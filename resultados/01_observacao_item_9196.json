@@ -1,0 +1,7 @@
+{
+  "notebook": "01_primeiro_item_v3",
+  "item_id": 9196,
+  "modelo": "Qwen/Qwen3-VL-8B-Instruct",
+  "prompt": "Descreva APENAS o que está visível nesta fotografia de um objeto de museu: formas, cores, materiais aparentes, texturas, enquadramento (o objeto aparece inteiro ou só um detalhe?), fundo, e qualquer artefato de estúdio (etiqueta, numeração, cartela de cores, régua, suporte). NÃO invente o que não dá para ver. Se algo estiver ilegível ou incerto, diga isso em vez de estimar. Responda em português.",
+  "observacao": "O objeto visível na fotografia é um pequeno recipiente de cerâmica, provavelmente uma jarra ou copo, com formato bulboso e gargalo arredondado. A superfície é coberta por um padrão geométrico estilizado, composto por linhas e formas abstratas em dois tons: um vermelho-alaranjado e um preto ou marrom escuro, aplicados sobre um fundo de cor bege ou terracota. A textura aparente é lisa, típica de cerâmica cozida. O material parece ser barro cozido, com uma superfície que pode ter um acabamento levemente áspero ou fosco. O enquadramento é um plano geral, mostrando o objeto inteiro, posicionado de forma a destacar sua forma e decoração. O fundo é completamente branco e neutro, sugerindo um ambiente de estúdio fotográfico. Não há artefatos de estúdio visíveis, como etiquetas, numeração, cartelas de cores ou régua. A iluminação é uniforme, sem sombras fortes, e o objeto está isolado, sem suporte visível."
+}

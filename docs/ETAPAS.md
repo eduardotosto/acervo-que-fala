@@ -14,7 +14,7 @@
 | E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
-| E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | 🔶 notebook pronto — aguardando Eduardo rodar no Colab |
+| E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
@@ -57,6 +57,8 @@ Achados da revisão humana:
 `notebooks/01_primeiro_item.ipynb`: instala dependências, busca o Pote Karajá (9196) direto da API, carrega o **Qwen3-VL-8B quantizado em 4-bit** (cabe na GPU T4 gratuita) e roda a observação visual com o prompt anti-alucinação. Notebook didático: cada código precedido de explicação em linguagem simples, com nota de metodologia (vibe coding transparente) na abertura.
 **Divisão:** Claude escreve o notebook · Eduardo roda no Colab (GPU T4 → "Executar tudo") e cola o resultado no chat.
 **Verificação:** observação visual do Pote impressa, sem invenções óbvias (grafismos vermelho/preto descritos, nada inventado).
+
+**Concluída (24/08/2026, notebook v3):** duas iterações de correção de ambiente (v2: não atualizar Pillow/requests; v3: pin da Pillow na versão do Colab — issue conhecida da Pillow 12 —, célula de checagem fail-fast e classe oficial `Qwen3VLForConditionalGeneration`). Resultado em `resultados/01_observacao_item_9196.json` (e no Drive). **Análise da observação:** zero alucinação — cores, forma, material e fundo corretos; incerteza expressa direito ("provavelmente uma jarra ou copo"); ausência de artefatos confirmada. Lacunas de cobertura p/ ajustar no prompt v2 (E5): não citou a inclinação do enquadramento nem a boca/interior visíveis e a faixa escura da borda.
 
 ### E5 — Pipeline nível 1
 `app/redator.py` v1: observação + metadados → alt-text com ancoragem (JSON estruturado). Rodar nos 5 objetos do smoke test e comparar com os alt-texts manuais da proposta (que viram referência de qualidade).
