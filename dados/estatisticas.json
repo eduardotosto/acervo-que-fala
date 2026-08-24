@@ -1,0 +1,38 @@
+{
+  "total": 60,
+  "com_descricao_curatorial": 60,
+  "por_categoria": {
+    "Adornos de Materiais Ecléticos, Indumentária e Toucador": 46,
+    "Cerâmica": 8,
+    "Objetos rituais, mágicos e lúdicos": 3,
+    "Trançados": 1,
+    "Instrumentos musicais e de sinalização": 1,
+    "Adornos Plumários": 1
+  },
+  "por_povo": {
+    "Tiriyó": 27,
+    "Kaxinawá": 12,
+    "Kanamari": 3,
+    "Tukano": 3,
+    "Parakanã": 3,
+    "Karajá": 2,
+    "Fulni-ô": 2,
+    "Xikrin": 2,
+    "Mawé": 1,
+    "Tapayuna": 1,
+    "Kaingang": 1,
+    "Palikur": 1,
+    "Tikuna": 1,
+    "Kalapalo": 1
+  },
+  "por_estado": {
+    "Pará": 32,
+    "Acre": 12,
+    "Amazonas": 8,
+    "Tocantins": 2,
+    "Pernambuco": 2,
+    "Mato Grosso": 2,
+    "São Paulo": 1,
+    "Amapá": 1
+  }
+}
