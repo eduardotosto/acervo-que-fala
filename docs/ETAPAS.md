@@ -11,8 +11,8 @@
 
 | Etapa | Descrição | Status |
 |---|---|---|
-| E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 25/08/2026 |
-| E2 | Dataset completo (500 itens) + relatório de inspeção | ⬜ |
+| E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
+| E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ⬜ |
 | E4 | Ambiente de inferência: Ollama + qwen3-vl:8b local, 1 item ponta a ponta | ⬜ |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
@@ -33,10 +33,9 @@ Mapeamento com o plano de 10 semanas: E1–E3 = Fases 0–1 · E4–E7 = Fase 2 
 Estrutura do curso (`app/`, `dados/`, `avaliacao/`, `tests/`, `docs/`), `.gitignore`, `requirements.txt`, `app/config.py`, `app/tainacan.py` (coleta reprodutível com argparse), amostra smoke de ~60 itens versionada em `dados/`, git init + primeiros commits.
 **Verificação:** `python app/tainacan.py --n 60` termina sem erro e `dados/itens.json` tem itens com metadados e URL de imagem.
 
-### E2 — Dataset completo
-Rodar `tainacan.py --n 500` (± 8 min, pode rodar em background). Gerar `dados/relatorio_coleta.md`: % com imagem, % com campo Descrição, distribuição por categoria e povo, campos raros. Decidir amostragem estratificada para os casos.
-**Verificação:** relatório legível; nenhuma categoria dominante >50%.
-**Sessão curta** (Sonnet 5 serve).
+### E2 — Dataset completo ✅
+500 itens coletados (9 categorias, 49 povos, 100% com descrição curatorial; mediana da descrição: 164 caracteres). Relatório em `dados/relatorio_coleta.md`.
+**Resultado da verificação:** Cerâmica = 51% do dataset (viés da ordenação por modificação recente — lotes de digitalização). **Decisão registrada:** os 50 casos da E3 serão estratificados por quota — máx. 10 de Cerâmica, presença garantida das categorias pequenas (Trançados, Instrumentos, Cordões e Tecidos), ≥15 povos distintos, e cobertura das 7 categorias de borda.
 
 ### E3 — casos.jsonl (interativa)
 Esquema do caso definido; Eduardo escolhe os 50 itens (estratificados pelas 6 categorias de borda já mapeadas: `jargao_catalogo`, `divergencia_imagem_catalogo`, `artefato_estudio`, `foto_parcial`, `metadado_suspeito`, `texto_sem_hierarquia` + `caso_simples`) e define critérios por caso. 10 vão para `holdout.jsonl` — **não abrir até E12**.
