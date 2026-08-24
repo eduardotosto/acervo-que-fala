@@ -13,7 +13,7 @@
 |---|---|---|
 | E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
-| E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | 🔶 preparação pronta — aguardando revisão do Eduardo em `avaliacao/candidatos.html` |
+| E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
 | E4 | Ambiente de inferência: Ollama + qwen3-vl:8b local, 1 item ponta a ponta | ⬜ |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
@@ -44,7 +44,14 @@ Estrutura do curso (`app/`, `dados/`, `avaliacao/`, `tests/`, `docs/`), `.gitign
 - Seleção estratificada determinística (`selecionar_candidatos.py`, seed 42): **70 candidatos**, 33 povos, quota + 2 extras por categoria; 5 âncoras do smoke test garantidas com bordas conhecidas.
 - Página de revisão: `avaliacao/candidatos.html` (gerada por `gerar_pagina_revisao.py`).
 
-**Pendente (Eduardo):** revisar os 70 na página (trocar itens, marcar bordas visuais, ajustar critérios) → Claude gera `casos.jsonl` (40) + `holdout.jsonl` (10) → `rodar.py --so-validar` fecha a etapa. **Holdout não se abre até E12.**
+**Concluída (24/08/2026):** Eduardo revisou os 70 cards, um a um. Decisões codificadas em `finalizar_casos.py` (REVISAO) → `casos.jsonl` (40) + `holdout.jsonl` (10), validados por `rodar.py --so-validar` (8/8 bordas, 30 povos, 10 categorias, quota Cerâmica 7/10). **Holdout não se abre até E12.**
+
+Achados da revisão humana:
+- **Nova borda descoberta:** `enquadramento_distante` (objeto ocupa área mínima do quadro — não é foto parcial) — 3 casos.
+- **Padrão sistemático:** etiquetas/numerações de inventário fotografadas junto ao objeto em Utensílios, Plumária e Cordões (15 casos com `artefato_estudio`).
+- **Todas as fotos de Armas são closes/detalhes** (5/5 candidatos `foto_parcial`).
+- **11 divergências foto×catálogo** anotadas com o elemento específico ausente (cores, tonalidades, penas azuis, formatos, cordas) — o campo `notas` de cada caso guarda o que o Eduardo viu.
+- 5 candidatos descartados por resolução de imagem inutilizável.
 
 ### E4 — Ambiente de inferência
 Instalar Ollama, `ollama pull qwen3-vl:8b` (~6 GB), `app/vlm.py` com a função `observar()`, rodar 1 item de ponta a ponta (Pote 9196). Se a máquina não aguentar o modelo local: fallback imediato para notebook Colab 01 (mesma função, mesma interface).

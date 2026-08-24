@@ -23,6 +23,7 @@ CATEGORIAS_BORDA = {
     "divergencia_imagem_catalogo",
     "artefato_estudio",
     "foto_parcial",
+    "enquadramento_distante",  # descoberta na revisão humana da E3 (24/08/2026)
     "metadado_suspeito",
     "texto_sem_hierarquia",
     "caso_simples",
@@ -105,7 +106,7 @@ def main() -> None:
     categorias = {c["categoria_objeto"] for c in casos + holdout}
     print(f"OK: {len(casos)} casos + {len(holdout)} holdout")
     print(f"    povos distintos: {len(povos)} | categorias de objeto: {len(categorias)}")
-    print(f"    Cerâmica em casos: {ceramicas}/{MAX_CERAMICA_AVALIACAO} | bordas cobertas: {len(bordas_cobertas)}/7")
+    print(f"    Cerâmica em casos: {ceramicas}/{MAX_CERAMICA_AVALIACAO} | bordas cobertas: {len(bordas_cobertas)}/{len(CATEGORIAS_BORDA)}")
 
     if not args.so_validar:
         print("\nMétricas automáticas: implementação na E8 (ver docs/ETAPAS.md).")
