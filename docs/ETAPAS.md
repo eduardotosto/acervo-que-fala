@@ -4,7 +4,7 @@
 > 1. **1 etapa = 1 sessão = 1 commit.** Nenhuma etapa começa sem estimativa de terminar na mesma sessão.
 > 2. **Fim de etapa:** commit + atualizar o status aqui. Se a sessão for interrompida, nada além do commit anterior se perde.
 > 3. **Retomada:** toda sessão nova começa lendo este arquivo ("onde paramos").
-> 4. **GPU vai para o Colab** (não gasta crédito de Claude): lotes de inferência e processamento pesado rodam em notebook, Claude só escreve o notebook e analisa o resultado.
+> 4. **TODA inferência roda no Colab** (decisão de 24/08/2026 — nada de modelo local): notebooks didáticos em `notebooks/`, com passo a passo explicativo voltado à banca — célula markdown antes de cada código, pontos de verificação, 1 item antes de lote. Claude escreve o notebook e analisa os resultados; Eduardo abre no Colab, ativa a GPU e clica "Executar tudo". Não gasta crédito de Claude.
 > 5. **Modelo por etapa:** Sonnet 5 para execução mecânica · Opus 5 para pipeline/RAG/código novo · Fable 5 para travamentos e decisões de arquitetura.
 
 ## Status
@@ -14,7 +14,7 @@
 | E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
-| E4 | Ambiente de inferência: Ollama + qwen3-vl:8b local, 1 item ponta a ponta | ⬜ |
+| E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ⬜ |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
@@ -53,9 +53,10 @@ Achados da revisão humana:
 - **11 divergências foto×catálogo** anotadas com o elemento específico ausente (cores, tonalidades, penas azuis, formatos, cordas) — o campo `notas` de cada caso guarda o que o Eduardo viu.
 - 5 candidatos descartados por resolução de imagem inutilizável.
 
-### E4 — Ambiente de inferência
-Instalar Ollama, `ollama pull qwen3-vl:8b` (~6 GB), `app/vlm.py` com a função `observar()`, rodar 1 item de ponta a ponta (Pote 9196). Se a máquina não aguentar o modelo local: fallback imediato para notebook Colab 01 (mesma função, mesma interface).
-**Verificação:** observação visual do Pote impressa, sem invenções óbvias.
+### E4 — Notebook 01 no Colab
+`notebooks/01_primeiro_item.ipynb`: instala dependências, busca o Pote Karajá (9196) direto da API, carrega o **Qwen3-VL-8B quantizado em 4-bit** (cabe na GPU T4 gratuita) e roda a observação visual com o prompt anti-alucinação. Notebook didático: cada código precedido de explicação em linguagem simples, com nota de metodologia (vibe coding transparente) na abertura.
+**Divisão:** Claude escreve o notebook · Eduardo roda no Colab (GPU T4 → "Executar tudo") e cola o resultado no chat.
+**Verificação:** observação visual do Pote impressa, sem invenções óbvias (grafismos vermelho/preto descritos, nada inventado).
 
 ### E5 — Pipeline nível 1
 `app/redator.py` v1: observação + metadados → alt-text com ancoragem (JSON estruturado). Rodar nos 5 objetos do smoke test e comparar com os alt-texts manuais da proposta (que viram referência de qualidade).

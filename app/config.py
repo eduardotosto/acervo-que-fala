@@ -11,8 +11,9 @@ TAINACAN_BASE = os.environ.get(
 COLECAO_ID = int(os.environ.get("COLECAO_ID", "471"))  # Museu do Índio: 20.965 itens
 
 # Modelos (parâmetros de configuração — trocar aqui não altera a arquitetura)
-MODELO_VLM = os.environ.get("MODELO_VLM", "qwen3-vl:8b")        # visão (Ollama)
-MODELO_REDATOR = os.environ.get("MODELO_REDATOR", "qwen3:8b")   # redação (Ollama)
+# Toda inferência roda no Colab (notebooks/); ids do Hugging Face.
+MODELO_VLM = os.environ.get("MODELO_VLM", "Qwen/Qwen3-VL-8B-Instruct")
+MODELO_REDATOR = os.environ.get("MODELO_REDATOR", "Qwen/Qwen3-8B")
 MODELO_EMBEDDINGS = os.environ.get(
     "MODELO_EMBEDDINGS", "Qwen/Qwen3-Embedding-0.6B"
 )
