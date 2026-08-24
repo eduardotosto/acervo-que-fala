@@ -16,7 +16,7 @@
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
-| E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | 🔶 notebook v1 no Drive — aguardando Eduardo rodar |
+| E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
@@ -73,7 +73,9 @@ Achados da revisão humana:
 **Base de conhecimento autorada e versionada** em `dados/rubrica/rubrica.json` (v1.0): 8 regras gerais (codificam as 4 correções da E5), 11 diretrizes por categoria de objeto e 10 termos de glossário — glossário construído do vocabulário do próprio catálogo (acordelado, sarjado, gregas...), em vez do Tesauro (indisponível como dataset; decisão honesta registrada).
 `notebooks/03_rag_redacao.ipynb`: embeddings **Qwen3-Embedding-0.6B** + busca por similaridade direta (30 trechos — ChromaDB fica para o site/E11, decisão explicada no notebook); teste de recuperação (tanga → miçangaria, não cerâmica); **redação v3** (regras fixas + diretrizes recuperadas) comparada com a v2 nos 5 objetos, com checagens automáticas das 4 falhas. Reaproveita as observações do Notebook 02.
 **Verificação:** recuperação correta nos 2 testes + as 4 falhas da E5 zeradas na v3.
-**Pendente:** Eduardo rodar a v1 no Colab.
+
+**Concluída (24/08/2026):** recuperação verificada ✓ (tanga→miçangaria, pote→cerâmica). Scorecard das 4 falhas na v3: "close" indevido **4/5→0/5 ✓**; cores vagas ~zeradas; hedge preservado ✓ (Abano: "provavelmente vime"→"fibra vegetal"); artefato no alt 2/5→**1/5** (Flauta ainda citou "marcação numérica" — endurecer regra 4 na E7 com exemplo negativo). Destaque do RAG em ação: o alt do Abano usou "espinha-de-peixe" vindo do glossário recuperado (`glossario-02`); campo `diretrizes_usadas` torna a recuperação rastreável por item.
+**Bug de integração encontrado (Eduardo detectou):** a redação saiu **sem os povos** ("[nome do povo]" literal no Pote) — o resultado salvo do nb02 não carregava metadados e o nb03 passou Povo vazio. Erro de passagem de dados entre etapas, não do modelo. Correções na E7: pipeline completo direto da API + **regra nova: todo resultado salvo carrega os metadados-chave**. Resultado em `resultados/03_rag_redacao.json`.
 
 ### E7 — Nível 2 + flags
 Descrição do objeto (nível 2) + flags de divergência + ancoragem afirmação-a-afirmação. Rodar lote de 20 itens novos (fora dos casos).

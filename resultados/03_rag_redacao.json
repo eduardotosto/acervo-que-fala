@@ -1,0 +1,79 @@
+{
+  "notebook": "03_rag_redacao_v1",
+  "modelo": "Qwen/Qwen3-VL-8B-Instruct",
+  "embedding": "Qwen/Qwen3-Embedding-0.6B",
+  "rubrica_versao": "1.0 (24/08/2026)",
+  "prompt_redacao_v3": "Você escreve alt-text de acessibilidade para o acervo digital de um museu, lido por pessoas cegas via leitor de tela.\n\nOBSERVAÇÃO VISUAL DA FOTOGRAFIA (única fonte do que é visível):\n{observacao}\n\nDADOS DO REGISTRO DO MUSEU (use SOMENTE nome e povo):\nNome do item: {nome} | Povo: {povo}\n\nDIRETRIZES PARA ESTE TIPO DE OBJETO (recuperadas da base do projeto):\n{diretrizes}\n\nREGRAS FIXAS:\n1. Uma frase, no máximo 30 palavras, começando pelo objeto e povo.\n2. Linguagem simples, sem jargão de catalogação.\n3. Enquadramento com termos exclusivos: se a observação diz que o objeto aparece INTEIRO, descreva-o normalmente e NUNCA use a palavra 'close'; se a observação diz que é só um DETALHE, comece o alt-text com 'Detalhe de...'.\n4. Artefatos de estúdio ou inventário (etiqueta, numeração, cartela/paleta de cores, régua, suporte) NUNCA aparecem no alt-text.\n5. Nomeie as cores como estão na observação (vermelho, preto, amarelo...). Proibido 'colorido', 'tons variados', 'tons terrosos'.\n6. Preserve a incerteza da observação: palpite ('provavelmente vime') vira termo genérico ('fibra vegetal') — nunca vira afirmação.\n7. Responda APENAS com JSON: {{\"alt_text\": \"...\"}}",
+  "itens": [
+    {
+      "id": 9196,
+      "titulo": "Pote",
+      "observacao": "O objeto é uma pequena peça cerâmica, provavelmente um recipiente ou jarro, com forma arredondada e boca ligeiramente alongada, posicionada de forma a mostrar sua face frontal e parte lateral. Está inclinado ligeiramente para o lado esquerdo, com a boca voltada para cima e ligeiramente para a direita, permitindo a visualização da borda superior e do interior parcialmente. A peça apresenta acabamento em tons terrosos, com uma tonalidade bege-claro predominante na superfície, sobre a qual se destacam padrões geométricos em tons de vermelho-alaranjeado e linhas pretas ou escuras, formando motivos abstratos, incluindo cruzes e elementos retangulares. A borda superior é mais escura, com um tom cinza-escuro ou marrom-escuro, sugerindo um acabamento ou material diferente. O interior da boca é visível, com tonalidade mais clara e textura lisa. O objeto aparece inteiro, enquadrado de forma a destacar sua forma e decoração, sem cortes ou detalhes parciais. O fundo é branco puro, sem marcas, etiquetas, numeração, régua ou suporte visíveis. Não há artefatos de estúdio ou elementos adicionais no enquadramento.",
+      "alt_v2": "Pote de cerâmica Karajá, em close frontal e lateral, inclinado para esquerda, com padrões geométricos em tons terrosos sobre fundo branco.",
+      "alt_v3": "Pote cerâmico do povo [nome do povo], com forma arredondada, boca aberta para cima, decoração em vermelho-alaranjeado e preto sobre fundo bege-claro.",
+      "json_valido_v3": true,
+      "diretrizes_usadas": [
+        "glossario-07",
+        "ceramica-01",
+        "utensilio-01"
+      ],
+      "gabarito": "Pequeno pote de cerâmica Karajá em tom cru, decorado com grafismos geométricos em vermelho e preto, fotografado inclinado, mostrando a boca de borda escura."
+    },
+    {
+      "id": 665,
+      "titulo": "Faixa frontal emplumada",
+      "observacao": "O objeto é um adorno de penas, possivelmente um tipo de chapéu ou tiara, com uma base circular e colorida, com detalhes em preto, vermelho e amarelo. A base é coberta por penas amarelas, com bordas em tons de vermelho e preto. De sua parte superior emergem várias penas de diferentes cores e texturas: duas penas longas e finas em tons de marrom e vermelho-alaranjado, uma pena mais curta e escura com listras pretas e brancas, e duas penas azuis vibrantes. As penas estão dispostas de forma simétrica e apontam para cima e para os lados, com a parte superior do objeto voltada para o observador. O objeto está de pé, em posição vertical, e sua face frontal está visível, mas não é possível ver o verso ou partes internas. O enquadramento é um plano geral, mostrando o objeto inteiro, com o topo ligeiramente acima do centro da imagem. O fundo é neutro, de cor cinza clara, e há uma cartela de cores (uma paleta de cores de estúdio) posicionada no canto esquerdo da imagem, parcialmente visível. Não há etiquetas, numeração ou outros artefatos visíveis além da cartela de cores.",
+      "alt_v2": "Adorno plumário Kalapalo, em pé, com penas coloridas em frente, sobre fundo cinza claro, com paleta de cores no canto esquerdo.",
+      "alt_v3": "Faixa frontal emplumada do povo, com base circular colorida, penas amarelas, bordas vermelhas e pretas, e penas eretas simétricas em marrom, vermelho-alaranjado, preto, branco e azul vibrante.",
+      "json_valido_v3": true,
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "cordoes-01",
+        "arma-01"
+      ],
+      "gabarito": "Faixa frontal emplumada Kalapalo: base compacta de penas amarelas com faixa preta na borda, de onde se erguem penas longas — duas alaranjadas, uma rajada em preto e branco e uma azul."
+    },
+    {
+      "id": 51023,
+      "titulo": "Flauta de pã",
+      "observacao": "O objeto é um instrumento musical de percussão, provavelmente um tipo de flauta de bambu ou xilofone de bambu, composto por várias varas de bambu de comprimentos diferentes, dispostas em inclinação ascendente da esquerda para a direita. As varas são unidas por cordas de fibra natural, que as mantêm agrupadas em um conjunto. O material principal é o bambu, com tonalidade marrom claro e textura natural visível. Não há detalhes internos visíveis, como a boca do instrumento ou o interior das varas. O objeto está em posição vertical, mas inclinado ligeiramente para a direita, com a vara mais longa apontando para baixo. O enquadramento é um close-up que mostra o instrumento inteiro, desde a base até a parte superior das varas. O fundo é completamente preto, sem outros elementos. Há uma pequena marcação numérica “8285” gravada na parte inferior da vara mais longa. Não há etiquetas, cartelas de cores, régua ou suporte visíveis.",
+      "alt_v2": "Close-up da Flauta de pã, instrumento musical Tukano, com varas de bambu inclinadas, unidas por cordas, fundo preto, marcação '8285' na base.",
+      "alt_v3": "Flauta de pã, instrumento de percussão de bambu, varas em inclinação ascendente, unidas por cordas de fibra natural, com marcação numérica na base.",
+      "json_valido_v3": true,
+      "diretrizes_usadas": [
+        "glossario-09",
+        "instrumento-01",
+        "glossario-08"
+      ],
+      "gabarito": "Flauta de pã Tukano com seis tubos de taquara em comprimentos decrescentes, presos por amarrações de fibra trançada, fotografada sobre fundo preto."
+    },
+    {
+      "id": 63283,
+      "titulo": "Abano trançado",
+      "observacao": "- **Formas, cores e materiais aparentes**: A fotografia exibe um detalhe de um objeto de tecido ou entrelaçado, provavelmente feito de vime, palha ou madeira fina, com uma textura de entrelaçamento em padrão de “V” ou “X” (estilo herringbone). As cores são tons de marrom claro a médio, com variações sutis de tonalidade que sugerem o material natural. Não há bordas visíveis, nem acabamentos aparentes, apenas a superfície do entrelaçado. Não há partes internas, boca, verso ou qualquer outra parte do objeto visível — apenas a superfície externa do padrão de tecido.\n\n- **Posição/orientação**: O objeto está posicionado de forma plana, como se estivesse deitado ou apoiado horizontalmente. A fotografia é um close-up, focado apenas na textura e no padrão do tecido, sem mostrar o objeto inteiro.\n\n- **Enquadramento**: É um close-up, mostrando apenas uma seção da superfície do objeto, sem revelar sua forma global ou dimensões.\n\n- **Fundo e artefatos de estúdio**: Não há fundo visível, nem artefatos como etiquetas, numeração, cartelas de cores, régua ou suporte. A imagem é um plano de fundo neutro, provavelmente com iluminação de estúdio, mas sem elementos que indiquem o contexto do museu ou a presença de equipamentos de exposição.",
+      "alt_v2": "Close-up de trançado Fulni-ô: padrão de entrelaçamento em 'V', textura de vime, tons marrom, sem fundo ou contexto.",
+      "alt_v3": "Detalhe de abano trançado, com fibra vegetal em padrão de espinha-de-peixe, tons marrom claro a médio.",
+      "json_valido_v3": true,
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-02",
+        "cordoes-01"
+      ],
+      "gabarito": "Detalhe aproximado da trama de um abano Fulni-ô: fitas de fibra vegetal entrelaçadas em padrão de espinha-de-peixe, em tons dourados e castanhos."
+    },
+    {
+      "id": 78838,
+      "titulo": "Tanga de miçangas",
+      "observacao": "O objeto visível na fotografia é um tecido com padrão geométrico, provavelmente um tapete ou cobertor, em tons de branco e preto. A composição apresenta motivos repetitivos, com elementos que lembram cruzes ou figuras abstratas, intercalados com padrões de pontos e linhas. A borda do tecido é visível e apresenta um acabamento com costura ou bordado em relevo, com detalhes que parecem ser pontos ou pequenas cruzes. O tecido está deitado, inclinado em relação à câmera, de modo que se vê uma perspectiva angular, mostrando a superfície superior e parte da borda. Não está visível o verso, nem partes internas como costuras ou reforços. O enquadramento é um close-up, focado em uma porção do tecido, não mostrando o objeto inteiro. O fundo é branco e uniforme, sem artefatos de estúdio como etiquetas, régua ou cartelas de cores. Não há elementos legíveis ou identificáveis como numeração ou inscrições.",
+      "alt_v2": "Close-up de detalhe de tanga de miçangas Tiriyó: tecido com padrão geométrico em branco e preto, bordado em relevo, inclinado sobre fundo branco.",
+      "alt_v3": "Detalhe de tanga de miçangas, provavelmente de povo indígena, com padrão geométrico em preto e branco, bordas com acabamento em relevo.",
+      "json_valido_v3": true,
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "trancado-01",
+        "glossario-02"
+      ],
+      "gabarito": "Tanga retangular de miçangas Tiriyó, chamada keweyu, tecida em branco com grafismos pretos — gregas, motivos piramidais e figuras estilizadas — e franjas nas bordas."
+    }
+  ]
+}
