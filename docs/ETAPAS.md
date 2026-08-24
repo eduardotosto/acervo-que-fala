@@ -16,7 +16,7 @@
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
-| E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
+| E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | 🔶 notebook v1 no Drive — aguardando Eduardo rodar |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
@@ -69,9 +69,11 @@ Achados da revisão humana:
 - **Achados para o prompt de redação v2 (corrigir na E6/E7):** (1) *"close" usado errado* — 4/5 alts disseram "close" mesmo com objeto inteiro (a observação usa o termo de forma ambígua; exigir "inteiro"/"detalhe" como termos exclusivos); (2) *vazamento de artefatos* — cartela e numeração entraram no alt (regra: artefatos NUNCA no alt; viram flag); (3) *cores vagas* — "tons terrosos", "penas coloridas" (regra: nomear as cores da observação); (4) *hedge perdido* — "vime" afirmado quando a observação dizia "provavelmente".
 - **Verificação humana resolvida (24/08):** a Faixa tem mesmo **duas penas azuis** (uma parcialmente encoberta) — **o modelo corrigiu o gabarito humano**, que registrava só a pena óbvia. Gabaritos atualizados (demo, proposta, notebook 02). Episódio de mão dupla máquina↔humano registrado para o texto descritivo.
 
-### E6 — RAG
-Indexar rubrica de descrição (adaptada em `dados/rubrica/`) + trechos do Tesauro com ChromaDB + Qwen3-Embedding. `app/rag.py`: recuperação por tipo de objeto. Integrar ao redator.
-**Verificação:** para "tanga de miçangas", a recuperação traz trecho de têxtil/adorno, não de cerâmica.
+### E6 — RAG (Notebook 03) 🔶
+**Base de conhecimento autorada e versionada** em `dados/rubrica/rubrica.json` (v1.0): 8 regras gerais (codificam as 4 correções da E5), 11 diretrizes por categoria de objeto e 10 termos de glossário — glossário construído do vocabulário do próprio catálogo (acordelado, sarjado, gregas...), em vez do Tesauro (indisponível como dataset; decisão honesta registrada).
+`notebooks/03_rag_redacao.ipynb`: embeddings **Qwen3-Embedding-0.6B** + busca por similaridade direta (30 trechos — ChromaDB fica para o site/E11, decisão explicada no notebook); teste de recuperação (tanga → miçangaria, não cerâmica); **redação v3** (regras fixas + diretrizes recuperadas) comparada com a v2 nos 5 objetos, com checagens automáticas das 4 falhas. Reaproveita as observações do Notebook 02.
+**Verificação:** recuperação correta nos 2 testes + as 4 falhas da E5 zeradas na v3.
+**Pendente:** Eduardo rodar a v1 no Colab.
 
 ### E7 — Nível 2 + flags
 Descrição do objeto (nível 2) + flags de divergência + ancoragem afirmação-a-afirmação. Rodar lote de 20 itens novos (fora dos casos).
