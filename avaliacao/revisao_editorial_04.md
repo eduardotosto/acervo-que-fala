@@ -62,3 +62,14 @@ Ao final, destila em **rubrica v1.1** + **prompt v5** (abertura da E8).
 
 Eduardo perguntou se seguimos card a card ou aplicamos as regras e "sentimos" o resultado.
 **Decisão: parar a revisão de estilo no #4** — achados repetindo (foto no nível 2 3×, medidas 2×, ausências 2×). Aplicar regras 1–12 em rubrica v1.1 + prompt v5, regenerar o lote (notebook 04 v2), e a segunda revisão foca só em fidelidade visual + o que sobrar.
+
+## Análise da v2 (24/08/2026) — achada por código, sem revisão visual do Eduardo
+
+O prompt v5 acertou quase tudo das 12 regras (fotografia sumiu do nível 2 em 20/20, ficha técnica virou escala, aves das penas citadas, "todo artefato vira flag" gerou 8 flags vs. 1 antes). Mas 2 problemas objetivos apareceram, achados sem precisar da revisão visual:
+
+1. **Artefato ainda vazou para o nível 2** (Flauta 51023: "apresenta uma marcação numérica, que não é parte do objeto original") — a regra "artefato nunca aparece" só estava escrita no prompt v5 para a saída A (alt-text), não repetida para a saída B (nível 2).
+2. **Atribuição ao registro sumiu em 15/20 textos** — o prompt só garantia isso via um exemplo específico (o Pote, que foi o único a manter "segundo o registro do museu"); o modelo não generalizou a regra para os outros 19 objetos, que passaram a narrar fatos do catálogo sem nenhuma marca de atribuição.
+
+E 2 falsos positivos na própria checagem automática (não no texto do modelo): "o objeto é" estava sendo procurado em qualquer posição (pegou "...e o objeto é pequeno..." e "...do objeto é auxiliar..."), quando a regra só proíbe abrir o texto assim; "sobre fundo X" foi confundido com fotografia, quando é vocabulário legítimo de padronagem ("padrões geométricos sobre fundo bege" descreve a peça, não a foto).
+
+**Prompt v6 fecha os 2 bugs reais** (regra do artefato repetida para as duas saídas, com exemplo errado×certo cada; atribuição virou exigência explícita, não mais dependente de um único exemplo) **e a checagem corrigiu os 2 falsos positivos** (abertura de frase-etiqueta só conta no início do texto; termos de fundo saíram da lista de "foto no nível 2"). Notebook 04 v3 no Drive, aguardando Eduardo rodar.
