@@ -15,7 +15,7 @@
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
-| E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | 🔶 notebook v1 no Drive — aguardando Eduardo rodar |
+| E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
@@ -63,7 +63,11 @@ Achados da revisão humana:
 ### E5 — Pipeline nível 1 (Notebook 02) 🔶
 `notebooks/02_nivel1_smoke_test.ipynb`: observação visual (**prompt v2** — pede orientação/partes internas/cores de bordas, corrigindo as lacunas da E4) → redação do alt-text com regras (≤30 palavras, objeto primeiro, avisa close, JSON estruturado) → comparação lado a lado com o gabarito humano da proposta + checagens automáticas (JSON válido, limite de palavras). Mesmo modelo nas duas etapas (memória da T4); a separação está no que ele recebe em cada uma.
 **Verificação:** 5/5 JSONs válidos; caso crítico: o alt do Abano avisa que é close.
-**Pendente:** Eduardo rodar a v1 no Colab; Claude busca o resultado no Drive e analisa.
+
+**Concluída (24/08/2026):** 5/5 JSONs válidos, 5/5 ≤30 palavras, **Abano avisou o close ✓**. Resultado em `resultados/02_nivel1_smoke_test.json`.
+- **Observação v2 funcionou:** as 3 lacunas da E4 sumiram (Pote: inclinação, boca/interior e borda escura descritos); artefatos detectados ativamente (cartela da Faixa ✓; numeração da Flauta lida — "8285", real 8283, OCR quase exato).
+- **Achados para o prompt de redação v2 (corrigir na E6/E7):** (1) *"close" usado errado* — 4/5 alts disseram "close" mesmo com objeto inteiro (a observação usa o termo de forma ambígua; exigir "inteiro"/"detalhe" como termos exclusivos); (2) *vazamento de artefatos* — cartela e numeração entraram no alt (regra: artefatos NUNCA no alt; viram flag); (3) *cores vagas* — "tons terrosos", "penas coloridas" (regra: nomear as cores da observação); (4) *hedge perdido* — "vime" afirmado quando a observação dizia "provavelmente".
+- **Para verificação humana:** observação da Faixa diz "duas penas azuis" (gabarito: uma) — Eduardo confere na foto.
 
 ### E6 — RAG
 Indexar rubrica de descrição (adaptada em `dados/rubrica/`) + trechos do Tesauro com ChromaDB + Qwen3-Embedding. `app/rag.py`: recuperação por tipo de objeto. Integrar ao redator.
