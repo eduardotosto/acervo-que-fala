@@ -1,0 +1,8 @@
+# imagens ficam em cache local, fora do git (o dataset versionado é o JSON)
+dados/imagens/
+
+__pycache__/
+*.pyc
+.env
+chroma/
+avaliacao/holdout_resultados/
