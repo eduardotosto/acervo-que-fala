@@ -14,46 +14,46 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Google Sans Flex','Segoe UI',system-ui,sans-serif; background:var(--md-surface);
   color:var(--md-on-surface); line-height:1.55; padding:2.5rem 1.25rem 4rem; }
-.wrap { max-width:900px; margin:0 auto; }
+.wrap { max-width:1180px; margin:0 auto; }
 h1 { font-weight:700; font-size:1.8rem; }
 .resumo { background:var(--md-secondary-container); color:var(--md-on-secondary-container);
   border-radius:var(--shape-lg); padding:1rem 1.3rem; margin:1rem 0 2rem; font-size:.92rem; }
 .card { background:var(--md-surface-container-low); border-radius:var(--shape-lg);
-  box-shadow:var(--elev1); margin-bottom:1.3rem; display:grid;
-  grid-template-columns:180px 1fr; overflow:hidden; }
-@media (max-width:640px) { .card { grid-template-columns:1fr; } }
-.card img { width:100%; height:100%; max-height:260px; object-fit:contain;
-  background:var(--md-surface-container-high); padding:.5rem; }
-.corpo { padding:1rem 1.2rem 1.1rem; }
-.num { font-weight:700; color:var(--md-primary); }
-h2 { font-size:1.02rem; font-weight:600; display:inline; }
+  box-shadow:var(--elev1); margin-bottom:1.6rem; display:grid;
+  grid-template-columns:minmax(320px, 480px) 1fr; overflow:hidden; }
+@media (max-width:860px) { .card { grid-template-columns:1fr; } }
+.foto { display:block; background:var(--md-surface-container-high); cursor:zoom-in; }
+.foto img { display:block; width:100%; height:100%; max-height:560px; object-fit:contain; padding:.6rem; }
+.corpo { padding:1.15rem 1.4rem 1.25rem; }
+.num { font-weight:700; color:var(--md-primary); font-size:1.05rem; }
+h2 { font-size:1.1rem; font-weight:600; display:inline; }
 .tag { display:inline-block; font-weight:600; font-size:.64rem; letter-spacing:.05em;
   text-transform:uppercase; background:var(--md-primary-container); color:var(--md-on-primary-container);
   padding:.15rem .5rem; border-radius:var(--shape-full); margin-left:.3rem; vertical-align:middle; }
-.materia { font-size:.78rem; color:var(--md-on-surface-variant); margin:.25rem 0 .55rem; }
+.materia { font-size:.78rem; color:var(--md-on-surface-variant); margin:.3rem 0 .6rem; }
 .rot { font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--md-secondary); margin-top:.5rem; }
+  color:var(--md-secondary); margin:.65rem 0 .2rem; }
 .alt { background:var(--md-secondary-container); color:var(--md-on-secondary-container);
-  border-radius:var(--shape-sm); padding:.5rem .7rem; font-size:.88rem; }
-.nivel2 { font-size:.85rem; color:var(--md-on-surface-variant); margin-top:.2rem; }
+  border-radius:var(--shape-sm); padding:.55rem .75rem; font-size:.95rem; }
+.nivel2 { font-size:.9rem; color:var(--md-on-surface-variant); }
 .flag { background:var(--md-tertiary-container); color:var(--md-on-tertiary-container);
   border-radius:var(--shape-sm); padding:.4rem .6rem; font-size:.8rem; margin-top:.3rem; }
 </style></head><body><div class="wrap">
 <h1>Lote da E7 — 20 objetos para revisão editorial</h1>
-<div class="resumo"><b>Checagens automáticas:</b> 20/20 JSONs válidos · 20/20 sem problemas
-(povo no alt, sem "close" indevido, sem artefato no alt, ≤30 palavras, atribuição no nível 2) ·
-caso-referência Abano ✓ · 1 flag(s) gerada(s).<br>
-<b>Como revisar (responda no chat):</b> aponte pelo número — ex.: "no #6, prefiro o material antes
-da cor", "no #1, citar de que ave são as penas (está na Matéria-prima)". Suas impressões viram a
-rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
+<div class="resumo"><b>Clique na foto para abrir em resolução máxima</b> (numa nova aba, direto do
+servidor do museu).<br>
+<b>Como revisar (responda no chat, pelo número):</b> 1) o alt mente ou esconde algo que a foto
+mostra? 2) o nível 2 respeita o registro? 3) preferências editoriais — ex.: "no #20, material antes
+da cor", "no #6, citar a arara no alt". Suas impressões viram a rubrica v1.1.</div>
 
 <div class="card" id="i9196">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" alt="Pote (Karajá)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" alt="Pote (Karajá)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#1</span> <h2>Pote</h2>
     <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila ·
-      <b>Técnica:</b> Acordelado · item 9196</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 9196</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Pote Karajá, cerâmica globular com gargalo estreito, cor bege com padrões vermelho-alaranjado e preto.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -63,12 +63,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i665">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" alt="Faixa frontal emplumada (Kalapalo)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" alt="Faixa frontal emplumada (Kalapalo)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#2</span> <h2>Faixa frontal emplumada</h2>
     <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu ·
-      <b>Técnica:</b> (vazio) · item 665</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu · item 665</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Chapéu plumário dos Kalapalo, com penas longas em marrom, vermelho-alaranjado, azul e listradas, sobre base de couro preto com bordas vermelhas e amarelas.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -78,12 +79,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i51023">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" alt="Flauta de pã (Tukano)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" alt="Flauta de pã (Tukano)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#3</span> <h2>Flauta de pã</h2>
     <span class="tag">Tukano</span><span class="tag">Instrumentos musicais e de sinalização</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Taquara ·
-      <b>Técnica:</b> (vazio) · item 51023</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Taquara · item 51023</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Flauta de pã dos Tukano, composta por tubos de taquara marrom claro, unidos por fios de buriti, em disposição vertical decrescente.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -93,12 +95,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i63283">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2-1024x683.jpg" alt="Abano trançado (Fulni-ô)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2-1024x683.jpg" alt="Abano trançado (Fulni-ô)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#4</span> <h2>Abano trançado</h2>
     <span class="tag">Fulni-ô</span><span class="tag">Trançados</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fibra de vegetal não identificado ·
-      <b>Técnica:</b> Trançado sarjado · item 63283</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fibra de vegetal não identificado · item 63283</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Detalhe de abano trançado dos Fulni-ô, com fitas marrom claro em padrão de espinha-de-peixe, tecido vegetal sem acabamento aparente.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -108,12 +111,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i78838">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" alt="Tanga de miçangas (Tiriyó)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" alt="Tanga de miçangas (Tiriyó)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#5</span> <h2>Tanga de miçangas</h2>
     <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga ·
-      <b>Técnica:</b> Entretecido · item 78838</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga · item 78838</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Tanga de miçangas do povo Tiriyó, tecida em branco e preto, com padrões piramidais e gregos, bordas franjadas e cordel de amarração.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -123,12 +127,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i1376">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_3a__1_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_3a__1_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_3a__1_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#6</span> <h2>Braçadeira emplumada</h2>
     <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Algodão | Animal > Pena de arara ·
-      <b>Técnica:</b> Passamanaria · item 1376</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Algodão | Animal > Pena de arara · item 1376</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Braçadeira emplumada dos Kalapalo, com penas vermelhas, laranjas e amarelas, presas por cordão de fibra natural.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -138,12 +143,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i84811">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_11_fot_006.jpg" alt="Pulseira de miçangas (Kaxinawá)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_11_fot_006.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_11_fot_006.jpg" alt="Pulseira de miçangas (Kaxinawá)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#7</span> <h2>Pulseira de miçangas</h2>
     <span class="tag">Kaxinawá</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga ·
-      <b>Técnica:</b> (vazio) · item 84811</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga · item 84811</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Pulseira de miçangas do povo Kaxinawá, com padrões geométricos em verde, branco, vermelho e preto, sobre fundo neutro.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -153,12 +159,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i883523">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/883523/20_4_53_0001.jpg" alt="Brinquedo zarabatana (Baniwa)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/883523/20_4_53_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/883523/20_4_53_0001.jpg" alt="Brinquedo zarabatana (Baniwa)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#8</span> <h2>Brinquedo zarabatana</h2>
     <span class="tag">Baniwa</span><span class="tag">Armas</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Breu | Vegetal > Jupati | Vegetal > Madeira marupá ·
-      <b>Técnica:</b> Entalhe · item 883523</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Breu | Vegetal > Jupati | Vegetal > Madeira marupá · item 883523</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Bastão longo e cilíndrico do brinquedo zarabatana dos Baniwa, com cabo escuro e bocal claro, em material vegetal.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -168,12 +175,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i2081">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_3154_f04.jpg" alt="Pote (Karajá)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_3154_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_3154_f04.jpg" alt="Pote (Karajá)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#9</span> <h2>Pote</h2>
     <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila ·
-      <b>Técnica:</b> Acordelado · item 2081</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 2081</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Pote Karajá, cerâmica globular com boca extrovertida, cor bege claro com padrões geométricos pretos em faixas horizontais.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -183,12 +191,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i5011">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/fuso_88_8_25_f04.jpg" alt="Fuso (Xavante)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/fuso_88_8_25_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/fuso_88_8_25_f04.jpg" alt="Fuso (Xavante)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#10</span> <h2>Fuso</h2>
     <span class="tag">Xavante</span><span class="tag">Cordões e Tecidos</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila | Vegetal > Madeira não identificada ·
-      <b>Técnica:</b> Entalhe | Modelado · item 5011</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila | Vegetal > Madeira não identificada · item 5011</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Fuso xavante, de madeira e cerâmica, com fio de algodão branco enrolado em sua lateral.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -198,12 +207,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i200648">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/200648/14_11_154_0001-1024x683.jpg" alt="Argila (Baniwa)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/200648/14_11_154_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/200648/14_11_154_0001-1024x683.jpg" alt="Argila (Baniwa)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#11</span> <h2>Argila</h2>
     <span class="tag">Baniwa</span><span class="tag">Etnobotânica</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) ·
-      <b>Técnica:</b> (vazio) · item 200648</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 200648</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Frasco de vidro contendo fragmentos de argila de cor marrom, pertencente ao povo Baniwa, do Amazonas.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -213,12 +223,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i210680">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#12</span> <h2>Flauta reta de osso</h2>
     <span class="tag">Hixkaryána</span><span class="tag">Instrumentos musicais e de sinalização</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) ·
-      <b>Técnica:</b> (vazio) · item 210680</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 210680</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Flauta reta de osso do povo Hixkaryána, com três furos, penas vermelhas e corda marrom-claro, deitada horizontalmente sobre fundo cinza-escur.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -228,12 +239,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i5146">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4828_foto_01_DSC_7447.jpg" alt="Pião noz de tucum (Canela)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4828_foto_01_DSC_7447.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4828_foto_01_DSC_7447.jpg" alt="Pião noz de tucum (Canela)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#13</span> <h2>Pião noz de tucum</h2>
     <span class="tag">Canela</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Cabaça | Vegetal > Madeira não identificada ·
-      <b>Técnica:</b> (vazio) · item 5146</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Cabaça | Vegetal > Madeira não identificada · item 5146</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Pião noz de tucum, do povo Canela, é uma esfera marrom-avermelhada com haste curta à esquerda e mais longa à direita, ambas de madeira.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -243,12 +255,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i500179">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500179/20_4_45_0001.jpg" alt="Abano de talo de tucum (Baniwa)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500179/20_4_45_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500179/20_4_45_0001.jpg" alt="Abano de talo de tucum (Baniwa)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#14</span> <h2>Abano de talo de tucum</h2>
     <span class="tag">Baniwa</span><span class="tag">Trançados</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Palmeira de tucum ·
-      <b>Técnica:</b> Trançado · item 500179</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Palmeira de tucum · item 500179</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Abano de talo de tucum, do povo Baniwa, com trançado em padrão de espinha-de-peixe, cor bege-claro, sobre fundo azul-marinho.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -258,12 +271,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i3411">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3411/5599_0005-1-1024x395.jpg" alt="Remo espatular (Karajá)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3411/5599_0005-1.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3411/5599_0005-1-1024x395.jpg" alt="Remo espatular (Karajá)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#15</span> <h2>Remo espatular</h2>
     <span class="tag">Karajá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Madeira não identificada ·
-      <b>Técnica:</b> Entalhe · item 3411</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Madeira não identificada · item 3411</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Remo espatular do povo Karajá, de madeira com pá decorada em vermelho e preto, repousando sobre fundo cinza.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -273,12 +287,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i1366">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_4b__2_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_4b__2_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_4b__2_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#16</span> <h2>Braçadeira emplumada</h2>
     <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Pena de arara ·
-      <b>Técnica:</b> Emplumação em passamanaria · item 1366</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Pena de arara · item 1366</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Braçadeira emplumada dos Kalapalo, com penas vermelhas, laranjas e amarelas dispostas em arco sobre fio de fibra natural.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -288,12 +303,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i4156">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/estojo_peniano_7660_f04.jpg" alt="Estojo peniano (Bororo)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/estojo_peniano_7660_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/estojo_peniano_7660_f04.jpg" alt="Estojo peniano (Bororo)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#17</span> <h2>Estojo peniano</h2>
     <span class="tag">Bororo</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Palmeira de babaçu ·
-      <b>Técnica:</b> Dobradura · item 4156</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Palmeira de babaçu · item 4156</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Bastão de madeira marrom claro, com decoração estilizada de animais em preto, pertencente ao povo Bororo.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -303,12 +319,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i205095">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004-683x1024.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004-683x1024.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#18</span> <h2>Arco plano-côncavo</h2>
     <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) ·
-      <b>Técnica:</b> Entalhe · item 205095</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 205095</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Detalhe de empunhadura de arco plano-côncavo dos Waimiri-Atroari, com corda marrom claro envolvendo haste de madeira escura.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -318,12 +335,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i905">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/905/6739_0001.jpg" alt="Panela gameliforme (Karajá)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/905/6739_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/905/6739_0001.jpg" alt="Panela gameliforme (Karajá)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#19</span> <h2>Panela gameliforme</h2>
     <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila ·
-      <b>Técnica:</b> Acordelado · item 905</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 905</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Panela gameliforme do povo Karajá, cerâmica com base plana, cor bege, decorada com padrões geométricos vermelhos em forma de 'X'.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
@@ -333,12 +351,13 @@ rubrica v1.1. As fotos vêm do servidor do museu (precisa de internet).</div>
   </div>
 </div>
 <div class="card" id="i500322">
-  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" alt="Bolsa tecida (Baniwa)" loading="lazy">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" alt="Bolsa tecida (Baniwa)" loading="lazy"></a>
   <div class="corpo">
     <span class="num">#20</span> <h2>Bolsa tecida</h2>
     <span class="tag">Baniwa</span><span class="tag">Cordões e Tecidos</span>
-    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Semente de açaí ·
-      <b>Técnica:</b> (vazio) · item 500322</div>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Semente de açaí · item 500322</div>
     <div class="rot">Alt-text (nível 1)</div>
     <div class="alt">Bolsa tecida do povo Baniwa, de cor bege claro, com alça longa e fecho escuro, sobre fundo azul-escuríssimo.</div>
     <div class="rot">Descrição do objeto (nível 2)</div>
