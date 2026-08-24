@@ -13,7 +13,7 @@
 |---|---|---|
 | E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
-| E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ⬜ |
+| E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | 🔶 preparação pronta — aguardando revisão do Eduardo em `avaliacao/candidatos.html` |
 | E4 | Ambiente de inferência: Ollama + qwen3-vl:8b local, 1 item ponta a ponta | ⬜ |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
@@ -37,10 +37,14 @@ Estrutura do curso (`app/`, `dados/`, `avaliacao/`, `tests/`, `docs/`), `.gitign
 500 itens coletados (9 categorias, 49 povos, 100% com descrição curatorial; mediana da descrição: 164 caracteres). Relatório em `dados/relatorio_coleta.md`.
 **Resultado da verificação:** Cerâmica = 51% do dataset (viés da ordenação por modificação recente — lotes de digitalização). **Decisão registrada:** os 50 casos da E3 serão estratificados por quota — máx. 10 de Cerâmica, presença garantida das categorias pequenas (Trançados, Instrumentos, Cordões e Tecidos), ≥15 povos distintos, e cobertura das 7 categorias de borda.
 
-### E3 — casos.jsonl (interativa)
-Esquema do caso definido; Eduardo escolhe os 50 itens (estratificados pelas 6 categorias de borda já mapeadas: `jargao_catalogo`, `divergencia_imagem_catalogo`, `artefato_estudio`, `foto_parcial`, `metadado_suspeito`, `texto_sem_hierarquia` + `caso_simples`) e define critérios por caso. 10 vão para `holdout.jsonl` — **não abrir até E12**.
-**Verificação:** `python avaliacao/rodar.py --so-validar` valida o schema dos 50.
-**Atenção:** é a sessão de julgamento do Eduardo — Claude guia, ele decide.
+### E3 — casos.jsonl (interativa) 🔶
+**Preparação concluída (24/08/2026):**
+- Coleta complementar via taxquery (`tainacan.py --completar`): pool 500 → **555 itens**, todas as 10 categorias com ≥15 (incluindo **Armas**, que a coleta original tinha perdido por completo). Taxonomia `tnc_tax_543` e term ids registrados em `config.py`.
+- Schema do caso + validador: `avaliacao/rodar.py --so-validar` (checa campos, quotas da E2, cobertura das 7 bordas, 40+10).
+- Seleção estratificada determinística (`selecionar_candidatos.py`, seed 42): **70 candidatos**, 33 povos, quota + 2 extras por categoria; 5 âncoras do smoke test garantidas com bordas conhecidas.
+- Página de revisão: `avaliacao/candidatos.html` (gerada por `gerar_pagina_revisao.py`).
+
+**Pendente (Eduardo):** revisar os 70 na página (trocar itens, marcar bordas visuais, ajustar critérios) → Claude gera `casos.jsonl` (40) + `holdout.jsonl` (10) → `rodar.py --so-validar` fecha a etapa. **Holdout não se abre até E12.**
 
 ### E4 — Ambiente de inferência
 Instalar Ollama, `ollama pull qwen3-vl:8b` (~6 GB), `app/vlm.py` com a função `observar()`, rodar 1 item de ponta a ponta (Pote 9196). Se a máquina não aguentar o modelo local: fallback imediato para notebook Colab 01 (mesma função, mesma interface).

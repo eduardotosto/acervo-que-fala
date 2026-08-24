@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Candidatos aos casos — E3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+<style>
+:root { --md-primary:#8a4b2c; --md-primary-container:#ffdbc6; --md-on-primary-container:#341000;
+  --md-secondary:#2f5d8f; --md-secondary-container:#d3e4ff; --md-on-secondary-container:#001b3d;
+  --md-tertiary-container:#ffe9b3; --md-on-tertiary-container:#271900;
+  --md-surface:#f7f4ee; --md-surface-container-low:#f1ede3; --md-surface-container-high:#e3ddd1;
+  --md-on-surface:#1e1b16; --md-on-surface-variant:#4d463b; --md-outline-variant:#d8cfc0;
+  --shape-sm:8px; --shape-lg:16px; --shape-full:999px;
+  --elev1:0 1px 2px rgba(30,20,10,.09), 0 1px 4px rgba(30,20,10,.07); }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Google Sans Flex','Segoe UI',system-ui,sans-serif; background:var(--md-surface);
+  color:var(--md-on-surface); line-height:1.55; padding:2.5rem 1.25rem 4rem; }
+.wrap { max-width:860px; margin:0 auto; }
+h1 { font-weight:700; font-size:1.9rem; }
+.instrucoes { background:var(--md-secondary-container); color:var(--md-on-secondary-container);
+  border-radius:var(--shape-lg); padding:1.1rem 1.3rem; margin:1.2rem 0 2rem; font-size:.93rem; }
+.instrucoes b { font-weight:700; }
+.card { background:var(--md-surface-container-low); border-radius:var(--shape-lg);
+  box-shadow:var(--elev1); margin-bottom:1.4rem; overflow:hidden; display:grid;
+  grid-template-columns:220px 1fr; }
+@media (max-width:640px) { .card { grid-template-columns:1fr; } }
+.card img { width:100%; height:100%; max-height:280px; object-fit:contain;
+  background:var(--md-surface-container-high); padding:.5rem; }
+.corpo { padding:1rem 1.2rem 1.1rem; }
+.num { font-weight:700; color:var(--md-primary); font-variant-numeric:tabular-nums; }
+h2 { font-size:1.05rem; font-weight:600; display:inline; }
+.tag { display:inline-block; font-weight:600; font-size:.66rem; letter-spacing:.05em;
+  text-transform:uppercase; background:var(--md-primary-container); color:var(--md-on-primary-container);
+  padding:.16rem .55rem; border-radius:var(--shape-full); margin-left:.35rem; vertical-align:middle; }
+.tag.ancora { background:var(--md-secondary-container); color:var(--md-on-secondary-container); }
+.meta { font-size:.78rem; color:var(--md-on-surface-variant); margin:.3rem 0 .6rem; }
+.meta a { color:var(--md-secondary); }
+.baseline { font-size:.85rem; background:var(--md-surface-container-high);
+  border-radius:var(--shape-sm); padding:.55rem .75rem; margin-bottom:.55rem;
+  color:var(--md-on-surface-variant); }
+.borda { display:inline-block; font-size:.72rem; font-weight:600;
+  background:var(--md-tertiary-container); color:var(--md-on-tertiary-container);
+  padding:.14rem .5rem; border-radius:var(--shape-full); margin:0 .25rem .25rem 0; }
+.criterios { font-size:.8rem; color:var(--md-on-surface-variant); margin-left:1.1rem; }
+</style></head><body><div class="wrap">
+<h1>Candidatos aos 50 casos de avaliação</h1>
+<div class="instrucoes">
+<b>Como revisar (responda no chat do Claude):</b><br>
+1. <b>Trocar um item:</b> “trocar o 12” (sai da lista; o reserva da mesma categoria entra).<br>
+2. <b>Marcar borda visual:</b> olhe a foto — “o 7 é foto_parcial”, “o 23 tem artefato_estudio”
+   (cartela de cor, escala, suporte no quadro), “o 31 tem divergencia” (algo visível que o registro não cita).<br>
+3. <b>Ajustar critérios:</b> “no 15, acrescentar critério X”.<br>
+4. <b>Nada a mudar?</b> “aprovar todos” — os 10 do holdout serão sorteados entre os casos simples
+   e a lista final vira <code>casos.jsonl</code> (40) + <code>holdout.jsonl</code> (10).<br>
+As fotos vêm direto do servidor do museu — precisa de internet para vê-las.
+</div>
+
+<div class="card" id="c1">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" alt="Pote (Karajá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#1</span> <h2>Pote</h2>
+    <span class="tag">Karajá</span><span class="tag">Cerâmica</span><span class="tag ancora">smoke test</span>
+    <div class="meta">Mineral > Argila · Acordelado · 4,3 cm de diâmetro (borda); 5,5 cm de diâmetro (bojo); 6,0 cm de altura · Objeto utilizado para o preparo e serviço de alimentos · Tocantins · 1977 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/77-3-169/">ver no acervo</a> · item 9196</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Pote de borda extrovertida e base plana apresentando superfície decorada com motivos geometrizantes pintados em vermelho e preto</div>
+    <div><span class="borda">jargao_catalogo</span></div>
+    <ul class="criterios"><li>alt-text em linguagem simples, sem jargão de catalogação</li><li>termos técnicos só na descrição do objeto, explicados ou atribuídos ao museu</li></ul>
+  </div>
+</div>
+<div class="card" id="c2">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6779-f.jpg" alt="Moringa (Terena)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#2</span> <h2>Moringa</h2>
+    <span class="tag">Terena</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila | Mineral > Argila branca | Mineral > Argila vermelha · Acordelado · 23,0 cm de altura; 22,0 cm de comprimento; 18,0 cm de largura · Objeto utlilizado para reservar e servir líquidos (água) · Mato Grosso do Sul · 1955 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6779-2/">ver no acervo</a> · item 1045</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Moringa de base plana, com dois gargalos de bordas direta, separados por uma alça. Apresenta decoração no bojo com motivos naturalistas fitomorfos (vegetais) pintados na cor branco</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c3">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/81_1_4__1_.jpg" alt="Panela gameliforme (Suruí)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#3</span> <h2>Panela gameliforme</h2>
+    <span class="tag">Suruí</span><span class="tag">Cerâmica</span>
+    <div class="meta">Acordelado · 13,0 cm de diâmetro da borda; 9,0 cm de altura · Cerâmica utilitária para a cozinnha; Vasilha larga e funda, provida ou não de tampa, usada para cozinhar alimentos e/ou fermentar bebidas · Rondônia · 1980 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/81-1-4/">ver no acervo</a> · item 680</div>
+    <div class="baseline"><b>Descrição curatorial:</b> O objeto possui borda reta e base arredondada. Apresenta também superfície enegrecida</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c4">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/2426-v.jpg" alt="Tigela (Kadiweu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#4</span> <h2>Tigela</h2>
+    <span class="tag">Kadiweu</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 23,0 cm de diâmetro da borda; 8,5 cm de altura · Objeto utilizado para o preparo e serviço de alimentos · Mato Grosso do Sul · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/2426-2/">ver no acervo</a> · item 1260</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tigela de borda reta e base plana. Apresenta decoração externa marcado com corda formando motivos geometrizantes e internamente, os mesmos motivos pintados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c5">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/91.2.1_001_DSC2918.jpg" alt="Panela gameliforme (Maxacali)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#5</span> <h2>Panela gameliforme</h2>
+    <span class="tag">Maxacali</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 19,0 cm de diâmetro de borda; 16,5 cm de altura · Objeto utilizado para o preparo e serviço de alimentos · Minas Gerais · 1990 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/91-2-1/">ver no acervo</a> · item 1255</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Panela gameliforme de porte médio com borda reta,base convexa e corpo bojudo. Apresentando marcas de queima provenientes do processo de cozimento em fogueira com temperaturas aproximadas 500/550ºC</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c6">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/630/8171-Foto-31.jpg" alt="Bilhas comunicantes (Palikur)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#6</span> <h2>Bilhas comunicantes</h2>
+    <span class="tag">Palikur</span><span class="tag">Cerâmica</span>
+    <div class="meta">Acordelado · 16,5 cm de diâmetro de bojo; 21,0 cm de altura; 42,0 cm de comprimento; 19,0 cm de largura · Objeto utilizado como cerâmica utilitária e/ou cerimonial para armazenagem e serviço · Amapá · 1957 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/8171-2/">ver no acervo</a> · item 630</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Bilhas comunicantes composta por dois recipientes diferentes. O primeiro de borda reta e contorno simples e o segundo exibe um pequeno orifício na parte superior. Apresenta base oval única para ambos os recipientes, superfície resinada e decorada com motivos geometrizantes</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c7">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/bilha_75_4_85_f04.jpg" alt="Bilha (Marubo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#7</span> <h2>Bilha</h2>
+    <span class="tag">Marubo</span><span class="tag">Cerâmica</span>
+    <div class="meta">Acordelado · 13,0 cm de altura; 10,5 cm de largura; 10,5 cm de comprimento · Objeto utilizado para reservar e/ou servir líquidos (aioásca) · Amazonas · 1975 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/75-4-85/">ver no acervo</a> · item 1050</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Bilha frutiforme com alça de tucum, ambos enegrecidos, de base plana. Apresenta gargalo com bico</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c8">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/1826/2465-v-2.jpg" alt="Tigela (Kadiweu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#8</span> <h2>Tigela</h2>
+    <span class="tag">Kadiweu</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 33,5 cm de comprimento; 20,0 cm de largura; 13,0 cm de altura (maior); 9,5 cm de altura (menor) · Objeto utilizado para servir alimentos e para outros fins · Mato Grosso do Sul · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/2465-2/">ver no acervo</a> · item 1826</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tigela fitomorfa de borda reta, lábio ondulado e base plana. Apresenta externamente decoração marcada com corda formando motivos geometrizantes e internamente, os mesmos motivos pintados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c9">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/2151/6766_0001.jpg" alt="Pote (Karajá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#9</span> <h2>Pote</h2>
+    <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 4,7 cm de diâmetro de borda; 9,0 cm de diâmetro de bojo; 10,2 cm de altura · Objeto utilizado para o preparo e serviço de alimentos · Tocantins · 1955 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6766-2/">ver no acervo</a> · item 2151</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Pote de cor clara, base plana e borda direta. Apresenta decoração externa com motivos geometrizantes (figuras labiríntica) pintados nas cores preto e amarelo</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c10">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/68.6.41-c.jpg" alt="Tigela (Kadiweu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#10</span> <h2>Tigela</h2>
+    <span class="tag">Kadiweu</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 21,5 cm de diâmetro da borda; 7,5 cm de altura · Objeto utilizado para servir alimentos e para outros fins · Mato Grosso do Sul · 1968 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/68-6-41/">ver no acervo</a> · item 1996</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tigela de borda extrovertida e base plana. Apresenta decoração interna e externa formada por motivos geometrizantes pintados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c11">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/2453_001_DSC2268.jpg" alt="Tigela (Kadiweu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#11</span> <h2>Tigela</h2>
+    <span class="tag">Kadiweu</span><span class="tag">Cerâmica</span>
+    <div class="meta">Mineral > Argila · Acordelado · 19,0 cm de largura (maior); 8,5 cm de altura (maior); 6,0 cm de altura (menor) · Objeto utilizado para servir e armazenagem de alimentos · Mato Grosso do Sul · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/2453-2/">ver no acervo</a> · item 1871</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tigela de borda reta, lábio ondulado e base plana. Apresentando decoração externa "marcado-com-corda" formando motivos geometrizantes e internamente, os mesmos motivos pintados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c12">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" alt="Tanga de miçangas (Tiriyó)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#12</span> <h2>Tanga de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span><span class="tag ancora">smoke test</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · Entretecido · 50,0 cm de comprimento (medida maior, sem cordel); 75,0 cm de comprimento (com cordel de amarração); 44,0 cm de largura · Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro · Pará · 2009 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-47/">ver no acervo</a> · item 78838</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tanga de miçanga de conformação retangular confeccionado com linha industrializada branca e contas de miçangas nas cores: branca e preta. A superfície é ornamentada por: figuras estilizadas, motivo grego e piramidal, tecida segundo a técnica do entretorcido. Apresenta borda superior com cordel para amarrar o objeto ao corpo feito com barbante de algodão. Acabamento inferior com franjas de linha industrializada, tendo nas duas extremidades pingentes constituídos por miçangas branca e preta intercaladas. Possui acabamento da borda inferior com franjas de linha industrializada na cor branca</div>
+    <div><span class="borda">texto_sem_hierarquia</span></div>
+    <ul class="criterios"><li>alt-text conciso (≤30 palavras), objeto primeiro</li><li>informação do registro reorganizada com hierarquia na descrição do objeto</li></ul>
+  </div>
+</div>
+<div class="card" id="c13">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37r_f02.jpg" alt="Brinco cavilha (Xavante)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#13</span> <h2>Brinco cavilha</h2>
+    <span class="tag">Xavante</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Vegetal > Taquara · Entalhe · 5,2 cm de comprimento · Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha · Mato Grosso · 1988 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37r/">ver no acervo</a> · item 4286</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c14">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08.2.117_foto_01DSC_4328.jpg" alt="Sobrecinto de miçangas (Tiriyó)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#14</span> <h2>Sobrecinto de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · Entretecido · 1,08 m de comprimento; 30,0 cm de largura · Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro do tronco · Pará · 2009 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-117/">ver no acervo</a> · item 78213</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Sobrecinto de miçanga usado pelos homens para decoro do tronco, confeccionado com enfiaduras de miçangas coloridas, tecida segundo a técnica do entretorcido. Constitui-se de uma faixa horizontal com prolongamento vertical que adorna o quadril. A faixa horizontal é adornada por oito estilizações de pássaros tendo ao centro a figura de um caranguejo, constituídos por contas de miçangas coloridas. Apresenta três prolongamentos verticais adornados por figuras antropomórficas e motivos geométricos, interligados por uma faixa horizontal, com borda constituída de contas na cor laranja e o interior com uma faixa preta adornada por pequenas flores amarelas e acabamento inferior com franjas coloridas de miçangas. Possui cordel de linha industrializada branca para amarrar o objeto ao corpo</div>
+    <div><span class="borda">texto_sem_hierarquia</span></div>
+    <ul class="criterios"><li>alt-text conciso (≤30 palavras), objeto primeiro</li><li>informação do registro reorganizada com hierarquia na descrição do objeto</li></ul>
+  </div>
+</div>
+<div class="card" id="c15">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4116/colar_de_micangas_86_7_14_f03.jpg" alt="Colar de miçangas (Waiwái)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#15</span> <h2>Colar de miçangas</h2>
+    <span class="tag">Waiwái</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Miçanga · 41,0 cm de comprimento (com pingente); 28,5 cm (sem pingente); 5,5 cm de largura e 0,3 cm de espessura · Adornos de materiais ecléticos do tronco · Roraima · 1986 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/86-7-14/">ver no acervo</a> · item 4116</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Colar confeccionado com enfiaduras de miçangas na cor laranja,  presas com linha industrializada  na cor branca.Apresenta,ao centro, um desenho de pássaro (papagaio) formado de miçangas coloridas nas cores: amarelo, verde, azul claro e azul marinho</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c16">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08_2_78_f00037.jpg" alt="Pulseira de miçangas (Tiriyó)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#16</span> <h2>Pulseira de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · Entretecido · 35,0 cm de comprimento (com cordel); 2,0 cm de largura; 22,3 cm de comprimento (sem cordel); 2,0 cm de largura · Adorno de Materiais Ecléticos, usado para adornar o braço · Pará · 2008 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-78/">ver no acervo</a> · item 77963</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Pulseira de miçanga confeccionado com miçangas nas cores: preta, verde, amarela,branca, vermelha, laranja e azul e linha industrializada na cor branca segundo a técnica do entretecido apresentando cordel de linha na cor branca para amarração, adornada por vários zigue-zague coloridos e um central na cor preta</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c17">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37e_f01.jpg" alt="Brinco cavilha (Xavante)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#17</span> <h2>Brinco cavilha</h2>
+    <span class="tag">Xavante</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Vegetal > Madeira não identificada · Entalhe · 6,4 cm de comprimento · Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha · Mato Grosso · 1988 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37e/">ver no acervo</a> · item 4211</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c18">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37k_f01.jpg" alt="Brinco cavilha (Xavante)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#18</span> <h2>Brinco cavilha</h2>
+    <span class="tag">Xavante</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Vegetal > Taquara · Entalhe · 6,2 cm de comprimento · Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha · Mato Grosso · 1988 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37k/">ver no acervo</a> · item 4246</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c19">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_14_fot_003.jpg" alt="Pulseira de miçangas (Kaxinawá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#19</span> <h2>Pulseira de miçangas</h2>
+    <span class="tag">Kaxinawá</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · 10,0 cm de comprimento; 7,2 cm de largura · Adorno para os membros que cinge o pulso · Acre · 2011 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/11-9-14/">ver no acervo</a> · item 84836</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Pulseira de miçangas fechada,confeccionado com fios de nylon e contas de miçangas formando uma faixa que cinge o pulso, cuja composição das contas formam padrões característico do grupo nas cores: azul e laranja, com contorno na cor preta</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c20">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08_2_148_foto_1.jpg" alt="Colar de miçangas (Tiriyó)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#20</span> <h2>Colar de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · 20,0 cm de largura; 21,0 cm de comprimento · Adornos de materiais ecléticos do tronco · Pará · 2008 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-148/">ver no acervo</a> · item 90371</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Colar de miçangas, confeccionado com contas de miçangas "samura" multicoloridas (transparente,azul,laranja,preto e marrom) e linha industrializada na cor branca. Consiste de colar com franjas em toda sua extensão. Exibe, ao centro,pingente triangular com a representação de figura zoomorfa</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c21">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08.2.120_foto_01_DSC_3755.jpg" alt="Sobrecinto de miçangas (Tiriyó)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#21</span> <h2>Sobrecinto de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="meta">Sintético > Fio de algodão industrializado | Sintético > Miçanga · Entretecido · 95,0 cm de comprimento; 26,0 cm de largura · Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro do tronco · Pará · 2009 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-120/">ver no acervo</a> · item 78218</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Sobrecinto de miçanga usado pelos homens para decoro do tronco, confeccionado com enfiaduras de miçangas coloridas, tecida no tear em arco segundo a técnica do entretorcido. Constitui-se de uma faixa horizontal com prolongamentos verticais que adornam o quadril. A faixa horizontal é adornada por oito estilizações de pássaros com reprodução de cena destes sobre um galho, comendo minhoca, e de pássaros voando com as asas levantadas, tendo ao centro da faixa uma roseta constituída por miçangas nas cores: preto formando as pétalas e o interior contas nas cores: branca, vermelho e verde. Apresenta sete prolongamentos verticais adornados por figuras geométricas, interligados por uma faixa horizontal, com borda constituída de contas na cor vermelha e o interior uma faixa amarela adornada por pequenas flores na cor azul e acabamento inferior com franjas coloridas de miçangas. Possui cordel de linha industrializada branca para amarrar o objeto ao corpo</div>
+    <div><span class="borda">texto_sem_hierarquia</span></div>
+    <ul class="criterios"><li>alt-text conciso (≤30 palavras), objeto primeiro</li><li>informação do registro reorganizada com hierarquia na descrição do objeto</li></ul>
+  </div>
+</div>
+<div class="card" id="c22">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/3333__1_.jpg" alt="Cachimbo de cerâmica (Canela)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#22</span> <h2>Cachimbo de cerâmica</h2>
+    <span class="tag">Canela</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Mineral > Argila | Vegetal > Madeira não identificada · Modelado · 19,0 cm de comprimento; 3,6 cm de altura; 2,3 cm de diâmetro · Aparelho para estimulantes e narcóticos · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/3333-2/">ver no acervo</a> · item 4391</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Cachimbo cerâmica constituído de um fornilho modelado em barro e aspirador de madeira não identificada. Exibe a superfície do fornilho decorada com motivos incisos formando padrões geometrizantes</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c23">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/75_6_142__2_.jpg" alt="Escultura zoomorfa ritual Timbira (Krahô)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#23</span> <h2>Escultura zoomorfa ritual Timbira</h2>
+    <span class="tag">Krahô</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Trançado sarjado · 67,5 cm de comprimento · Objeto utilizado nos ritos de iniciação, onde os membros da metade peixe, carregam alimentos embrulhados em folha de buriti em forma de peixe · Tocantins · 1975 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/75-6-142/">ver no acervo</a> · item 2826</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Escultura zoomorfa ritual timbira representando "peixe", confeccionado com palha de buriti, trançada segundo a técnica do sarjado. Apresenta parte posterior provida de "nadadeiras" e extremidade distal "rabo"</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c24">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/680art_0001-1024x683.jpg" alt="Máscara antropomorfa Tikuna (Tikuna)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#24</span> <h2>Máscara antropomorfa Tikuna</h2>
+    <span class="tag">Tikuna</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Vegetal > Entrecasca de árvore não identificada | Vegetal > Madeira não identificada · Entalhe | Pintura · 22,0 cm de comprimento(cabeça de madeira); 59,0 cm de comprimento(cabeça e veste); 25,5 cm de largura(cabeça e veste) · Objeto utilizado nas festas de iniciação feminina para afastar os espíritos malígnos que elas representam · Amazonas · 1994 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/680art/">ver no acervo</a> · item 2746</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Máscara antropomorfa tukúna constituída por capuz confeccionado com entrecasca de árvore, decorado com motivos geometrizantes nas cores azul, amarelo e marrom. Apresenta na parte central do capuz, "cara sobrenatural, talhada em madeira não identificada exibindo superfície decorada, também com motivos geometrizantes, pintados na cor amarelo e preto. Exibe testa, nariz e boca salientes</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c25">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4802_foto_01_DSC0022.jpg" alt="Brinquedo balança (Canela)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#25</span> <h2>Brinquedo balança</h2>
+    <span class="tag">Canela</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">27,5 cm de comprimento; 11,0 cm de altura · Objeto destinado à atividades lúdicos infantins · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/4802-2/">ver no acervo</a> · item 5206</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Brinquedo balança constituído de uma haste de madeira exibindo nas extremidades dois "pratos" formados com disco de cabaça suspenso através de fios de tucum</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c26">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4548c__3_.jpg" alt="Estojo para guardar umbigo (Canela)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#26</span> <h2>Estojo para guardar umbigo</h2>
+    <span class="tag">Canela</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Vegetal > Palmeira de buriti · Dobradura · 5,2 cm de comprimento; 1,9 cm de largura; 1,8 cm de altura · Ritual · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/4548c/">ver no acervo</a> · item 4606</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Estojo para guardar o umbigo do recém - nascido, feito de folíolo de broto da palmeira de buriti, consiste em duas dobraduras afuniladas, com orifício no meio</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c27">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/86_3_9b_0001-1024x683.jpg" alt="Máscara antropomorfa Tikuna (Tikuna)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#27</span> <h2>Máscara antropomorfa Tikuna</h2>
+    <span class="tag">Tikuna</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Vegetal > Madeira balsa · Entalhe | Pintura · 22,0 cm de comprimento; 13,2 cm de largura · Objeto destinado a comercialização · Amazonas · 1986 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/86-3-9b/">ver no acervo</a> · item 2601</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Máscara antropomorfa tukúna constituída por "cara" talhada em madeira de balsa, exibindo sobrancelhas e olhos pintados, nariz e boca salientes</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c28">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/1394__1_.jpg" alt="Cachimbo de cerâmica (Fulni-ô)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#28</span> <h2>Cachimbo de cerâmica</h2>
+    <span class="tag">Fulni-ô</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Mineral > Argila · Modelado · 14,o cm de comprimento; 4,5 cm de diâmetro(borda) · Aparelho para estimulantes e narcóticos · Pernambuco · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/1394-2/">ver no acervo</a> · item 4366</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Cachimbo de cerâmica de conformação cônica, confeccionado com argila. Apresenta superfície enegrecida e decorada com motivos geometrizantes, incisos</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c29">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4056/76_2_85_0001.jpg" alt="Peteca (Menkrangnotí)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#29</span> <h2>Peteca</h2>
+    <span class="tag">Menkrangnotí</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="meta">Vegetal > Palha de milho · 22,0 cm de altura; 11,0 cm de diâmetro(base) · Objeto utilizado em atividades lúdicas · Pará · 1976 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/76-2-85/">ver no acervo</a> · item 4056</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Peteca confeccionado com palha de milho</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c30">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" alt="Faixa frontal emplumada (Kalapalo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#30</span> <h2>Faixa frontal emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span><span class="tag ancora">smoke test</span>
+    <div class="meta">Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu · 60,0cm de comprimento; 13,0cm de altura · Adorno para cabeça · Mato Grosso · 1987 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-61a/">ver no acervo</a> · item 665</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Faixa frontal emplumada confeccionado com penas nas cores preto(Jaburu), amarelo(Jacú-amarelo) e vermelha e amarelo(Arara) dispostas verticalmente com corte horizontal das penas costuradas em couro de onça</div>
+    <div><span class="borda">divergencia_imagem_catalogo</span><span class="borda">artefato_estudio</span></div>
+    <ul class="criterios"><li>elemento visível ausente do catálogo é descrito</li><li>divergência sinalizada em flag para revisão, não omitida</li><li>artefatos de estúdio (cartela de cor, escala, suporte) excluídos da descrição</li></ul>
+  </div>
+</div>
+<div class="card" id="c31">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6323b__2_.jpg" alt="Braçadeira emplumada (Kamayurá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#31</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kamayurá</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Vegetal > Fio de algodão | Animal > Pena de ave não identificada · Emplumação em passamanaria · 46,0cm de comprimento;6,0cm de largura · Adorno para braço · Mato Grosso · 1959 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6323b/">ver no acervo</a> · item 2221</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c32">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/7777__2_.jpg" alt="Braçadeira emplumada (Kamayurá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#32</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kamayurá</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Vegetal > Fio de algodão | Animal > Pena de ave não identificada · Emplumação em passamanaria · 50,0cm de comprimento;10,0cm de largura · Adorno para braço · Mato Grosso · 1959 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/7777-2/">ver no acervo</a> · item 2236</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c33">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/96_1_5b__1_.jpg" alt="Braçadeira emplumada (Waurá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#33</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Waurá</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Animal > Pena de arara | Animal > Pena de ave não identificada · Emplumação em passamanaria · 82,0cm de comprimento;10,5cm de largura · Adorno para braço · Mato Grosso · 1996 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/96-1-5b/">ver no acervo</a> · item 2316</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada confeccionado com fieira de penas nas cores amarelo, vermelho(Arara) e preto(Mutum) em formato de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c34">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_6b__1_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#34</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Animal > Pena de arara · Emplumação em passamanaria · 65,0cm de comprimento;8,0cm de largura · Adorno para braço · Mato Grosso · 1987 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-6b/">ver no acervo</a> · item 1521</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada composta de fio de algodão com penas na cores amarelo(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c35">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_7b__2_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#35</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Vegetal > Fibra de vegetal não identificado | Animal > Pena de arara · Emplumação em passamanaria · 60,0cm de comprimento;5,0cm de largura · Adorno para braço · Mato Grosso · 1987 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-7b/">ver no acervo</a> · item 1436</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada composta de fio de algodão tingido de verde com penas na cor vermelha de arara, amarradas por cordão de fibra, confeccionado segundo a técnica de emplumação em passamanaria com alças soltas</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c36">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6323a__2_.jpg" alt="Braçadeira emplumada (Kamayurá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#36</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kamayurá</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Vegetal > Fio de algodão | Animal > Pena de ave não identificada · Emplumação em passamanaria · 43,0cm de comprimento;6,0cm de largura · Adorno para braço · Mato Grosso · 1959 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6323a/">ver no acervo</a> · item 2226</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c37">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_6a__1_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#37</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="meta">Animal > Pena de arara · Emplumação em passamanaria · 60,0cm de comprimento;7,0cm de largura · Adorno para braço · Mato Grosso · 1987 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-6a/">ver no acervo</a> · item 1516</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Braçadeira emplumada composta de fio de algodão com penas na cores amarelo(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c38">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6630_foto_1.jpg" alt="Recipiente de cabaça (Guarani-Kaiowá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#38</span> <h2>Recipiente de cabaça</h2>
+    <span class="tag">Guarani-Kaiowá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 11,5 cm de altura; 7,5 cm de largura · Objeto utilizado para beber chimarrão · Mato Grosso do Sul · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6630-2/">ver no acervo</a> · item 5371</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente de cabaça "hý akwá" provido de orifício circular. Apresentando nos dois terços superiores da superfície decoração com motivos geometrizantes pirogravados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c39">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6624_foto_1.jpg" alt="Recipiente de cabaça (Guarani-Kaiowá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#39</span> <h2>Recipiente de cabaça</h2>
+    <span class="tag">Guarani-Kaiowá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 38,0 cm de altura (com alça); 27,0 cm de altura (sem alça); 11,0 cm de diâmetro · Objeto utilizado para reservar e servir alimentos · Mato Grosso do Sul · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6624-2/">ver no acervo</a> · item 1321</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente de cabaça com revestimento, alça da fibra de cipó guaimbé e tampa de sabugo de milho</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c40">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6629_foto_1.jpg" alt="Recipiente de cabaça (Guarani-Kaiowá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#40</span> <h2>Recipiente de cabaça</h2>
+    <span class="tag">Guarani-Kaiowá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 6,5 cm de largura; 10,5 cm de diâmetro · Objeto utilizado para tomar chimarrão · Mato Grosso do Sul · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6629-2/">ver no acervo</a> · item 5366</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente de cabaça "hý akwá" provido de orifício circular. Exibe em torno do orifício decoração com motivos geometrizantes pirogravados</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c41">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6559_foto_1.jpg" alt="Recipiente de cabaça (Guarani Nhandeva)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#41</span> <h2>Recipiente de cabaça</h2>
+    <span class="tag">Guarani Nhandeva</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 33,0 cm de altura (sem alça); 58,0 cm de altura (com alça); 15,0 cm de diâmetro · Objeto utilizado para a guarda e serviço de líquidos; Objeto de fabricação masculina · São Paulo · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6559-2/">ver no acervo</a> · item 1316</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente de cabaça com alça, tampa de sabugo de milho e revestida com cipó gwaimbé "djawóá"</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c42">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6626_foto_1.jpg" alt="Recipiente de cabaça (Guarani-Kaiowá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#42</span> <h2>Recipiente de cabaça</h2>
+    <span class="tag">Guarani-Kaiowá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 26,0 cm de altura (com alça); 21,0 cm de altura (sem alça); 12,0 cm de diâmetro · Objeto utilizado para reservar e servir alimentos · Mato Grosso do Sul · 1955 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6626-2/">ver no acervo</a> · item 1331</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente de cabaça com revestimento, alça da fibra de cipó guaimbé e tampa de sabugo de milho</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c43">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6634_foto_1.jpg" alt="Colher de cabaça (Guarani-Kaiowá)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#43</span> <h2>Colher de cabaça</h2>
+    <span class="tag">Guarani-Kaiowá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Cabaça · 11,0 cm de comprimento; 5,5 cm de altura · Objeto utilizado para beber chicha · Mato Grosso do Sul · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/6634-2/">ver no acervo</a> · item 5486</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Colher de cabaça "hý akwá" , confeccionado com meia cabaça apresentando superfície externa decorada com motivos geometrizantes pirogravados e alça de fios de algodão fixada ao cabo do objeto</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c44">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4527__4_.jpg" alt="Recipiente de casca (Canela)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#44</span> <h2>Recipiente de casca</h2>
+    <span class="tag">Canela</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="meta">Vegetal > Semente de cajá · 5,5 cm de comprimento; 3,1 cm de largura e 2,0 cm de altura · Ritual, onde guardam o urucum que serve para passar no umbigo do recém - nascido · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/4527-2/">ver no acervo</a> · item 4036</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Recipiente feito do fruto maduro do cajá cortado ao meio e esvaziado do miolo</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c45">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2-1024x683.jpg" alt="Abano trançado (Fulni-ô)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#45</span> <h2>Abano trançado</h2>
+    <span class="tag">Fulni-ô</span><span class="tag">Trançados</span><span class="tag ancora">smoke test</span>
+    <div class="meta">Vegetal > Fibra de vegetal não identificado · Trançado sarjado · 290,0 cm de comprimento (maior); 19,5 cm de largura (menor) · Objeto destinado a atiçar o fogo e para abanar-se · Pernambuco · 1949 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/281-2/">ver no acervo</a> · item 63283</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Abano trançado de conformação retangular confeccionado com fibra não identificada, segundo a técnica do trançado sarjado. Apresenta empunhadura formada com o pecíolo da planta revestido com trançado sarjado que também reveste as bordas do objeto. Exibe na parte central decoração formada com fitas de fibra tingidas de azul e verde, formando uma roseta, através do revestimento de parte do trançado</div>
+    <div><span class="borda">foto_parcial</span><span class="borda">metadado_suspeito</span></div>
+    <ul class="criterios"><li>alt-text avisa que a foto é detalhe/parcial</li><li>descrição do objeto completa vem do registro, com atribuição</li><li>valor improvável do registro sinalizado em flag, não repetido como fato</li></ul>
+  </div>
+</div>
+<div class="card" id="c46">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500067/20_4_39_0002.jpg" alt="Tipiti iará (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#46</span> <h2>Tipiti iará</h2>
+    <span class="tag">Baniwa</span><span class="tag">Trançados</span>
+    <div class="meta">Vegetal > Fibra de vegetal não identificado · Trançado · 145,0 cm de comprimento; 7,0 cm de diâmetro · Usado para extrair o ácido hidrociânico da mandioca brava para que a mesma possa ser utilizada para fazer farinha ou beiju. · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/tipiti-iara-baniwa-2019/">ver no acervo</a> · item 500067</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tipiti trançado de palmeira iará em formato cilíndrico com possibilidade de extensão com abertura na parte superior e duas alças: a de cima para prender a um ponto fixo e a de baixo para introduzir a alavanca e fazê-lo distender-se.</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c47">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508608/20_4_48_0001.jpg" alt="Cesto-cargueiro (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#47</span> <h2>Cesto-cargueiro</h2>
+    <span class="tag">Baniwa</span><span class="tag">Trançados</span>
+    <div class="meta">Vegetal > Cipó-imbé · Trançado hexagonal · 38cm de diâmetro lado maior; 28cm de diâmetro lado menor; 25cm de altura · Usado no transporte de cargas · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/cesto-cargueiro-baniwa-2019/">ver no acervo</a> · item 508608</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Cesto-cargueiro paneiriforme confeccionado em cipó ambé segundo a técnica do trançado hexagonal</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c48">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3176/2687_0004-2-1024x683.jpg" alt="Abano trançado (Tembé)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#48</span> <h2>Abano trançado</h2>
+    <span class="tag">Tembé</span><span class="tag">Trançados</span>
+    <div class="meta">Vegetal > Fibra de vegetal não identificado · Trançado sarjado · 44,5 cm de comprimento; 24,5 cm de largura · Objeto utilizado para atiçar o fogo e para abanar-se · Pará · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/2687-2/">ver no acervo</a> · item 3176</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Abano de conformação irregular confeccionado com matéria-prima não identificada segundo a técnica do trançado sarjado. Apresenta borda com acabamento em ourela simples</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c49">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/499969/20_4_40_0004.jpg" alt="Tipiti dente de cutia (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#49</span> <h2>Tipiti dente de cutia</h2>
+    <span class="tag">Baniwa</span><span class="tag">Trançados</span>
+    <div class="meta">Vegetal > Arumã · Trançado · 149,0 cm de comprimento; 8,0 cm de diâmetro · Usado para extrair o ácido hidrociânico da mandioca brava para que a mesma possa ser utilizada para fazer farinha ou beiju. · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/tipiti-dente-de-cutia-baniwa-2019/">ver no acervo</a> · item 499969</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tipiti trançado de arumã em formato cilíndrico com possibilidade de extensão com abertura na parte superior e duas alças: a de cima para prender a um ponto fixo e a de baixo para introduzir a alavanca e fazê-lo distender-se.</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c50">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508466/20_4_49_0001.jpg" alt="Cesto-cargueiro (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#50</span> <h2>Cesto-cargueiro</h2>
+    <span class="tag">Baniwa</span><span class="tag">Trançados</span>
+    <div class="meta">Vegetal > Cipó-titica · Trançado hexagonal · 38cm de diâmetro lado maior; 23cm de diâmetro lado menor; 35cm de altura · Usado no transporte de cargas · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/cesto-cargueiro-baniwa-2019-2/">ver no acervo</a> · item 508466</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Cesto-cargueiro paneiriforme confeccionado em cipó titica segundo a técnica do trançado hexagonal</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c51">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_30_96_foto_01.jpg" alt="Cesto paneiriforme (Apalai)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#51</span> <h2>Cesto paneiriforme</h2>
+    <span class="tag">Apalai</span><span class="tag">Trançados</span>
+    <div class="meta">Trançado sarjado · 36,5 cm de altura; 36,5 cm de diâmetro da borda e 29,5 cm; 29,5 cm de base · Utilizado para o transporte e armazenamento de carga · Amapá · 1987 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/87-30-96/">ver no acervo</a> · item 3331</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Cesto paneiriforme de base quadrada e borda circular, confeccionado com matéria - prima não identificada, nas cores: natural e preto, segundo a técnica do trançado sarjado. Apresenta superfície decorada com motivos geometrizantes obtidos através do cruzamento das fibras e borda com acabamento em aro plano</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c52">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/5041/2695_0001-1.jpg" alt="Fuso (Urubu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#52</span> <h2>Fuso</h2>
+    <span class="tag">Urubu</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Mineral > Argila | Vegetal > Madeira não identificada · Entalhe | Modelado · Utensílio para fiar o algodão · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/2695a/">ver no acervo</a> · item 5041</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Fuso constituído por haste de madeira com castão chanfrado e tortual da mesma matéria-prima. Exibe junto a extremidade proximal da haste decoração formada com motivos entalhados e fios de algodão envolvidos</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c53">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/777254/SN_230_0001.jpg" alt="Bolsa tecida (Pankararu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#53</span> <h2>Bolsa tecida</h2>
+    <span class="tag">Pankararu</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Vegetal > Fio de croatá · Contratorcido | Enlace sem enodação · 42,0 cm de comprimento; 47,5 cm de largura · Transporte e armazenamento · Pernambuco · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-tecida-pankararu/">ver no acervo</a> · item 777254</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Bolsa tecida em fibra vegetal de croatá, segundo a técnica do contratorcido e do enlace sem enodação</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c54">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4896/68_6_10_0001.jpg" alt="Alforge (Kadiweu)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#54</span> <h2>Alforge</h2>
+    <span class="tag">Kadiweu</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Vegetal > Fio de algodão · Amarração em nó rede de pesca · 15,5 cm de comprimento; 8,5 cm de largura; 0,4 cm de altura · Tecidos para o transporte, sendo a carga transportada no lombo de cavalgaduras ou ao ombro das pessoas · Mato Grosso do Sul · 1968 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/68-6-10/">ver no acervo</a> · item 4896</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Alforge em miniatura confeccionado com fios de algodão  segundo a técnica de enlace com enodação em forma de um duplo saco, fechado nas extremidades e aberto no meio, formando como que dois bornais decorado com três faixas tintas de verde escuro</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c55">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775243/2203_0001.jpg" alt="Tecido bordado (Tembé)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#55</span> <h2>Tecido bordado</h2>
+    <span class="tag">Tembé</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Vegetal > Tecido de algodão · Bordado em ponto cruz · 92,4 cm de comprimento; 95,5 cm de largura · Maranhão · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/tecido-bordado-tembe/">ver no acervo</a> · item 775243</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Tecido bordado constituído de tecido industrializado, na cor marrom, de conformação quadrangular confeccionado segundo a técnica do ponto cruz. Apresenta bordado com motivos zoomorfos, antropomorfos e fitomorfos executado com linhas azul, 
+vermelho e rosa industrializadas segundo a técnica do ponto cruz. Exibe a borda com acabamento na mesma técnica em linha rosa, arrematadas com franjas do mesmo tecido</div>
+    <div><span class="borda">texto_sem_hierarquia</span></div>
+    <ul class="criterios"><li>alt-text conciso (≤30 palavras), objeto primeiro</li><li>informação do registro reorganizada com hierarquia na descrição do objeto</li></ul>
+  </div>
+</div>
+<div class="card" id="c56">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508875/20_4_56_0001.jpg" alt="Bolsa tecida (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#56</span> <h2>Bolsa tecida</h2>
+    <span class="tag">Baniwa</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Vegetal > Corante de pakua caatinga | Vegetal > Fio de tucum | Vegetal > Semente de açaí · Enlace com enodação · 10,0 cm de largura; 16,0 cm de altura; 68,0 cm altura com a alça esticada · Usada como acessório para guardar e transportar objetos. · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-de-tucum-fiado-baniwa-2019/">ver no acervo</a> · item 508875</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Bolsa tecida com alça, confeccionada em fios de tucum nas cores natural e tingidos de corante natural de "pakua caatinga" (Renealmia exaltata/ Baniwa: "waipole"), segundo a técnica do enlace com enodação, usando o ponto "pé de aranha" (Nhengatu: "jandu ypi" / Baniwa: "ene ikapi"). Usado para portar pequenos objetos.</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c57">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" alt="Bolsa tecida (Baniwa)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#57</span> <h2>Bolsa tecida</h2>
+    <span class="tag">Baniwa</span><span class="tag">Cordões e Tecidos</span>
+    <div class="meta">Vegetal > Fio de tucum | Vegetal > Semente de açaí · 24,0 cm de largura; 23,5 cm de altura; 83,0 cm altura com a alça esticada · Usada como acessório para guardar e transportar objetos. · Amazonas · 2019 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-de-tucum-baniwa-2019-2/">ver no acervo</a> · item 500322</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Bolsa tecida com alça usado para portar pequenos objetos feito segundo a técnica de trabalho em malha.</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c58">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" alt="Flauta de pã (Tukano)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#58</span> <h2>Flauta de pã</h2>
+    <span class="tag">Tukano</span><span class="tag">Instrumentos musicais e de sinalização</span><span class="tag ancora">smoke test</span>
+    <div class="meta">Vegetal > Taquara · 29,5; 21,5; 16,8; 14,0; 12,0 e 9,5 cm de comprimento (para os tubos) e 6,5 cm de largura - medidas aproximadas por tratar-se de objeto irregular · Instrumenntos musical e sonoro · Amazonas · 1957 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/8283-2/">ver no acervo</a> · item 51023</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Flauta de pã confeccionado com seis tubos de taquara (Guadua angustifolia Kunth.), dispostos paralelamente uns aos outros e presos por meio de fios de fibra de buriti (Mauritia vinifera Mart.)</div>
+    <div><span class="borda">jargao_catalogo</span></div>
+    <ul class="criterios"><li>alt-text em linguagem simples, sem jargão de catalogação</li><li>termos técnicos só na descrição do objeto, explicados ou atribuídos ao museu</li></ul>
+  </div>
+</div>
+<div class="card" id="c59">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210599/18_3_60_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#59</span> <h2>Flauta reta de osso</h2>
+    <span class="tag">Hixkaryána</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="meta">11,8 cm de comprimento (osso); 41,3 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular · Instrumento musical e sonoro · Amazonas · 2018 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-2/">ver no acervo</a> · item 210599</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de tucano amarelas, amarradas ao fio de fibra, junto a extremidade proximal do osso</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c60">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/199679/13_5_54_0001-1024x683.jpg" alt="Flauta reta sem aeroduto (Salumã)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#60</span> <h2>Flauta reta sem aeroduto</h2>
+    <span class="tag">Salumã</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="meta">73,0 cm de comprimento; 8,0 cm de diâmetro · Mato Grosso · 2013 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-sem-aeroduto/">ver no acervo</a> · item 199679</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Flauta reta sem aeroduto confeccionado com tubo de taquara exibindo extremidade proximal em secção reta, corrigida com cera preta e quatro orifícios para variação do som. Apresenta adornada com franjas de linha industrializada na cor vermelha e duas penas de gavião, fixadas junto à extremidade superior</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c61">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#61</span> <h2>Flauta reta de osso</h2>
+    <span class="tag">Hixkaryána</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="meta">12,7 cm de comprimento (osso); 41,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular · Instrumento musical e sonoro · Amazonas · 2018 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-5/">ver no acervo</a> · item 210680</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor vermelhas, amarradas ao fio de fibra, junto a extremidade proximal do osso</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c62">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210761/18_3_66_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#62</span> <h2>Flauta reta de osso</h2>
+    <span class="tag">Hixkaryána</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="meta">13,3 cm de comprimento (osso); 49,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular · Instrumento musical e sonoro · Amazonas · 2018 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-8/">ver no acervo</a> · item 210761</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor azul, amarradas ao fio de fibra, junto a extremidade proximal do osso</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c63">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205123/1697_0003-1024x683.jpg" alt="Arco retangular (Botocudo)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#63</span> <h2>Arco retangular</h2>
+    <span class="tag">Botocudo</span><span class="tag">Armas</span>
+    <div class="meta">Entalhe · 212,5 cm de comprimento, 4,5 cm de largura - Medidas aproximadas por se tratar de objeto irregular · Equipamento utilizado para caça, pesca, ataque e defesa · Minas Gerais · 1950 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/205123-2/">ver no acervo</a> · item 205123</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Arco retangular confeccionado com madeira não identificada, tecida segundo a técnica da torção em Z. Possui acabamento com fibra natural não identificada na extremidade proximal</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c64">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/204975/75_5_12_0006-1024x683.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#64</span> <h2>Arco plano-côncavo</h2>
+    <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
+    <div class="meta">Entalhe · 264 cm de comprimento, 2,58 cm de largura - Medidas aproximadas por se tratar de objeto irregular · Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa · Amazonas · 1975 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-5/">ver no acervo</a> · item 204975</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c65">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205036/892art_0003-1024x683.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#65</span> <h2>Arco plano-côncavo</h2>
+    <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
+    <div class="meta">Entalhe · 238,4 cm de comprimento, 2,5 cm de largura - Medidas aproximadas por se tratar de objeto irregular · Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa · Amazonas · 1994 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-6/">ver no acervo</a> · item 205036</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c66">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004-683x1024.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#66</span> <h2>Arco plano-côncavo</h2>
+    <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
+    <div class="meta">Entalhe · 237,2 cm de comprimento, 3 cm de largura - Medidas aproximadas por se tratar de objeto irregular · Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa · Amazonas · 1972 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-7/">ver no acervo</a> · item 205095</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c67">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/204980/75_5_13_0006-1024x683.jpg" alt="Arco quadrangular (Waimiri-Atroari)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#67</span> <h2>Arco quadrangular</h2>
+    <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
+    <div class="meta">Entalhe · 236 cm de comprimento, 2,57 cm de largura - Medidas aproximadas por se tratar de objeto irregular · Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa · Amazonas · 1975 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/arco-quadrangular-2/">ver no acervo</a> · item 204980</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Arco quadrangular confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c68">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/206999/19_1_4_0001-1024x683.jpg" alt="Óleo vegetal de coco de babaçu (Tabajara)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#68</span> <h2>Óleo vegetal de coco de babaçu</h2>
+    <span class="tag">Tabajara</span><span class="tag">Etnobotânica</span>
+    <div class="meta">Vegetal > Semente de babaçu · - · Para cozinhar e produzir remédios caseiros · Piauí · 2018 · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/oleo-vegetal-coco-de-babacu/">ver no acervo</a> · item 206999</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Óleo amarelo claro extraído das sementes de babaçu.</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c69">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775404/S_N-228_0001.jpg" alt="Amostra de fibra vegetal (Sem identificação)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#69</span> <h2>Amostra de fibra vegetal</h2>
+    <span class="tag">Sem identificação</span><span class="tag">Etnobotânica</span>
+    <div class="meta">Vegetal > Fibra de vegetal não identificado · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/amostra-de-fibra-vegetal-2/">ver no acervo</a> · item 775404</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Amostra de fibra vegetal não identificada</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+<div class="card" id="c70">
+  <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775548/S_N-227_0001.jpg" alt="Amostra de fibra animal (Sem identificação)" loading="lazy">
+  <div class="corpo">
+    <span class="num">#70</span> <h2>Amostra de fibra animal</h2>
+    <span class="tag">Sem identificação</span><span class="tag">Etnobotânica</span>
+    <div class="meta"> · <a href="https://tainacan.museudoindio.gov.br/museu-do-indio/amostra-de-fibra-animal/">ver no acervo</a> · item 775548</div>
+    <div class="baseline"><b>Descrição curatorial:</b> Amostra de fibra de origem animal não identificada, de fios pretos, podendo ser cabelo humano, amarrados em fio de tucum</div>
+    <div><span class="borda">caso_simples</span></div>
+    <ul class="criterios"><li>alt-text descreve a fotografia (enquadramento incluído)</li><li>descrição do objeto ancorada: todo fato não-visível tem fonte no registro</li><li>nenhum elemento inventado</li></ul>
+  </div>
+</div>
+</div></body></html>

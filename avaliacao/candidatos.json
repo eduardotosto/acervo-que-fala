@@ -1,0 +1,1837 @@
+[
+  {
+    "item_id": 9196,
+    "titulo": "Pote",
+    "povo": "Karajá",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/77-3-169/",
+    "baseline": "Pote de borda extrovertida e base plana apresentando superfície decorada com motivos geometrizantes pintados em vermelho e preto",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "4,3 cm de diâmetro (borda); 5,5 cm de diâmetro (bojo); 6,0 cm de altura",
+      "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+      "Estado de origem": "Tocantins",
+      "Ano de aquisição do objeto": "1977"
+    },
+    "categorias_borda": [
+      "jargao_catalogo"
+    ],
+    "criterios": [
+      "alt-text em linguagem simples, sem jargão de catalogação",
+      "termos técnicos só na descrição do objeto, explicados ou atribuídos ao museu"
+    ],
+    "ancora_smoke_test": true
+  },
+  {
+    "item_id": 1045,
+    "titulo": "Moringa",
+    "povo": "Terena",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6779-f.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6779-2/",
+    "baseline": "Moringa de base plana, com dois gargalos de bordas direta, separados por uma alça. Apresenta decoração no bojo com motivos naturalistas fitomorfos (vegetais) pintados na cor branco",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila | Mineral > Argila branca | Mineral > Argila vermelha",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "23,0 cm de altura; 22,0 cm de comprimento; 18,0 cm de largura",
+      "Função": "Objeto utlilizado para reservar e servir líquidos (água)",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1955"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 680,
+    "titulo": "Panela gameliforme",
+    "povo": "Suruí",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/81_1_4__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/81-1-4/",
+    "baseline": "O objeto possui borda reta e base arredondada. Apresenta também superfície enegrecida",
+    "metadados_chave": {
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "13,0 cm de diâmetro da borda; 9,0 cm de altura",
+      "Função": "Cerâmica utilitária para a cozinnha; Vasilha larga e funda, provida ou não de tampa, usada para cozinhar alimentos e/ou fermentar bebidas",
+      "Estado de origem": "Rondônia",
+      "Ano de aquisição do objeto": "1980"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1260,
+    "titulo": "Tigela",
+    "povo": "Kadiweu",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/2426-v.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/2426-2/",
+    "baseline": "Tigela de borda reta e base plana. Apresenta decoração externa marcado com corda formando motivos geometrizantes e internamente, os mesmos motivos pintados",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "23,0 cm de diâmetro da borda; 8,5 cm de altura",
+      "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1255,
+    "titulo": "Panela gameliforme",
+    "povo": "Maxacali",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/91.2.1_001_DSC2918.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/91-2-1/",
+    "baseline": "Panela gameliforme de porte médio com borda reta,base convexa e corpo bojudo. Apresentando marcas de queima provenientes do processo de cozimento em fogueira com temperaturas aproximadas 500/550ºC",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "19,0 cm de diâmetro de borda; 16,5 cm de altura",
+      "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+      "Estado de origem": "Minas Gerais",
+      "Ano de aquisição do objeto": "1990"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 630,
+    "titulo": "Bilhas comunicantes",
+    "povo": "Palikur",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/630/8171-Foto-31.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/8171-2/",
+    "baseline": "Bilhas comunicantes composta por dois recipientes diferentes. O primeiro de borda reta e contorno simples e o segundo exibe um pequeno orifício na parte superior. Apresenta base oval única para ambos os recipientes, superfície resinada e decorada com motivos geometrizantes",
+    "metadados_chave": {
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "16,5 cm de diâmetro de bojo; 21,0 cm de altura; 42,0 cm de comprimento; 19,0 cm de largura",
+      "Função": "Objeto utilizado como cerâmica utilitária e/ou cerimonial para armazenagem e serviço",
+      "Estado de origem": "Amapá",
+      "Ano de aquisição do objeto": "1957"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1050,
+    "titulo": "Bilha",
+    "povo": "Marubo",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/bilha_75_4_85_f04.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/75-4-85/",
+    "baseline": "Bilha frutiforme com alça de tucum, ambos enegrecidos, de base plana. Apresenta gargalo com bico",
+    "metadados_chave": {
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "13,0 cm de altura; 10,5 cm de largura; 10,5 cm de comprimento",
+      "Função": "Objeto utilizado para reservar e/ou servir líquidos (aioásca)",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1975"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1826,
+    "titulo": "Tigela",
+    "povo": "Kadiweu",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/1826/2465-v-2.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/2465-2/",
+    "baseline": "Tigela fitomorfa de borda reta, lábio ondulado e base plana. Apresenta externamente decoração marcada com corda formando motivos geometrizantes e internamente, os mesmos motivos pintados",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "33,5 cm de comprimento; 20,0 cm de largura; 13,0 cm de altura (maior); 9,5 cm de altura (menor)",
+      "Função": "Objeto utilizado para servir alimentos e para outros fins",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2151,
+    "titulo": "Pote",
+    "povo": "Karajá",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/2151/6766_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6766-2/",
+    "baseline": "Pote de cor clara, base plana e borda direta. Apresenta decoração externa com motivos geometrizantes (figuras labiríntica) pintados nas cores preto e amarelo",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "4,7 cm de diâmetro de borda; 9,0 cm de diâmetro de bojo; 10,2 cm de altura",
+      "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+      "Estado de origem": "Tocantins",
+      "Ano de aquisição do objeto": "1955"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1996,
+    "titulo": "Tigela",
+    "povo": "Kadiweu",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/68.6.41-c.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/68-6-41/",
+    "baseline": "Tigela de borda extrovertida e base plana. Apresenta decoração interna e externa formada por motivos geometrizantes pintados",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "21,5 cm de diâmetro da borda; 7,5 cm de altura",
+      "Função": "Objeto utilizado para servir alimentos e para outros fins",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1968"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1871,
+    "titulo": "Tigela",
+    "povo": "Kadiweu",
+    "categoria_objeto": "Cerâmica",
+    "quota_categoria": 9,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/2453_001_DSC2268.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/2453-2/",
+    "baseline": "Tigela de borda reta, lábio ondulado e base plana. Apresentando decoração externa \"marcado-com-corda\" formando motivos geometrizantes e internamente, os mesmos motivos pintados",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Acordelado",
+      "Dimensões": "19,0 cm de largura (maior); 8,5 cm de altura (maior); 6,0 cm de altura (menor)",
+      "Função": "Objeto utilizado para servir e armazenagem de alimentos",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 78838,
+    "titulo": "Tanga de miçangas",
+    "povo": "Tiriyó",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-47/",
+    "baseline": "Tanga de miçanga de conformação retangular confeccionado com linha industrializada branca e contas de miçangas nas cores: branca e preta. A superfície é ornamentada por: figuras estilizadas, motivo grego e piramidal, tecida segundo a técnica do entretorcido. Apresenta borda superior com cordel para amarrar o objeto ao corpo feito com barbante de algodão. Acabamento inferior com franjas de linha industrializada, tendo nas duas extremidades pingentes constituídos por miçangas branca e preta intercaladas. Possui acabamento da borda inferior com franjas de linha industrializada na cor branca",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Técnica de confecção": "Entretecido",
+      "Dimensões": "50,0 cm de comprimento (medida maior, sem cordel); 75,0 cm de comprimento (com cordel de amarração); 44,0 cm de largura",
+      "Função": "Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "2009"
+    },
+    "categorias_borda": [
+      "texto_sem_hierarquia"
+    ],
+    "criterios": [
+      "alt-text conciso (≤30 palavras), objeto primeiro",
+      "informação do registro reorganizada com hierarquia na descrição do objeto"
+    ],
+    "ancora_smoke_test": true
+  },
+  {
+    "item_id": 4286,
+    "titulo": "Brinco cavilha",
+    "povo": "Xavante",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37r_f02.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37r/",
+    "baseline": "Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Taquara",
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "5,2 cm de comprimento",
+      "Função": "Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1988"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 78213,
+    "titulo": "Sobrecinto de miçangas",
+    "povo": "Tiriyó",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08.2.117_foto_01DSC_4328.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-117/",
+    "baseline": "Sobrecinto de miçanga usado pelos homens para decoro do tronco, confeccionado com enfiaduras de miçangas coloridas, tecida segundo a técnica do entretorcido. Constitui-se de uma faixa horizontal com prolongamento vertical que adorna o quadril. A faixa horizontal é adornada por oito estilizações de pássaros tendo ao centro a figura de um caranguejo, constituídos por contas de miçangas coloridas. Apresenta três prolongamentos verticais adornados por figuras antropomórficas e motivos geométricos, interligados por uma faixa horizontal, com borda constituída de contas na cor laranja e o interior com uma faixa preta adornada por pequenas flores amarelas e acabamento inferior com franjas coloridas de miçangas. Possui cordel de linha industrializada branca para amarrar o objeto ao corpo",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Técnica de confecção": "Entretecido",
+      "Dimensões": "1,08 m de comprimento; 30,0 cm de largura",
+      "Função": "Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro do tronco",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "2009"
+    },
+    "categorias_borda": [
+      "texto_sem_hierarquia"
+    ],
+    "criterios": [
+      "alt-text conciso (≤30 palavras), objeto primeiro",
+      "informação do registro reorganizada com hierarquia na descrição do objeto"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4116,
+    "titulo": "Colar de miçangas",
+    "povo": "Waiwái",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4116/colar_de_micangas_86_7_14_f03.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/86-7-14/",
+    "baseline": "Colar confeccionado com enfiaduras de miçangas na cor laranja,  presas com linha industrializada  na cor branca.Apresenta,ao centro, um desenho de pássaro (papagaio) formado de miçangas coloridas nas cores: amarelo, verde, azul claro e azul marinho",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Miçanga",
+      "Dimensões": "41,0 cm de comprimento (com pingente); 28,5 cm (sem pingente); 5,5 cm de largura e 0,3 cm de espessura",
+      "Função": "Adornos de materiais ecléticos do tronco",
+      "Estado de origem": "Roraima",
+      "Ano de aquisição do objeto": "1986"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 77963,
+    "titulo": "Pulseira de miçangas",
+    "povo": "Tiriyó",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08_2_78_f00037.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-78/",
+    "baseline": "Pulseira de miçanga confeccionado com miçangas nas cores: preta, verde, amarela,branca, vermelha, laranja e azul e linha industrializada na cor branca segundo a técnica do entretecido apresentando cordel de linha na cor branca para amarração, adornada por vários zigue-zague coloridos e um central na cor preta",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Técnica de confecção": "Entretecido",
+      "Dimensões": "35,0 cm de comprimento (com cordel); 2,0 cm de largura; 22,3 cm de comprimento (sem cordel); 2,0 cm de largura",
+      "Função": "Adorno de Materiais Ecléticos, usado para adornar o braço",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "2008"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4211,
+    "titulo": "Brinco cavilha",
+    "povo": "Xavante",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37e_f01.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37e/",
+    "baseline": "Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Madeira não identificada",
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "6,4 cm de comprimento",
+      "Função": "Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1988"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4246,
+    "titulo": "Brinco cavilha",
+    "povo": "Xavante",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/auricular_cavilha_88_8_37k_f01.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/88-8-37k/",
+    "baseline": "Brinco cavilha constituído de um pedaço de madeira roliço, de um tronco de taquara",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Taquara",
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "6,2 cm de comprimento",
+      "Função": "Objeto utilizado no lóbulo da orelha, sendo o conjunto utilizado no ritual de furação de orelha",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1988"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 84836,
+    "titulo": "Pulseira de miçangas",
+    "povo": "Kaxinawá",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_14_fot_003.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/11-9-14/",
+    "baseline": "Pulseira de miçangas fechada,confeccionado com fios de nylon e contas de miçangas formando uma faixa que cinge o pulso, cuja composição das contas formam padrões característico do grupo nas cores: azul e laranja, com contorno na cor preta",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Dimensões": "10,0 cm de comprimento; 7,2 cm de largura",
+      "Função": "Adorno para os membros que cinge o pulso",
+      "Estado de origem": "Acre",
+      "Ano de aquisição do objeto": "2011"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 90371,
+    "titulo": "Colar de miçangas",
+    "povo": "Tiriyó",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08_2_148_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-148/",
+    "baseline": "Colar de miçangas, confeccionado com contas de miçangas \"samura\" multicoloridas (transparente,azul,laranja,preto e marrom) e linha industrializada na cor branca. Consiste de colar com franjas em toda sua extensão. Exibe, ao centro,pingente triangular com a representação de figura zoomorfa",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Dimensões": "20,0 cm de largura; 21,0 cm de comprimento",
+      "Função": "Adornos de materiais ecléticos do tronco",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "2008"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 78218,
+    "titulo": "Sobrecinto de miçangas",
+    "povo": "Tiriyó",
+    "categoria_objeto": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+    "quota_categoria": 8,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/08.2.120_foto_01_DSC_3755.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/08-2-120/",
+    "baseline": "Sobrecinto de miçanga usado pelos homens para decoro do tronco, confeccionado com enfiaduras de miçangas coloridas, tecida no tear em arco segundo a técnica do entretorcido. Constitui-se de uma faixa horizontal com prolongamentos verticais que adornam o quadril. A faixa horizontal é adornada por oito estilizações de pássaros com reprodução de cena destes sobre um galho, comendo minhoca, e de pássaros voando com as asas levantadas, tendo ao centro da faixa uma roseta constituída por miçangas nas cores: preto formando as pétalas e o interior contas nas cores: branca, vermelho e verde. Apresenta sete prolongamentos verticais adornados por figuras geométricas, interligados por uma faixa horizontal, com borda constituída de contas na cor vermelha e o interior uma faixa amarela adornada por pequenas flores na cor azul e acabamento inferior com franjas coloridas de miçangas. Possui cordel de linha industrializada branca para amarrar o objeto ao corpo",
+    "metadados_chave": {
+      "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+      "Técnica de confecção": "Entretecido",
+      "Dimensões": "95,0 cm de comprimento; 26,0 cm de largura",
+      "Função": "Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro do tronco",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "2009"
+    },
+    "categorias_borda": [
+      "texto_sem_hierarquia"
+    ],
+    "criterios": [
+      "alt-text conciso (≤30 palavras), objeto primeiro",
+      "informação do registro reorganizada com hierarquia na descrição do objeto"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4391,
+    "titulo": "Cachimbo de cerâmica",
+    "povo": "Canela",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/3333__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/3333-2/",
+    "baseline": "Cachimbo cerâmica constituído de um fornilho modelado em barro e aspirador de madeira não identificada. Exibe a superfície do fornilho decorada com motivos incisos formando padrões geometrizantes",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila | Vegetal > Madeira não identificada",
+      "Técnica de confecção": "Modelado",
+      "Dimensões": "19,0 cm de comprimento; 3,6 cm de altura; 2,3 cm de diâmetro",
+      "Função": "Aparelho para estimulantes e narcóticos",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2826,
+    "titulo": "Escultura zoomorfa ritual Timbira",
+    "povo": "Krahô",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/75_6_142__2_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/75-6-142/",
+    "baseline": "Escultura zoomorfa ritual timbira representando \"peixe\", confeccionado com palha de buriti, trançada segundo a técnica do sarjado. Apresenta parte posterior provida de \"nadadeiras\" e extremidade distal \"rabo\"",
+    "metadados_chave": {
+      "Técnica de confecção": "Trançado sarjado",
+      "Dimensões": "67,5 cm de comprimento",
+      "Função": "Objeto utilizado nos ritos de iniciação, onde os membros da metade peixe, carregam alimentos embrulhados em folha de buriti em forma de peixe",
+      "Estado de origem": "Tocantins",
+      "Ano de aquisição do objeto": "1975"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2746,
+    "titulo": "Máscara antropomorfa Tikuna",
+    "povo": "Tikuna",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/680art_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/680art/",
+    "baseline": "Máscara antropomorfa tukúna constituída por capuz confeccionado com entrecasca de árvore, decorado com motivos geometrizantes nas cores azul, amarelo e marrom. Apresenta na parte central do capuz, \"cara sobrenatural, talhada em madeira não identificada exibindo superfície decorada, também com motivos geometrizantes, pintados na cor amarelo e preto. Exibe testa, nariz e boca salientes",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Entrecasca de árvore não identificada | Vegetal > Madeira não identificada",
+      "Técnica de confecção": "Entalhe | Pintura",
+      "Dimensões": "22,0 cm de comprimento(cabeça de madeira); 59,0 cm de comprimento(cabeça e veste); 25,5 cm de largura(cabeça e veste)",
+      "Função": "Objeto utilizado nas festas de iniciação feminina para afastar os espíritos malígnos que elas representam",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1994"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 5206,
+    "titulo": "Brinquedo balança",
+    "povo": "Canela",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4802_foto_01_DSC0022.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/4802-2/",
+    "baseline": "Brinquedo balança constituído de uma haste de madeira exibindo nas extremidades dois \"pratos\" formados com disco de cabaça suspenso através de fios de tucum",
+    "metadados_chave": {
+      "Dimensões": "27,5 cm de comprimento; 11,0 cm de altura",
+      "Função": "Objeto destinado à atividades lúdicos infantins",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4606,
+    "titulo": "Estojo para guardar umbigo",
+    "povo": "Canela",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4548c__3_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/4548c/",
+    "baseline": "Estojo para guardar o umbigo do recém - nascido, feito de folíolo de broto da palmeira de buriti, consiste em duas dobraduras afuniladas, com orifício no meio",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Palmeira de buriti",
+      "Técnica de confecção": "Dobradura",
+      "Dimensões": "5,2 cm de comprimento; 1,9 cm de largura; 1,8 cm de altura",
+      "Função": "Ritual",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2601,
+    "titulo": "Máscara antropomorfa Tikuna",
+    "povo": "Tikuna",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/86_3_9b_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/86-3-9b/",
+    "baseline": "Máscara antropomorfa tukúna constituída por \"cara\" talhada em madeira de balsa, exibindo sobrancelhas e olhos pintados, nariz e boca salientes",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Madeira balsa",
+      "Técnica de confecção": "Entalhe | Pintura",
+      "Dimensões": "22,0 cm de comprimento; 13,2 cm de largura",
+      "Função": "Objeto destinado a comercialização",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1986"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4366,
+    "titulo": "Cachimbo de cerâmica",
+    "povo": "Fulni-ô",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/1394__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/1394-2/",
+    "baseline": "Cachimbo de cerâmica de conformação cônica, confeccionado com argila. Apresenta superfície enegrecida e decorada com motivos geometrizantes, incisos",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila",
+      "Técnica de confecção": "Modelado",
+      "Dimensões": "14,o cm de comprimento; 4,5 cm de diâmetro(borda)",
+      "Função": "Aparelho para estimulantes e narcóticos",
+      "Estado de origem": "Pernambuco",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4056,
+    "titulo": "Peteca",
+    "povo": "Menkrangnotí",
+    "categoria_objeto": "Objetos rituais, mágicos e lúdicos",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4056/76_2_85_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/76-2-85/",
+    "baseline": "Peteca confeccionado com palha de milho",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Palha de milho",
+      "Dimensões": "22,0 cm de altura; 11,0 cm de diâmetro(base)",
+      "Função": "Objeto utilizado em atividades lúdicas",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "1976"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 665,
+    "titulo": "Faixa frontal emplumada",
+    "povo": "Kalapalo",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-61a/",
+    "baseline": "Faixa frontal emplumada confeccionado com penas nas cores preto(Jaburu), amarelo(Jacú-amarelo) e vermelha e amarelo(Arara) dispostas verticalmente com corte horizontal das penas costuradas em couro de onça",
+    "metadados_chave": {
+      "Matéria-prima": "Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu",
+      "Dimensões": "60,0cm de comprimento; 13,0cm de altura",
+      "Função": "Adorno para cabeça",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1987"
+    },
+    "categorias_borda": [
+      "divergencia_imagem_catalogo",
+      "artefato_estudio"
+    ],
+    "criterios": [
+      "elemento visível ausente do catálogo é descrito",
+      "divergência sinalizada em flag para revisão, não omitida",
+      "artefatos de estúdio (cartela de cor, escala, suporte) excluídos da descrição"
+    ],
+    "ancora_smoke_test": true
+  },
+  {
+    "item_id": 2221,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kamayurá",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6323b__2_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6323b/",
+    "baseline": "Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de algodão | Animal > Pena de ave não identificada",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "46,0cm de comprimento;6,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1959"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2236,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kamayurá",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/7777__2_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/7777-2/",
+    "baseline": "Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de algodão | Animal > Pena de ave não identificada",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "50,0cm de comprimento;10,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1959"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2316,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Waurá",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/96_1_5b__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/96-1-5b/",
+    "baseline": "Braçadeira emplumada confeccionado com fieira de penas nas cores amarelo, vermelho(Arara) e preto(Mutum) em formato de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão",
+    "metadados_chave": {
+      "Matéria-prima": "Animal > Pena de arara | Animal > Pena de ave não identificada",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "82,0cm de comprimento;10,5cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1996"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1521,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kalapalo",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_6b__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-6b/",
+    "baseline": "Braçadeira emplumada composta de fio de algodão com penas na cores amarelo(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas",
+    "metadados_chave": {
+      "Matéria-prima": "Animal > Pena de arara",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "65,0cm de comprimento;8,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1987"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1436,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kalapalo",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_7b__2_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-7b/",
+    "baseline": "Braçadeira emplumada composta de fio de algodão tingido de verde com penas na cor vermelha de arara, amarradas por cordão de fibra, confeccionado segundo a técnica de emplumação em passamanaria com alças soltas",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fibra de vegetal não identificado | Animal > Pena de arara",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "60,0cm de comprimento;5,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1987"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 2226,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kamayurá",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6323a__2_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6323a/",
+    "baseline": "Braçadeira emplumada confeccionado com fieira de penas na cor amarelo em forma de flores de plumas amarradas pela técnica de emplumação em passamanaria num cordel base de fio de algodão",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de algodão | Animal > Pena de ave não identificada",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "43,0cm de comprimento;6,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1959"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1516,
+    "titulo": "Braçadeira emplumada",
+    "povo": "Kalapalo",
+    "categoria_objeto": "Adornos Plumários",
+    "quota_categoria": 6,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_6a__1_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/87-22-6a/",
+    "baseline": "Braçadeira emplumada composta de fio de algodão com penas na cores amarelo(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas",
+    "metadados_chave": {
+      "Matéria-prima": "Animal > Pena de arara",
+      "Técnica de confecção": "Emplumação em passamanaria",
+      "Dimensões": "60,0cm de comprimento;7,0cm de largura",
+      "Função": "Adorno para braço",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "1987"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 5371,
+    "titulo": "Recipiente de cabaça",
+    "povo": "Guarani-Kaiowá",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6630_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6630-2/",
+    "baseline": "Recipiente de cabaça \"hý akwá\" provido de orifício circular. Apresentando nos dois terços superiores da superfície decoração com motivos geometrizantes pirogravados",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "11,5 cm de altura; 7,5 cm de largura",
+      "Função": "Objeto utilizado para beber chimarrão",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1321,
+    "titulo": "Recipiente de cabaça",
+    "povo": "Guarani-Kaiowá",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6624_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6624-2/",
+    "baseline": "Recipiente de cabaça com revestimento, alça da fibra de cipó guaimbé e tampa de sabugo de milho",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "38,0 cm de altura (com alça); 27,0 cm de altura (sem alça); 11,0 cm de diâmetro",
+      "Função": "Objeto utilizado para reservar e servir alimentos",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 5366,
+    "titulo": "Recipiente de cabaça",
+    "povo": "Guarani-Kaiowá",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6629_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6629-2/",
+    "baseline": "Recipiente de cabaça \"hý akwá\" provido de orifício circular. Exibe em torno do orifício decoração com motivos geometrizantes pirogravados",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "6,5 cm de largura; 10,5 cm de diâmetro",
+      "Função": "Objeto utilizado para tomar chimarrão",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1316,
+    "titulo": "Recipiente de cabaça",
+    "povo": "Guarani Nhandeva",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6559_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6559-2/",
+    "baseline": "Recipiente de cabaça com alça, tampa de sabugo de milho e revestida com cipó gwaimbé \"djawóá\"",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "33,0 cm de altura (sem alça); 58,0 cm de altura (com alça); 15,0 cm de diâmetro",
+      "Função": "Objeto utilizado para a guarda e serviço de líquidos; Objeto de fabricação masculina",
+      "Estado de origem": "São Paulo",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 1331,
+    "titulo": "Recipiente de cabaça",
+    "povo": "Guarani-Kaiowá",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6626_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6626-2/",
+    "baseline": "Recipiente de cabaça com revestimento, alça da fibra de cipó guaimbé e tampa de sabugo de milho",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "26,0 cm de altura (com alça); 21,0 cm de altura (sem alça); 12,0 cm de diâmetro",
+      "Função": "Objeto utilizado para reservar e servir alimentos",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1955"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 5486,
+    "titulo": "Colher de cabaça",
+    "povo": "Guarani-Kaiowá",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/6634_foto_1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/6634-2/",
+    "baseline": "Colher de cabaça \"hý akwá\" , confeccionado com meia cabaça apresentando superfície externa decorada com motivos geometrizantes pirogravados e alça de fios de algodão fixada ao cabo do objeto",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cabaça",
+      "Dimensões": "11,0 cm de comprimento; 5,5 cm de altura",
+      "Função": "Objeto utilizado para beber chicha",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4036,
+    "titulo": "Recipiente de casca",
+    "povo": "Canela",
+    "categoria_objeto": "Utensílios e implementos de materiais ecléticos",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4527__4_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/4527-2/",
+    "baseline": "Recipiente feito do fruto maduro do cajá cortado ao meio e esvaziado do miolo",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Semente de cajá",
+      "Dimensões": "5,5 cm de comprimento; 3,1 cm de largura e 2,0 cm de altura",
+      "Função": "Ritual, onde guardam o urucum que serve para passar no umbigo do recém - nascido",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 63283,
+    "titulo": "Abano trançado",
+    "povo": "Fulni-ô",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/281-2/",
+    "baseline": "Abano trançado de conformação retangular confeccionado com fibra não identificada, segundo a técnica do trançado sarjado. Apresenta empunhadura formada com o pecíolo da planta revestido com trançado sarjado que também reveste as bordas do objeto. Exibe na parte central decoração formada com fitas de fibra tingidas de azul e verde, formando uma roseta, através do revestimento de parte do trançado",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fibra de vegetal não identificado",
+      "Técnica de confecção": "Trançado sarjado",
+      "Dimensões": "290,0 cm de comprimento (maior); 19,5 cm de largura (menor)",
+      "Função": "Objeto destinado a atiçar o fogo e para abanar-se",
+      "Estado de origem": "Pernambuco",
+      "Ano de aquisição do objeto": "1949"
+    },
+    "categorias_borda": [
+      "foto_parcial",
+      "metadado_suspeito"
+    ],
+    "criterios": [
+      "alt-text avisa que a foto é detalhe/parcial",
+      "descrição do objeto completa vem do registro, com atribuição",
+      "valor improvável do registro sinalizado em flag, não repetido como fato"
+    ],
+    "ancora_smoke_test": true
+  },
+  {
+    "item_id": 500067,
+    "titulo": "Tipiti iará",
+    "povo": "Baniwa",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500067/20_4_39_0002.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/tipiti-iara-baniwa-2019/",
+    "baseline": "Tipiti trançado de palmeira iará em formato cilíndrico com possibilidade de extensão com abertura na parte superior e duas alças: a de cima para prender a um ponto fixo e a de baixo para introduzir a alavanca e fazê-lo distender-se.",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fibra de vegetal não identificado",
+      "Técnica de confecção": "Trançado",
+      "Dimensões": "145,0 cm de comprimento; 7,0 cm de diâmetro",
+      "Função": "Usado para extrair o ácido hidrociânico da mandioca brava para que a mesma possa ser utilizada para fazer farinha ou beiju.",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 508608,
+    "titulo": "Cesto-cargueiro",
+    "povo": "Baniwa",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508608/20_4_48_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/cesto-cargueiro-baniwa-2019/",
+    "baseline": "Cesto-cargueiro paneiriforme confeccionado em cipó ambé segundo a técnica do trançado hexagonal",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cipó-imbé",
+      "Técnica de confecção": "Trançado hexagonal",
+      "Dimensões": "38cm de diâmetro lado maior; 28cm de diâmetro lado menor; 25cm de altura",
+      "Função": "Usado no transporte de cargas",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 3176,
+    "titulo": "Abano trançado",
+    "povo": "Tembé",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3176/2687_0004-2-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/2687-2/",
+    "baseline": "Abano de conformação irregular confeccionado com matéria-prima não identificada segundo a técnica do trançado sarjado. Apresenta borda com acabamento em ourela simples",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fibra de vegetal não identificado",
+      "Técnica de confecção": "Trançado sarjado",
+      "Dimensões": "44,5 cm de comprimento; 24,5 cm de largura",
+      "Função": "Objeto utilizado para atiçar o fogo e para abanar-se",
+      "Estado de origem": "Pará",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 499969,
+    "titulo": "Tipiti dente de cutia",
+    "povo": "Baniwa",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/499969/20_4_40_0004.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/tipiti-dente-de-cutia-baniwa-2019/",
+    "baseline": "Tipiti trançado de arumã em formato cilíndrico com possibilidade de extensão com abertura na parte superior e duas alças: a de cima para prender a um ponto fixo e a de baixo para introduzir a alavanca e fazê-lo distender-se.",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Arumã",
+      "Técnica de confecção": "Trançado",
+      "Dimensões": "149,0 cm de comprimento; 8,0 cm de diâmetro",
+      "Função": "Usado para extrair o ácido hidrociânico da mandioca brava para que a mesma possa ser utilizada para fazer farinha ou beiju.",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 508466,
+    "titulo": "Cesto-cargueiro",
+    "povo": "Baniwa",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508466/20_4_49_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/cesto-cargueiro-baniwa-2019-2/",
+    "baseline": "Cesto-cargueiro paneiriforme confeccionado em cipó titica segundo a técnica do trançado hexagonal",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Cipó-titica",
+      "Técnica de confecção": "Trançado hexagonal",
+      "Dimensões": "38cm de diâmetro lado maior; 23cm de diâmetro lado menor; 35cm de altura",
+      "Função": "Usado no transporte de cargas",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 3331,
+    "titulo": "Cesto paneiriforme",
+    "povo": "Apalai",
+    "categoria_objeto": "Trançados",
+    "quota_categoria": 5,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_30_96_foto_01.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/87-30-96/",
+    "baseline": "Cesto paneiriforme de base quadrada e borda circular, confeccionado com matéria - prima não identificada, nas cores: natural e preto, segundo a técnica do trançado sarjado. Apresenta superfície decorada com motivos geometrizantes obtidos através do cruzamento das fibras e borda com acabamento em aro plano",
+    "metadados_chave": {
+      "Técnica de confecção": "Trançado sarjado",
+      "Dimensões": "36,5 cm de altura; 36,5 cm de diâmetro da borda e 29,5 cm; 29,5 cm de base",
+      "Função": "Utilizado para o transporte e armazenamento de carga",
+      "Estado de origem": "Amapá",
+      "Ano de aquisição do objeto": "1987"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 5041,
+    "titulo": "Fuso",
+    "povo": "Urubu",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/5041/2695_0001-1.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/2695a/",
+    "baseline": "Fuso constituído por haste de madeira com castão chanfrado e tortual da mesma matéria-prima. Exibe junto a extremidade proximal da haste decoração formada com motivos entalhados e fios de algodão envolvidos",
+    "metadados_chave": {
+      "Matéria-prima": "Mineral > Argila | Vegetal > Madeira não identificada",
+      "Técnica de confecção": "Entalhe | Modelado",
+      "Função": "Utensílio para fiar o algodão",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 777254,
+    "titulo": "Bolsa tecida",
+    "povo": "Pankararu",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/777254/SN_230_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-tecida-pankararu/",
+    "baseline": "Bolsa tecida em fibra vegetal de croatá, segundo a técnica do contratorcido e do enlace sem enodação",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de croatá",
+      "Técnica de confecção": "Contratorcido | Enlace sem enodação",
+      "Dimensões": "42,0 cm de comprimento; 47,5 cm de largura",
+      "Função": "Transporte e armazenamento",
+      "Estado de origem": "Pernambuco"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 4896,
+    "titulo": "Alforge",
+    "povo": "Kadiweu",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/4896/68_6_10_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/68-6-10/",
+    "baseline": "Alforge em miniatura confeccionado com fios de algodão  segundo a técnica de enlace com enodação em forma de um duplo saco, fechado nas extremidades e aberto no meio, formando como que dois bornais decorado com três faixas tintas de verde escuro",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de algodão",
+      "Técnica de confecção": "Amarração em nó rede de pesca",
+      "Dimensões": "15,5 cm de comprimento; 8,5 cm de largura; 0,4 cm de altura",
+      "Função": "Tecidos para o transporte, sendo a carga transportada no lombo de cavalgaduras ou ao ombro das pessoas",
+      "Estado de origem": "Mato Grosso do Sul",
+      "Ano de aquisição do objeto": "1968"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 775243,
+    "titulo": "Tecido bordado",
+    "povo": "Tembé",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775243/2203_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/tecido-bordado-tembe/",
+    "baseline": "Tecido bordado constituído de tecido industrializado, na cor marrom, de conformação quadrangular confeccionado segundo a técnica do ponto cruz. Apresenta bordado com motivos zoomorfos, antropomorfos e fitomorfos executado com linhas azul, \nvermelho e rosa industrializadas segundo a técnica do ponto cruz. Exibe a borda com acabamento na mesma técnica em linha rosa, arrematadas com franjas do mesmo tecido",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Tecido de algodão",
+      "Técnica de confecção": "Bordado em ponto cruz",
+      "Dimensões": "92,4 cm de comprimento; 95,5 cm de largura",
+      "Estado de origem": "Maranhão",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "texto_sem_hierarquia"
+    ],
+    "criterios": [
+      "alt-text conciso (≤30 palavras), objeto primeiro",
+      "informação do registro reorganizada com hierarquia na descrição do objeto"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 508875,
+    "titulo": "Bolsa tecida",
+    "povo": "Baniwa",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/508875/20_4_56_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-de-tucum-fiado-baniwa-2019/",
+    "baseline": "Bolsa tecida com alça, confeccionada em fios de tucum nas cores natural e tingidos de corante natural de \"pakua caatinga\" (Renealmia exaltata/ Baniwa: \"waipole\"), segundo a técnica do enlace com enodação, usando o ponto \"pé de aranha\" (Nhengatu: \"jandu ypi\" / Baniwa: \"ene ikapi\"). Usado para portar pequenos objetos.",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Corante de pakua caatinga | Vegetal > Fio de tucum | Vegetal > Semente de açaí",
+      "Técnica de confecção": "Enlace com enodação",
+      "Dimensões": "10,0 cm de largura; 16,0 cm de altura; 68,0 cm altura com a alça esticada",
+      "Função": "Usada como acessório para guardar e transportar objetos.",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 500322,
+    "titulo": "Bolsa tecida",
+    "povo": "Baniwa",
+    "categoria_objeto": "Cordões e Tecidos",
+    "quota_categoria": 4,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/bolsa-de-tucum-baniwa-2019-2/",
+    "baseline": "Bolsa tecida com alça usado para portar pequenos objetos feito segundo a técnica de trabalho em malha.",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fio de tucum | Vegetal > Semente de açaí",
+      "Dimensões": "24,0 cm de largura; 23,5 cm de altura; 83,0 cm altura com a alça esticada",
+      "Função": "Usada como acessório para guardar e transportar objetos.",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2019"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 51023,
+    "titulo": "Flauta de pã",
+    "povo": "Tukano",
+    "categoria_objeto": "Instrumentos musicais e de sinalização",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/8283-2/",
+    "baseline": "Flauta de pã confeccionado com seis tubos de taquara (Guadua angustifolia Kunth.), dispostos paralelamente uns aos outros e presos por meio de fios de fibra de buriti (Mauritia vinifera Mart.)",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Taquara",
+      "Dimensões": "29,5; 21,5; 16,8; 14,0; 12,0 e 9,5 cm de comprimento (para os tubos) e 6,5 cm de largura - medidas aproximadas por tratar-se de objeto irregular",
+      "Função": "Instrumenntos musical e sonoro",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1957"
+    },
+    "categorias_borda": [
+      "jargao_catalogo"
+    ],
+    "criterios": [
+      "alt-text em linguagem simples, sem jargão de catalogação",
+      "termos técnicos só na descrição do objeto, explicados ou atribuídos ao museu"
+    ],
+    "ancora_smoke_test": true
+  },
+  {
+    "item_id": 210599,
+    "titulo": "Flauta reta de osso",
+    "povo": "Hixkaryána",
+    "categoria_objeto": "Instrumentos musicais e de sinalização",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210599/18_3_60_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-2/",
+    "baseline": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de tucano amarelas, amarradas ao fio de fibra, junto a extremidade proximal do osso",
+    "metadados_chave": {
+      "Dimensões": "11,8 cm de comprimento (osso); 41,3 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Instrumento musical e sonoro",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2018"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 199679,
+    "titulo": "Flauta reta sem aeroduto",
+    "povo": "Salumã",
+    "categoria_objeto": "Instrumentos musicais e de sinalização",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/199679/13_5_54_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-sem-aeroduto/",
+    "baseline": "Flauta reta sem aeroduto confeccionado com tubo de taquara exibindo extremidade proximal em secção reta, corrigida com cera preta e quatro orifícios para variação do som. Apresenta adornada com franjas de linha industrializada na cor vermelha e duas penas de gavião, fixadas junto à extremidade superior",
+    "metadados_chave": {
+      "Dimensões": "73,0 cm de comprimento; 8,0 cm de diâmetro",
+      "Estado de origem": "Mato Grosso",
+      "Ano de aquisição do objeto": "2013"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 210680,
+    "titulo": "Flauta reta de osso",
+    "povo": "Hixkaryána",
+    "categoria_objeto": "Instrumentos musicais e de sinalização",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-5/",
+    "baseline": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor vermelhas, amarradas ao fio de fibra, junto a extremidade proximal do osso",
+    "metadados_chave": {
+      "Dimensões": "12,7 cm de comprimento (osso); 41,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Instrumento musical e sonoro",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2018"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 210761,
+    "titulo": "Flauta reta de osso",
+    "povo": "Hixkaryána",
+    "categoria_objeto": "Instrumentos musicais e de sinalização",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210761/18_3_66_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/flauta-reta-de-osso-8/",
+    "baseline": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor azul, amarradas ao fio de fibra, junto a extremidade proximal do osso",
+    "metadados_chave": {
+      "Dimensões": "13,3 cm de comprimento (osso); 49,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Instrumento musical e sonoro",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "2018"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 205123,
+    "titulo": "Arco retangular",
+    "povo": "Botocudo",
+    "categoria_objeto": "Armas",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205123/1697_0003-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/205123-2/",
+    "baseline": "Arco retangular confeccionado com madeira não identificada, tecida segundo a técnica da torção em Z. Possui acabamento com fibra natural não identificada na extremidade proximal",
+    "metadados_chave": {
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "212,5 cm de comprimento, 4,5 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Equipamento utilizado para caça, pesca, ataque e defesa",
+      "Estado de origem": "Minas Gerais",
+      "Ano de aquisição do objeto": "1950"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 204975,
+    "titulo": "Arco plano-côncavo",
+    "povo": "Waimiri-Atroari",
+    "categoria_objeto": "Armas",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/204975/75_5_12_0006-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-5/",
+    "baseline": "Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada",
+    "metadados_chave": {
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "264 cm de comprimento, 2,58 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1975"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 205036,
+    "titulo": "Arco plano-côncavo",
+    "povo": "Waimiri-Atroari",
+    "categoria_objeto": "Armas",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205036/892art_0003-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-6/",
+    "baseline": "Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada",
+    "metadados_chave": {
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "238,4 cm de comprimento, 2,5 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1994"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 205095,
+    "titulo": "Arco plano-côncavo",
+    "povo": "Waimiri-Atroari",
+    "categoria_objeto": "Armas",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004-683x1024.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/arco-plano-concavo-7/",
+    "baseline": "Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada",
+    "metadados_chave": {
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "237,2 cm de comprimento, 3 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1972"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 204980,
+    "titulo": "Arco quadrangular",
+    "povo": "Waimiri-Atroari",
+    "categoria_objeto": "Armas",
+    "quota_categoria": 3,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/204980/75_5_13_0006-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/arco-quadrangular-2/",
+    "baseline": "Arco quadrangular confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada",
+    "metadados_chave": {
+      "Técnica de confecção": "Entalhe",
+      "Dimensões": "236 cm de comprimento, 2,57 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+      "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+      "Estado de origem": "Amazonas",
+      "Ano de aquisição do objeto": "1975"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 206999,
+    "titulo": "Óleo vegetal de coco de babaçu",
+    "povo": "Tabajara",
+    "categoria_objeto": "Etnobotânica",
+    "quota_categoria": 1,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/206999/19_1_4_0001-1024x683.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/oleo-vegetal-coco-de-babacu/",
+    "baseline": "Óleo amarelo claro extraído das sementes de babaçu.",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Semente de babaçu",
+      "Dimensões": "-",
+      "Função": "Para cozinhar e produzir remédios caseiros",
+      "Estado de origem": "Piauí",
+      "Ano de aquisição do objeto": "2018"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 775404,
+    "titulo": "Amostra de fibra vegetal",
+    "povo": "Sem identificação",
+    "categoria_objeto": "Etnobotânica",
+    "quota_categoria": 1,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775404/S_N-228_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/amostra-de-fibra-vegetal-2/",
+    "baseline": "Amostra de fibra vegetal não identificada",
+    "metadados_chave": {
+      "Matéria-prima": "Vegetal > Fibra de vegetal não identificado"
+    },
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  },
+  {
+    "item_id": 775548,
+    "titulo": "Amostra de fibra animal",
+    "povo": "Sem identificação",
+    "categoria_objeto": "Etnobotânica",
+    "quota_categoria": 1,
+    "imagem_url": "https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/775548/S_N-227_0001.jpg",
+    "url_acervo": "https://tainacan.museudoindio.gov.br/museu-do-indio/amostra-de-fibra-animal/",
+    "baseline": "Amostra de fibra de origem animal não identificada, de fios pretos, podendo ser cabelo humano, amarrados em fio de tucum",
+    "metadados_chave": {},
+    "categorias_borda": [
+      "caso_simples"
+    ],
+    "criterios": [
+      "alt-text descreve a fotografia (enquadramento incluído)",
+      "descrição do objeto ancorada: todo fato não-visível tem fonte no registro",
+      "nenhum elemento inventado"
+    ],
+    "ancora_smoke_test": false
+  }
+]

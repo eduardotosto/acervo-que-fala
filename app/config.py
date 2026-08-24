@@ -20,3 +20,19 @@ MODELO_EMBEDDINGS = os.environ.get(
 # Caminhos
 DADOS_DIR = os.environ.get("DADOS_DIR", "dados")
 IMAGENS_DIR = os.path.join(DADOS_DIR, "imagens")  # cache local, fora do git
+
+# Taxonomia "Categoria" da coleção 471 (descoberta via API em 24/08/2026).
+# Usada pelo modo --completar da coleta para reforçar categorias raras.
+TAXONOMIA_CATEGORIA = "tnc_tax_543"
+TERMOS_CATEGORIA = {
+    "Cerâmica": 176,
+    "Adornos de Materiais Ecléticos, Indumentária e Toucador": 12152,
+    "Objetos rituais, mágicos e lúdicos": 157,
+    "Adornos Plumários": 185,
+    "Utensílios e implementos de materiais ecléticos": 619,
+    "Trançados": 290,
+    "Cordões e Tecidos": 861,
+    "Instrumentos musicais e de sinalização": 595,
+    "Armas": 1134,
+    "Etnobotânica": 1360,
+}
