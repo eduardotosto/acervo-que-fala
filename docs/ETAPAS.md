@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | 🔶 notebook v1 no Drive — aguardando Eduardo rodar (~40 min) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -77,9 +77,10 @@ Achados da revisão humana:
 **Concluída (24/08/2026):** recuperação verificada ✓ (tanga→miçangaria, pote→cerâmica). Scorecard das 4 falhas na v3: "close" indevido **4/5→0/5 ✓**; cores vagas ~zeradas; hedge preservado ✓ (Abano: "provavelmente vime"→"fibra vegetal"); artefato no alt 2/5→**1/5** (Flauta ainda citou "marcação numérica" — endurecer regra 4 na E7 com exemplo negativo). Destaque do RAG em ação: o alt do Abano usou "espinha-de-peixe" vindo do glossário recuperado (`glossario-02`); campo `diretrizes_usadas` torna a recuperação rastreável por item.
 **Bug de integração encontrado (Eduardo detectou):** a redação saiu **sem os povos** ("[nome do povo]" literal no Pote) — o resultado salvo do nb02 não carregava metadados e o nb03 passou Povo vazio. Erro de passagem de dados entre etapas, não do modelo. Correções na E7: pipeline completo direto da API + **regra nova: todo resultado salvo carrega os metadados-chave**. Resultado em `resultados/03_rag_redacao.json`.
 
-### E7 — Nível 2 + flags
-Descrição do objeto (nível 2) + flags de divergência + ancoragem afirmação-a-afirmação. Rodar lote de 20 itens novos (fora dos casos).
-**Verificação:** o caso Abano reproduz o comportamento esperado (alt avisa que é close; nível 2 usa o registro com atribuição).
+### E7 — Nível 2 + flags (Notebook 04) 🔶
+`notebooks/04_pipeline_completo.ipynb`: pipeline fechado — observação (prompt v2) → **redação v4 estruturada** (alt-text + descrição do objeto + flags num único JSON; regra do artefato endurecida com exemplo errado×certo). Correções incorporadas: **bug do povo** (registro completo da API viaja no prompt e no resultado — regra nova), **salvaguardas de imagem** (EXIF transpose + RGB). Lote: 5 smoke + **15 novos** (seed 42, estratificado, fora dos 50 casos — ids no notebook e no commit). Verificação automática embutida: povo no alt, artefato, ≤30 palavras, atribuição no nível 2, caso-referência Abano.
+**Verificação da etapa:** Abano passa (alt "Detalhe de..." + nível 2 com atribuição); povos presentes em 20/20.
+**Pendente:** Eduardo rodar a v1 (~35–45 min, aba aberta).
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
