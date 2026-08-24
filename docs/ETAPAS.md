@@ -14,7 +14,7 @@
 | E1 | Fundação: repo + coleta reprodutível + amostra smoke | ✅ 24/08/2026 |
 | E2 | Dataset completo (500 itens) + relatório de inspeção | ✅ 24/08/2026 |
 | E3 | `casos.jsonl`: 40 casos fixos + 10 holdout (sessão interativa com Eduardo) | ✅ 24/08/2026 |
-| E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ⬜ |
+| E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | 🔶 notebook pronto — aguardando Eduardo rodar no Colab |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test | ⬜ |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto | ⬜ |
 | E7 | Nível 2 + flags de divergência + saída estruturada; lote de 20 itens | ⬜ |
