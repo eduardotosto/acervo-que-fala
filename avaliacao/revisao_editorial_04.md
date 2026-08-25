@@ -63,6 +63,51 @@ Ao final, destila em **rubrica v1.1** + **prompt v5** (abertura da E8).
 Eduardo perguntou se seguimos card a card ou aplicamos as regras e "sentimos" o resultado.
 **Decisão: parar a revisão de estilo no #4** — achados repetindo (foto no nível 2 3×, medidas 2×, ausências 2×). Aplicar regras 1–12 em rubrica v1.1 + prompt v5, regenerar o lote (notebook 04 v2), e a segunda revisão foca só em fidelidade visual + o que sobrar.
 
+---
+
+# Segunda revisão — lote v2, todos os 20 cards (25/08/2026)
+
+Eduardo revisou os 20 cards do lote v2 (`tabela_lote_04_v2.html`), foco em fidelidade visual.
+Feedback verbatim consolidado abaixo por card; regras novas 14–25 no final.
+
+- **#1 Pote (9196):** "fundo bege" no alt é a base da própria cerâmica → nomear pelo material. Nível 2: agrupar informações do mesmo gênero (material repetido: abre com cerâmica, fecha com "feita em argila"); concordância "cinza-escura" para acabamento; 6 cm de altura questionado → **checado: as 3 dimensões do registro são coerentes (4,3/5,5/6,0) = miniatura genuína; o texto deve DIZER "miniatura"**.
+- **#2 Faixa (665):** no alt, prioridade são as CORES das penas (visual); aves qualificam — ideal em pares ("penas vermelhas de arara"); "texturas variadas e padrões naturais de coloração" = vago demais.
+- **#3 Flauta de pã (51023):** alt deve contar os tubos. Nível 2: "mais curtos no topo, mais longos na base" depende do ponto de vista — "em cascata" basta; "formato vertical, textura natural, sem pinturas ou decorações visíveis" = vago + ausência (já vetada).
+- **#4 Abano (63283):** "em ângulo agudo" não descreve — "diagonais alternadas" é o certo. Nível 2: "estrutura retangular" e "roseta com fitas tingidas de azul e verde" NÃO verificáveis (foto é detalhe) → invenção; "trançado"/"fibra vegetal" repetidos; "porte médio, comprimento suficiente para uso prático" = frase vazia.
+- **#5 Tanga (78838):** não é detalhe — objeto sangra as margens (≈ inteiro). Nível 2: "sobre fundo branco" confundiu cor do objeto com fundo da FOTO; "miçangas" repetida demais.
+- **#6 Braçadeira (1376):** "composição rica e texturizada" = subjetivo; "se curva suavemente" = descrição da foto. 76 cm questionado → **checado: registro menciona "alças soltas"; comprimento deve incluir os cordões → flag**. Registro tem pares cor↔ave ("amarelo, verde e vermelha (Arara)") — modelo nem usou o verde.
+- **#7 Pulseira (84811):** alt confuso; faltou o preto; fundo branco da foto contaminou as cores; pulseira não tem "bordas". Nível 2: "destinada a ser usada no pulso" = óbvio; "motivos florais e corações" = interpretação subjetiva de padrão abstrato/geométrico; perdeu o fecho; comprimento irrelevante (escala de pulseira é conhecida).
+- **#8 Zarabatana (883523):** brinquedo ou caça? → **checado: contradição interna do registro (Descrição: "brinquedo em miniatura" × Função: "utilizado para caça") = metadado_suspeito**. "Cabo" vem do registro, mas zarabatana tem TUBO (vocabulário fisicamente correto vence). Escala: dizer a MAIOR dimensão (comprimento), não o bocal.
+- **#9 Pote (2081):** "fundo creme" = argila; "superfície bege clara" → nomear material.
+- **#10 Fuso (5011):** "sugerindo uso frequente" = inferência indevida (textura felpuda é própria do algodão cru); **"tortual" não existe** (registro: "Entalhe | Modelado") = palavra inventada; "forma é funcional, bordas suaves, sem detalhes ornamentais" = frase sem sentido.
+- **#11 Argila (200648):** nível 2 focou no tubo de ensaio quando o que importa é o CONTEÚDO; leu como alt.
+- **#12 Flauta de osso (210680):** "instrumento musical usado para sons ritmados" = redundante (sabemos para que serve flauta; contexto cultural sim); "sua forma sugere uso em rituais sonoros" = especulação — só afirmações.
+- **#13 Pião (5146):** "parecendo cerâmica ou madeira" = especulação — ou sabemos (registro: cabaça + madeira) ou termo genérico.
+- **#14 Abano de tucum (500179):** alt: faltou descrição visual da forma e complexidade. Nível 2: "arredondada e simétrica, como uma pequena esteira" = impreciso.
+- **#15 Remo (3411):** "inteiro e horizontal" — remo não é horizontal nem vertical; "inteiro" não é descrição (só marcar quando é detalhe).
+- **#16 Braçadeira (1366):** "material das penas é natural, sem tingimento artificial" — não é do registro + afirmação de ausência; "Kalapalo" repetido.
+- **#17 Estojo (4156):** fundo da foto confundindo de novo; "sem detalhes de acabamento visíveis" = negativa E contradiz a pintura citada acima.
+- **#18 Arco (205095):** "mostra sinais de uso" = inferência imprecisa (todo objeto de museu parece desgastado).
+- **#19 Panela (905):** "o que a torna pequena para uso doméstico" = inferência desnecessária.
+- **#20 Bolsa (500322):** "Peça pequena, com formato retangular e bordas suaves" = vago; por que foco nas bordas?; "peça pequena" sozinho não informa.
+
+## Regras novas da segunda revisão (14–25)
+
+14. **Fundo fotográfico nunca contamina o objeto**: o fundo do estúdio não entra em nenhum texto nem empresta cor ao objeto (#5, #7, #17); quando a "cor de fundo" é a base da própria peça, nomear pelo material ("sobre a argila bege"), nunca como "fundo" (#1, #9).
+15. **Só afirmações verificáveis**: proibido "sugere", "parece", "parecendo X ou Y", "possivelmente"; sem inferências de uso/desgaste ("sinais de uso", "uso frequente", "pequena para uso doméstico"); sem juízo estético ("composição rica"); padrão abstrato é "geométrico/abstrato", nunca vira flores/corações; na dúvida de material, termo genérico OU a matéria-prima do registro (#6, #7, #10, #12, #13, #18, #19).
+16. **Frases vazias cortadas**: "porte médio", "comprimento suficiente para uso prático", "forma funcional", "bordas suaves" sem função descritiva, "peça pequena" sozinho (#4, #10, #20).
+17. **Pares cor↔ave no alt** — cor primeiro (é o visual), ave qualifica: "penas vermelhas e amarelas de arara"; nunca "texturas variadas e padrões naturais" (#2, #6).
+18. **Quantidades contáveis entram** quando distinguíveis (tubos da flauta) (#3).
+19. **Relações dependentes de ponto de vista só no alt**; nível 2 usa relações da própria peça ("em cascata", "decrescentes") (#3).
+20. **Enquadramento refinado**: objeto que sangra as margens ≈ completo (sem "Detalhe de"); "Detalhe" só para fragmento claro; nunca escrever "inteiro"/"horizontal"/"vertical" quando não informa (#5, #15).
+21. **Não explicar o óbvio**: função tautológica não entra ("pulseira usada no pulso", "flauta para sons"); função entra quando acrescenta (caça, ritual, preparo) (#7, #12).
+22. **Sem redundância lexical**: não repetir a mesma palavra-chave várias vezes (trançado, miçangas, nome do povo) (#4, #5, #16).
+23. **Conteúdo antes do recipiente** em amostras (argila, resina): o nível 2 abre pelo conteúdo (#11).
+24. **Vocabulário fisicamente correto e existente**: zarabatana tem tubo (mesmo que o registro diga "cabo"); palavra inventada ("tortual") é defeito — termo técnico só do registro ou glossário (#8, #10).
+25. **Escala = maior dimensão aproximada** ("cerca de 40 cm de comprimento"), nunca medida de parte (bocal); miniatura é declarada ("miniatura de 6 cm — cabe na palma da mão"); detalhes redundantes de escala conhecida (pulseira) podem ser omitidos (#1, #7, #8).
+
+**Aplicação:** regras 14–25 → prompt v7 (Notebook 04 v4) + checagens novas (especulação, frases vazias, "fundo" no alt). Fidelidade dos casos #4 (roseta inventada) e #14 será reavaliada no lote v4.
+
 ## Análise da v2 (24/08/2026) — achada por código, sem revisão visual do Eduardo
 
 O prompt v5 acertou quase tudo das 12 regras (fotografia sumiu do nível 2 em 20/20, ficha técnica virou escala, aves das penas citadas, "todo artefato vira flag" gerou 8 flags vs. 1 antes). Mas 2 problemas objetivos apareceram, achados sem precisar da revisão visual:
