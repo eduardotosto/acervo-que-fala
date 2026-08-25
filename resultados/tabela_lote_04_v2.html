@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lote E7 — revisão (04_pipeline_completo_v2)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
+<style>
+:root { --md-primary:#8a4b2c; --md-primary-container:#ffdbc6; --md-on-primary-container:#341000;
+  --md-secondary:#2f5d8f; --md-secondary-container:#d3e4ff; --md-on-secondary-container:#001b3d;
+  --md-tertiary-container:#ffe9b3; --md-on-tertiary-container:#271900;
+  --md-surface:#f7f4ee; --md-surface-container-low:#f1ede3; --md-surface-container-high:#e3ddd1;
+  --md-on-surface:#1e1b16; --md-on-surface-variant:#4d463b; --md-outline-variant:#d8cfc0;
+  --shape-sm:8px; --shape-lg:16px; --shape-full:999px;
+  --elev1:0 1px 2px rgba(30,20,10,.09), 0 1px 4px rgba(30,20,10,.07); }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Google Sans Flex','Segoe UI',system-ui,sans-serif; background:var(--md-surface);
+  color:var(--md-on-surface); line-height:1.55; padding:2.5rem 1.25rem 4rem; }
+.wrap { max-width:1180px; margin:0 auto; }
+h1 { font-weight:700; font-size:1.8rem; }
+.resumo { background:var(--md-secondary-container); color:var(--md-on-secondary-container);
+  border-radius:var(--shape-lg); padding:1rem 1.3rem; margin:1rem 0 2rem; font-size:.92rem; }
+.card { background:var(--md-surface-container-low); border-radius:var(--shape-lg);
+  box-shadow:var(--elev1); margin-bottom:1.6rem; display:grid;
+  grid-template-columns:minmax(320px, 480px) 1fr; overflow:hidden; }
+@media (max-width:860px) { .card { grid-template-columns:1fr; } }
+.foto { display:block; background:var(--md-surface-container-high); cursor:zoom-in; }
+.foto img { display:block; width:100%; height:100%; max-height:560px; object-fit:contain; padding:.6rem; }
+.corpo { padding:1.15rem 1.4rem 1.25rem; }
+.num { font-weight:700; color:var(--md-primary); font-size:1.05rem; }
+h2 { font-size:1.1rem; font-weight:600; display:inline; }
+.tag { display:inline-block; font-weight:600; font-size:.64rem; letter-spacing:.05em;
+  text-transform:uppercase; background:var(--md-primary-container); color:var(--md-on-primary-container);
+  padding:.15rem .5rem; border-radius:var(--shape-full); margin-left:.3rem; vertical-align:middle; }
+.materia { font-size:.78rem; color:var(--md-on-surface-variant); margin:.3rem 0 .6rem; }
+.rot { font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--md-secondary); margin:.65rem 0 .2rem; }
+.alt { background:var(--md-secondary-container); color:var(--md-on-secondary-container);
+  border-radius:var(--shape-sm); padding:.55rem .75rem; font-size:.95rem; }
+.nivel2 { font-size:.9rem; color:var(--md-on-surface-variant); }
+.flag { background:var(--md-tertiary-container); color:var(--md-on-tertiary-container);
+  border-radius:var(--shape-sm); padding:.4rem .6rem; font-size:.8rem; margin-top:.3rem; }
+</style></head><body><div class="wrap">
+<h1>Lote da E7 — 20 objetos (04_pipeline_completo_v2)</h1>
+<div class="resumo"><b>Clique na foto para abrir em resolução máxima</b> (numa nova aba, direto do
+servidor do museu).<br>
+<b>Foco desta revisão: fidelidade visual.</b> O estilo já é coberto por regra — aqui a pergunta é
+uma só: <b>o texto mente ou esconde algo que a foto mostra?</b> (cores erradas, quantidades,
+padronagens, partes descritas que não existem). Responda no chat pelo número do card.</div>
+
+<div class="card" id="i9196">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_77_3_169_f03.jpg" alt="Pote (Karajá)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#1</span> <h2>Pote</h2>
+    <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 9196</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Pote cerâmico Karajá, com borda estreita, corpo arredondado e decoração em padrões geométricos em tons de terracota e marrom sobre fundo bege.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um pote cerâmico Karajá que, segundo o registro do museu, era usado no preparo e serviço de alimentos. Apresenta forma arredondada, com boca ligeiramente alongada e base plana. A superfície externa é decorada com padrões geométricos em tons de terracota e marrom-escuro sobre fundo bege, com acabamento liso na borda e interior da boca, que aparecem em cinza-escura. A peça é pequena, cerca de 6 cm de altura, e foi adquirida em 1977. Foi feita em argila, com técnica de acordelado, e originou-se no estado do Tocantins.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i665">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_61_f.jpg" alt="Faixa frontal emplumada (Kalapalo)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#2</span> <h2>Faixa frontal emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu · item 665</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Faixa frontal emplumada dos Kalapalo, com penas de arara, jaburu e jacu dispostas verticalmente sobre couro de onça, vista de frente em enquadramento completo.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Faixa frontal emplumada usada como adorno para cabeça, segundo o registro do museu. Apresenta penas longas e curtas em cores vivas, dispostas verticalmente sobre uma base de couro de onça. As penas são de arara, jaburu e jacu, com texturas variadas e padrões naturais de coloração. A peça é pequena, cerca de 13 cm de altura, e foi adquirida em 1987 no estado de Mato Grosso.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: cartela de cores de estúdio visível no canto inferior esquerdo da imagem.</div>
+  </div>
+</div>
+<div class="card" id="i51023">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/8283__4_.jpg" alt="Flauta de pã (Tukano)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#3</span> <h2>Flauta de pã</h2>
+    <span class="tag">Tukano</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Taquara · item 51023</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Flauta de pã dos Tukano, composta por tubos de taquara dispostos em cascata, amarrados com fios naturais, sobre fundo preto.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Flauta de pã, instrumento musical dos Tukano, usado para produzir sons em ritmos rituais e cerimoniais. Confeccionada com tubos de taquara dispostos em cascata, com os mais curtos no topo e os mais longos na base, unidos por fios de fibra natural. A peça tem formato vertical, com textura natural do material, sem pinturas ou decorações visíveis. A base do instrumento apresenta uma marcação numérica, que não é parte do objeto original. A peça é pequena, com altura de cerca de 30 cm. Foi adquirida em 1957, originária da região amazônica, e sua construção reflete o uso tradicional de taquara e fibras vegetais nas culturas indígenas.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Marcação numérica '8285' visível na base do tubo mais longo.</div>
+  </div>
+</div>
+<div class="card" id="i63283">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/63283/281_0006-2-1024x683.jpg" alt="Abano trançado (Fulni-ô)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#4</span> <h2>Abano trançado</h2>
+    <span class="tag">Fulni-ô</span><span class="tag">Trançados</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fibra de vegetal não identificado · item 63283</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Detalhe de um abano trançado dos Fulni-ô, com padrão de entrelaçamento em ângulo agudo, feito em fibra vegetal natural, em tons de marrom claro.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um abano trançado dos Fulni-ô, usado para abanar-se e atiçar fogo, com estrutura retangular e padrão de trançado sarjado em diagonais alternadas. As fitas de fibra vegetal natural formam um entrelaçamento com relevo, com bordas limpas e acabamento em trançado que envolve a empunhadura. O centro exibe uma decoração em forma de roseta com fitas tingidas de azul e verde. Adquirido em 1949, o objeto é originário de Pernambuco e apresenta técnica tradicional de trançado sarjado, com fibra vegetal não identificada. A peça é de porte médio, com comprimento suficiente para uso prático.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i78838">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/tanga_de_micangas_08_2_147_f04.jpg" alt="Tanga de miçangas (Tiriyó)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#5</span> <h2>Tanga de miçangas</h2>
+    <span class="tag">Tiriyó</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga · item 78838</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Detalhe de uma tanga de miçangas dos Tiriyó, com padrões geométricos em preto sobre fundo branco, bordas decoradas e franjas nas extremidades.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Tanga de miçangas dos Tiriyó, usada como adorno e vestuário, com padrões geométricos estilizados em miçangas pretas e brancas sobre fundo branco. Apresenta bordas com cordel de amarração e franjas de linha industrializada branca nas extremidades. A peça é confeccionada com tecido entrelaçado, seguindo técnica tradicional de entretorcido, e possui acabamento com miçangas intercaladas em pontas. A peça foi adquirida em 2009, originária do Pará, e é feita com fio de algodão industrializado e miçangas sintéticas.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i1376">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_3a__1_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_3a__1_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#6</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Algodão | Animal > Pena de arara · item 1376</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Braçadeira emplumada Kalapalo, com penas de arara em tons de vermelho, laranja e amarelo, dispostas em buquê volumoso, com cordão marrom de fibra natural.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Braçadeira emplumada Kalapalo, usada como adorno para o braço, com penas de arara dispostas em forma de buquê volumoso e densamente enfeitado. As penas, em tons de vermelho, laranja e amarelo, formam uma composição rica e texturizada, com algumas pontas em verde e marrom. A peça é sustentada por um cordão de fibra natural, marrom, que se curva suavemente. A técnica de confecção é passamanaria, com acabamento empenado e textura natural das penas. Foi adquirida em 1987, originária do estado de Mato Grosso, e é confeccionada com fio de algodão e penas de arara, em técnica tradicional de emplumação. A peça tem cerca de 76 cm de comprimento, sendo um objeto de uso pessoal e expressão cultural.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: etiqueta branca presa ao cordão, com texto ilegível</div>
+  </div>
+</div>
+<div class="card" id="i84811">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_11_fot_006.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/11_9_11_fot_006.jpg" alt="Pulseira de miçangas (Kaxinawá)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#7</span> <h2>Pulseira de miçangas</h2>
+    <span class="tag">Kaxinawá</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Sintético > Fio de algodão industrializado | Sintético > Miçanga · item 84811</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Pulseira de miçangas Kaxinawá, com padrões em verde, branco e vermelho, bordas em contas brancas e verdes, sobre fundo branco.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Pulseira de miçangas usada pelos membros do povo Kaxinawá, destinada a ser usada no pulso. Apresenta contas em verde, branco, vermelho e preto, organizadas em padrões que lembram motivos florais e corações. As bordas são destacadas por contas brancas e verdes, com detalhes em preto para delimitar os desenhos. A peça tem cerca de 18,8 cm de comprimento e foi adquirida em 2011, originária do Acre.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i883523">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/883523/20_4_53_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/883523/20_4_53_0001.jpg" alt="Brinquedo zarabatana (Baniwa)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#8</span> <h2>Brinquedo zarabatana</h2>
+    <span class="tag">Baniwa</span><span class="tag">Armas</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Breu | Vegetal > Jupati | Vegetal > Madeira marupá · item 883523</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Brinquedo zarabatana Baniwa, objeto longo e cilíndrico com corpo preto e cabeça clara, sobre fundo cinza-escuro.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um brinquedo zarabatana, usado pelos Baniwa na caça, é composto por um cabo cilíndrico de madeira de jupati, com acabamento natural e tonalidade escura, e uma cabeça côncava em madeira de marupá, de cor clara. A peça apresenta acabamento liso e foi unida com breu. A forma geral é alongada, com extremidade arredondada no bocal. A peça foi adquirida em 2020, originária da região amazônica, e sua técnica de confecção é o entalhe, realizada com instrumentos de arumã. O objeto é pequeno, com cerca de 6 cm de diâmetro no bocal.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i2081">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_3154_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/pote_3154_f04.jpg" alt="Pote (Karajá)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#9</span> <h2>Pote</h2>
+    <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 2081</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Detalhe de um pote cerâmico Karajá, com corpo arredondado e decoração externa em padrões geométricos pintados em marrom escuro sobre fundo creme.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um pote cerâmico Karajá, segundo o registro do museu, era usado no preparo e serviço de alimentos. Apresenta corpo arredondado, base mais larga e boca ligeiramente estreita, com acabamento escuro em algumas bordas. A superfície é de cor bege clara, com padrões geométricos estilizados em linha contínua, pintados em tom marrom escuro. A peça possui acabamento áspero e sinais de uso. Foi adquirido em 1950 e originou-se no estado de Tocantins. A técnica de confecção é o acordelado, utilizando argila como matéria-prima.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i5011">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/fuso_88_8_25_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/fuso_88_8_25_f04.jpg" alt="Fuso (Xavante)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#10</span> <h2>Fuso</h2>
+    <span class="tag">Xavante</span><span class="tag">Cordões e Tecidos</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila | Vegetal > Madeira não identificada · item 5011</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Fuso Xavante, utensílio de madeira com fio de algodão enrolado, em fundo branco.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um fuso Xavante, utensílio usado para fiar algodão, com estrutura de madeira escura e fio bruto enrolado em torno de um carretel circular. A peça apresenta acabamento natural, sem tingimento, e a forma do carretel é arredondada com uma haste fina projetando-se lateralmente. A superfície do fio mostra textura irregular e felpuda, sugerindo uso frequente. A peça foi adquirida em 1988 no estado de Mato Grosso, originando-se de uma técnica de modelagem em madeira e cerâmica, com fixação do fio por meio de entalhes. O material da haste é madeira não identificada, e o carretel é feito de cerâmica com acabamento tortual. A função do objeto é auxiliar no processo de tecelagem, e sua forma é funcional, com bordas suaves e sem detalhes ornamentais.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Fundo neutro e branco, sem elementos de estúdio como etiquetas, numeração ou cartelas.</div>
+  </div>
+</div>
+<div class="card" id="i200648">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/200648/14_11_154_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/200648/14_11_154_0001-1024x683.jpg" alt="Argila (Baniwa)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#11</span> <h2>Argila</h2>
+    <span class="tag">Baniwa</span><span class="tag">Etnobotânica</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 200648</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Detalhe de um tubo de ensaio com argila dekai, material cerâmico usado pelos Baniwa, contendo fragmentos em tons bege e marrom.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um tubo de ensaio contendo amostra de argila dekai, matéria-prima usada pelos Baniwa na confecção de cerâmica. O recipiente é de vidro transparente, com tampa de metal dourado, e contém fragmentos de material em tons bege, cinza e marrom. A argila foi coletada no Igarapé Ucuqui, no Amazonas, e foi adquirida pelo museu em 2014.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Etiqueta branca parcialmente visível na base do frasco, com texto ilegível.</div>
+  </div>
+</div>
+<div class="card" id="i210680">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/210680/18_3_63_0001-1024x683.jpg" alt="Flauta reta de osso (Hixkaryána)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#12</span> <h2>Flauta reta de osso</h2>
+    <span class="tag">Hixkaryána</span><span class="tag">Instrumentos musicais e de sinalização</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 210680</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Flauta reta de osso dos Hixkaryána, com três furos, penas vermelhas de arara e fio de fibra natural, sobre fundo escuro.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Flauta reta de osso dos Hixkaryána, instrumento musical usado para sons ritmados. Apresenta corpo alongado, com três furos circulares alinhados, e penas vermelhas de arara presas ao final por um fio de fibra natural. A peça foi aquisição em 2018, originária da região amazônica, e sua forma sugere uso em rituais sonoros.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Não há etiquetas, numeração ou cartelas visíveis na fotografia.</div>
+  </div>
+</div>
+<div class="card" id="i5146">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4828_foto_01_DSC_7447.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/4828_foto_01_DSC_7447.jpg" alt="Pião noz de tucum (Canela)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#13</span> <h2>Pião noz de tucum</h2>
+    <span class="tag">Canela</span><span class="tag">Objetos rituais, mágicos e lúdicos</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Cabaça | Vegetal > Madeira não identificada · item 5146</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Pião noz de tucum, do povo Canela, é uma esfera marrom-avermelhada com abertura central e duas projeções laterais, parecendo cerâmica ou madeira.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um pião noz de tucum, segundo o registro do museu, era usado em atividade lúdica. Apresenta forma esférica, com abertura circular no centro e duas projeções curtas em ângulo reto, como alças. A superfície tem textura granulada, sugerindo material vegetal, talvez cabaça ou madeira. A peça é pequena, cerca de 13,5 cm de comprimento, e o registro indica ser de origem do Maranhão, adquirido em 1950.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i500179">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500179/20_4_45_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500179/20_4_45_0001.jpg" alt="Abano de talo de tucum (Baniwa)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#14</span> <h2>Abano de talo de tucum</h2>
+    <span class="tag">Baniwa</span><span class="tag">Trançados</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Palmeira de tucum · item 500179</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Abano de talo de tucum, trançado pelo povo Baniwa, em fio de tucum natural, com padrão de entrelaçamento geométrico e bordas lisas, sobre fundo azul.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um abano trançado, usado pelos Baniwa para virar beiju e atiçar fogo, com forma arredondada e simétrica, como uma pequena esteira. Feito em fio de tucum, o objeto exibe um padrão de entrelaçamento geométrico, com bordas lisas e acabamento natural, sem reforços visíveis. A peça possui uma parte mais resistente em um dos cantos, para ser empunhada, e mede cerca de 40 cm de comprimento. Foi aquisição em 2019, originário da região amazônica.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i3411">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3411/5599_0005-1.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/3411/5599_0005-1-1024x395.jpg" alt="Remo espatular (Karajá)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#15</span> <h2>Remo espatular</h2>
+    <span class="tag">Karajá</span><span class="tag">Utensílios e implementos de materiais ecléticos</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Madeira não identificada · item 3411</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Remo espatular Karajá, inteiro e horizontal, com pá pintada em vermelho-alaranjado sobre madeira escura, cabo cilíndrico e acabamento côncavo.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um remo espatular usado pelos Karajá para deslocar transporte em vias aquáticas. A pá é larga e arredondada, com padrão geométrico pintado em vermelho-alaranjado sobre madeira escura. O cabo é cilíndrico, com acabamento côncavo na ponta. A peça foi confeccionada em um só bloco de madeira não identificada, com entalhes, e foi adquirida em 1952 no estado do Tocantins.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i1366">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_4b__2_.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/87_22_4b__2_.jpg" alt="Braçadeira emplumada (Kalapalo)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#16</span> <h2>Braçadeira emplumada</h2>
+    <span class="tag">Kalapalo</span><span class="tag">Adornos Plumários</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Animal > Pena de arara · item 1366</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Braçadeira emplumada Kalapalo, com penas de arara em tons de vermelho, laranja e amarelo, dispostas em arco sobre fundo preto, acompanhada de cordão de fibra natural marrom-avermelhada enrolado ao lado.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Braçadeira emplumada Kalapalo, usada como adorno para o braço, com penas de arara dispostas em formato de arco, formando um leque colorido em tons de vermelho, laranja e amarelo. A peça é sustentada por um cordão de fibra natural, de cor marrom-avermelhada, enrolado ao lado, com textura irregular. A técnica de emplumação em passamanaria cria um efeito volumoso e decorativo, com penas densas e eretas, dispostas de forma simétrica. A peça é de porte médio, com comprimento suficiente para envolver o braço, e o material das penas é natural, sem tingimento artificial. Foi adquirida em 1987, originária do estado de Mato Grosso, e representa um adorno tradicional da cultura Kalapalo.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Fundo preto uniforme, sem textura, sem marcações, etiquetas ou suporte visível.</div>
+  </div>
+</div>
+<div class="card" id="i4156">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/estojo_peniano_7660_f04.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/2018/10/estojo_peniano_7660_f04.jpg" alt="Estojo peniano (Bororo)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#17</span> <h2>Estojo peniano</h2>
+    <span class="tag">Bororo</span><span class="tag">Adornos de Materiais Ecléticos, Indumentária e Toucador</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Palmeira de babaçu · item 4156</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Estojo peniano Bororo, peça longa e curvada, marrom claro, com desenhos de animais em preto sobre superfície lisa, em fundo branco.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um estojo peniano Bororo, usado como protetor cerimonial, tem forma alongada e levemente curvada, com uma ponta afilada e outra dobrada. Foi feito de folíolo de palmeira de babaçu, com decoração de motivos animais em preto aplicados sobre a superfície. A peça apresenta textura lisa e bordas levemente desgastadas, sem detalhes de acabamento visíveis.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i205095">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/205095/72_4_21_0004-683x1024.jpg" alt="Arco plano-côncavo (Waimiri-Atroari)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#18</span> <h2>Arco plano-côncavo</h2>
+    <span class="tag">Waimiri-Atroari</span><span class="tag">Armas</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> (vazio) · item 205095</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Detalhe de um arco plano-côncavo dos Waimiri-Atroari, com cabo de madeira escura envolto por corda de fibra natural, tecida em espiral.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um arco plano-côncavo dos Waimiri-Atroari, usado para arremessar flechas em caça, pesca e defesa. O cabo é de madeira escura, com textura visível, envolto por uma corda de fibra natural, tecida em espiral apertada. A ponta superior, mais fina, mostra sinais de uso. A técnica de confecção é o entalhe, e o objeto foi adquirido em 1972 no estado do Amazonas. A corda é feita de fibra não identificada, e o arco tem cerca de 237 cm de comprimento.</div>
+    <div class="rot">Flags</div>
+    <div class="flag">⚑ artefato_estudio: Fundo cinza-azulado, provavelmente tecido de estúdio, não parte do objeto.</div>
+  </div>
+</div>
+<div class="card" id="i905">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/905/6739_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/905/6739_0001.jpg" alt="Panela gameliforme (Karajá)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#19</span> <h2>Panela gameliforme</h2>
+    <span class="tag">Karajá</span><span class="tag">Cerâmica</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Mineral > Argila · item 905</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Panela gameliforme Karajá, cerâmica bege com padrão geométrico vermelho em faixa e linhas cruzadas, vista de corpo inteiro sobre fundo azul-escuro.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Um pote cerâmico Karajá que, segundo o registro do museu, era usado no preparo e serviço de alimentos. Apresenta formato circular e baixo, com base plana e borda levemente arredondada. O corpo é revestido com padrão geométrico em vermelho, formado por linhas cruzadas que criam um efeito de quadrados. O interior é liso e da mesma tonalidade bege da cerâmica. A peça tem cerca de 8 cm de altura, o que a torna pequena para uso doméstico.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+<div class="card" id="i500322">
+  <a class="foto" href="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" target="_blank" rel="noopener"
+     title="Abrir em resolução máxima">
+    <img src="https://tainacan.museudoindio.gov.br/wp-content/uploads/tainacan-items/471/500322/20_4_58_0001.jpg" alt="Bolsa tecida (Baniwa)" loading="lazy"></a>
+  <div class="corpo">
+    <span class="num">#20</span> <h2>Bolsa tecida</h2>
+    <span class="tag">Baniwa</span><span class="tag">Cordões e Tecidos</span>
+    <div class="materia"><b>Matéria-prima (registro):</b> Vegetal > Fio de tucum | Vegetal > Semente de açaí · item 500322</div>
+    <div class="rot">Alt-text (nível 1)</div>
+    <div class="alt">Bolsa tecida Baniwa, de cor bege claro, com alça flexível e botão escuro no centro frontal, sobre fundo azul-escuro.</div>
+    <div class="rot">Descrição do objeto (nível 2)</div>
+    <div class="nivel2">Bolsa tecida Baniwa, usada para guardar e transportar pequenos objetos. Feita em tecido de fio de tucum e semente de açaí, com textura aparente e acabamento reforçado na borda superior. A alça é longa, flexível e cruzada sobre o corpo da bolsa, com um botão escuro no centro frontal. Peça pequena, com formato retangular e bordas suaves.</div>
+    <div class="rot">Flags</div>
+    <div class="materia">— sem flags</div>
+  </div>
+</div>
+</div></body></html>

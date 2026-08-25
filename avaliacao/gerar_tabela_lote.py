@@ -6,7 +6,8 @@ lado a lado, flags e matéria-prima do registro. Serve para Eduardo
 comparar texto × imagem e apontar ajustes de rubrica.
 
 Uso:
-    python avaliacao/gerar_tabela_lote.py
+    python avaliacao/gerar_tabela_lote.py [resultado.json] [saida.html]
+    (padrão: resultados/04_pipeline_completo.json -> resultados/tabela_lote_04.html)
 """
 import json
 import os
@@ -89,7 +90,9 @@ def melhor_imagem(det: dict, sessao: requests.Session) -> tuple[str, str]:
 
 
 def main() -> None:
-    with open(os.path.join(REPO, "resultados", "04_pipeline_completo.json"), encoding="utf-8") as f:
+    entrada = sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, "resultados", "04_pipeline_completo.json")
+    saida = sys.argv[2] if len(sys.argv) > 2 else os.path.join(REPO, "resultados", "tabela_lote_04.html")
+    with open(entrada, encoding="utf-8") as f:
         resultado = json.load(f)
 
     sessao = requests.Session()
@@ -123,22 +126,21 @@ def main() -> None:
     html = f"""<!DOCTYPE html>
 <html lang="pt-BR"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lote E7 — revisão editorial</title>
+<title>Lote E7 — revisão ({resultado.get('notebook', '?')})</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;600;700&display=swap">
 <style>{CSS}</style></head><body><div class="wrap">
-<h1>Lote da E7 — 20 objetos para revisão editorial</h1>
+<h1>Lote da E7 — 20 objetos ({resultado.get('notebook', '?')})</h1>
 <div class="resumo"><b>Clique na foto para abrir em resolução máxima</b> (numa nova aba, direto do
 servidor do museu).<br>
-<b>Como revisar (responda no chat, pelo número):</b> 1) o alt mente ou esconde algo que a foto
-mostra? 2) o nível 2 respeita o registro? 3) preferências editoriais — ex.: "no #20, material antes
-da cor", "no #6, citar a arara no alt". Suas impressões viram a rubrica v1.1.</div>
+<b>Foco desta revisão: fidelidade visual.</b> O estilo já é coberto por regra — aqui a pergunta é
+uma só: <b>o texto mente ou esconde algo que a foto mostra?</b> (cores erradas, quantidades,
+padronagens, partes descritas que não existem). Responda no chat pelo número do card.</div>
 {''.join(cards)}
 </div></body></html>"""
 
-    destino = os.path.join(REPO, "resultados", "tabela_lote_04.html")
-    with open(destino, "w", encoding="utf-8") as f:
+    with open(saida, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"OK: {destino} ({len(resultado['itens'])} objetos)")
+    print(f"OK: {saida} ({len(resultado['itens'])} objetos)")
 
 
 if __name__ == "__main__":
