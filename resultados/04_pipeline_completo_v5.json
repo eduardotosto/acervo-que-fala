@@ -1,0 +1,620 @@
+{
+  "notebook": "04_pipeline_completo_v5",
+  "modelo": "Qwen/Qwen3-VL-8B-Instruct",
+  "embedding": "Qwen/Qwen3-Embedding-0.6B",
+  "rubrica_versao": "1.1 (24/08/2026)",
+  "prompt_observacao": "Descreva APENAS o que está visível nesta fotografia de um objeto de museu:\n- formas, cores e materiais aparentes — incluindo cores de bordas, faixas e acabamentos, não só as dominantes;\n- a posição/orientação do objeto (de pé, inclinado, deitado) e se partes internas (boca, interior, verso) estão visíveis;\n- o enquadramento: o objeto aparece inteiro ou só um detalhe/close?;\n- o fundo e qualquer artefato de estúdio (etiqueta, numeração, cartela de cores, régua, suporte).\nNÃO invente o que não dá para ver. Se algo estiver ilegível ou incerto, diga isso em vez de estimar. Responda em português.",
+  "prompt_redacao_v8": "Você escreve descrições de acessibilidade para o acervo digital de um museu, lidas por pessoas cegas via leitor de tela. Escreva em linguagem cotidiana — NUNCA jargão de catálogo ('globular' → 'arredondado'), NUNCA palavras inventadas; termo técnico só se vier do registro ou do glossário. Só afirmações verificáveis: proibido 'sugere', 'parece', 'parecendo X ou Y', 'possivelmente'; proibido inferir uso ou desgaste ('sinais de uso', 'uso frequente'); proibido juízo estético ('composição rica') e frases vazias ('porte médio', 'forma funcional', 'comprimento para uso prático'). Não repita a mesma palavra-chave várias vezes.\n\nOBSERVAÇÃO VISUAL DA FOTOGRAFIA (única fonte do que é visível):\n{observacao}\n\nREGISTRO DO MUSEU (fatos do catálogo — o título nomeia o objeto):\n{registro}\n\nDIRETRIZES PARA ESTE TIPO DE OBJETO (recuperadas da base do projeto):\n{diretrizes}\n\nPRODUZA TRÊS SAÍDAS:\n\nA) alt_text — uma frase, máx. 30 palavras, descrevendo a FOTOGRAFIA. Começa pelo objeto (nomeado pelo TÍTULO do registro — nunca rebatize pela aparência) e pelo povo — o nome do povo SEMPRE aparece no alt_text. Enquadramento: marque 'Detalhe de...' SÓ quando a foto mostra claramente um fragmento; objeto que encosta ou sangra nas margens conta como completo; NUNCA escreva 'inteiro', 'horizontal' ou 'vertical' — não informam. O fundo do estúdio NUNCA aparece nem empresta cor ao objeto; quando a cor de base é da própria peça, nomeie pelo material ('sobre a argila bege'), nunca como 'fundo'. Cores: nomeie onde informam (penas, miçangas, pinturas — proibido 'colorido', 'tons variados'); em material natural sem tingimento, nomeie o MATERIAL em vez da cor. Padrões têm FORMA além de cor (faixas, xadrez, losangos); padrão abstrato é 'geométrico' — nunca vire flores ou corações. Conte partes distinguíveis (ex.: 'sete tubos'). Penas: par cor+ave SOMENTE quando a Matéria-prima ou a Descrição do registro NOMEIA a ave ('penas vermelhas e amarelas de arara'); se o registro não nomeia nenhuma ave, descreva só as cores — citar espécie sem fonte é o pior erro possível. Na dúvida de material: termo genérico OU a matéria-prima do registro — nunca 'parecendo cerâmica ou madeira'. ARTEFATO DE ESTÚDIO/INVENTÁRIO NUNCA APARECE (vale também para a saída B) — ERRADO: '...com marcação numérica na base.' CERTO: terminar a frase sem citar a marcação (ela vira flag).\n\nB) descricao_objeto — descreve o OBJETO, não a fotografia: PROIBIDO posição, inclinação, fundo, enquadramento ou a foto; relação que depende do ponto de vista ('mais curtos no topo') vira relação da própria peça ('em cascata', 'decrescentes'). PROIBIDO citar artefato de estúdio/inventário — ERRADO: 'A base apresenta uma marcação numérica, que não é parte do objeto original.' CERTO: a frase termina sem citar a marcação (ela já virou flag). Em amostras e conteúdos (argila, resina, sementes), o CONTEÚDO vem antes do recipiente. Dois parágrafos:\n   1º: abre direto com o objeto e sua função — mas só função que ACRESCENTA (caça, ritual, preparo de alimentos); nunca o óbvio ('pulseira usada no pulso'). Ex.: 'Um pote cerâmico Karajá que, segundo o registro do museu, era usado no preparo e serviço de alimentos.' PROIBIDO abrir com 'O objeto é...', 'Trata-se de...' ou anunciar 'A função é...'. Depois, a aparência: formas, materiais e padrões em palavras comuns, informações do mesmo gênero agrupadas (material dito UMA vez, num lugar só).\n   2º: os demais fatos do catálogo. Escala: a MAIOR dimensão aproximada ('cerca de 40 cm de comprimento'); miniatura é declarada ('miniatura de 6 cm, cabe na palma da mão'); escala óbvia (pulseira) pode ser omitida. Aves das penas: detalhe cor a cor conforme o registro. Significado cultural: só se estiver no registro.\n   REGRA DE ATRIBUIÇÃO (vale para o texto todo): TODO fato que vem do catálogo e NÃO é visível na foto — função, técnica, origem, ano, medidas, decorações que o registro descreve — carrega uma marca de atribuição na própria frase, com formulação variada: 'segundo o registro do museu', 'o registro informa', 'conforme o catálogo', 'de acordo com o registro'. O que a observação viu não leva marca. Sem a marca, quem ouve não distingue o que a foto mostra do que o museu documentou. Datas sempre em frase natural: 'adquirido em 1977' — NUNCA 'foi aquisição em'.\n   NUNCA afirme ausências ('sem etiquetas', 'não há sinais de...') — o que não existe simplesmente não aparece no texto.\n\nC) flags — lista do que precisa de revisão humana:\n   - tipo 'artefato_estudio': etiqueta, numeração, cartela, régua ou suporte que a observação notou — cada um vira uma flag. O FUNDO LISO DE ESTÚDIO NÃO É ARTEFATO e não vira flag. Uma flag descreve o que EXISTE — nunca escreva flag afirmando ausência ('sem etiquetas visíveis');\n   - tipo 'divergencia_imagem_catalogo': algo claramente visível que o registro não menciona, ou objeto visto diferente do que o título nomeia (nesse caso, use o título no texto e registre a divergência aqui);\n   - tipo 'metadado_suspeito': valor do registro que parece improvável (dimensão absurda para o tipo de objeto, data impossível) ou contradição entre campos do registro (ex.: Descrição diz 'brinquedo em miniatura' e Função diz 'utilizado para caça').\n   Lista vazia [] se não houver nada.\n\nResponda APENAS com JSON: {{\"alt_text\": \"...\", \"descricao_objeto\": \"...\", \"flags\": [{{\"tipo\": \"...\", \"detalhe\": \"...\"}}]}}",
+  "itens": [
+    {
+      "id": 9196,
+      "titulo": "Pote",
+      "registro": {
+        "Nome do item": "Pote",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "4,3 cm de diâmetro (borda); 5,5 cm de diâmetro (bojo); 6,0 cm de altura",
+        "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1977",
+        "Descrição": "Pote de borda extrovertida e base plana apresentando superfície decorada com motivos geometrizantes pintados em vermelho e preto"
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é uma pequena peça cerâmica, com formato de vaso ou jarro de base arredondada e boca levemente proeminente. A superfície é predominantemente de cor bege-claro ou terracota, com desenhos geométricos estilizados em tons de laranja-avermelhado e linhas escuras (possivelmente preto ou marrom-escuro), que formam padrões abstratos. A borda superior é mais escura, com acabamento irregular, sugerindo uso ou desgaste. O interior da boca é visível, com tonalidade mais clara e textura lisa.\n\n- **Posição/orientação do objeto**: O objeto está de pé, em posição vertical, com a boca voltada para cima e ligeiramente inclinada para o lado esquerdo da imagem. A boca e parte do interior são visíveis. O verso do objeto não está visível.\n\n- **Enquadramento**: O objeto aparece inteiro, em plano médio, ocupando o centro da composição. Não há close-up nem detalhe isolado.\n\n- **Fundo e artefatos de estúdio**: O fundo é completamente branco e neutro, sem textura ou padrão. Não há etiquetas, numeração, cartelas de cores, régua, suporte ou outros artefatos visíveis. A iluminação é uniforme, típica de fotografia de museu, sem sombras fortes.",
+      "alt_text": "Pote cerâmico Karajá, sobre a argila bege, com padrão geométrico em vermelho e preto, boca proeminente, em plano médio sobre fundo branco.",
+      "descricao_objeto": "Um pote cerâmico Karajá, segundo o registro do museu, era usado no preparo e serviço de alimentos. O corpo é baixo, com base arredondada e boca levemente proeminente, com acabamento irregular na borda superior. A superfície é coberta por padrões geométricos pintados em vermelho-alaranjado e preto, com textura lisa no interior visível. O material é argila, conforme o registro. O objeto foi aquisição em 1977, originário do estado de Tocantins, com altura de 6,0 cm e diâmetro da borda de 4,3 cm.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "utensilio-01",
+        "ritual-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "'foi aquisição em' (usar 'adquirido em')"
+      ]
+    },
+    {
+      "id": 665,
+      "titulo": "Faixa frontal emplumada",
+      "registro": {
+        "Nome do item": "Faixa frontal emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu",
+        "Técnica de confecção": "",
+        "Dimensões": "60,0cm de comprimento; 13,0cm de altura",
+        "Função": "Adorno para cabeça",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Faixa frontal emplumada confeccionado com penas nas cores preto(Jaburu), amarelo(Jacú-amarelo) e vermelha e amarelo(Arara) dispostas verticalmente com corte horizontal das penas costuradas em couro de onça"
+      },
+      "observacao": "O objeto visível na fotografia é um adorno de penas, provavelmente um tipo de cocar ou tiara, com uma base circular e colorida, composta por faixas horizontais em amarelo, preto e vermelho. Da base emergem várias penas de diferentes cores e texturas: penas longas em tons de marrom e laranja, penas azuis, uma pena com padrão de listras pretas e brancas (possivelmente de avestruz), e penas mais curtas e amarelas no topo da base. A base está posicionada de forma horizontal, aparentemente de pé, mas o ângulo da foto não permite ver se está apoiada ou suspensa. O objeto está inteiro e em vista frontal, com partes externas visíveis. O fundo é uma superfície branca e neutra, típica de fotografia de museu, e à esquerda do objeto há uma cartela de cores de estúdio (uma paleta de cores de referência), com quadrados coloridos. Não há etiquetas, numeração ou outros artefatos visíveis além da cartela de cores.",
+      "alt_text": "Detalhe de Faixa frontal emplumada, adorno do povo Kalapalo, com base circular em couro de onça, penas em tons de amarelo, preto e vermelho dispostas verticalmente, algumas longas em marrom e laranja, outras curtas e amarelas no topo, com uma pena listrada preto e branco destacada.",
+      "descricao_objeto": "Faixa frontal emplumada, adorno para cabeça, segundo o registro do museu, usado pelo povo Kalapalo. A peça apresenta uma base circular de couro de onça, sobre a qual se erguem penas em configuração vertical, com predominância de cores amarelo, preto e vermelho. As penas mais longas são em tons de marrom e laranja, enquanto outras são curtas e amarelas no topo. Uma pena com listras pretas e brancas, possivelmente de avestruz, destaca-se entre as outras. O registro informa que o objeto foi adquirido em 1987, originário do Estado de Mato Grosso, e mede cerca de 60 cm de comprimento por 13 cm de altura.",
+      "flags": [
+        {
+          "tipo": "artefato_estudio",
+          "detalhe": "Cartela de cores de estúdio visível à esquerda do objeto na fotografia."
+        }
+      ],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "arma-01",
+        "cordoes-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "46 palavras",
+        "especulação no nível 2 ('possivelmente')"
+      ]
+    },
+    {
+      "id": 51023,
+      "titulo": "Flauta de pã",
+      "registro": {
+        "Nome do item": "Flauta de pã",
+        "Povo": "Tukano",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "Vegetal > Taquara",
+        "Técnica de confecção": "",
+        "Dimensões": "29,5; 21,5; 16,8; 14,0; 12,0 e 9,5 cm de comprimento (para os tubos) e 6,5 cm de largura - medidas aproximadas por tratar-se de objeto irregular",
+        "Função": "Instrumenntos musical e sonoro",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1957",
+        "Descrição": "Flauta de pã confeccionado com seis tubos de taquara (Guadua angustifolia Kunth.), dispostos paralelamente uns aos outros e presos por meio de fios de fibra de buriti (Mauritia vinifera Mart.)"
+      },
+      "observacao": "O objeto é um instrumento musical de madeira, composto por sete tubos cilíndricos de comprimentos diferentes, dispostos em uma configuração inclinada, com a base mais longa no topo e a mais curta na base. Os tubos são de madeira clara, com tonalidade marrom-claro, e apresentam acabamento natural, sem pintura ou revestimento visível. Eles estão unidos por dois nós de corda de fibra natural, que os mantêm agrupados em uma forma de cascata. O nó mais baixo está na base do tubo mais longo, e o nó superior envolve os tubos mais curtos. O tubo mais longo possui uma marcação de números (aparentemente \"8283\") gravada em sua superfície, visível na parte inferior. O objeto está em pé, com a base mais curta apontando para baixo, e está posicionado verticalmente, mas ligeiramente inclinado para o lado esquerdo da imagem. A fotografia mostra o objeto inteiro, em perspectiva frontal, com o topo dos tubos ligeiramente mais alto do que a base, mas sem partes internas (como a boca dos tubos ou o interior) visíveis. O fundo é preto, uniforme e sem textura, sugerindo um estúdio fotográfico. Não há etiquetas, cartelas, régua ou suporte visível. A iluminação é frontal e direcionada, destacando as texturas dos tubos e os nós de corda.",
+      "alt_text": "Flauta de pã dos Tukano, composta por sete tubos de taquara dispostos em cascata, unidos por nós de fibra de buriti, sobre fundo preto.",
+      "descricao_objeto": "Flauta de pã, instrumento musical dos Tukano, segundo o registro do museu, utilizado em contextos sonoros e rituais. Apresenta sete tubos cilíndricos de taquara, dispostos em ordem decrescente de comprimento, unidos por nós de fibra de buriti. O material natural exibe tonalidade marrom-claro, sem pintura ou revestimento. A peça possui marcação numérica na base do tubo mais longo, conforme observado na fotografia. O registro informa que foi adquirido em 1957, originário do estado do Amazonas, e suas dimensões variam entre 9,5 e 29,5 cm de comprimento.",
+      "flags": [
+        {
+          "tipo": "artefato_estudio",
+          "detalhe": "marcação numérica na base do tubo mais longo"
+        }
+      ],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-08"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "artefato no nível 2 ('marcação')",
+        "foto no nível 2 ('fotografia')"
+      ]
+    },
+    {
+      "id": 63283,
+      "titulo": "Abano trançado",
+      "registro": {
+        "Nome do item": "Abano trançado",
+        "Povo": "Fulni-ô",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Fibra de vegetal não identificado",
+        "Técnica de confecção": "Trançado sarjado",
+        "Dimensões": "290,0 cm de comprimento (maior); 19,5 cm de largura (menor)",
+        "Função": "Objeto destinado a atiçar o fogo e para abanar-se",
+        "Estado de origem": "Pernambuco",
+        "Ano de aquisição do objeto": "1949",
+        "Descrição": "Abano trançado de conformação retangular confeccionado com fibra não identificada, segundo a técnica do trançado sarjado. Apresenta empunhadura formada com o pecíolo da planta revestido com trançado sarjado que também reveste as bordas do objeto. Exibe na parte central decoração formada com fitas de fibra tingidas de azul e verde, formando uma roseta, através do revestimento de parte do trançado"
+      },
+      "observacao": "A fotografia exibe um detalhe de um objeto de tecido, provavelmente uma peça de artesanato ou mobília de vime, bambu ou material similar, com um padrão de trançado em \"V\" ou \"X\" — o conhecido como “travessa de vime” ou “têxtil em xadrez”. \n\n- **Formas, cores e materiais**: As tiras são retangulares, com textura natural de fibra vegetal, apresentando tons de marrom claro a médio, com variações sutis de tonalidade que sugerem envelhecimento ou variações naturais do material. Não há bordas visíveis, nem acabamentos distintos, apenas o padrão de entrelaçamento. A superfície é lisa, com pequenas irregularidades naturais da fibra.\n\n- **Posição/orientação**: O objeto está em plano horizontal, com o padrão de trança em ângulo, sugerindo que a peça está deitada ou apoiada de forma plana. Não há partes internas visíveis — apenas a superfície externa do tecido.\n\n- **Enquadramento**: É um close-up, focado exclusivamente na textura e no padrão do tecido. A imagem não mostra o objeto inteiro, apenas uma seção da superfície, com o enquadramento cortando as tiras em diagonal.\n\n- **Fundo e artefatos**: Não há fundo visível — a imagem é um plano de textura, com o tecido preenchendo toda a composição. Não há etiquetas, numeração, cartelas, régua ou qualquer outro artefato de estúdio. A iluminação é difusa, sem sombras fortes, sugerindo um estúdio de fotografia de detalhes.",
+      "alt_text": "Detalhe de um abano trançado do povo Fulni-ô, com padrão de trança em forma de xadrez, feito de fibra vegetal natural em tons marrom claro, em plano de estúdio sem fundo visível.",
+      "descricao_objeto": "Abano trançado, segundo o registro do museu, era usado para abanar-se e atiçar fogo. Possui forma retangular, confeccionado com fibra vegetal não identificada, em trançado sarjado. A peça exibe decoração central com fitas tingidas de azul e verde, formando roseta, segundo o registro. A empunhadura é revestida com trançado sarjado, conforme descrito no catálogo. O objeto tem cerca de 290 cm de comprimento e 19,5 cm de largura, originado do estado de Pernambuco e adquirido em 1949.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-02",
+        "cordoes-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "32 palavras"
+      ]
+    },
+    {
+      "id": 78838,
+      "titulo": "Tanga de miçangas",
+      "registro": {
+        "Nome do item": "Tanga de miçangas",
+        "Povo": "Tiriyó",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "Entretecido",
+        "Dimensões": "50,0 cm de comprimento (medida maior, sem cordel); 75,0 cm de comprimento (com cordel de amarração); 44,0 cm de largura",
+        "Função": "Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro",
+        "Estado de origem": "Pará",
+        "Ano de aquisição do objeto": "2009",
+        "Descrição": "Tanga de miçanga de conformação retangular confeccionado com linha industrializada branca e contas de miçangas nas cores: branca e preta. A superfície é ornamentada por: figuras estilizadas, motivo grego e piramidal, tecida segundo a técnica do entretorcido. Apresenta borda superior com cordel para amarrar o objeto ao corpo feito com barbante de algodão. Acabamento inferior com franjas de linha industrializada, tendo nas duas extremidades pingentes constituídos por miçangas branca e preta intercaladas. Possui acabamento da borda inferior com franjas de linha industrializada na cor branca"
+      },
+      "observacao": "O objeto visível na fotografia é um tecido ou tapeçaria com padrão geométrico, provavelmente de origem indígena ou tradicional, apresentando desenhos em preto sobre fundo branco. As formas são simétricas, com motivos que lembram cruzes ou elementos abstratos, intercalados por padrões de pontos e linhas retas. O tecido parece estar deitado, com uma inclinação leve, e está posicionado de forma a mostrar a superfície principal, mas não é possível ver o verso ou partes internas. O enquadramento é um close-up, mostrando apenas uma porção do objeto, com o canto superior direito e a borda inferior cortadas pela imagem. Não há fundo visível além do tecido, e não há artefatos de estúdio como etiquetas, régua ou suporte. A borda do tecido apresenta um acabamento com fios desfiados, sugerindo um detalhe de costura ou bordado. A cor predominante é o branco do tecido, com detalhes em preto.",
+      "alt_text": "Detalhe de tanga de miçangas do povo Tiriyó, com padrão geométrico em preto sobre fundo branco, bordas com franjas e cordel de amarração.",
+      "descricao_objeto": "Tanga de miçangas do povo Tiriyó, usada como adorno e vestuário. Confeccionada com fio de algodão industrializado branco e miçangas em preto e branco, apresenta padrão geométrico com motivos estilizados, gregos e piramidais, tecidos em entrelaçado. A peça possui cordel de amarração na borda superior e franjas com miçangas nas extremidades inferiores. Segundo o registro do museu, foi aquisitada em 2009, originária do Pará, com dimensões de cerca de 75 cm de comprimento com cordel e 44 cm de largura.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "ceramica-02",
+        "trancado-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 1376,
+      "titulo": "Braçadeira emplumada",
+      "registro": {
+        "Nome do item": "Braçadeira emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Vegetal > Algodão | Animal > Pena de arara",
+        "Técnica de confecção": "Passamanaria",
+        "Dimensões": "76,0cm de comprimento;11,0cm de largura",
+        "Função": "Adorno para braço",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Braçadeira emplumada composta de fio de algodão com penas nas cores amarelo,verde e vermelha(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas"
+      },
+      "observacao": "O objeto é uma peça decorativa, provavelmente um adorno ou acessório, composto por penas de aves dispostas em forma de flor ou buquê. As penas são predominantemente vermelhas, com tons de laranja, amarelo e verde nas bordas e pontas, sugerindo variações naturais de coloração. A textura das penas é visível, com fibras finas e desenhos naturais. Um fio de cor marrom, possivelmente de cânhamo ou corda natural, emerge do topo do objeto, curvando-se para o lado direito da imagem, com uma etiqueta branca presa a ele. A etiqueta contém caracteres que parecem ser de um idioma asiático (provavelmente chinês), mas o texto é ilegível devido à resolução. O objeto está deitado, com a base voltada para o lado esquerdo da imagem. O enquadramento é de corpo inteiro, mostrando o objeto completo. O fundo é completamente preto, e não há outros artefatos de estúdio visíveis além da etiqueta e do fio. A iluminação realça as texturas e cores do objeto, criando sombras sutis.",
+      "alt_text": "Braçadeira emplumada dos Kalapalo, sobre fundo preto, com penas vermelhas, amarelas e verdes dispostas em buquê, sustentada por fio marrom com etiqueta branca ilegível.",
+      "descricao_objeto": "Braçadeira emplumada, usada como adorno para braço, segundo o registro do museu. Apresenta penas de arara em tons de vermelho, amarelo e verde, dispostas em forma de buquê, fixadas por fio de algodão. O suporte é um fio marrom, com etiqueta branca presa, mas o texto nela é ilegível. A peça foi adquirida em 1987, originária do estado de Mato Grosso, e mede cerca de 76 cm de comprimento por 11 cm de largura. Confeccionada pela técnica de passamanaria, com alças soltas, segundo o catálogo.",
+      "flags": [
+        {
+          "tipo": "artefato_estudio",
+          "detalhe": "etiqueta branca com caracteres ilegíveis"
+        }
+      ],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "arma-01",
+        "plumaria-03"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "artefato no alt ('etiqueta')",
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "artefato no nível 2 ('etiqueta')",
+        "artefato no nível 2 ('suporte')"
+      ]
+    },
+    {
+      "id": 84811,
+      "titulo": "Pulseira de miçangas",
+      "registro": {
+        "Nome do item": "Pulseira de miçangas",
+        "Povo": "Kaxinawá",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "",
+        "Dimensões": "18,8 cm de comprimento; 7,0 cm de largura",
+        "Função": "Adorno para os membros que cinge o pulso",
+        "Estado de origem": "Acre",
+        "Ano de aquisição do objeto": "2011",
+        "Descrição": "Pulseira de miçangas confeccionado com fios de nylon e contas de miçangas nas cores: verde, branca, vermelha, preta e azul, formando uma faixa, cuja composição das contas formam padrões característico do grupo nas cores: verde, vermelho e branco. Possui as laterais com contas azuis e dois fechos com botões para prender o objeto ao pulso"
+      },
+      "observacao": "O objeto é um pequeno item de artesanato feito com contas, possivelmente um broche ou adorno decorativo, com design geométrico em padrão de meandro. As cores predominantes são verde, branco e vermelho, com detalhes em preto nas bordas e em alguns pontos do padrão. O padrão é composto por elementos em forma de “G” e “C” entrelaçados, intercalados com pequenos quadrados vermelhos. As bordas do objeto são reforçadas com contas pretas, formando um contorno nítido. O objeto está deitado sobre uma superfície branca, com uma leve inclinação, mostrando sua face frontal, mas não está de pé nem em posição vertical. A fotografia captura o objeto inteiro, sem cortes ou detalhes em close-up. O fundo é branco e uniforme, sem artefatos de estúdio visíveis, como etiquetas, numeração ou régua. Não há sinais de que o interior, verso ou partes ocultas do objeto estejam visíveis.",
+      "alt_text": "Pulseira de miçangas do povo Kaxinawá, sobre fundo branco, com padrão geométrico em verde, vermelho e branco, contas pretas nas bordas.",
+      "descricao_objeto": "Pulseira de miçangas usada como adorno para o pulso, segundo o registro do museu. Feita com fios de nylon e contas de miçangas em verde, vermelho, branco e preto, com padrão geométrico de elementos entrelaçados e contas pretas nas bordas. O registro informa que possui fechos com botões para ajuste e foi adquirido em 2011 no estado do Acre.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "plumaria-01",
+        "ceramica-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 883523,
+      "titulo": "Brinquedo zarabatana",
+      "registro": {
+        "Nome do item": "Brinquedo zarabatana",
+        "Povo": "Baniwa",
+        "Categoria": "Armas",
+        "Matéria-prima": "Vegetal > Breu | Vegetal > Jupati | Vegetal > Madeira marupá",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "102 cm de comprimento; 6 cm de diâmetro (bocal); 2 cm de diâmetro (cabo)",
+        "Função": "Objeto utilizado para caça",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2020",
+        "Descrição": "Brinquedor zarabatana em miniatura, apresentando o cabo na cor preta natural confeccionada em madeira de jupati (\"mawi\" baniwa / \"yupati\" nhengatu) e bocal confeccionado em madeira de marupá (Simarouba amara. / \"koitina\" baniwa) na cor natural branca, colada ao cabo com breu. O cabo é confeccionado segundo a técnica do entalhe, usando instrumentos de arumã, para retirada do miolo da madeira de jupati."
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é um bastão longo, cilíndrico, com acabamento liso e uniforme. A maior parte do bastão é de cor preta, com uma tonalidade escura e mate. No extremo direito, há uma ponta de cor clara, provavelmente de madeira, com acabamento ligeiramente côncavo ou arredondado, em tom bege ou creme. Não há detalhes visíveis de bordas, faixas ou acabamentos adicionais além do que está mostrado. O material do corpo principal parece ser metal ou madeira pintada, enquanto a ponta é de madeira.\n\n- **Posição/orientação do objeto**: O objeto está deitado horizontalmente, estendido de forma paralela ao topo e à base da imagem, com o extremo direito ligeiramente mais próximo da câmera. Nenhuma parte interna (como boca, interior, verso) é visível, pois o objeto está mostrado de frente, em vista lateral.\n\n- **Enquadramento**: O objeto aparece inteiro, de ponta a ponta, ocupando a largura da imagem de forma centralizada.\n\n- **Fundo e artefatos de estúdio**: O fundo é um tecido de cor cinza-escuro ou preto, com textura suave e uniforme, sem pregas ou desvios significativos. Não há etiquetas, numerações, cartelas de cores, régua ou suporte visíveis. A iluminação é difusa, com sombra suave projetada pelo objeto, indicando um estúdio fotográfico. Não há artefatos de estúdio visíveis.",
+      "alt_text": "Bastão longo e cilíndrico, com corpo preto e ponta clara de madeira, do brinquedo zarabatana dos Baniwa, em vista lateral sobre fundo neutro.",
+      "descricao_objeto": "Zarabatana, arma de caça dos Baniwa, com corpo de madeira de jupati pintada de preto e ponta de madeira de marupá em tom natural claro. Segundo o registro do museu, o objeto foi confeccionado com técnica de entalhe, usando instrumentos de arumã para retirar o miolo da madeira, e foi adquirido em 2020 no estado do Amazonas. O cabo tem 6 cm de diâmetro e o bocal 2 cm, com cerca de 102 cm de comprimento total.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "arma-01",
+        "glossario-09",
+        "instrumento-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 2081,
+      "titulo": "Pote",
+      "registro": {
+        "Nome do item": "Pote",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "6,8 cm de diâmetro de borda; 10,3 cm de diâmetro de bojo; 7,3 cm de altura",
+        "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1950",
+        "Descrição": "Pote de cor clara, base plana e borda extrovertida. Apresenta decoração externa no bojo com motivos geometrizantes (arabesco) pintados na cor preto"
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é uma peça cerâmica de formato bulboso, com base arredondada e boca ligeiramente estreitada. A superfície é de cor bege ou creme, com um padrão geométrico estilizado em linhas escuras, provavelmente feitas com tinta ou esmalte. As linhas são contínuas e formam motivos que lembram meandros ou quadrados entrelaçados. A borda superior é escura, com aspecto de uso ou de acabamento cerâmico. O material parece ser cerâmica, com textura ligeiramente áspera ou envelhecida.\n\n- **Posição/orientação do objeto**: O objeto está em posição vertical, aparentemente de pé, mas inclinado levemente para a direita do espectador. A boca superior está visível, mas o interior não é claramente observável. A parte inferior não está visível, e o verso não é mostrado. O objeto está em foco, com a parte superior mais nítida.\n\n- **Enquadramento**: É um close-up, mostrando apenas a parte superior e média do corpo do objeto, sem a base. A borda superior e o padrão decorativo são os elementos mais destacados.\n\n- **Fundo e artefatos de estúdio**: O fundo é branco e uniforme, sem textura ou detalhes, sugerindo um estúdio fotográfico. Não há etiquetas, numeração, cartelas de cores, régua ou suporte visível. A iluminação é difusa, com sombras suaves.",
+      "alt_text": "Pote Karajá em cerâmica, com base arredondada e boca estreitada, exibindo padrão geométrico em linhas pretas sobre argila bege, em close-up sobre fundo branco.",
+      "descricao_objeto": "Um pote cerâmico Karajá, segundo o registro do museu, era usado no preparo e serviço de alimentos. O corpo apresenta forma bulbosa, com base arredondada e boca ligeiramente estreitada. A superfície é de argila bege, com decoração externa no bojo composta por linhas pretas formando padrão geométrico. A borda superior é escura, com acabamento cerâmico. O objeto tem cerca de 7,3 cm de altura, 10,3 cm de diâmetro no bojo e 6,8 cm na borda, segundo o registro do museu. Foi adquirido em 1950, originário do estado de Tocantins.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "plumaria-01",
+        "ritual-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 5011,
+      "titulo": "Fuso",
+      "registro": {
+        "Nome do item": "Fuso",
+        "Povo": "Xavante",
+        "Categoria": "Cordões e Tecidos",
+        "Matéria-prima": "Mineral > Argila | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Entalhe | Modelado",
+        "Dimensões": "44,0 cm de comprimento; 6,2 cm de diâmetro ( tortual )",
+        "Função": "Utensílio para fiar o algodão",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1988",
+        "Descrição": "Fuso constituído de uma haste de madeira \"buritiana\" com castão chanfrado e tortual de cerâmica com fixação de fio de algodão. Apresenta algodão bruto enrolado à vareta"
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é um rolo de fibra natural, provavelmente lã ou algodão, de cor branca com tons bege e amarelados, com textura felpuda e desigual. Ao lado, está um pequeno rolete de madeira escura, com aparência envelhecida e desgastada, com um eixo metálico ou de madeira escura inserido em seu centro. A madeira tem veios visíveis e uma superfície irregular, sugerindo uso prolongado. Não há bordas, faixas ou acabamentos visíveis além do que está em evidência.\n\n- **Posição/orientação do objeto**: O objeto está deitado horizontalmente, com o rolete de madeira virado para o lado direito da imagem. A fibra está enrolada em torno do rolete, mas não é possível ver o interior do rolete nem o seu verso. O objeto está em posição lateral, com a parte mais larga voltada para o espectador.\n\n- **Enquadramento**: O objeto aparece em sua totalidade, ocupando a maior parte do quadro, com o rolete ligeiramente mais afastado do centro. Não há close-up de detalhes específicos, mas sim uma visão geral do objeto em sua configuração completa.\n\n- **Fundo e artefatos de estúdio**: O fundo é branco e uniforme, sem textura, sugerindo um estúdio fotográfico. Não há etiquetas, numeração, cartelas de cores, régua ou suporte visível. A iluminação é difusa, sem sombras fortes, e não há artefatos de estúdio adicionais.",
+      "alt_text": "Fuso Xavante, com fio de algodão enrolado em torno de um rolete de madeira escura, sobre a argila bege.",
+      "descricao_objeto": "Fuso Xavante, segundo o registro do museu, era usado para fiar o algodão. Apresenta fio de algodão bruto enrolado em torno de um rolete de madeira escura, com veios visíveis e superfície irregular. O fio tem tonalidades bege e amareladas, com textura felpuda e desigual. O rolete possui um eixo central de madeira escura, sem sinais de acabamento ou bordas visíveis. A peça foi adquirida em 1988, originária do Estado de Mato Grosso.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "cordoes-01",
+        "ritual-01",
+        "instrumento-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "afirmação de ausência ('sem sinais')"
+      ]
+    },
+    {
+      "id": 200648,
+      "titulo": "Argila",
+      "registro": {
+        "Nome do item": "Argila",
+        "Povo": "Baniwa",
+        "Categoria": "Etnobotânica",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "14,7 cm de altura; 3,0 cm de diâmetro (tubo de ensaio)",
+        "Função": "Utilizada como um dos componente no processo para confecção de objetos de cerâmica",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2014",
+        "Descrição": "Amostra de argila \"dekai\", matéria-prima utilizada na manufatura de artefatos indígenas, usada para o processo de confecção da cerâmica, dentro de um tubo de ensaio da localização geográfica Igarapé Ucuqui"
+      },
+      "observacao": "O objeto visível é um frasco de vidro transparente, com tampa de metal dourado, posicionado deitado sobre uma superfície escura de textura uniforme, provavelmente tecido ou papelão. A tampa apresenta uma borda ranhurada e tem inscrita uma data: “14.11.1954”, escrita em preto, de forma legível. O corpo do frasco contém material fragmentado, de cor predominantemente marrom-acinzentado, que parece ser restos de papel ou material orgânico destruído, com texturas irregulares. O frasco está inclinado, com a boca voltada para a direção superior esquerda da imagem. A câmera capta o objeto em um enquadramento que mostra o topo da tampa e parte do corpo, mas não o fundo do frasco nem sua base. Não há etiquetas visíveis no corpo do frasco, apenas uma pequena etiqueta branca parcialmente visível na lateral inferior. O fundo é neutro, sem artefatos de estúdio como régua, cartela de cores ou suporte. A iluminação é difusa, sem sombras fortes, sugerindo um ambiente de estúdio.",
+      "alt_text": "Detalhe de um tubo de ensaio contendo amostra de argila Baniwa, com tampa metálica dourada e data inscrita. O conteúdo é material fragmentado, marrom-acinzentado, sobre fundo escuro.",
+      "descricao_objeto": "Amostra de argila Baniwa, utilizada na confecção de artefatos cerâmicos, conforme o registro do museu. Encontra-se contida em um tubo de ensaio de vidro transparente, com tampa de metal dourado e data gravada. O conteúdo é composto por fragmentos de material orgânico ou de papel, com tonalidade marrom-acinzentada. O tubo apresenta uma etiqueta branca parcialmente visível, mas não é parte do objeto original. O registro informa que a amostra foi coletada no Igarapé Ucuqui, no estado do Amazonas, e foi adquirida pelo museu em 2014.",
+      "flags": [
+        {
+          "tipo": "artefato_estudio",
+          "detalhe": "Etiqueta branca parcialmente visível na lateral inferior do tubo."
+        }
+      ],
+      "diretrizes_usadas": [
+        "etnobotanica-01",
+        "utensilio-01",
+        "arma-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "artefato no nível 2 ('etiqueta')"
+      ]
+    },
+    {
+      "id": 210680,
+      "titulo": "Flauta reta de osso",
+      "registro": {
+        "Nome do item": "Flauta reta de osso",
+        "Povo": "Hixkaryána",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "12,7 cm de comprimento (osso); 41,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+        "Função": "Instrumento musical e sonoro",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2018",
+        "Descrição": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor vermelhas, amarradas ao fio de fibra, junto a extremidade proximal do osso"
+      },
+      "observacao": "O objeto é um pequeno artefato de forma alongada, com aparência de ser feito de osso ou madeira clara, possivelmente de cor bege ou creme, com textura natural e marcas de uso ou desgaste. Apresenta três furos circulares alinhados ao longo de seu comprimento, sugerindo uso funcional, talvez para passar cordas ou ser fixado. No final direito, está preso um conjunto de penas vibrantes de cor vermelha, com detalhes em tons mais escuros, talvez castanho ou marrom, e uma pequena pena mais escura, talvez cinza ou marrom, entre elas. Um fio de cânhamo ou fibra natural, de cor marrom claro, está preso ao objeto, estendendo-se para a esquerda em direção ao canto superior esquerdo da imagem, com fios desfiados, indicando uso ou desgaste. O objeto está deitado horizontalmente, com a extremidade direita mais proeminente e a esquerda mais afastada, e está inteiramente visível no enquadramento. O fundo é uma superfície plana, de cor cinza escura, com textura leve, possivelmente tecido ou material de estúdio. Não há etiquetas, numerações, cartelas de cores, régua, suporte ou outros artefatos visíveis. A iluminação é uniforme, sem sombras fortes, e o objeto está centralizado horizontalmente, mas com mais espaço à esquerda.",
+      "alt_text": "Flauta reta de osso dos Hixkaryána, com três furos alinhados, penas vermelhas de arara amarradas ao fio de fibra natural, sobre fundo cinza escura.",
+      "descricao_objeto": "Flauta reta de osso, segundo o registro do museu, era usada como instrumento musical e sonoro. O objeto é feito de osso, com três furos circulares alinhados ao longo de seu comprimento. No final, penas vermelhas de arara estão amarradas a um fio de fibra natural, que se estende para o lado. A peça tem cerca de 40 cm de comprimento quando incluído o fio de fibra. A origem é o estado do Amazonas, e foi adquirida pelo museu em 2018.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-06"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 5146,
+      "titulo": "Pião noz de tucum",
+      "registro": {
+        "Nome do item": "Pião noz de tucum",
+        "Povo": "Canela",
+        "Categoria": "Objetos rituais, mágicos e lúdicos",
+        "Matéria-prima": "Vegetal > Cabaça | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "",
+        "Dimensões": "13,5 cm de comprimento",
+        "Função": "Objeto destinado a atividade lúdica",
+        "Estado de origem": "Maranhão",
+        "Ano de aquisição do objeto": "1950",
+        "Descrição": "Pião noz de tucum constituído de um recipiente de cabaça contendo uma haste de madeira roliça atravessada"
+      },
+      "observacao": "O objeto é um pequeno artefato de forma ovalada, com acabamento liso e cor marrom avermelhada, possivelmente de madeira ou material similar. Apresenta uma cavidade circular no centro, que parece ser um orifício ou furo. Duas projeções finas e alongadas se estendem lateralmente do corpo principal, como se fossem alças ou prolongamentos. O objeto está posicionado de forma a mostrar sua face frontal, com o furo central visível. A orientação é horizontal, com o objeto deitado. A fotografia mostra o objeto inteiro, enquadrado de forma a destacá-lo contra um fundo branco e neutro, sem artefatos de estúdio visíveis, como etiquetas, numerações ou suportes. Não há detalhes internos visíveis além do furo central.",
+      "alt_text": "Pião noz de tucum, artefato do povo Canela, com corpo ovalado de cor marrom avermelhada, furo central e duas projeções laterais, sobre fundo neutro.",
+      "descricao_objeto": "Pião noz de tucum, segundo o registro do museu, era usado em atividade lúdica. O corpo ovalado, de material vegetal identificado como cabaça, possui um furo circular central e duas projeções finas que se estendem lateralmente, possivelmente como alças. A cor é marrom avermelhada, sem decoração ou padrão. O objeto tem cerca de 13,5 cm de comprimento, conforme indicado no registro do museu. A matéria-prima é vegetal, especificamente cabaça, com uma haste de madeira roliça atravessada, conforme descrito no registro. O registro informa que o objeto originou-se no Maranhão e foi adquirido em 1950.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "ritual-01",
+        "glossario-08",
+        "instrumento-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "especulação no nível 2 ('possivelmente')"
+      ]
+    },
+    {
+      "id": 500179,
+      "titulo": "Abano de talo de tucum",
+      "registro": {
+        "Nome do item": "Abano de talo de tucum",
+        "Povo": "Baniwa",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Fio de tucum | Vegetal > Palmeira de tucum",
+        "Técnica de confecção": "Trançado",
+        "Dimensões": "41,5 cm de comprimento; 37,0 cm de largura",
+        "Função": "Usado como uma pá para virar beiju e para atiçar o fogo.",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Abano trançado semelhante a uma pequena esteira, provido\nde uma parte mais resistente em um dos seus cantos para empalmar."
+      },
+      "observacao": "O objeto é um artefato de tecido, provavelmente de vime ou palha, com uma forma arredondada e simétrica, lembrando um coração ou uma concha. A cor predominante é o bege claro, com variações sutis de tonalidade nas fibras. A textura é visivelmente entrelaçada, com padrões de tecelagem em diagonal e em redondo, especialmente nas bordas curvas. O acabamento das extremidades é simples, com os fios aparentemente amarrados por fios de linha fina, talvez de cânhamo ou sisal, que servem para unir as partes e dar forma ao objeto. Não há bordas coloridas, faixas ou acabamentos distintos visíveis além da cor natural do material.\n\nO objeto está deitado, em posição horizontal, com a parte superior arredondada voltada para cima e a base mais estreita apontando para baixo. A parte interna do objeto não é visível — apenas a face externa está em destaque. O enquadramento é completo, mostrando o objeto inteiro, sem cortes ou detalhes parciais. O fundo é uma superfície lisa e uniforme de cor azul-escura, sem textura aparente. Não há artefatos de estúdio visíveis, como etiquetas, numerações, cartelas de cores, régua ou suporte. A iluminação é difusa, vinda de cima, destacando a textura do tecido sem criar sombras fortes.",
+      "alt_text": "Abano de talo de tucum, do povo Baniwa, em trançado de fio vegetal, sobre fundo azul-escuríssimo, com padrão geométrico em diagonais e bordas amarradas com fios finos.",
+      "descricao_objeto": "Abano trançado, segundo o registro do museu, usado para virar beiju e atiçar fogo. Feito de fio de tucum, possui forma arredondada e simétrica, com textura de entrelaçamento em padrão de espinha-de-peixe. As bordas são unidas por fios finos, sem decoração adicional. Dimensões: cerca de 40 cm de comprimento. Originário do estado do Amazonas, adquirido em 2019.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-02",
+        "glossario-09"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 3411,
+      "titulo": "Remo espatular",
+      "registro": {
+        "Nome do item": "Remo espatular",
+        "Povo": "Karajá",
+        "Categoria": "Utensílios e implementos de materiais ecléticos",
+        "Matéria-prima": "Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "124,2 cm de comprimento; 19,3 cm de largura (pá)",
+        "Função": "Objeto utilizado para deslocar o transporte em vias aquáticas",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1952",
+        "Descrição": "Remo espatular confeccionado em um só bloco de madeira apresentando punho em forma de muleta, cabo roliço e pá em forma de espatulada. Exibe superfície da pá decorada com motivos geometrizantes pintados na cor vermelha e preta"
+      },
+      "observacao": "O objeto visível na fotografia é uma pá de madeira, provavelmente uma pá de barco, com uma forma alongada e simétrica. A superfície da pá é predominantemente de cor marrom-avermelhada, com um padrão geométrico estilizado em relevo, composto por linhas retas e curvas interligadas, que se assemelham a um labirinto ou padrão abstrato. A cor do padrão é um vermelho-alaranjado, com textura granulada e pequenos pontos escuros, sugerindo que foi pintado ou decorado com tinta e depois esfregado ou desgastado, revelando a madeira por baixo. A madeira ao redor do padrão é de tom marrom escuro, com acabamento natural, sem verniz aparente.\n\nO objeto está deitado horizontalmente, com a parte mais larga (o “ponto” da pá) voltada para a esquerda da imagem e a haste estreita e alongada para a direita. A ponta da haste termina em uma base circular, com um detalhe em relevo, possivelmente para facilitar o manuseio. A parte traseira da pá (o lado oposto ao que seria o “ponto” de empurrar) não está visível. A parte frontal da pá (o lado que seria o “ponto” de empurrar) está parcialmente visível, mas o seu interior não é acessível à vista.\n\nO objeto aparece inteiro, com o seu comprimento completo visível, e está posicionado de forma a mostrar a face decorada, sem partes internas ou verso visíveis. O enquadramento é um plano geral, sem close-up.\n\nO fundo é uma superfície plana e uniforme de",
+      "alt_text": "Remo espatular Karajá, de madeira com padrão geométrico em relevo, pintado em vermelho-alaranjado e preto, sobre superfície plana.",
+      "descricao_objeto": "Remo espatular Karajá, usado para deslocar embarcações em águas fluviais. Feito de madeira, apresenta forma alongada com ponta mais larga e haste estreita, decorada com padrão geométrico em relevo, pintado em vermelho-alaranjado e preto, com textura granulada e pequenos pontos escuros. Segundo o registro do museu, o objeto foi adquirido em 1952, originário do estado de Tocantins, e mede cerca de 124 cm de comprimento.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "arma-01",
+        "utensilio-01",
+        "instrumento-01"
+      ],
+      "json_valido": true,
+      "problemas": []
+    },
+    {
+      "id": 1366,
+      "titulo": "Braçadeira emplumada",
+      "registro": {
+        "Nome do item": "Braçadeira emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Animal > Pena de arara",
+        "Técnica de confecção": "Emplumação em passamanaria",
+        "Dimensões": "76,0cm de comprimento;9,0cm de largura",
+        "Função": "Adorno para braço",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Braçadeira emplumada composta de fio de algodão com penas nas cores amarelo,vermelha de arara confeccionado pela técnica de emplumação em passamanaria com alças soltas"
+      },
+      "observacao": "A fotografia exibe um objeto de museu, provavelmente um acessório ou adorno tradicional, composto por penas vibrantes e uma corda de fibra natural. As penas apresentam tons de vermelho intenso, laranja e amarelo, com texturas fofas e desfechadas, sugerindo serem de aves como pavões ou feras ornamentais. Há um pequeno detalhe branco, talvez um pedaço de tecido ou resina, no centro das penas. A corda, de cor marrom-terrosa e textura fibrosa, está enrolada em espiral, com um dos extremos ligado às penas. O objeto está deitado sobre um fundo preto sólido, o que realça suas cores e contornos. A composição é um plano geral, mostrando o objeto inteiro, sem partes internas ou verso visíveis. Não há etiquetas, numerações, régua, suporte ou artefatos de estúdio visíveis. A iluminação é direcionada, criando sombras suaves e destacando a textura dos materiais.",
+      "alt_text": "Braçadeira emplumada dos Kalapalo, com penas vermelhas e amarelas de arara, presas por corda de fibra natural sobre fundo preto.",
+      "descricao_objeto": "Braçadeira emplumada dos Kalapalo, usada como adorno para o braço. Apresenta penas vermelhas e amarelas de arara, dispostas em leque, sustentadas por corda de fibra natural em espiral. Conforme o registro do museu, foi confeccionada pela técnica de emplumação em passamanaria, com alças soltas, e mede cerca de 76 cm de comprimento. Originária do Estado de Mato Grosso, foi adquirida pelo museu em 1987.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "arma-01",
+        "cordoes-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 4156,
+      "titulo": "Estojo peniano",
+      "registro": {
+        "Nome do item": "Estojo peniano",
+        "Povo": "Bororo",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Vegetal > Palmeira de babaçu",
+        "Técnica de confecção": "Dobradura",
+        "Dimensões": "19,5 cm de comprimento; 4,2 cm de largura; 2,4 cm de espessura",
+        "Função": "Objeto utilizado como protetor de genitália masculina de uso cerimonial",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1959",
+        "Descrição": "Estojo peniano feito do folíolo do broto da palmeira de babaçu, que consiste em uma dobradura afunilada, com orifício na ponta. Apresenta prolongamento da folha onde apresenta decoração com motivos zoomorfos em cera"
+      },
+      "observacao": "O objeto é um pequeno bastão ou varinha de madeira, com acabamento natural, de cor marrom claro, possivelmente de bambu ou madeira fina. Sua superfície apresenta uma decoração em preto, com silhuetas de dois animais: um com padrões pontilhados (possivelmente um gato ou felino) e outro com contorno liso (parecendo um cão). O objeto está deitado diagonalmente, com a extremidade mais larga (possivelmente uma base ou punho) na parte superior esquerda da imagem e a ponta afiada na parte inferior direita. A peça está inteira e visível em sua totalidade. O enquadramento é um plano geral, sem cortes ou detalhes em close. O fundo é branco e uniforme, sem artefatos de estúdio visíveis, como etiquetas, numeração ou régua. Não há partes internas visíveis, nem verso do objeto.",
+      "alt_text": "Estojo peniano Bororo, de folíolo de palmeira de babaçu, com decoração em preto de dois animais, sobre fundo branco.",
+      "descricao_objeto": "Este estojo peniano, segundo o registro do museu, era usado em cerimônia. Feito de folíolo de palmeira de babaçu, apresenta forma afunilada com orifício na ponta e decoração com motivos zoomorfos em cera. A peça tem cerca de 20 cm de comprimento, com acabamento natural em tom marrom claro e detalhes em preto. O registro informa que foi adquirido em 1959, originário do Estado de Mato Grosso, e sua técnica de confecção é a dobradura.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "utensilio-01",
+        "glossario-08",
+        "etnobotanica-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)"
+      ]
+    },
+    {
+      "id": 205095,
+      "titulo": "Arco plano-côncavo",
+      "registro": {
+        "Nome do item": "Arco plano-côncavo",
+        "Povo": "Waimiri-Atroari",
+        "Categoria": "Armas",
+        "Matéria-prima": "",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "237,2 cm de comprimento, 3 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+        "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1972",
+        "Descrição": "Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada"
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é um detalhe de uma arma ou ferramenta de madeira, com uma ponta afiada e curvada, possivelmente de uma lança ou machado de cerimônia. A parte central está envolta por uma corda de fibra natural, de cor marrom claro, com textura irregular e nós aparentes. A madeira, visível nas extremidades, tem tonalidade marrom escura, com acabamento natural. Não há bordas, faixas ou acabamentos visíveis além da corda envolta. A cor dominante é o marrom, variando entre o claro da corda e o escuro da madeira.\n\n- **Posição/orientação do objeto**: O objeto está em posição vertical, aparentemente de pé, com a ponta virada para cima. A parte superior (ponta) está parcialmente visível, mas não se vê o interior ou o verso. A base do objeto não está visível, apenas o segmento central e superior.\n\n- **Enquadramento**: É um close-up, mostrando apenas uma porção do objeto, centrado verticalmente na imagem. Não é possível determinar se o objeto é inteiro, mas o enquadramento foca na parte central, onde a corda envolve a haste.\n\n- **Fundo e artefatos de estúdio**: O fundo é uma superfície plana de cor cinza-azulada, com textura de tecido ou tela, possivelmente um pano de museu. Não há etiquetas, numeração, cartelas de cores, régua ou suporte visível. O objeto está sobre essa superfície, sem artefatos adicionais.",
+      "alt_text": "Detalhe de um arco plano-côncavo dos Waimiri-Atroari, com haste de madeira escura e corda de fibra natural envolta no centro.",
+      "descricao_objeto": "Arco plano-côncavo dos Waimiri-Atroari, usado para arremesso de flechas em caça, pesca, ataque e defesa, segundo o registro do museu. A haste é de madeira escura, com corda de fibra natural tecida em volta do centro, apresentando nós visíveis. A ponta é afiada e curvada, mas não é possível identificar a forma completa do arco. A peça não possui decoração ou pintura visível, e a corda é a única parte com textura irregular. O registro informa que foi adquirido em 1972 e mede cerca de 237,2 cm de comprimento.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "arma-01",
+        "utensilio-01",
+        "ceramica-01"
+      ],
+      "json_valido": true,
+      "problemas": []
+    },
+    {
+      "id": 905,
+      "titulo": "Panela gameliforme",
+      "registro": {
+        "Nome do item": "Panela gameliforme",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "17,3 cm de diâmetro de borda; 8,4 cm de altura",
+        "Função": "Objeto utilizado para cozinhar e servir alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1955",
+        "Descrição": "Panela gameliforme de borda extrovertida e base plana. Apresenta externamente o bojo decorado com motivos geometrizantes, figuras em \"X\", pintados na cor vermelha"
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é um recipiente cerâmico de formato circular, com base ligeiramente achatada e bordas levemente arredondadas. A cerâmica tem tonalidade clara, quase bege ou creme, com uma borda externa e interior pintada em tom avermelhado, que se estende em faixas cruzadas decorativas sobre a superfície externa. A textura parece lisa, mas com pequenas irregularidades e marcas de uso. A pintura vermelha é aplicada de forma geométrica, com linhas que se cruzam, formando um padrão de quadrados ou reticulado. Não há detalhes visíveis que indiquem a presença de etiquetas, numeração ou cartelas.\n\n- **Posição/orientação do objeto**: O objeto está em posição horizontal, deitado sobre uma superfície plana, com a boca voltada para o observador. A parte interna (boca e interior) é parcialmente visível, mas o interior não é o foco principal. A base do objeto está em contato com o suporte, e a parte superior (boca) está aberta para o observador.\n\n- **Enquadramento**: O objeto aparece inteiro, em plano médio, com o topo e a lateral visíveis, ocupando a maior parte do quadro. Não há close-up de detalhes específicos, nem partes parcialmente cortadas.\n\n- **Fundo e artefatos de estúdio**: O fundo é uniforme, de cor azul-escura, com textura leve, sugerindo um tecido ou superfície estofada. Não há artefatos de estúdio visíveis, como etiquetas, numeração, cartelas de cores ou régua. A il",
+      "alt_text": "Panela gameliforme Karajá, de cerâmica com borda arredondada e base plana, com padrão geométrico em vermelho sobre argila bege, vista de cima em fundo azul-escuríssimo.",
+      "descricao_objeto": "Um recipiente cerâmico Karajá, segundo o registro do museu, usado no preparo e serviço de alimentos. Apresenta forma circular com base plana e borda levemente arredondada, fabricado em argila com acabamento liso e pequenas irregularidades. A superfície externa exibe padrão geométrico em vermelho, formado por linhas que se cruzam em ângulo reto, criando uma estrutura de quadrados. O interior é visível parcialmente, sem detalhes decorativos. O objeto foi aquisitado em 1955, originário do estado de Tocantins, com altura de 8,4 cm e diâmetro de borda de 17,3 cm.",
+      "flags": [
+        {
+          "tipo": "artefato_estudio",
+          "detalhe": "Fundo azul-escuríssimo, sem textura ou marcação visível"
+        }
+      ],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "plumaria-01",
+        "ritual-01"
+      ],
+      "json_valido": true,
+      "problemas": [
+        "'fundo' no alt (fundo de estúdio? base da peça vira material)",
+        "flag afirmando ausência"
+      ]
+    },
+    {
+      "id": 500322,
+      "titulo": "Bolsa tecida",
+      "registro": {
+        "Nome do item": "Bolsa tecida",
+        "Povo": "Baniwa",
+        "Categoria": "Cordões e Tecidos",
+        "Matéria-prima": "Vegetal > Fio de tucum | Vegetal > Semente de açaí",
+        "Técnica de confecção": "",
+        "Dimensões": "24,0 cm de largura; 23,5 cm de altura; 83,0 cm altura com a alça esticada",
+        "Função": "Usada como acessório para guardar e transportar objetos.",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Bolsa tecida com alça usado para portar pequenos objetos feito segundo a técnica de trabalho em malha."
+      },
+      "observacao": "- **Formas, cores e materiais aparentes**: O objeto é uma bolsa de formato retangular, com bordas levemente arredondadas, confeccionada em um material texturizado de cor bege claro, possivelmente de fibra natural como cânhamo ou vime, com um padrão de tecido em trama aberta. Possui uma alça longa e flexível, do mesmo material, que se estende para o lado esquerdo da imagem, formando uma curva suave. No centro superior da bolsa, há um pequeno botão escuro, provavelmente de madeira ou cerâmica, que parece ser o fecho ou detalhe decorativo. A cor predominante do objeto é bege, com variações sutis de tonalidade nas texturas e sombras. Não há bordas, faixas ou acabamentos visíveis de forma clara, apenas o material natural e o botão central.\n\n- **Posição/orientação do objeto**: A bolsa está deitada, de forma horizontal, com a abertura voltada para o topo da imagem. A alça está posicionada de forma a sugerir que a bolsa está pronta para ser usada sobre o ombro. A boca da bolsa está aberta, mas o interior não é visível. O verso da bolsa não está acessível à vista. A bolsa está em posição plana, com a parte frontal voltada para o observador.\n\n- **Enquadramento**: O objeto aparece inteiro, de forma completa e clara, ocupando a maior parte do centro da composição. Não há cortes ou detalhes em close-up.\n\n- **Fundo e artefatos de estúdio**: O fundo é uma superfície lisa e uniforme de cor azul-escura, sem textura aparent",
+      "alt_text": "Bolsa tecida dos Baniwa, sobre a argila bege, com alça flexível e botão central escuro.",
+      "descricao_objeto": "Bolsa tecida dos Baniwa, usada para guardar e transportar objetos. Confeccionada em fio de tucum e semente de açaí, com textura aberta e padrão geométrico. A peça possui alça longa e flexível, fecho central em material escuro, e bordas levemente arredondadas. Segundo o registro do museu, foi adquirida em 2019 no estado do Amazonas, com dimensões de 24 cm de largura e 23,5 cm de altura.",
+      "flags": [],
+      "diretrizes_usadas": [
+        "cordoes-01",
+        "ceramica-01",
+        "miçanga-01"
+      ],
+      "json_valido": true,
+      "problemas": []
+    }
+  ]
+}
