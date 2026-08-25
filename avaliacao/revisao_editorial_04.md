@@ -108,6 +108,64 @@ Feedback verbatim consolidado abaixo por card; regras novas 14–25 no final.
 
 **Aplicação:** regras 14–25 → prompt v7 (Notebook 04 v4) + checagens novas (especulação, frases vazias, "fundo" no alt). Fidelidade dos casos #4 (roseta inventada) e #14 será reavaliada no lote v4.
 
+---
+
+# Resultado do lote v4 (25/08/2026) — o teto do controle por prompt
+
+Rodado com prompt v7 (25 regras). **Resultado misto: 4/20 sem problemas.** O que aconteceu é
+o achado técnico mais importante da E7.
+
+## Ganhou
+
+- **Atribuição ao registro: 5/20 → 20/20** — a correção da v6 funcionou integralmente.
+- Regra 18 (contagem): Flauta agora diz **"seis tubos"**.
+- Regra 14 onde a base É o material: Pote e Panela dizem **"sobre a argila bege"** ✓.
+- Invenções da v2 que sumiram: "corações e flores" na pulseira; "tortual" no fuso; "ângulo agudo"
+  virou "espinha-de-peixe" no Abano.
+- Par cor↔ave correto na Braçadeira 1366: "penas vermelhas e amarelas de arara".
+
+## Regras que produziram efeito colateral (o achado central)
+
+1. **Regra 17 (pares cor↔ave) CAUSOU uma alucinação nova.** Item 210680 (Flauta de osso): o
+   registro não tem Matéria-prima, não nomeia ave nenhuma, e a observação não menciona arara —
+   mas o alt da v4 diz **"penas vermelhas de arara"**. Na v2 o modelo tinha acertado justamente
+   por NÃO inventar a ave. A regra empurrou o modelo a completar o par mesmo sem fonte.
+2. **Regra 5 (uma atribuição por texto) quebrou a auditabilidade.** No Abano, a "roseta de fitas
+   tingidas em azul e verde" **está no registro** (verificado: campo Descrição) — não era invenção,
+   como parecia na revisão. Mas o texto a apresenta sem marca de atribuição, misturada à descrição
+   visual, e por isso lê como se fosse visível na foto. Com fatos de catálogo espalhados pelo texto,
+   uma atribuição só no começo não basta.
+
+## Regressões
+
+- **"foi aquisição em"** voltou em 4 itens (883523, 210680, 1366, 4156) — estava corrigido na v2.
+- **Povo sumiu do alt** no 200648 (estava presente na v2).
+- **Ruído de flags**: 18 flags, mas 12 são só "existe um fundo" — e várias afirmam ausência dentro
+  da flag ("Fundo branco, sem artefatos visíveis"), que é a regra 12 violada por dentro. A regra
+  "todo artefato vira flag" super-corrigiu.
+
+## Regras que simplesmente não pegaram
+
+- Regra 25 (miniatura declarada): o Pote de 6 cm continua sem dizer que é miniatura.
+- Regra 24 (vocabulário físico): a zarabatana continua com "cabo", não "tubo".
+- `metadado_suspeito` **zero vezes**, apesar de dois casos claros no lote: o Abano de **290 cm**
+  (reproduzido como "cerca de 3 metros" sem flag) e a contradição do 883523 (Descrição diz
+  "brinquedo em miniatura", Função diz "caça") — que o modelo **harmonizou** em vez de sinalizar.
+
+## Conclusão metodológica
+
+O Qwen3-VL-8B chegou ao **teto de obediência a prompt**: com 25 regras concorrendo no mesmo
+contexto, cada regra nova passou a custar uma regra antiga, e duas regras produziram defeitos que
+não existiam. Não é falha de método — é limite de capacidade do modelo, e é um resultado
+tecnicamente defensável para a banca. Consequências práticas:
+
+- **Parar de extrair regras**; congelar o prompt v7 e ir para a avaliação (E8–E10), onde o painel
+  humano julga com os critérios oficiais do projeto, não o olho editorial.
+- Defeitos residuais são exatamente o que as **flags + interface de revisão humana (E11)** existem
+  para capturar — o sistema nunca foi desenhado para dispensar revisão.
+- Duas correções pontuais valem a pena antes de congelar (ver E8): regra 17 exige fonte explícita
+  no registro para nomear a ave; regra 5 vira "cada fato de catálogo carrega marca de atribuição".
+
 ## Análise da v2 (24/08/2026) — achada por código, sem revisão visual do Eduardo
 
 O prompt v5 acertou quase tudo das 12 regras (fotografia sumiu do nível 2 em 20/20, ficha técnica virou escala, aves das penas citadas, "todo artefato vira flag" gerou 8 flags vs. 1 antes). Mas 2 problemas objetivos apareceram, achados sem precisar da revisão visual:
