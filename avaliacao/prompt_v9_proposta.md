@@ -7,7 +7,7 @@
 
 | Camada | O que carrega | Por quê |
 |---|---|---|
-| **Prompt de observação v3** | O olhar + 2 campos estruturados: `ENQUADRAMENTO:` e `ARTEFATOS:` | Decisões visuais são tomadas por quem vê a foto |
+| **Prompt de observação v3** | Observação em SEÇÕES nomeadas (todas parseáveis), com contexto guardado ("reconhecer materiais, não adivinhar significado") | Decisões visuais são tomadas por quem vê a foto; seções eliminam divagação e pergunta que induz resposta |
 | **Prompt de redação v9** | Contrato de fontes + regras universais, hierarquizadas | Regra que vale para todo objeto não pode depender de sorteio do RAG |
 | **Rubrica v1.2 (RAG)** | Só diretrizes por categoria + glossário | O que o `recuperar()` realmente entrega (k=3 por semelhança) |
 | **Código do notebook** | Garantias mecânicas: cada item de `ARTEFATOS:` vira flag automaticamente; parse do `ENQUADRAMENTO:` injetado no prompt; pós-processamento remove "sobre fundo [cor]" residual do alt | O que precisa de 100% de garantia não se pede a modelo |
@@ -15,15 +15,40 @@
 
 ## Prompt de observação v3
 
+*Revisado em 26/08 após o feedback do Eduardo: (a) ganhou contexto do acervo COM guarda explícita
+— serve para reconhecer materiais e estúdio, nunca para adivinhar significado (a falta da guarda
+gerou a divagação "aves como pavões ou feras ornamentais" na braçadeira); (b) a linha "incluindo
+bordas, faixas e acabamentos" era pergunta que induz resposta (remendo da E4 generalizado) — saiu,
+substituída por seções neutras com "somente se existirem"; (c) estrutura em seções nomeadas, todas
+parseáveis pelo código.*
+
 ```
-Descreva APENAS o que está visível nesta fotografia de um objeto de museu:
-- formas, cores e materiais aparentes — incluindo bordas, faixas e acabamentos, não só os dominantes;
-- a posição/orientação do objeto (de pé, inclinado, deitado) e se partes internas (boca, interior, verso) estão visíveis;
-- o fundo e qualquer artefato de estúdio (etiqueta, numeração, cartela de cores, régua, suporte).
-NÃO invente o que não dá para ver. Se algo estiver ilegível ou incerto, diga isso em vez de estimar.
-Termine SEMPRE com estas duas linhas, exatamente neste formato:
-ENQUADRAMENTO: inteiro OU detalhe — escreva "detalhe" SÓ se a foto mostra claramente apenas uma parte do objeto; objeto que encosta ou sangra nas margens conta como inteiro
-ARTEFATOS: os artefatos de estúdio que você viu, separados por vírgula, ou a palavra "nenhum"
+Você está diante da fotografia de um objeto do acervo de um museu — objetos
+etnográficos de povos indígenas do Brasil, fotografados em estúdio. Este contexto
+serve para você reconhecer materiais e situações de estúdio; NÃO use para adivinhar
+o que o objeto é ou significa. Descreva somente o que está visível NESTA fotografia.
+
+Preencha as seções abaixo, nesta ordem:
+
+OBJETO: o que se vê, em uma frase — forma geral, sem nomear função nem significado.
+MATERIAIS E CORES: os materiais aparentes e suas cores, do maior para o menor.
+Material que não dá para identificar recebe o termo genérico ("fibra", "madeira
+clara") — nunca chute espécie ou origem.
+PADRÕES E TEXTURAS: desenhos, tramas e acabamentos visíveis, descritos pela forma
+(linhas, xadrez, diagonais) — somente se existirem.
+PARTES E QUANTIDADES: partes distinguíveis e contáveis (tubos, furos, alças, penas
+destacadas).
+POSIÇÃO: como o objeto está na foto (de pé, deitado, inclinado) e partes internas
+visíveis (boca, interior, verso).
+LEGIBILIDADE: o que estiver ilegível ou incerto — declare a incerteza em vez de
+estimar.
+FUNDO E ESTÚDIO: o fundo e qualquer artefato de estúdio (etiqueta, numeração,
+cartela de cores, régua, suporte).
+ENQUADRAMENTO: inteiro OU detalhe — "detalhe" SÓ se a foto mostra claramente
+apenas parte do objeto; objeto que encosta ou sangra nas margens conta como inteiro.
+ARTEFATOS: os artefatos de estúdio vistos, separados por vírgula, ou "nenhum".
+
+Regra geral: o que não está visível não existe para esta descrição.
 Responda em português.
 ```
 
