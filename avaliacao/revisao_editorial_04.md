@@ -166,6 +166,26 @@ tecnicamente defensável para a banca. Consequências práticas:
 - Duas correções pontuais valem a pena antes de congelar (ver E8): regra 17 exige fonte explícita
   no registro para nomear a ave; regra 5 vira "cada fato de catálogo carrega marca de atribuição".
 
+---
+
+# ERRATA (26/08/2026) — a "alucinação da arara" não era alucinação
+
+Durante a análise do bake-off descobriu-se que o campo **Descrição** do registro do item 210680
+diz textualmente: *"Possui decoração formada por **tufos de penas de arara de cor vermelhas**,
+amarradas ao fio de fibra"*. O diagnóstico da v4/v5 ("o modelo inventa a arara sem fonte") estava
+**errado**: a verificação da época leu a Descrição truncada em 200 caracteres — o corte caía
+exatamente em "decoração formada por t…" — e checou apenas Matéria-prima (vazia) e a observação.
+O fato estava no registro que viaja no prompt; o Qwen estava ancorado, e a regra 17 não induziu
+erro nenhum neste caso.
+
+**O que a errata NÃO muda:** a conclusão de saturação do prompt permanece, sustentada pelas
+regressões verificadas ("foi aquisição em" voltou em 4 itens na v4, povo sumiu de um alt,
+etiqueta vazou na v5, "sobre fundo X" persistiu em 15/20 apesar da regra).
+
+**Lição de método (para o texto da banca):** o erro nasceu de evidência truncada pela própria
+ferramenta de análise — mais um caso, ao lado do gabarito das duas penas azuis, de que cada
+camada da avaliação também precisa ser auditável.
+
 ## Análise da v2 (24/08/2026) — achada por código, sem revisão visual do Eduardo
 
 O prompt v5 acertou quase tudo das 12 regras (fotografia sumiu do nível 2 em 20/20, ficha técnica virou escala, aves das penas citadas, "todo artefato vira flag" gerou 8 flags vs. 1 antes). Mas 2 problemas objetivos apareceram, achados sem precisar da revisão visual:
