@@ -195,7 +195,7 @@ RE_FUNCAO_OBVIA = re.compile(
 # padrao descrito por semelhanca em vez de geometria: as gregas do 84811 viraram
 # "elementos em forma de G ou C invertidos" com o termo certo disponivel no glossario
 RE_ANALOGIA = re.compile(
-    r"(?<![a-zà-ú])(?:em forma de\s+[\"“‘']?[A-Z][\"”’']?(?![a-zà-ú])|letra\s+[A-Z]"
+    r"(?<![a-zà-ú])(?:em forma de\s+[\"“‘']?[A-Z][\"”’']?(?![a-zà-ú])|letra\s+[A-Z]\b"
     r"|(?:em )?forma de (?:flor|coração|estrela|coroa|esteira|pétala|folha|animal|ave|leque)"
     r"|lembra(?:ndo)? um|semelhante a um|parecid\w+ com)", re.I)
 # marca de atribuicao: uma por bloco de fatos do catalogo, nao uma por fato
