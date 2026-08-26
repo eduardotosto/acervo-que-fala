@@ -118,5 +118,5 @@ A pergunta-guia do projeto ajusta junto: "as descrições geradas superam a desc
 Rodar holdout (primeira e única vez). Preencher `docs/modelo-readme-banca.md` → `README.md` final (Resumo, Introdução, Modelagem, Resultados, Conclusões — remover comentários HTML). Texto descritivo. Ensaio da demo: problema em 30s, 2 casos, 1 falha explicada.
 **Verificação:** checklist §8.8 do curso completo.
 
-### EP — GitHub remoto (paralela)
-Instalar `gh` (`winget install GitHub.cli`), autenticar, criar repo privado `eduardotosto/acervo-que-fala`, push. Os commits locais garantem o histórico até lá — o push pode acontecer a qualquer momento sem pressa.
+### EP — GitHub remoto (paralela) ✅
+**Concluída (25/08/2026):** o `gh` já estava instalado e autenticado (conta eduardotosto, keyring). Repo privado criado com `gh repo create --source . --push`: **github.com/eduardotosto/acervo-que-fala** — os 28 commits subiram com o histórico completo, branch main com tracking. Deixar privado até a entrega; abrir (ou convidar a banca/orientadora) na E12.
