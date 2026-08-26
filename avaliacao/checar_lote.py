@@ -127,6 +127,39 @@ def artefatos_da_observacao(obs):
         if nome not in por_familia or len(frase) < len(por_familia[nome]):
             por_familia[nome] = frase
     return [{"tipo": "artefato_estudio", "detalhe": f"{n}: {t}"} for n, t in por_familia.items()]
+
+# Cor vista na foto que o registro nao nomeia. Reencontra automaticamente o achado
+# fundador do projeto: as duas penas AZUIS da Faixa Kalapalo (665), que o registro
+# nao menciona. So dispara quando o registro DESCREVE cores (registro que nao fala de
+# cor nao autoriza divergencia) e so para cores informativas - bege, marrom, cinza e
+# afins sao a cor natural do material, que o catalogo nunca nomeia.
+CORES_INFORMATIVAS = {"azul": r"azu[lm]|azulad", "verde": r"verde|esverdead",
+                      "vermelho": r"vermelh|avermelhad", "amarelo": r"amarel",
+                      "laranja": r"laranj", "roxo": r"rox|violet", "rosa": r"rosa",
+                      "preto": r"pret", "branco": r"branc"}
+CORES_DE_MATERIAL = r"bege|marrom|castanh|cinza|creme|ocre|dourad|prate|amarronzad"
+
+
+def cores_do_texto(texto):
+    return {nome for nome, pat in CORES_INFORMATIVAS.items()
+            if re.search(rf"(?<![a-zà-ú])(?:{pat})\w*", texto or "", re.I)}
+
+
+def cores_divergentes(observacao, registro, secao_fn):
+    """Cores que a observacao nomeia e o registro nao. Devolve lista de flags."""
+    texto_reg = " ".join(str(registro.get(c, "")) for c in
+                         ("Descrição", "Matéria-prima", "Técnica de confecção", "Nome do item"))
+    no_registro = cores_do_texto(texto_reg)
+    if not no_registro:
+        return []
+    na_foto = cores_do_texto(secao_fn(observacao, "MATERIAIS E CORES") + " " +
+                             secao_fn(observacao, "PADRÕES E TEXTURAS"))
+    so_na_foto = sorted(na_foto - no_registro)
+    if not so_na_foto:
+        return []
+    return [{"tipo": "divergencia_imagem_catalogo",
+             "detalhe": f"a foto mostra {', '.join(so_na_foto)} e o registro nomeia só "
+                        f"{', '.join(sorted(no_registro))}"}]
 # --- FIM BLOCO OBSERVACAO ---
 
 # --- INICIO BLOCO VERIFICACAO (compartilhado com o Notebook 04, etapa 7) ---
@@ -135,9 +168,12 @@ def artefatos_da_observacao(obs):
 # com "decoração" — o mesmo casamento raso de texto que o projeto diagnosticou nos
 # modelos aparecia na própria régua que os media.
 B = lambda termos: re.compile(r"(?<![a-zà-úA-ZÀ-Ú])(?:" + "|".join(termos) + r")", re.I)
-RE_ARTEFATO = B(["cartela", "paleta", "numeraç", "marcaç", "etiqueta", "régua", "suporte"])
-RE_AUSENCIA = B(["não há", "sem etiqueta", "sem sinais", "sem evidência", "sem artefato",
-                 "sem marca"])
+RE_ARTEFATO = B(["cartela", "paleta", "numeraç", "marcaç", "etiqueta", "régua", "suporte",
+                 "rótulo", "rotulo", "inscriç", "tombo"])
+RE_AUSENCIA = re.compile(
+    r"(?<![a-zà-ú])(?:n[ãa]o (?:h[áa]|é|s[ãa]o|est[áa]|apresenta|possui|tem|cont[ée]m|traz|"
+    r"exibe|permite|menciona|descrev\w+|inform\w+|registr\w+|visív\w+)|sem \w+|nenhum\w*|"
+    r"aus[êe]ncia de)(?!\s*\w{0,12}identificad)", re.I)
 RE_ESPECULACAO = B(["sugere", "sugerindo", "parece", "parecendo", "possivelmente", "talvez"])
 RE_VAZIA = B(["porte médio", "uso prático", "uso frequente", "sinais de uso", "forma funcional",
               "forma é funcional"])
@@ -150,6 +186,23 @@ RE_FOTO = re.compile(r"(?<![a-zà-ú])(?:posicionad|enquadr|fotografia|[dn]a ima
 # vocabulário novo de enquadramento na v5, depois que a regra proibiu
 # "inteiro/horizontal/vertical". "Detalhe de..." continua sendo a marca sancionada.
 RE_JARGAO_FOTO = re.compile(r"(?<![a-zà-ú])(?:close|plano (?:médio|geral|fechado|aberto)|primeiro plano)", re.I)
+# funcao tautologica: a que so repete o que o nome do objeto ja diz (regra 21)
+RE_FUNCAO_OBVIA = re.compile(
+    r"(pulseira|bracelete)[^.]{0,45}(pulso|braço)|(flauta|instrumento)[^.]{0,50}(som|sonor|músic|music)"
+    r"|(bolsa|cesto|cesta)[^.]{0,45}(guardar|transportar|carregar)|(pote|panela|vasilha|tigela)"
+    r"[^.]{0,50}(armazenar|guardar|conter)|(remo)[^.]{0,35}(remar|navega)|(arco)[^.]{0,35}(atirar|flecha)"
+    r"|(colar|cinto|tanga)[^.]{0,40}(pescoço|cintura|corpo)", re.I)
+# padrao descrito por semelhanca em vez de geometria: as gregas do 84811 viraram
+# "elementos em forma de G ou C invertidos" com o termo certo disponivel no glossario
+RE_ANALOGIA = re.compile(
+    r"(?<![a-zà-ú])(?:em forma de\s+[\"“‘']?[A-Z][\"”’']?(?![a-zà-ú])|letra\s+[A-Z]"
+    r"|(?:em )?forma de (?:flor|coração|estrela|coroa|esteira|pétala|folha|animal|ave|leque)"
+    r"|lembra(?:ndo)? um|semelhante a um|parecid\w+ com)", re.I)
+# marca de atribuicao: uma por bloco de fatos do catalogo, nao uma por fato
+RE_MARCA_ATRIB = re.compile(
+    r"segundo o registro(?: do museu)?|o registro(?: do museu)? (?:informa|menciona|indica|descreve|diz)"
+    r"|conforme o (?:registro|cat[áa]logo)|de acordo com o (?:registro|cat[áa]logo)"
+    r"|segundo o cat[áa]logo|o cat[áa]logo (?:informa|registra|descreve)", re.I)
 ABERTURAS_ETIQUETA = ("o objeto é", "trata-se de")
 RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
 
@@ -214,8 +267,13 @@ def _verificar_nivel2(item, d, dl, a, registro):
             p.append(("afirmacao_de_ausencia", RE_AUSENCIA.search(dl).group(0)))
         if RE_FOTO.search(dl):
             p.append(("foto_no_nivel2", RE_FOTO.search(dl).group(0)))
-        if len(d.split()) > 200:
+        if len(d.split()) > 140:
             p.append(("nivel2_longo", f"{len(d.split())} palavras"))
+        marcas = RE_MARCA_ATRIB.findall(d)
+        if len(marcas) > 1:
+            p.append(("atribuicao_repetida", f"{len(marcas)} marcas no mesmo texto"))
+        if RE_FUNCAO_OBVIA.search(dl):
+            p.append(("funcao_obvia", RE_FUNCAO_OBVIA.search(dl).group(0)[:40]))
         # medidas: toda medida escrita tem que estar no registro, e a escala é a maior
         nums_txt = [float(x.replace(",", ".")) for x in RE_MEDIDA_TXT.findall(d)]
         nums_reg = [float(x.replace(",", ".")) for x in
@@ -232,6 +290,10 @@ def _verificar_nivel2(item, d, dl, a, registro):
                     p.append(("escala_errada", f"a maior é {esc:g} cm"))
         if "miniatura" in escala and "miniatura" not in dl:
             p.append(("miniatura_nao_declarada", ""))
+
+    for nome, texto in [("alt", a), ("nível 2", d)]:
+        if RE_ANALOGIA.search(texto):
+            p.append(("padrao_por_analogia", f"{nome}: {RE_ANALOGIA.search(texto).group(0)[:34]}"))
 
     for nome, texto in [("alt", a), ("nível 2", dl)]:
         if RE_ESPECULACAO.search(texto):
@@ -292,6 +354,10 @@ def main():
     for k in chaves:
         print(f"{k:28}" + "".join(f"{l['contagem'][k] or '-':>{larg}}" for l in lotes))
     print("-" * (28 + larg * len(lotes)))
+    print(f"{'total de problemas':28}" +
+          "".join(f"{sum(l['contagem'].values()):>{larg}}" for l in lotes))
+    print(f"{'problemas por item':28}" +
+          "".join(f"{sum(l['contagem'].values()) / l['n']:>{larg}.1f}" for l in lotes))
     print(f"{'itens sem problema':28}" +
           "".join(f"{str(l['limpos']) + '/' + str(l['n']):>{larg}}" for l in lotes))
     for t in sorted({t for l in lotes for t in l["flags"] if t}):

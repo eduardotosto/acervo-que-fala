@@ -311,3 +311,40 @@ no bake-off. Era a primeira divergência legítima produzida pelo Qwen.
 `miniatura_nao_declarada` em 1 item, `aquisicao_em` em 1, `afirmacao_de_ausencia` em 1. E a
 vantagem do Gemma em **flags de divergência (7 × 1)** não foi tocada pelo redesenho — é diferença
 de modelo, não de instrução. O bake-off continua de pé.
+
+---
+
+# Terceira revisão editorial (26/08/2026) — o lote v6, lido pelo Eduardo
+
+Oito observações sobre o lote v6, todas confirmadas nos dados. **Três delas a régua automática
+não estava vendo** — o "11/20 sem problemas" do v6 era otimista porque a régua era cega para elas.
+
+| # | Observação do Eduardo | O que os dados mostram | Onde a correção entra |
+|---|---|---|---|
+| 1 | Repetição de "segundo o registro do museu" | A fórmula abre **20 dos 20** textos, e 13 têm 2+ marcas. É papagaio de exemplo: era o primeiro exemplo do prompt | **Código**: 5 fórmulas em rodízio por item. Prompt: uma marca por bloco de fatos, não por fato |
+| 2 | Descrições longas demais | Máximo 143 palavras; o teto do prompt era 180 | Teto baixado para **120** no prompt, checagem em 140 |
+| 3 | Padrão geométrico descrito como letras ("G ou C invertidos") | Confirmado no 84811 — e são **gregas**, termo que o glossário do RAG entrega. Também "em forma de coroa" (665) e "forma de pequena esteira" (500179, regressão da regra 14) | Prompt: padrão sempre pela geometria, nunca por semelhança. Régua: checagem `padrao_por_analogia` |
+| 4 | "pequeno rótulo branco" no #6 (1376) | Confirmado — e a régua **não pegava**: "rótulo", "inscrição" e "tombo" faltavam na lista de artefatos | Régua corrigida |
+| 5 | Função óbvia | 4 casos: flauta = "instrumento musical", pulseira = "cingir o pulso", bolsa = "guardar e transportar" | Prompt: função só quando diz algo que o **nome** já não diz. Régua: `funcao_obvia` |
+| 6 | Afirmação de ausência | **14 dos 20** textos. A régua acusava **1** — cobria seis frases fixas | Régua com padrão amplo (exceto o hedge legítimo "não identificado", que vem do registro). Prompt: nem a ausência de informação vira frase |
+| 7 | Contagem errada de tubos no #3 | A observação contou sete, o registro enumera **seis** medidas de tubo. A flag de divergência saiu ✓, mas o texto afirmou "sete". Enumeração de partes existe em **1 dos 555** itens — não compensa código | Prompt: conflito de QUANTIDADE → o texto não escreve número |
+| 8 | Imprecisão das cores no alt do #2 (665) | O alt cita preto, amarelo e vermelho; a observação viu também **azul** — as duas penas azuis, o achado fundador do projeto — e o registro não as menciona. Não virou flag | Prompt: todas as cores que a observação nomeia. **Código**: cor vista e não registrada vira flag automática |
+
+## O item 8 fecha um ciclo
+
+A comparação automática entre as cores da observação e as do registro **reencontra sozinha as duas
+penas azuis da Faixa Kalapalo** — o caso em que o modelo corrigiu o gabarito humano, em agosto,
+por leitura de uma pessoa. Agora é uma flag que o código gera. Dispara em 3 dos 20 itens (665,
+1376, 1366), sempre como pedido de conferência: só considera cores informativas — bege, marrom e
+cinza são a cor natural do material, que o catálogo nunca nomeia — e só quando o registro
+descreve alguma cor.
+
+## O retrato honesto, com a régua corrigida
+
+Com as checagens novas ligadas, os três lotes caem para **1/20 sem problemas**. O número não diz
+que a qualidade caiu: diz que a régua anterior era cega para defeitos presentes em todos eles.
+`atribuicao_repetida` atinge 11, 15 e 16 dos 20 textos de v5, v6 e Gemma; `afirmacao_de_ausencia`
+atinge 7, 12 e 1. São defeitos que existiam desde o primeiro lote e que ninguém tinha medido.
+
+O "sem problemas" deixa de ser a métrica útil quando a régua tem vinte checagens — qualquer
+tropeço desqualifica o item inteiro. A comparação passa a ser a **tabela por checagem**.
