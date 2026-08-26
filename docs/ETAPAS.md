@@ -160,6 +160,14 @@ escrita como afirmação ("a primeira palavra do texto é o nome do objeto") —
 **v10**. Entram também as garantias que ficaram prontas depois que o v6 já estava no Drive: escala
 calculada, teto de plausibilidade, contradição isolada e alt bruto salvo.
 
+**No Drive (convenção do projeto — arquivo novo leva sufixo, os antigos ficam):** o notebook está
+em `notebooks/04_pipeline_completo_v7.ipynb`
+(colab.research.google.com/drive/1ep0iZVKXPWWrr8kncWcVHpfH-PMiJceG) e a rubrica em
+`dados/rubrica_v1_3.json`. Os dois foram conferidos depois do upload: o notebook bate célula a
+célula com o do repositório (16/16) e a rubrica bate byte a byte (só a quebra de linha muda,
+CRLF local × LF no Drive). O notebook lê a rubrica do Drive e, se não a encontrar, do
+repositório público — a comparação vale para os dois caminhos.
+
 **Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v7** no Colab (~40–50 min); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
