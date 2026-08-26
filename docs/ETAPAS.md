@@ -119,4 +119,4 @@ Rodar holdout (primeira e única vez). Preencher `docs/modelo-readme-banca.md` �
 **Verificação:** checklist §8.8 do curso completo.
 
 ### EP — GitHub remoto (paralela) ✅
-**Concluída (25/08/2026):** o `gh` já estava instalado e autenticado (conta eduardotosto, keyring). Repo privado criado com `gh repo create --source . --push`: **github.com/eduardotosto/acervo-que-fala** — os 28 commits subiram com o histórico completo, branch main com tracking. Deixar privado até a entrega; abrir (ou convidar a banca/orientadora) na E12.
+**Concluída (25/08/2026):** o `gh` já estava instalado e autenticado (conta eduardotosto, keyring). Repo criado com `gh repo create --source . --push`: **github.com/eduardotosto/acervo-que-fala** — os 28 commits subiram com o histórico completo, branch main com tracking. **Tornado PÚBLICO em 25/08/2026** (decisão do Eduardo) — o link pode ir na nota para a orientadora e na página de andamento.
