@@ -94,6 +94,41 @@ def analisar_registro(registro):
     return escala, flags
 # --- FIM BLOCO REGISTRO ---
 
+# --- INICIO BLOCO OBSERVACAO (compartilhado com o Notebook 04, etapa 5) ---
+# A secao ARTEFATOS sozinha nao basta. Medido no lote v6: em 2 dos 4 itens com artefato
+# real, o modelo descreveu o artefato na secao onde o viu (PARTES E QUANTIDADES,
+# LEGIBILIDADE, FUNDO E ESTUDIO) e respondeu "nenhum" em ARTEFATOS - ele nao repete o
+# que ja disse. A varredura le todas as secoes e descarta as mencoes sob negacao
+# ("nao ha etiquetas", "sem numeracao"), que sao a maioria. No lote v6: 4/4 itens
+# corretos, 0 falso positivo, contra 2/4 da secao sozinha.
+# "suporte" ficou de fora: nomeia tanto a base de estudio quanto uma parte do proprio
+# objeto (a peca central da bracadeira 1366) - ambiguidade que nao da para resolver aqui.
+FAMILIAS_ARTEFATO = [("etiqueta", r"etiqueta\w*|r[óo]tulo\w*"),
+                     ("inscrição", r"numera[çc]\w*|marca[çc][ãa]o\w*|inscri[çc]\w*"),
+                     ("cartela de cores", r"cartela\w*|escala\s+de\s+cores?"),
+                     ("régua", r"r[ée]gua\w*")]
+RE_TERMO_ARTEFATO = re.compile(
+    r"(?<![a-zà-ú])(" + "|".join(p for _, p in FAMILIAS_ARTEFATO) + ")", re.I)
+RE_NEGACAO = re.compile(r"(?<![a-zà-ú])(n[ãa]o\s|nenhum\w*|sem\s|nada\s|aus[êe]ncia)", re.I)
+
+
+def artefatos_da_observacao(obs):
+    """Uma flag por familia de artefato citada na observacao fora de contexto de
+    negacao, com a frase mais curta como detalhe."""
+    por_familia = {}
+    for m in RE_TERMO_ARTEFATO.finditer(obs):
+        ini = max(obs.rfind(".", 0, m.start()), obs.rfind("\n", 0, m.start())) + 1
+        if RE_NEGACAO.search(obs[ini:m.start()]):
+            continue
+        fim = obs.find(".", m.end())
+        frase = re.sub(r"\s+", " ", obs[ini:fim if fim > 0 else m.end() + 60]).strip(" .;,")
+        frase = re.sub(r"^[#*\s]*[A-ZÀ-Ú ]{4,}[#*\s]*:[#*\s]*", "", frase)
+        nome = next(n for n, pat in FAMILIAS_ARTEFATO if re.match(pat, m.group(0), re.I))
+        if nome not in por_familia or len(frase) < len(por_familia[nome]):
+            por_familia[nome] = frase
+    return [{"tipo": "artefato_estudio", "detalhe": f"{n}: {t}"} for n, t in por_familia.items()]
+# --- FIM BLOCO OBSERVACAO ---
+
 # --- INICIO BLOCO VERIFICACAO (compartilhado com o Notebook 04, etapa 7) ---
 # Todos os termos são procurados com FRONTEIRA DE PALAVRA. A versão anterior usava
 # "termo in texto": "parece" casava com "aparece", "fundo" com "profundo", "coração"
@@ -203,6 +238,11 @@ def _verificar_nivel2(item, d, dl, a, registro):
             p.append(("especulacao", f"{nome}: {RE_ESPECULACAO.search(texto).group(0)}"))
         if RE_VAZIA.search(texto):
             p.append(("frase_vazia", f"{nome}: {RE_VAZIA.search(texto).group(0)}"))
+
+    obs = item.get("observacao") or ""
+    if obs and artefatos_da_observacao(obs) and not any(
+            f.get("tipo") == "artefato_estudio" for f in (item.get("flags") or [])):
+        p.append(("artefato_visto_sem_flag", artefatos_da_observacao(obs)[0]["detalhe"][:40]))
 
     for f in item.get("flags", []) or []:
         det = (f.get("detalhe") or "").lower()

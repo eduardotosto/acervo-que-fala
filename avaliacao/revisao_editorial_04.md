@@ -282,8 +282,8 @@ contradição isolada, alt bruto salvo — **não estavam nesta rodada**.*
 | `especulacao` | 2 | 1 |
 
 O fundo do estúdio era o resíduo mais teimoso do projeto — sobreviveu a três versões de prompt que
-o proibiam explicitamente. Sumiu quando a seção `FUNDO E ESTÚDIO` **parou de viajar** para a
-redação. Confirma o mecanismo 1c da análise: regra negativa planta a palavra proibida no contexto.
+o proibiam explicitamente, e neste lote foi a zero. **Errata (ver o fim desta seção): o crédito
+não é da remoção da seção `FUNDO E ESTÚDIO`, que não chegou a acontecer.**
 
 Ganho de qualidade junto: a Flauta de pã (51023) gerou uma flag de divergência **real** — "a
 observação indica sete tubos, o registro menciona seis" —, o mesmo achado que o Gemma tinha feito
@@ -295,11 +295,11 @@ no bake-off. Era a primeira divergência legítima produzida pelo Qwen.
    e a lista explícita ("PROIBIDO abrir com 'O objeto é…', anunciar 'A função é…'") saiu junto.
    Duas abrem com rótulo, duas trazem "A função é" no meio. É o preço de trocar regra negativa por
    checklist positivo — e mostra que algumas proibições não têm equivalente positivo.
-2. **A observação v3 perdeu artefatos: 5 → 2 flags.** Não é bug de parse (nenhuma das 20
-   observações veio com cabeçalho em negrito, e a seção `FUNDO E ESTÚDIO` também não cita nada que
-   `ARTEFATOS` tenha deixado de fora): a observação em seções simplesmente **parou de ver** a
-   marcação numérica da Flauta e a etiqueta do 200648, que a observação anterior via. A cartela da
-   Faixa (665) e a etiqueta da Braçadeira (1376) continuaram detectadas.
+2. **A observação v3 perdeu artefatos: 5 → 2 flags** — e a causa é outra, ver a errata. A
+   observação **viu** os dois artefatos: a marcação numérica da Flauta está escrita em `PARTES E
+   QUANTIDADES` e em `LEGIBILIDADE`, e a etiqueta do 200648 está escrita em `FUNDO E ESTÚDIO`. Nos
+   dois casos a seção `ARTEFATOS` respondeu "nenhum": o modelo não repete o que já disse. A cartela
+   da Faixa (665) e a etiqueta da Braçadeira (1376) continuaram detectadas.
 3. **Escala: 2 → 3.** Esperado — esta rodada não tinha a escala calculada. Dos três, dois são erro
    claro (o Pote 2081 escreveu 7,3 cm de altura em vez dos 10,3 cm do bojo; a Bolsa 500322 escreveu
    83 cm, que é a altura *com a alça esticada*) e um é juízo em disputa (a Tanga 78838 escreveu 75 cm

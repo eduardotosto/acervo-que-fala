@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · lote **v6** rodado: 3/20 → 11/20 |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · v6 rodado (3/20 → 11/20) · 🔶 **v7** aguardando Eduardo rodar |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -129,20 +129,38 @@ da rubrica antes de rodar, com correções em três frentes:
 
 **Lote v6 rodado (26/08/2026) — a hipótese se confirma.** Mesmo modelo, mesmos 20 objetos, mesma
 régua: **3/20 (v5) → 11/20 (v6) sem problemas**, empatando com o Gemma. O fundo do estúdio no alt,
-resíduo que sobreviveu a três prompts que o proibiam, foi a **15 → 0** quando a seção `FUNDO E
-ESTÚDIO` parou de viajar para a redação — regra negativa planta a palavra proibida no contexto.
+resíduo que sobreviveu a três prompts que o proibiam, foi a **15 → 0** — e a análise seguinte
+mostrou que o crédito é do prompt v9, não da remoção da seção `FUNDO E ESTÚDIO`, que não chegou
+a acontecer (errata abaixo).
 Jargão de foto, artefato no alt e foto no nível 2 também zeraram, e o Qwen produziu sua primeira
 flag de divergência legítima (sete tubos × seis do registro, o mesmo achado do Gemma).
 **Dois custos:** a frase-etiqueta voltou (0 → 4) porque a lista explícita de proibições saiu do
-prompt ao virar checklist positivo; e a observação v3 **perdeu artefatos** (5 → 2 flags) — não é
-bug de parse, é a observação em seções deixando de ver a marcação da Flauta e a etiqueta do 200648.
+prompt ao virar checklist positivo; e as flags de artefato caíram (5 → 2).
 A vantagem do Gemma em flags de divergência (7 × 1) não foi tocada: é diferença de modelo.
 Análise em `avaliacao/revisao_editorial_04.md`; resultado em `resultados/04_pipeline_completo_v6.json`.
 *A rodada usou o notebook como estava no Drive pela manhã — as garantias da revisão técnica da
 tarde (escala injetada, teto de plausibilidade, contradição isolada, alt bruto) ainda não rodaram.*
 
-**Pendências da E7:** (1) rodar o notebook v6 **de novo**, com as garantias da revisão técnica (escala,
-plausibilidade, contradição isolada) + a lista de proibições de abertura de volta no prompt; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Errata do lote v6 e Notebook 04 v7 (26/08/2026).** A análise do lote encontrou uma falha
+silenciosa no próprio código: o modelo escreveu `FONDO E ESTÚDIO` em 19 das 20 observações e
+`FUNDOS E ESTÚDIO` numa — nenhuma acertou a grafia exigida, então a seção **não foi lida nem
+removida** em nenhum item. O fundo viajou inteiro para o prompt de redação e o alt ficou 0/20 com
+"fundo" mesmo assim: o crédito é do prompt v9 e do pós-processamento, não da remoção da seção — e
+quanto coube a cada um só a v7 dirá, porque ela salva o alt bruto. Pelo mesmo motivo, a perda de
+artefatos tem outra causa: a observação **viu** os dois artefatos e os descreveu em outras seções
+(`PARTES E QUANTIDADES`, `LEGIBILIDADE`, `FUNDO E ESTÚDIO`), respondendo "nenhum" em `ARTEFATOS` —
+o modelo não repete o que já disse. É o terceiro caso em que a análise erra antes do modelo, sempre
+por conclusão tirada sem conferir o dado bruto.
+
+**O que a v7 corrige:** parse tolerante à grafia do cabeçalho, com aviso quando uma seção esperada
+não aparece; flag de artefato por **varredura de todas as seções**, descartando menções sob negação
+(validada contra o lote v6: 4/4 itens certos, 0 falso positivo, contra 2/4 da seção sozinha, e a
+régua ganhou a checagem `artefato_visto_sem_flag`); e a regra contra frase-etiqueta de volta,
+escrita como afirmação ("a primeira palavra do texto é o nome do objeto") — prompt de redação
+**v10**. Entram também as garantias que ficaram prontas depois que o v6 já estava no Drive: escala
+calculada, teto de plausibilidade, contradição isolada e alt bruto salvo.
+
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v7** no Colab (~40–50 min); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
