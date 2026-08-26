@@ -83,7 +83,7 @@ A) alt_text — o que a fotografia mostra, para quem não a vê.
    Contém: o material, quando natural e sem tingimento; as cores, onde a cor informa (penas, miçangas, pinturas, tingimentos); a forma dos padrões (faixas, xadrez, losangos, geométrico); as quantidades da seção PARTES E QUANTIDADES da observação.
    As seções FUNDO E ESTÚDIO e ARTEFATOS da observação nunca alimentam este texto nem o B — são insumo exclusivo das flags.
    Se o ENQUADRAMENTO diz "detalhe", comece com "Detalhe de [objeto]"; se diz "inteiro", não mencione enquadramento nem orientação que não informa.
-   O fundo do estúdio não existe para este texto; a cor de base da própria peça é nomeada pelo material: "sobre a [material] [cor]".
+   O fundo do estúdio não existe para este texto. Pintura ou decoração aplicada sobre a base da peça se descreve nesta ordem: primeiro a decoração e suas cores, depois a base — "pintura [tipo] em [cores] sobre [material da base]"; a base nunca aparece sozinha ("sobre a [material]") sem dizer o que está sobre ela.
    Aves de penas: só as que o registro nomear, com a cor primeiro: "penas [cores] de [ave]".
    Não aparecem aqui: artefato de estúdio ou inventário, palavra de catálogo, medida.
 
