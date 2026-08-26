@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · 🔶 lote **v6** (sistema redesenhado) aguardando Eduardo rodar |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · lote **v6** rodado: 3/20 → 11/20 |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -127,8 +127,22 @@ da rubrica antes de rodar, com correções em três frentes:
   cinco lotes** e **miniatura não declarada nos cinco**. Com a régua única o bake-off fica Gemma
   11/20 × Qwen v5 3/20 (era 13 × 3 com as réguas antigas).
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v6** no Colab (~40–50 min) → compara v5 × v6
-pela mesma régua; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Lote v6 rodado (26/08/2026) — a hipótese se confirma.** Mesmo modelo, mesmos 20 objetos, mesma
+régua: **3/20 (v5) → 11/20 (v6) sem problemas**, empatando com o Gemma. O fundo do estúdio no alt,
+resíduo que sobreviveu a três prompts que o proibiam, foi a **15 → 0** quando a seção `FUNDO E
+ESTÚDIO` parou de viajar para a redação — regra negativa planta a palavra proibida no contexto.
+Jargão de foto, artefato no alt e foto no nível 2 também zeraram, e o Qwen produziu sua primeira
+flag de divergência legítima (sete tubos × seis do registro, o mesmo achado do Gemma).
+**Dois custos:** a frase-etiqueta voltou (0 → 4) porque a lista explícita de proibições saiu do
+prompt ao virar checklist positivo; e a observação v3 **perdeu artefatos** (5 → 2 flags) — não é
+bug de parse, é a observação em seções deixando de ver a marcação da Flauta e a etiqueta do 200648.
+A vantagem do Gemma em flags de divergência (7 × 1) não foi tocada: é diferença de modelo.
+Análise em `avaliacao/revisao_editorial_04.md`; resultado em `resultados/04_pipeline_completo_v6.json`.
+*A rodada usou o notebook como estava no Drive pela manhã — as garantias da revisão técnica da
+tarde (escala injetada, teto de plausibilidade, contradição isolada, alt bruto) ainda não rodaram.*
+
+**Pendências da E7:** (1) rodar o notebook v6 **de novo**, com as garantias da revisão técnica (escala,
+plausibilidade, contradição isolada) + a lista de proibições de abertura de volta no prompt; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas

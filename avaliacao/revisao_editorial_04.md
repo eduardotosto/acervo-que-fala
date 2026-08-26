@@ -257,3 +257,57 @@ flags: metadado_suspeito                     -                 -                
 
 A comparação **v5 × v6** vai usar esta mesma tabela — é o que separa o efeito do sistema
 redesenhado do efeito de ter trocado a régua no meio do caminho.
+
+---
+
+# Lote v6 (26/08/2026) — a hipótese do Eduardo se confirma
+
+Mesmo modelo (Qwen3-VL-8B), mesmos 20 objetos, mesma régua. Só o sistema de instruções mudou:
+observação v3 em seções, redação v9 com Contrato de Fontes, rubrica v1.2, enquadramento decidido
+no código. **Sem problemas: 3/20 (v5) → 11/20 (v6)** — o mesmo placar do Gemma no bake-off.
+
+*Nota de escopo: a rodada usou o notebook v6 como estava no Drive pela manhã (rubrica 1.2). As
+garantias acrescentadas na revisão técnica da tarde — escala injetada, teto de plausibilidade,
+contradição isolada, alt bruto salvo — **não estavam nesta rodada**.*
+
+## O que o redesenho resolveu
+
+| Checagem | v5 | v6 |
+|---|---|---|
+| `fundo_no_alt` | 15 | **0** |
+| `jargao_de_foto_no_alt` ("close-up", "plano médio") | 2 | **0** |
+| `artefato_no_alt` | 1 | **0** |
+| `foto_no_nivel2` | 1 | **0** |
+| `artefato_no_nivel2` | 3 | 1 |
+| `especulacao` | 2 | 1 |
+
+O fundo do estúdio era o resíduo mais teimoso do projeto — sobreviveu a três versões de prompt que
+o proibiam explicitamente. Sumiu quando a seção `FUNDO E ESTÚDIO` **parou de viajar** para a
+redação. Confirma o mecanismo 1c da análise: regra negativa planta a palavra proibida no contexto.
+
+Ganho de qualidade junto: a Flauta de pã (51023) gerou uma flag de divergência **real** — "a
+observação indica sete tubos, o registro menciona seis" —, o mesmo achado que o Gemma tinha feito
+no bake-off. Era a primeira divergência legítima produzida pelo Qwen.
+
+## O que o redesenho custou
+
+1. **Frase-etiqueta voltou: 0 → 4** (665, 51023, 5146, 500322). O prompt v9 enxugou as proibições
+   e a lista explícita ("PROIBIDO abrir com 'O objeto é…', anunciar 'A função é…'") saiu junto.
+   Duas abrem com rótulo, duas trazem "A função é" no meio. É o preço de trocar regra negativa por
+   checklist positivo — e mostra que algumas proibições não têm equivalente positivo.
+2. **A observação v3 perdeu artefatos: 5 → 2 flags.** Não é bug de parse (nenhuma das 20
+   observações veio com cabeçalho em negrito, e a seção `FUNDO E ESTÚDIO` também não cita nada que
+   `ARTEFATOS` tenha deixado de fora): a observação em seções simplesmente **parou de ver** a
+   marcação numérica da Flauta e a etiqueta do 200648, que a observação anterior via. A cartela da
+   Faixa (665) e a etiqueta da Braçadeira (1376) continuaram detectadas.
+3. **Escala: 2 → 3.** Esperado — esta rodada não tinha a escala calculada. Dos três, dois são erro
+   claro (o Pote 2081 escreveu 7,3 cm de altura em vez dos 10,3 cm do bojo; a Bolsa 500322 escreveu
+   83 cm, que é a altura *com a alça esticada*) e um é juízo em disputa (a Tanga 78838 escreveu 75 cm
+   com cordel; o registro chama os 50 cm de "medida maior").
+4. **Nível 2 mais longo: 79 → 102 palavras** em média. Ainda dentro do teto de 180.
+
+## O que continua igual
+
+`miniatura_nao_declarada` em 1 item, `aquisicao_em` em 1, `afirmacao_de_ausencia` em 1. E a
+vantagem do Gemma em **flags de divergência (7 × 1)** não foi tocada pelo redesenho — é diferença
+de modelo, não de instrução. O bake-off continua de pé.
