@@ -10,7 +10,7 @@
 | **Prompt de observação v3** | Observação em SEÇÕES nomeadas (todas parseáveis), com contexto guardado ("reconhecer materiais, não adivinhar significado") | Decisões visuais são tomadas por quem vê a foto; seções eliminam divagação e pergunta que induz resposta |
 | **Prompt de redação v9** | Contrato de fontes + regras universais, hierarquizadas | Regra que vale para todo objeto não pode depender de sorteio do RAG |
 | **Rubrica v1.2 (RAG)** | Só diretrizes por categoria + glossário | O que o `recuperar()` realmente entrega (k=3 por semelhança) |
-| **Código do notebook** | Garantias mecânicas: cada item de `ARTEFATOS:` vira flag automaticamente; parse do `ENQUADRAMENTO:` injetado no prompt; pós-processamento remove "sobre fundo [cor]" residual do alt | O que precisa de 100% de garantia não se pede a modelo |
+| **Código do notebook** | Garantias mecânicas: cada item de `ARTEFATOS:` vira flag automaticamente; `ENQUADRAMENTO:` parseado e injetado no prompt (as duas linhas saem do texto da observação antes da redação); consulta do RAG montada das seções `OBJETO:` + `PADRÕES:`; pós-processamento remove "sobre fundo [cor]" residual do alt | O que precisa de 100% de garantia não se pede a modelo |
 | **docs (git)** | As 25 regras editoriais com os casos que as originaram (`revisao_editorial_04.md`) | Documentação para a banca, não insumo de runtime |
 
 ## Prompt de observação v3
@@ -72,7 +72,7 @@ DIRETRIZES PARA ESTE TIPO DE OBJETO (autorizam: vocabulário e o que observar ne
 
 CONTRATO DE FONTES — prevalece sobre qualquer outra regra:
 1. Cada informação escrita precisa de fonte: visível na observação, escrita no registro (e então leva atribuição) ou vocabulário das diretrizes. Sem fonte, não escreva — omitir é sempre permitido; um texto curto e todo verificável vale mais que um completo com um palpite.
-2. Incerteza se herda: se a observação hesita ("parece", "talvez", "possivelmente"), a informação sai do texto ou vira o termo genérico — nunca vira afirmação.
+2. Incerteza se herda: o que estiver na seção LEGIBILIDADE da observação, ou vier com hesitação ("parece", "talvez", "possivelmente"), sai do texto ou vira o termo genérico — nunca vira afirmação.
 3. Divergência não se resolve no texto: quando observação e registro conflitam (nome, cor, quantidade, material, dimensão), não escolha um lado nem harmonize — registre em flags como divergencia_imagem_catalogo; no texto, o fato não visível fica com o registro e a aparência fica com a observação.
 4. Os exemplos deste prompt mostram a FORMA das frases, com lacunas [assim]; preencha sempre com o conteúdo deste objeto, nunca com as palavras do exemplo.
 
@@ -80,7 +80,8 @@ PRODUZA TRÊS SAÍDAS:
 
 A) alt_text — o que a fotografia mostra, para quem não a vê.
    Uma frase, no máximo 30 palavras, começando pelo objeto (nomeado pelo TÍTULO do registro) e pelo povo.
-   Contém: o material, quando natural e sem tingimento; as cores, onde a cor informa (penas, miçangas, pinturas, tingimentos); a forma dos padrões (faixas, xadrez, losangos, geométrico); quantidades contáveis de partes.
+   Contém: o material, quando natural e sem tingimento; as cores, onde a cor informa (penas, miçangas, pinturas, tingimentos); a forma dos padrões (faixas, xadrez, losangos, geométrico); as quantidades da seção PARTES E QUANTIDADES da observação.
+   As seções FUNDO E ESTÚDIO e ARTEFATOS da observação nunca alimentam este texto nem o B — são insumo exclusivo das flags.
    Se o ENQUADRAMENTO diz "detalhe", comece com "Detalhe de [objeto]"; se diz "inteiro", não mencione enquadramento nem orientação que não informa.
    O fundo do estúdio não existe para este texto; a cor de base da própria peça é nomeada pelo material: "sobre a [material] [cor]".
    Aves de penas: só as que o registro nomear, com a cor primeiro: "penas [cores] de [ave]".
