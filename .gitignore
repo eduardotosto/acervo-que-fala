@@ -6,3 +6,6 @@ __pycache__/
 .env
 chroma/
 avaliacao/holdout_resultados/
+
+# preferências locais da sessão (CLAUDE.md e settings.json do projeto ficam versionados)
+.claude/settings.local.json
