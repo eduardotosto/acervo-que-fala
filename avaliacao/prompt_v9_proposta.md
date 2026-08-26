@@ -104,7 +104,7 @@ Responda APENAS com JSON: {"alt_text": "...", "descricao_objeto": "...", "flags"
 ## Rubrica v1.2 — o que muda (arquivo em `dados/rubrica/rubrica.json`)
 
 1. **Saem os 11 trechos "geral"** (geral-01…geral-11) — nunca eram recuperados; o conteúdo vive
-   no prompt v9. Ficam 22 trechos: 12 de categoria + 10 de glossário.
+   no prompt v9. Ficam **23 trechos: 13 de categoria (10 categorias) + 10 de glossário**.
 2. **plumaria-03**: a frase copiável "penas de arara, jaburu e jacu" vira lacuna
    ("as espécies que a matéria-prima nomear").
 3. **arma-01**: sai a instrução "aplicar a regra do 'Detalhe de...'" — enquadramento agora é
@@ -120,3 +120,66 @@ Responda APENAS com JSON: {"alt_text": "...", "descricao_objeto": "...", "flags"
   se ainda aparecerem.
 - Verificação automática com as correções conhecidas (abertura em vez de substring, sem
   falsos positivos de "fundo" quando for "sobre a argila/madeira/palha…").
+
+---
+
+# O que a implementação acrescentou à proposta (26/08/2026)
+
+A proposta acima foi revisada pelo Eduardo e implementada no **Notebook 04 v6**. Cinco coisas
+mudaram ou nasceram durante a implementação — todas na mesma direção: **o que dá para garantir
+em código sai do prompt**.
+
+## 1. `FUNDO E ESTÚDIO` também é consumida pelo código
+
+A proposta dizia que as seções `FUNDO E ESTÚDIO` e `ARTEFATOS` "nunca alimentam" os textos, mas
+deixava a primeira viajar no prompt de redação com a instrução de ignorá-la. Isso é o mecanismo
+1b do próprio diagnóstico: mandar "há um fundo branco e uma etiqueta" e pedir que o modelo não
+use é plantar a palavra proibida no contexto. **A seção agora sai da observação antes da
+redação**, junto com `ENQUADRAMENTO` e `ARTEFATOS`. Medida de referência: nos alts da v5, "sobre
+fundo [cor]" aparecia em 15 de 20.
+
+## 2. RAG híbrido — a categoria deixou de depender de sorteio
+
+O campo `Categoria` existe em 100% dos itens e usa exatamente os mesmos nomes dos trechos da
+rubrica (conferido nos 555 itens do acervo). A diretriz da categoria passou a ser **escolhida
+pelo registro**, e só o glossário é recuperado por similaridade (k=2). A mesma regra que tirou
+as regras universais da rubrica ("regra universal não pode depender de sorteio do RAG") vale
+para a diretriz de categoria. Categoria fora da rubrica cai no modo semântico antigo.
+
+Dois ajustes técnicos junto: o embedder passou a rodar na **CPU** (23 trechos e 20 consultas são
+trabalho trivial, e a T4 fica inteira para o modelo 4-bit), e a consulta passou a ser codificada
+com o **prompt de query** da família Qwen3-Embedding, que é instruída — os documentos vão sem.
+
+## 3. Escala, plausibilidade e contradição saíram do prompt
+
+Três defeitos resistiram a todas as versões do prompt: a escala pela medida de uma parte, a
+miniatura não declarada e `metadado_suspeito` em zero por três lotes. Nenhum é tarefa de escrita:
+
+- **Escala** = maior dimensão do registro, com rótulo, ignorando medidas "com cordel/alça
+  esticada". A redação recebe a frase pronta e é proibida de recalcular.
+- **Plausibilidade** = teto por categoria calculado como **Q3 + 3×IQR das dimensões do próprio
+  acervo** (547 itens com medida parseável), com piso de 150 cm. Dispara em 2 dos 547: o abano de
+  290 cm e uma capa de pele de onça de 223 cm, que é grande de verdade. Taxa de alarme 0,4%.
+- **Contradição entre campos** continua sendo trabalho de modelo, mas como **pergunta isolada**,
+  fora da tarefa de escrita.
+
+## 4. O alt bruto fica salvo ao lado do alt final
+
+Sem ele, um "sobre fundo X" zerado não distingue o que o prompt v9 resolveu do que o
+pós-processamento escondeu — e é exatamente essa diferença que o lote v6 está medindo. O
+pós-processamento também ficou **conservador**: só remove quando o trecho termina em pontuação
+dentro de duas palavras. Em "sobre fundo bege e boca larga" ele não mexe, e a verificação acusa —
+amputar a frase seria pior que deixar passar.
+
+## 5. A régua virou código compartilhado, e mede os lotes antigos
+
+`avaliacao/checar_lote.py` roda as checagens de hoje sobre qualquer lote salvo. Os dois blocos
+que importam (registro e verificação) são **o mesmo texto** no script e no notebook — o notebook
+é montado a partir do script, então as duas cópias não divergem.
+
+As checagens ganharam **fronteira de palavra**: a régua anterior procurava o termo como pedaço
+de texto e confundia "aparece" com "parece", "profundo" com "fundo", "decoração" com "coração" —
+o mesmo casamento raso que o projeto diagnosticou nos modelos estava na régua que os media.
+Checagens novas: coerência de enquadramento, medida que não existe no registro, escala pela
+medida errada, miniatura não declarada, jargão de fotografia no alt ("close-up", "plano médio") e
+teto de escuta do nível 2.

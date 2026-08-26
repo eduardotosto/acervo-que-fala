@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | 🔶 notebook v1 no Drive — aguardando Eduardo rodar (~40 min) |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · 🔶 lote **v6** (sistema redesenhado) aguardando Eduardo rodar |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -94,6 +94,42 @@ Achados da revisão humana:
 **Encaminhamento:** resíduos mecânicos ("sobre fundo X", contagem de palavras) são candidatos a **pós-processamento determinístico** na E8 (código remove, não prompt); a alucinação da arara vira caso de estudo do bake-off (o Gemma resiste ao prior sob o mesmo prompt?) e, em produção, é o que a revisão humana com flags captura.
 **Bake-off rodado (26/08/2026, Notebook 05 v2 — Gemma via Unsloth):** placar objetivo nas mesmas checagens: **Gemma 13/20 sem problemas × Qwen 3/20**. "Fundo" no alt: 15/20 → **1/20**. Atribuição: 20/20 nos dois. Flags do Gemma com qualidade nova: **7 divergências reais** (incluindo as penas azuis da Faixa ausentes do registro — o achado original do smoke test, redescoberto pelo modelo — e a marcação "8283" da Flauta virando metadado_suspeito). Fraquezas do Gemma: "Detalhe de" usado em excesso (13/20 alts, vs 5/20 do Qwen — objetos inteiros marcados como detalhe), 1 figura subjetiva ("forma de flor"), 2 medidas no alt. Pontos cegos compartilhados pelos dois: miniatura não declarada, "cabo" na zarabatana, 290 cm sem flag. Resultado em `resultados/05_bakeoff_gemma.json`; **página de comparação CEGA** em `resultados/tabela_bakeoff.html` (A/B sorteado por item, gabarito em `avaliacao/bakeoff_gabarito.json` — não abrir antes de julgar). Pendente: julgamento editorial cego do Eduardo → decisão do redator.
 **ERRATA (26/08/2026):** a "alucinação da arara" da v4/v5 **não era alucinação** — o campo Descrição do registro do 210680 diz "tufos de penas de arara de cor vermelhas" (a análise da época leu a Descrição truncada em 200 caracteres). A conclusão de saturação permanece pelas regressões verificadas; detalhes em `avaliacao/revisao_editorial_04.md` (seção Errata).
+
+**Redesenho do sistema de instruções (26/08/2026) — a hipótese do Eduardo.** Antes de julgar o
+bake-off, o autor levantou que parte dos erros vinha de instruções mal desenhadas, não do modelo.
+A análise confirmou três mecanismos (`avaliacao/analise_prompt_rubrica.md`): frase de exemplo do
+prompt copiada literalmente ("sobre a argila bege" numa bolsa de fio de tucum); pergunta que induz
+resposta na observação; palavra-gatilho lida sem a negação ("não há close-up" → alt vira detalhe).
+Achado estrutural junto: os 11 trechos "geral" da rubrica **nunca eram recuperados** — a função
+`recuperar()` os pulava por desenho, e eles pareciam regra ativa. Resultado: **observação v3** em
+seções nomeadas, **redação v9** com Contrato de Fontes, **rubrica v1.2** enxuta e o **Notebook 04
+v6** (`avaliacao/prompt_v9_proposta.md`, revisado pelo Eduardo antes de virar código).
+
+**Revisão técnica e endurecimento do v6 (26/08/2026).** Revisão do notebook, dos três documentos e
+da rubrica antes de rodar, com correções em três frentes:
+
+- **Bugs achados e corrigidos:** o parse das seções não lia cabeçalho em negrito ou em título
+  markdown (a seção era removida do texto mas não lida — o enquadramento caía no padrão em
+  silêncio); o pós-processamento do alt amputava a frase depois de "fundo" ("sobre fundo bege **e
+  boca larga**"); a verificação repetia a doença que o próprio projeto diagnosticou, casando
+  "aparece" com "parece" e "profundo" com "fundo"; o embedder ocupava a GPU antes do modelo 4-bit;
+  o alt bruto não era salvo, o que impedia separar o efeito do prompt do efeito do pós-processamento.
+- **Decisões que saíram do prompt para o código:** `FUNDO E ESTÚDIO` deixou de viajar para a
+  redação (o que o texto não pode usar, não viaja); a diretriz de categoria passou a vir do campo
+  `Categoria` do registro em vez de sorteio semântico (RAG híbrido, rubrica **v1.3**); a **escala**
+  virou aritmética sobre `Dimensões`; a **plausibilidade da dimensão** virou detecção de outlier
+  com teto por categoria (Q3 + 3×IQR do próprio acervo, piso de 150 cm — 0,4% de alarme em 547
+  itens); a **contradição entre campos** virou pergunta isolada, fora da tarefa de escrita.
+- **Régua única (`avaliacao/checar_lote.py`):** as checagens de hoje aplicadas aos cinco lotes
+  anteriores, tabela em `avaliacao/revisao_editorial_04.md`. A régua reproduz achados que vieram de
+  leitura humana (atribuição sumindo em 15/20 na v2, "fundo" subindo 5→15 na linha do Qwen) e
+  revela dois defeitos que nenhuma versão da verificação enxergava: **escala pela medida errada nos
+  cinco lotes** e **miniatura não declarada nos cinco**. Com a régua única o bake-off fica Gemma
+  11/20 × Qwen v5 3/20 (era 13 × 3 com as réguas antigas).
+
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v6** no Colab (~40–50 min) → compara v5 × v6
+pela mesma régua; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.

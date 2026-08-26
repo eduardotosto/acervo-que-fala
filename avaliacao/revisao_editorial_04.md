@@ -196,3 +196,64 @@ O prompt v5 acertou quase tudo das 12 regras (fotografia sumiu do nível 2 em 20
 E 2 falsos positivos na própria checagem automática (não no texto do modelo): "o objeto é" estava sendo procurado em qualquer posição (pegou "...e o objeto é pequeno..." e "...do objeto é auxiliar..."), quando a regra só proíbe abrir o texto assim; "sobre fundo X" foi confundido com fotografia, quando é vocabulário legítimo de padronagem ("padrões geométricos sobre fundo bege" descreve a peça, não a foto).
 
 **Prompt v6 fecha os 2 bugs reais** (regra do artefato repetida para as duas saídas, com exemplo errado×certo cada; atribuição virou exigência explícita, não mais dependente de um único exemplo) **e a checagem corrigiu os 2 falsos positivos** (abertura de frase-etiqueta só conta no início do texto; termos de fundo saíram da lista de "foto no nível 2"). Notebook 04 v3 no Drive, aguardando Eduardo rodar.
+
+---
+
+# Régua única: os cinco lotes medidos pelo mesmo critério (26/08/2026)
+
+Cada lote foi gerado com uma versão diferente da verificação automática — inclusive com bugs
+conhecidos, como o casamento de substring que confundia "aparece" com "parece". Comparar o
+"n/20 sem problemas" de dois lotes medidos por réguas diferentes não diz nada, e o projeto já
+tinha caído nessa armadilha uma vez (os falsos positivos da v2).
+
+`avaliacao/checar_lote.py` aplica as checagens de hoje a qualquer lote salvo, pulando sozinho as
+que dependem de campos que o lote antigo não tem. Rodando nos cinco lotes existentes:
+
+
+
+```
+Problemas por checagem — itens afetados, a mesma régua em todos os lotes
+
+checagem                                    04             04_v2             04_v4             04_v5  05_bakeoff_gemma
+----------------------------------------------------------------------------------------------------------------------
+fundo_no_alt                                 5                13                14                15                 1
+especulacao                                  9                 4                 3                 2                 2
+frase_etiqueta                              17                 -                 2                 -                 -
+nivel2_sem_atribuicao                        -                15                 -                 -                 -
+flag_de_fundo                                -                 1                10                 -                 3
+foto_no_nivel2                              11                 -                 1                 1                 -
+artefato_no_nivel2                           5                 1                 2                 3                 -
+escala_errada                                2                 4                 1                 2                 1
+aquisicao_em                                 2                 2                 4                 1                 -
+afirmacao_de_ausencia                        6                 -                 2                 1                 -
+flag_de_ausencia                             -                 2                 6                 -                 -
+miniatura_nao_declarada                      1                 1                 1                 1                 1
+frase_vazia                                  -                 5                 -                 -                 -
+jargao_de_foto_no_alt                        -                 -                 1                 2                 1
+alt_longo                                    -                 -                 -                 2                 2
+medida_fora_do_registro                      -                 1                 -                 1                 -
+artefato_no_alt                              -                 -                 -                 1                 1
+povo_ausente_no_alt                          -                 -                 1                 -                 -
+----------------------------------------------------------------------------------------------------------------------
+itens sem problema                        1/20              0/20              2/20              3/20             11/20
+flags: artefato_estudio                      1                 8                18                 5                12
+flags: divergencia_imagem_catalogo                 -                 -                 -                 -                 7
+flags: metadado_suspeito                     -                 -                 -                 -                 1
+```
+
+**Como ler.** As linhas são checagens, não itens: um item pode falhar em várias. Três leituras:
+
+- **O que a régua confirma do que já estava documentado:** `nivel2_sem_atribuicao` = 15 só na v2 é
+  exatamente o achado registrado à época ("a atribuição sumiu em 15/20"); `frase_etiqueta` = 17 no
+  primeiro lote é a "abertura em rótulo"; `fundo_no_alt` sobe 5 → 13 → 14 → 15 na linha do Qwen e
+  fica em 1 no Gemma. A régua reproduz os achados que vieram de leitura humana.
+- **O que ninguém estava medindo:** `escala_errada` aparece em todos os cinco lotes (2, 4, 1, 2, 1)
+  e `miniatura_nao_declarada` em todos (1 cada) — defeitos que existiam desde o começo e que
+  nenhuma versão da verificação enxergava, porque exigem comparar o texto com o registro.
+  `jargao_de_foto_no_alt` mostra o "close-up"/"plano médio" entrando como vocabulário novo a partir
+  da v4, depois que a regra proibiu "inteiro/horizontal/vertical".
+- **O placar do bake-off muda de número, não de sentido:** com a régua única, Gemma **11/20** ×
+  Qwen v5 **3/20** (as checagens de hoje são mais estritas; o placar original era 13 × 3).
+
+A comparação **v5 × v6** vai usar esta mesma tabela — é o que separa o efeito do sistema
+redesenhado do efeito de ter trocado a régua no meio do caminho.

@@ -1,0 +1,270 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Mede QUALQUER lote de resultados com a régua de hoje.
+
+Cada lote (v1, v2, v4, v5, bake-off Gemma, v6) foi gerado com uma versão diferente da
+verificação automática — inclusive com bugs conhecidos, como o casamento de substring
+que confundia "aparece" com "parece". Comparar o "n/20 sem problemas" de dois lotes
+medidos por réguas diferentes não diz nada. Este script aplica as MESMAS checagens a
+todos, e pula sozinho as que dependem de campos que o lote antigo não tem.
+
+Os dois blocos marcados abaixo são o mesmo texto que roda no Notebook 04 (etapas 5b e
+7) — o notebook é montado a partir daqui, então as duas cópias não divergem.
+
+Uso:
+    python avaliacao/checar_lote.py resultados/04_pipeline_completo_v5.json
+    python avaliacao/checar_lote.py --itens resultados/04_pipeline_completo_v5.json
+"""
+import argparse, collections, io, json, os, re, sys
+
+# --- INICIO BLOCO REGISTRO (compartilhado com o Notebook 04, etapa 5b) ---
+ROTULOS = r"(comprimento|altura|largura|di[âa]metro|espessura|profundidade)"
+RE_ROTULO, RE_NUM = re.compile(ROTULOS, re.I), re.compile(r"\d+(?:[.,]\d+)?")
+# medida "com cordel / com a alça esticada" mede o objeto pendurado, não a peça
+RE_COM_CORDA = re.compile(r"com\s+(a\s+|o\s+)?(cordel|cord[aã]o|al[çc]a|amarra)|esticad", re.I)
+
+# Teto de plausibilidade por categoria = Q3 + 3xIQR das dimensões do PRÓPRIO acervo
+# (547 dos 555 itens de dados/itens.json têm medida parseável), com piso de 150 cm —
+# abaixo disso, peça grande é plausível em qualquer categoria. No acervo inteiro o teto
+# dispara 2 vezes: o abano de 290 cm (dimensão improvável, caso conhecido do projeto) e
+# a capa de pele de onça de 223 cm (peça genuinamente grande). Flag é pedido de
+# conferência humana, não veredito — a taxa de alarme é o que importa, e é de 0,4%.
+TETOS_CATEGORIA = {
+    "Adornos Plumários": 156,
+    "Adornos de Materiais Ecléticos, Indumentária e Toucador": 106,
+    "Armas": 491,
+    "Cerâmica": 56,
+    "Cordões e Tecidos": 103,
+    "Etnobotânica": 33,
+    "Instrumentos musicais e de sinalização": 76,
+    "Objetos rituais, mágicos e lúdicos": 144,
+    "Trançados": 181,
+    "Utensílios e implementos de materiais ecléticos": 75,
+}
+PISO_SUSPEITA = 150
+# miniatura: peça bem menor que o comum da categoria, em categorias de objeto grande
+MEDIANAS_CATEGORIA = {"Cerâmica": 14.0, "Trançados": 41.5, "Armas": 212.5,
+                      "Instrumentos musicais e de sinalização": 41.0,
+                      "Utensílios e implementos de materiais ecléticos": 19.5}
+
+def escala_do_registro(dimensoes):
+    """Maior dimensão do objeto, em cm, com o rótulo — a regra editorial 25 ("escala é a
+    maior dimensão, nunca a medida de uma parte"), resolvida em código. Trata a lista
+    enumerada ("29,5; 21,5; ... e 9,5 cm de comprimento") herdando o rótulo do segmento
+    seguinte. Devolve (valor, rótulo) ou None."""
+    if not dimensoes or "cm" not in dimensoes.lower():
+        return None
+    segmentos = [s for s in re.split(r";|\s-\s", dimensoes) if s.strip()]
+    candidatos = []
+    for i, seg in enumerate(segmentos):
+        if RE_COM_CORDA.search(seg):
+            continue
+        rot = RE_ROTULO.search(seg) or next(
+            (RE_ROTULO.search(s) for s in segmentos[i + 1:] if RE_ROTULO.search(s)), None)
+        rotulo = rot.group(1).lower() if rot else ""
+        candidatos += [(float(m.group(0).replace(",", ".")), rotulo) for m in RE_NUM.finditer(seg)]
+    return max(candidatos) if candidatos else None
+
+
+def numero_pt(v):
+    return f"{v:.0f}" if v >= 20 else f"{v:.1f}".replace(".", ",").replace(",0", "")
+
+
+def analisar_registro(registro):
+    """Devolve a linha ESCALA pronta para o prompt + as flags de metadado que a
+    aritmética já resolve (dimensão fora do teto da categoria, ano impossível)."""
+    cat, flags = registro.get("Categoria", ""), []
+    e = escala_do_registro(registro.get("Dimensões", ""))
+    if not e:
+        escala = "não informada no registro — não escreva medida nenhuma"
+    else:
+        valor, rotulo = e
+        escala = f"cerca de {numero_pt(valor)} cm" + (f" de {rotulo}" if rotulo else "")
+        mediana = MEDIANAS_CATEGORIA.get(cat)
+        if mediana and valor < 10 and valor < mediana / 2:
+            escala += " — miniatura (bem menor que o comum na categoria): diga que é miniatura"
+        teto = TETOS_CATEGORIA.get(cat)
+        if teto and valor > max(teto, PISO_SUSPEITA):
+            flags.append({"tipo": "metadado_suspeito", "detalhe":
+                          f"{numero_pt(valor)} cm de {rotulo or 'dimensão'} está acima do teto de "
+                          f"plausibilidade da categoria {cat} ({teto} cm, calculado do acervo)"})
+    ano = (registro.get("Ano de aquisição do objeto") or "").strip()
+    if ano.isdigit() and not (1850 <= int(ano) <= 2026):
+        flags.append({"tipo": "metadado_suspeito", "detalhe": f"ano de aquisição improvável: {ano}"})
+    return escala, flags
+# --- FIM BLOCO REGISTRO ---
+
+# --- INICIO BLOCO VERIFICACAO (compartilhado com o Notebook 04, etapa 7) ---
+# Todos os termos são procurados com FRONTEIRA DE PALAVRA. A versão anterior usava
+# "termo in texto": "parece" casava com "aparece", "fundo" com "profundo", "coração"
+# com "decoração" — o mesmo casamento raso de texto que o projeto diagnosticou nos
+# modelos aparecia na própria régua que os media.
+B = lambda termos: re.compile(r"(?<![a-zà-úA-ZÀ-Ú])(?:" + "|".join(termos) + r")", re.I)
+RE_ARTEFATO = B(["cartela", "paleta", "numeraç", "marcaç", "etiqueta", "régua", "suporte"])
+RE_AUSENCIA = B(["não há", "sem etiqueta", "sem sinais", "sem evidência", "sem artefato",
+                 "sem marca"])
+RE_ESPECULACAO = B(["sugere", "sugerindo", "parece", "parecendo", "possivelmente", "talvez"])
+RE_VAZIA = B(["porte médio", "uso prático", "uso frequente", "sinais de uso", "forma funcional",
+              "forma é funcional"])
+RE_FUNDO_TXT = B(["fundo"])
+RE_FOTO = re.compile(r"(?<![a-zà-ú])(?:posicionad|enquadr|fotografia|[dn]a imagem|ao fundo|"
+                     r"plano (?:médio|geral|fechado|aberto)|close|"
+                     r"inclinad\w*\s+(?:levemente\s+)?(?:para\s+)?[aà]?\s*"
+                     r"(?:direita|esquerda|frente|trás))", re.I)
+# jargão de fotografia no alt: "close-up" e "plano médio" apareceram como
+# vocabulário novo de enquadramento na v5, depois que a regra proibiu
+# "inteiro/horizontal/vertical". "Detalhe de..." continua sendo a marca sancionada.
+RE_JARGAO_FOTO = re.compile(r"(?<![a-zà-ú])(?:close|plano (?:médio|geral|fechado|aberto)|primeiro plano)", re.I)
+ABERTURAS_ETIQUETA = ("o objeto é", "trata-se de")
+RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
+
+
+def tem_atribuicao(texto):
+    return re.search(r"(?<![a-zà-ú])(registro|catálogo|catalogo)", texto or "", re.I) is not None
+
+
+def verificar(item):
+    """Devolve os problemas como pares (chave, detalhe). A chave é estável, para somar o
+    mesmo problema entre lotes; o detalhe é o que muda de item para item.
+
+    As checagens que dependem de campos que só a v6 produz (o enquadramento decidido na
+    observação) são puladas quando o campo não existe — é o que permite medir os lotes
+    antigos sem inventar dado que eles não têm. A escala, por ser função só do registro,
+    vale para todos."""
+    p = []
+    alt = item.get("alt_text", "") or ""
+    d = item.get("descricao_objeto", "") or ""
+    a, dl = alt.lower(), d.lower().strip()
+    registro = item.get("registro", {}) or {}
+
+    if item.get("json_valido") is False:
+        p.append(("json_invalido", ""))
+    if "enquadramento_ok" in item and not item["enquadramento_ok"]:
+        p.append(("obs_sem_enquadramento", ""))
+
+    povo = (registro.get("Povo") or "").strip()
+    if povo and povo.split()[0].lower() not in a:
+        p.append(("povo_ausente_no_alt", povo))
+    if RE_ARTEFATO.search(a):
+        p.append(("artefato_no_alt", RE_ARTEFATO.search(a).group(0)))
+    if RE_FUNDO_TXT.search(a):
+        p.append(("fundo_no_alt", ""))
+    if RE_JARGAO_FOTO.search(a):
+        p.append(("jargao_de_foto_no_alt", RE_JARGAO_FOTO.search(a).group(0)))
+    if len(alt.split()) > 30:
+        p.append(("alt_longo", f"{len(alt.split())} palavras"))
+    if item.get("enquadramento"):
+        alt_detalhe = a.strip().startswith("detalhe")
+        if alt_detalhe and item["enquadramento"] != "detalhe":
+            p.append(("enquadramento_incoerente", "alt diz Detalhe, observação diz inteiro"))
+        if not alt_detalhe and item["enquadramento"] == "detalhe":
+            p.append(("enquadramento_incoerente", "observação diz detalhe, alt não marca"))
+    return p + _verificar_nivel2(item, d, dl, a, registro)
+
+
+def _verificar_nivel2(item, d, dl, a, registro):
+    p = []
+    if d:
+        if not tem_atribuicao(d):
+            p.append(("nivel2_sem_atribuicao", ""))
+        if any(dl.startswith(ab) for ab in ABERTURAS_ETIQUETA):
+            p.append(("frase_etiqueta", dl[:18]))
+        if "a função é" in dl:
+            p.append(("frase_etiqueta", "a função é"))
+        if "aquisição em" in dl:
+            p.append(("aquisicao_em", ""))
+        if RE_ARTEFATO.search(dl):
+            p.append(("artefato_no_nivel2", RE_ARTEFATO.search(dl).group(0)))
+        if RE_AUSENCIA.search(dl):
+            p.append(("afirmacao_de_ausencia", RE_AUSENCIA.search(dl).group(0)))
+        if RE_FOTO.search(dl):
+            p.append(("foto_no_nivel2", RE_FOTO.search(dl).group(0)))
+        if len(d.split()) > 200:
+            p.append(("nivel2_longo", f"{len(d.split())} palavras"))
+        # medidas: toda medida escrita tem que estar no registro, e a escala é a maior
+        nums_txt = [float(x.replace(",", ".")) for x in RE_MEDIDA_TXT.findall(d)]
+        nums_reg = [float(x.replace(",", ".")) for x in
+                    re.findall(r"\d+(?:[.,]\d+)?", registro.get("Dimensões", "") or "")]
+        for t in nums_txt:
+            if nums_reg and not any(abs(r - t) <= 1.0 for r in nums_reg):
+                p.append(("medida_fora_do_registro", f"{t:g} cm"))
+        escala = item.get("escala") or ""
+        if escala and nums_txt:
+            m = re.search(r"(\d+(?:[.,]\d+)?)", escala)
+            if m:
+                esc = float(m.group(1).replace(",", "."))
+                if not any(abs(esc - t) <= 1.0 for t in nums_txt):
+                    p.append(("escala_errada", f"a maior é {esc:g} cm"))
+        if "miniatura" in escala and "miniatura" not in dl:
+            p.append(("miniatura_nao_declarada", ""))
+
+    for nome, texto in [("alt", a), ("nível 2", dl)]:
+        if RE_ESPECULACAO.search(texto):
+            p.append(("especulacao", f"{nome}: {RE_ESPECULACAO.search(texto).group(0)}"))
+        if RE_VAZIA.search(texto):
+            p.append(("frase_vazia", f"{nome}: {RE_VAZIA.search(texto).group(0)}"))
+
+    for f in item.get("flags", []) or []:
+        det = (f.get("detalhe") or "").lower()
+        if (f.get("tipo") == "artefato_estudio" and RE_FUNDO_TXT.search(det)
+                and not RE_ARTEFATO.search(det)):
+            p.append(("flag_de_fundo", ""))
+        if RE_AUSENCIA.search(det):
+            p.append(("flag_de_ausencia", ""))
+    return p
+# --- FIM BLOCO VERIFICACAO ---
+
+
+def medir(caminho):
+    with io.open(caminho, encoding="utf-8") as f:
+        lote = json.load(f)
+    itens = lote["itens"]
+    contagem, por_item = collections.Counter(), []
+    for it in itens:
+        # a escala é função só do registro: dá para calculá-la retroativamente nos lotes
+        # que não a receberam pronta. Mede o resultado, não como se chegou nele.
+        if not it.get("escala") and it.get("registro"):
+            it = dict(it, escala=analisar_registro(it["registro"])[0])
+        problemas = verificar(it)
+        por_item.append((it["id"], it.get("titulo", ""), problemas))
+        for chave, _ in problemas:
+            contagem[chave] += 1
+    flags = collections.Counter(f.get("tipo") for it in itens for f in (it.get("flags") or []))
+    return {"nome": os.path.basename(caminho).replace(".json", "").replace("_pipeline_completo", ""),
+            "n": len(itens), "limpos": sum(1 for _, _, p in por_item if not p),
+            "contagem": contagem, "por_item": por_item, "flags": flags}
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Mede lotes de resultados com a régua da v6.")
+    ap.add_argument("arquivos", nargs="+")
+    ap.add_argument("--itens", action="store_true", help="lista os problemas item a item")
+    args = ap.parse_args()
+
+    lotes = [medir(c) for c in args.arquivos]
+    chaves = sorted({k for l in lotes for k in l["contagem"]},
+                    key=lambda k: -sum(l["contagem"][k] for l in lotes))
+    larg = max(12, max(len(l["nome"]) for l in lotes) + 2)
+
+    print("\nProblemas por checagem — itens afetados, a mesma régua em todos os lotes\n")
+    print(f"{'checagem':28}" + "".join(f"{l['nome']:>{larg}}" for l in lotes))
+    print("-" * (28 + larg * len(lotes)))
+    for k in chaves:
+        print(f"{k:28}" + "".join(f"{l['contagem'][k] or '-':>{larg}}" for l in lotes))
+    print("-" * (28 + larg * len(lotes)))
+    print(f"{'itens sem problema':28}" +
+          "".join(f"{str(l['limpos']) + '/' + str(l['n']):>{larg}}" for l in lotes))
+    for t in sorted({t for l in lotes for t in l["flags"] if t}):
+        print(f"{'flags: ' + t:28}" + "".join(f"{l['flags'][t] or '-':>{larg}}" for l in lotes))
+
+    if args.itens:
+        for l in lotes:
+            print(f"\n=== {l['nome']} ===")
+            for id_, titulo, problemas in l["por_item"]:
+                marca = "ok" if not problemas else "; ".join(
+                    f"{k}{' (' + v + ')' if v else ''}" for k, v in problemas)
+                print(f"{id_:>7} {titulo[:26]:26} {marca}")
+
+
+if __name__ == "__main__":
+    main()
