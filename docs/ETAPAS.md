@@ -295,9 +295,14 @@ Dry-run com modelo simulado passou de ponta a ponta: retry forçado em 19/20, po
 resolução ativo, campos do JSON idênticos aos do v10 — e a média recalculada do Qwen bateu com
 o 1,7 registrado. Resultado esperado: `resultados/05_bakeoff_gemma_v2.json`.
 
-**Pendências da E7:** (1) subir o notebook ao Drive (`notebooks/05_bakeoff_redator_v3.ipynb`) e
-rodar no Colab; (2) análise do lote + página de comparação cega v2 (A/B sorteado por item,
-gabarito lacrado) → **julgamento editorial cego do Eduardo decide o redator**.
+**No Drive (27/08/2026):** `notebooks/05_bakeoff_redator_v3.ipynb`
+(colab.research.google.com/drive/1Hd-W2JkSde9tzCVFNiqIcX0qD4cNgYyD), conferido depois do upload
+por download e comparação: **byte a byte idêntico ao do repositório (12/12 células)**.
+
+**Pendências da E7:** (1) rodar o bake-off v2 no Colab (GPU T4, Executar tudo → salva
+`resultados/05_bakeoff_gemma_v2.json`); (2) análise do lote + página de comparação cega v2
+(A/B sorteado por item, gabarito lacrado) → **julgamento editorial cego do Eduardo decide o
+redator**.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
