@@ -27,6 +27,12 @@
 
 Mapeamento com o plano de 10 semanas: E1–E3 = Fases 0–1 · E4–E7 = Fase 2 · E8–E10 = Fase 3 · E11 = Fase 4 · E12 = Fase 5.
 
+**Mapa único de versionamentos** (notebook × observação × redação × rubrica × lote):
+`docs/VERSOES.md` (27/08/2026) — reconstruído dos JSONs de `resultados/`, que embutem os prompts
+e a rubrica de cada rodada; onde a narrativa diverge do artefato, prevalece o artefato (o lote v7
+rodou com a redação **v11**, não v10 — a 3ª revisão editorial elevou o prompt antes da rodada).
+Insumo do README final (E12).
+
 ## Detalhe das etapas
 
 ### E1 — Fundação ✅
