@@ -32,9 +32,9 @@
     },
     {
       "slug": "ficha_tecnica",
-      "tipo": "medidas_2mais",
+      "tipo": "medidas_3mais",
       "padrao": "",
-      "origem": "1a #1 regra 7 (escala, nao ficha) + 4a #2 (Dimensoes: coladas no texto)"
+      "origem": "1a #1 regra 7 (escala, nao ficha) + 4a #2 (Dimensoes: coladas no texto) | 5a adjudicacao: duas medidas coerentes passam a ser aceitas"
     },
     {
       "slug": "textura_natural_vazia",
@@ -142,13 +142,6 @@
       "tipo": "proibe",
       "padrao": "(?<![a-zà-ú])bordas?(?![a-zà-ú])",
       "origem": "2a #7 — pulseira nao tem bordas"
-    },
-    {
-      "item": 883523,
-      "slug": "cabo_de_zarabatana",
-      "tipo": "proibe",
-      "padrao": "(?<![a-zà-ú])cabo(?![a-zà-ú])",
-      "origem": "2a #8 regra 24 — zarabatana tem TUBO, mesmo que o registro diga cabo"
     },
     {
       "item": 883523,
@@ -262,6 +255,67 @@
       "tipo": "proibe",
       "padrao": "laranja[s]?[^.]{0,30}de arara|de arara em tons de[^.]{0,30}laranja",
       "origem": "juiz v7 #16, pendente de adjudicação"
+    },
+    {
+      "item": 4156,
+      "slug": "afunil_inventado",
+      "tipo": "proibe",
+      "padrao": "em afunil",
+      "origem": "juiz v7 17.2, adjudicado — o catálogo diz 'dobradura afunilada', sem jargão: usar como está"
+    },
+    {
+      "item": 4156,
+      "slug": "zoomorfo_nao_traduzido",
+      "tipo": "exige",
+      "padrao": "anima[li]",
+      "origem": "juiz v7 17.1, adjudicado PARCIAL — traduzir zoomorfos para 'animais'; espécie (onça, anta) SÓ com evidência no catálogo"
+    },
+    {
+      "item": 1366,
+      "slug": "etiqueta_como_peca",
+      "tipo": "proibe",
+      "padrao": "peça branca",
+      "origem": "juiz v7 16.4, adjudicado — é etiqueta de inventário: flag, nunca texto"
+    },
+    {
+      "item": 5011,
+      "slug": "algodao_omitido",
+      "tipo": "exige",
+      "padrao": "algodão",
+      "origem": "juiz v7 10.1, adjudicado — catálogo sem jargão: manter os termos dele"
+    },
+    {
+      "item": 3411,
+      "slug": "lamina_por_pa",
+      "tipo": "proibe",
+      "padrao": "lâmina",
+      "origem": "juiz v7 15.1 + 5a adjudicacao (catálogo manda): o registro usa 'pá'"
+    },
+    {
+      "item": 210680,
+      "slug": "osso_dos_ambiguo",
+      "tipo": "proibe",
+      "padrao": "de osso dos",
+      "origem": "5a adjudicacao — construção lê como osso humano do povo; reformular"
+    },
+    {
+      "item": 84811,
+      "slug": "preto_do_registro_omitido",
+      "tipo": "exige",
+      "padrao": "pret[ao]",
+      "origem": "2a #7 + juiz v7 7.1 — o registro nomeia preta e a foto mostra"
     }
-  ]
+  ],
+  "politicas": {
+    "5a_adjudicacao_27_08": [
+      "FOTO SEM RESOLUÇÃO: flag de falta de resolução e NENHUM texto gerado (alt e nível 2 vazios) — auditar o dataset é função do projeto",
+      "INFO COM FLAG NÃO ENTRA NO TEXTO: o que virou flag (divergência, metadado suspeito, dataset) é omitido da redação",
+      "CATÁLOGO MANDA NO VOCABULÁRIO: termo do catálogo que não é jargão se usa como está (cabo, pá, dobradura afunilada, algodão); descrição visual não-técnica do catálogo tem força máxima (figuras em X)",
+      "ESPÉCIE/FIGURA SÓ COM FONTE: zoomorfos vira 'animais'; nomear onça/anta exige evidência no catálogo (generaliza a regra das aves)",
+      "NÚMERO LITERAL DO CATÁLOGO: arredondar cria número que não existe (41,5 não vira 42)",
+      "ALÇAS E CORDAS NUNCA na medida nem no foco — o objeto principal manda; na dúvida, omitir",
+      "FUNÇÃO SÓ COM ESPECIFICIDADE CULTURAL: explicar remo, panela ou bolsa é redundância",
+      "GAMELIFORME e afins: título mantém, glossário do RAG explica em linguagem comum"
+    ]
+  }
 }

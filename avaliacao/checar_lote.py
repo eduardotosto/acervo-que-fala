@@ -68,7 +68,9 @@ def escala_do_registro(dimensoes):
 
 
 def numero_pt(v):
-    return f"{v:.0f}" if v >= 20 else f"{v:.1f}".replace(".", ",").replace(",0", "")
+    """O número exatamente como o catálogo o dá, em grafia brasileira — arredondar cria
+    um número que não existe no registro (5ª adjudicação: 'cerca de 42' para 41,5)."""
+    return f"{v:g}".replace(".", ",")
 
 
 def analisar_registro(registro):
@@ -202,7 +204,8 @@ RE_FUNCAO_OBVIA = re.compile(
     r"(pulseira|bracelete)[^.]{0,45}(pulso|braço)|(flauta|instrumento)[^.]{0,50}(som|sonor|músic|music)"
     r"|(bolsa|cesto|cesta)[^.]{0,45}(guardar|transportar|carregar)|(pote|panela|vasilha|tigela)"
     r"[^.]{0,50}(armazenar|guardar|conter)|(remo)[^.]{0,35}(remar|navega)|(arco)[^.]{0,35}(atirar|flecha)"
-    r"|(colar|cinto|tanga)[^.]{0,40}(pescoço|cintura|corpo)", re.I)
+    r"|(colar|cinto|tanga)[^.]{0,40}(pescoço|cintura|corpo)"
+    r"|(remo)[^.]{0,50}(desloc|vias aquáticas|transporte)|(panela)[^.]{0,50}(cozinhar|servir)", re.I)
 # padrao descrito por semelhanca em vez de geometria: as gregas do 84811 viraram
 # "elementos em forma de G ou C invertidos" com o termo certo disponivel no glossario
 RE_ANALOGIA = re.compile(
@@ -259,6 +262,13 @@ def verificar(item):
     povo = (registro.get("Povo") or "").strip()
     if povo and povo.split()[0].lower() not in a:
         p.append(("povo_ausente_no_alt", povo))
+    # nome de povo é nome próprio: "Fuso xavante" está errado (5ª adjudicação)
+    if povo:
+        alvo_povo = povo.split()[0]
+        for texto_orig in (item.get("alt_text") or "", item.get("descricao_objeto") or ""):
+            if re.search(rf"(?<![a-zà-úA-ZÀ-Ú]){alvo_povo.lower()}(?![a-zà-ú])", texto_orig):
+                p.append(("povo_em_minuscula", alvo_povo.lower()))
+                break
     if RE_ARTEFATO.search(a):
         p.append(("artefato_no_alt", RE_ARTEFATO.search(a).group(0)))
     if RE_FUNDO_TXT.search(a):

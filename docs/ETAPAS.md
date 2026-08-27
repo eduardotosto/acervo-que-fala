@@ -215,7 +215,23 @@ na régua (`ausencia_no_alt`, `medida_no_alt`, `molde_de_escala_no_texto`, `cola
 quando só 2 trocas Amazonas→Amazônia são reais (o dump do protocolo omitia o campo; caso-método:
 a camada que audita também precisa ser auditável). Régua e gabarito rodados de novo nos 7 lotes.
 
-**Pendências da E7:** (1) Eduardo adjudicar os achados 7.1–20.4 de `avaliacao/revisao_juiz_v7.md` (concordo/discordo/parcial — as concordâncias entram no gabarito e o índice de concordância valida o LLM-as-judge da E10); (2) decisão entre os três caminhos da quarta revisão (reincluir regras no prompt · pós-processamento léxico determinístico · congelar e seguir para E8); (3) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**5ª adjudicação (27/08/2026) — o juiz calibrado e as 8 políticas novas.** Eduardo adjudicou os
+48 achados do juiz: **concordância ~95%** (2 discordâncias + 1 parcial) e **recall ~89%** (6
+achados que só ele viu, todos convertidos em checagem ou glossário) — números que validam o
+LLM-as-judge da E10 com dados próprios. As discordâncias recalibraram a régua e o gabarito: a
+regra 24 foi **revertida** no caso "cabo" (o termo está no catálogo e não é jargão — catálogo
+manda; a linha 7/7 do gabarito era uma regra errada fabricando defeito universal), e duas medidas
+coerentes deixaram de ser ficha técnica (3+ continua). **Oito políticas novas** registradas no
+gabarito (`politicas.5a_adjudicacao_27_08`): foto sem resolução → flag e NENHUM texto; informação
+flagada é omitida da redação (flag = quarentena); catálogo manda no vocabulário não-técnico;
+espécie/figura só com fonte (zoomorfos → "animais", nunca "onça" sem catálogo); número literal do
+catálogo (41,5 não vira 42 — código corrigido); alças/cordas fora da medida e do foco; função só
+com especificidade cultural; jargão de título (gameliforme) explicado pelo glossário — **rubrica
+v1.4** ganhou o verbete. Régua ganhou `povo_em_minuscula` e `funcao_obvia` ampliada (remo,
+panela). Auditoria do dataset assumida como função do projeto (flags de dataset: nylon×algodão da
+pulseira, miniatura×102 cm da zarabatana).
+
+**Pendências da E7:** (1) construir o **notebook v8** com as 8 políticas da adjudicação (prompt v11 + resolução mínima em código + info flagada fora do texto + rubrica v1.4 no Drive) — OU congelar e seguir para E8, decisão do Eduardo; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas

@@ -1,6 +1,6 @@
 {
-  "versao": "1.3 (26/08/2026)",
-  "descricao": "Base de conhecimento do RAG: diretrizes por categoria de objeto e glossário de termos do catálogo em linguagem simples. v1.2: os trechos 'gerais' saíram — regras universais vivem no prompt de redação (v9); frases copiáveis viraram lacunas (análise em avaliacao/analise_prompt_rubrica.md). v1.3: a recuperação virou híbrida — a diretriz da categoria é escolhida pelo campo Categoria do registro (garantia, não sorteio) e só o glossário é recuperado por similaridade (k=2); 'suporte' saiu do texto de plumaria-01, porque a palavra nomeia também um artefato de estúdio e a verificação automática não tem como distinguir os dois usos. Termos do glossário coletados dos campos 'Técnica de confecção' e 'Descrição' do próprio dataset (dados/itens.json).",
+  "versao": "1.4 (27/08/2026)",
+  "descricao": "Base de conhecimento do RAG: diretrizes por categoria de objeto e glossário de termos do catálogo em linguagem simples. v1.2: os trechos 'gerais' saíram — regras universais vivem no prompt de redação (v9); frases copiáveis viraram lacunas (análise em avaliacao/analise_prompt_rubrica.md). v1.3: a recuperação virou híbrida — a diretriz da categoria é escolhida pelo campo Categoria do registro (garantia, não sorteio) e só o glossário é recuperado por similaridade (k=2); 'suporte' saiu do texto de plumaria-01, porque a palavra nomeia também um artefato de estúdio e a verificação automática não tem como distinguir os dois usos. v1.4: glossário ganhou 'gameliforme' (5ª adjudicação: o Eduardo não sabia o que era — o título mantém o termo, o glossário dá a explicação em linguagem comum para o nível 2). Termos do glossário coletados dos campos 'Técnica de confecção' e 'Descrição' do próprio dataset (dados/itens.json).",
   "trechos": [
     {"id": "ceramica-01", "categoria": "Cerâmica", "texto": "Cerâmica: descrever a forma do corpo em palavras comuns (arredondado, cilíndrico, em forma de pera), gargalo e boca; a pintura — cores E a forma dos padrões (linhas, faixas, xadrez, losangos), nunca só as cores; o interior quando visível; bordas e faixas de acabamento."},
     {"id": "ceramica-02", "categoria": "Cerâmica", "texto": "Em cerâmica pintada dos povos do Brasil central (ex.: Karajá, Kadiweu), os grafismos geométricos são identidade visual do povo — descrever o padrão (linhas, hachuras, ângulos retos, espirais) sem interpretar significado."},
@@ -24,6 +24,7 @@
     {"id": "glossario-07", "categoria": "glossario", "texto": "Borda extrovertida: borda voltada para fora (em cerâmica, a boca que se abre para fora). Em texto público, dizer 'boca que se abre para fora'."},
     {"id": "glossario-08", "categoria": "glossario", "texto": "Pecíolo: o talo que liga a folha ao caule da planta — usado como cabo ou empunhadura em objetos de fibra."},
     {"id": "glossario-09", "categoria": "glossario", "texto": "Taquara: bambu fino brasileiro, usado em instrumentos de sopro e trançados."},
-    {"id": "glossario-10", "categoria": "glossario", "texto": "Buriti: palmeira cujas fibras são usadas em amarrações e trançados."}
+    {"id": "glossario-10", "categoria": "glossario", "texto": "Buriti: palmeira cujas fibras são usadas em amarrações e trançados."},
+    {"id": "glossario-11", "categoria": "glossario", "texto": "Gameliforme: em forma de gamela — vasilha baixa e larga, mais aberta que funda. Em texto público, dizer 'em forma de gamela, baixa e larga'."}
   ]
 }

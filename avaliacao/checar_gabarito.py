@@ -34,6 +34,8 @@ def avaliar(entrada, item):
                        for f in (item.get("flags") or []))
     if tipo == "medidas_2mais":
         return len(RE_CM.findall(n2)) >= 2 or "dimensões:" in n2
+    if tipo == "medidas_3mais":
+        return len(RE_CM.findall(n2)) >= 3 or "dimensões:" in n2
     if tipo == "proibe_abertura":
         return re.search(padrao, n2.strip(), re.I) is not None
     raise ValueError(tipo)

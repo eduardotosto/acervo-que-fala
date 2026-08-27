@@ -163,3 +163,62 @@ campos do registro.** Fica como caso de método: até a camada que audita precis
    do registro; a régua ganhou `colagem_do_registro` e o gabarito já media `ficha_tecnica`.
 6. **Foto de 100×66 px no 5146** — checagem de resolução mínima precisa existir em código no
    próximo notebook.
+
+---
+
+# Adjudicação do Eduardo (27/08/2026) — e a calibração do juiz
+
+Adjudicação por comentário dirigido: itens comentados receberam veredito explícito; itens não
+comentados contam como **concordância tácita** (premissa declarada — o Eduardo pode reabrir
+qualquer um).
+
+## O placar da calibração
+
+| Métrica | Valor | Como foi contado |
+|---|---|---|
+| Achados do juiz adjudicados | 48 | 14 dos cards #4–#6 + 34 dos #7–#20 |
+| **Concordância** | **~95%** | 2 discordâncias (8.4, 19.3) + 1 parcial (17.1) em 48 |
+| **Recall do juiz** | **~89%** | 6 achados que só o Eduardo viu (lista abaixo) |
+
+Achados que o juiz perdeu: "Fuso **xavante**" com o povo em minúscula (#10); concordância quebrada
+em "dimensões de 44 cm de comprimento" (#10); a ambiguidade de "Flauta reta de osso dos
+Hixkaryána" — lê como se o osso fosse do povo (#11); função redundante do remo (#15) e da panela
+(#19), que a régua também não pegava; e "gameliforme" como jargão a explicar (#19). Os seis
+viraram checagem (`povo_em_minuscula`, `funcao_obvia` ampliada) ou glossário (rubrica v1.4,
+`glossario-11: Gameliforme`).
+
+## As discordâncias — e o que elas recalibram
+
+1. **8.4 "cabo" (DISCORDO)** — o termo está no catálogo e não é jargão: **catálogo manda**. A
+   regra 24 (2ª revisão) fica revertida neste ponto e a linha `cabo_de_zarabatana` — que marcava
+   7/7 lotes — sai do gabarito. Lição de avaliação: uma regra errada na régua fabrica um defeito
+   universal que não existe.
+2. **19.3 duas medidas (DISCORDO)** — diâmetro + altura de uma cerâmica são coerentes e úteis;
+   `ficha_tecnica` recalibrada para 3+ medidas (ou ficha colada).
+3. **17.1 espécies (PARCIAL)** — traduzir "zoomorfos" para "animais": sim. Nomear onça ou anta
+   pela foto: **não** — espécie só com evidência no catálogo. A regra das aves generaliza para
+   toda identificação de figura.
+
+## As oito políticas novas da adjudicação (para o prompt v11 / notebook v8)
+
+1. **Foto sem resolução** → flag `falta_de_resolucao` e NENHUM texto gerado — auditar o dataset é
+   função assumida do projeto.
+2. **Informação com flag não entra no texto** — o que virou flag (divergência, metadado suspeito,
+   contradição de dataset) é omitido da redação. A flag é a quarentena; o texto só carrega o que
+   passou.
+3. **Catálogo manda no vocabulário**: termo não-técnico do catálogo se usa como está (cabo, pá,
+   "dobradura afunilada", algodão); descrição visual não-técnica do catálogo tem força máxima
+   (as figuras em "X" da panela).
+4. **Espécie/figura só com fonte** (generalização da regra das aves).
+5. **Número literal do catálogo** — 41,5 não vira "cerca de 42"; arredondar cria um número que
+   não existe (código corrigido).
+6. **Alças e cordas nunca** na medida nem no foco; na dúvida, omitir.
+7. **Função só com especificidade cultural** — remo, panela e bolsa não se explicam.
+8. **Jargão de título** (gameliforme): o título mantém, o glossário do RAG explica.
+
+## Nota metodológica sobre o gabarito cumulativo
+
+O gabarito cresce a cada rodada de revisão — e o lote mais recente é sempre o mais escrutinado
+(9 entradas novas nasceram da revisão do v7). Comparações "qual lote é melhor" pelo gabarito devem
+usar o subconjunto de padrões anterior aos dois lotes comparados; o total serve para medir o
+estoque de defeitos conhecidos ainda ativos, não para ranquear versões.
