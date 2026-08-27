@@ -27,6 +27,8 @@ def avaliar(entrada, item):
         return re.search(padrao, alt, re.I) is not None
     if tipo == "exige_alt":
         return re.search(padrao, alt, re.I) is None
+    if tipo == "exige":
+        return re.search(padrao, texto, re.I) is None
     if tipo == "exige_flag":
         return not any(re.search(padrao, f.get("tipo", ""), re.I)
                        for f in (item.get("flags") or []))

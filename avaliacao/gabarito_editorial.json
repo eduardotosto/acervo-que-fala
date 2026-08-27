@@ -1,6 +1,6 @@
 {
   "versao": "1.0 (27/08/2026)",
-  "descricao": "Consolidacao de TODAS as revisoes editoriais do Eduardo (1a: lote v1 cards 1-4; 2a: lote v2, 20 cards; 3a: lote v6, 8 achados; 4a: lote v7, parcial cards 1-3) em padroes verificaveis por codigo. E a metrica de reincidencia: defeito que o Eduardo ja apontou nao pode voltar. Tipos: 'proibe' (regex presente no alt+nivel2 = defeito), 'proibe_alt' (so no alt), 'exige_alt' (regex AUSENTE do alt = defeito), 'exige_flag' (nenhuma flag do tipo dado = defeito), 'medidas_2mais' (duas ou mais medidas em cm no nivel 2 = ficha tecnica), 'proibe_abertura' (nivel 2 comecando pelo padrao = defeito). Politica 'conferir' = fidelidade pendente de olho humano; as demais sao erro objetivo.",
+  "descricao": "Consolidacao de TODAS as revisoes editoriais do Eduardo (1a: lote v1 cards 1-4; 2a: lote v2, 20 cards; 3a: lote v6, 8 achados; 4a: lote v7, parcial cards 1-3) em padroes verificaveis por codigo. E a metrica de reincidencia: defeito que o Eduardo ja apontou nao pode voltar. Tipos: 'proibe' (regex presente no alt+nivel2 = defeito), 'proibe_alt' (so no alt), 'exige_alt' (regex AUSENTE do alt = defeito), 'exige_flag' (nenhuma flag do tipo dado = defeito), 'medidas_2mais' (duas ou mais medidas em cm no nivel 2 = ficha tecnica), 'proibe_abertura' (nivel 2 comecando pelo padrao = defeito). Politica 'conferir' = fidelidade pendente de olho humano; as demais sao erro objetivo. Tipo 'exige': o regex deve estar presente no alt+nivel2, senão é defeito. Entradas 'adjudicado: 27/08' vieram da revisão do juiz confirmada pelo Eduardo.",
   "vocabulario_aprovado": {
     "51023": "'dispostos paralelamente' (do proprio registro) e o termo certo para a disposicao dos tubos — melhor que 'em cascata' (4a revisao)",
     "politica_contagem": "4a revisao: a contagem do CATALOGO prevalece sempre sobre a contagem visual (substitui a politica da 3a revisao, que mandava omitir o numero em conflito); divergencia vira flag"
@@ -35,6 +35,12 @@
       "tipo": "medidas_2mais",
       "padrao": "",
       "origem": "1a #1 regra 7 (escala, nao ficha) + 4a #2 (Dimensoes: coladas no texto)"
+    },
+    {
+      "slug": "textura_natural_vazia",
+      "tipo": "proibe",
+      "padrao": "textura natural",
+      "origem": "juiz v7 #4, adjudicado 27/08 — frase que nada descreve"
     }
   ],
   "por_item": [
@@ -206,6 +212,56 @@
       "tipo": "proibe",
       "padrao": "se curva suavemente|composição rica",
       "origem": "2a #6 — descricao da foto e juizo estetico"
+    },
+    {
+      "item": 63283,
+      "slug": "letra_ou_angulo_por_espinha",
+      "tipo": "proibe",
+      "padrao": "v invertido|entrelaçamento em ângulo|cruzam em v",
+      "origem": "juiz v7 #4, adjudicado — o termo é espinha-de-peixe (glossário)"
+    },
+    {
+      "item": 63283,
+      "slug": "losangos_nao_conferidos",
+      "tipo": "proibe",
+      "padrao": "losango",
+      "origem": "juiz v7 #4, adjudicado — a foto mostra espinha-de-peixe",
+      "politica": "conferir"
+    },
+    {
+      "item": 78838,
+      "slug": "gregas_ignoradas",
+      "tipo": "exige",
+      "padrao": "grega",
+      "origem": "juiz v7 #5, adjudicado — motivo grego está no registro, no glossário e na foto"
+    },
+    {
+      "item": 1376,
+      "slug": "ritual_sem_fonte",
+      "tipo": "proibe",
+      "padrao": "ritual",
+      "origem": "juiz v7 #6, adjudicado — registro diz só 'adorno para braço'"
+    },
+    {
+      "item": 1376,
+      "slug": "verde_do_registro_omitido",
+      "tipo": "exige",
+      "padrao": "verde",
+      "origem": "2a #6 + juiz v7 #6, adjudicado — registro nomeia verde e a foto mostra"
+    },
+    {
+      "item": 1376,
+      "slug": "laranja_preso_a_arara",
+      "tipo": "proibe",
+      "padrao": "laranjas? (e amarelas )?de arara",
+      "origem": "juiz v7 #6, adjudicado — laranja é visto, não é cor que o registro dá à arara"
+    },
+    {
+      "item": 1366,
+      "slug": "laranja_preso_a_arara",
+      "tipo": "proibe",
+      "padrao": "laranja[s]?[^.]{0,30}de arara|de arara em tons de[^.]{0,30}laranja",
+      "origem": "juiz v7 #16, pendente de adjudicação"
     }
   ]
 }

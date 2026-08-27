@@ -21,7 +21,8 @@ import argparse, collections, io, json, os, re, sys
 ROTULOS = r"(comprimento|altura|largura|di[âa]metro|espessura|profundidade)"
 RE_ROTULO, RE_NUM = re.compile(ROTULOS, re.I), re.compile(r"\d+(?:[.,]\d+)?")
 # medida "com cordel / com a alça esticada" mede o objeto pendurado, não a peça
-RE_COM_CORDA = re.compile(r"com\s+(a\s+|o\s+)?(cordel|cord[aã]o|al[çc]a|amarra)|esticad", re.I)
+RE_COM_CORDA = re.compile(
+    r"com\s+(a\s+|o\s+)?(cordel|cord[aã]o|al[çc]a|amarra)|esticad|\+\s*(cordel|cord[aã]o|al[çc]a)", re.I)
 
 # Teto de plausibilidade por categoria = Q3 + 3xIQR das dimensões do PRÓPRIO acervo
 # (547 dos 555 itens de dados/itens.json têm medida parseável), com piso de 150 cm —
@@ -95,6 +96,9 @@ def analisar_registro(registro):
             flags.append({"tipo": "metadado_suspeito", "detalhe":
                           f"{numero_pt(valor)} cm de {rotulo or 'dimensão'} está acima do teto de "
                           f"plausibilidade da categoria {cat} ({teto} cm, calculado do acervo)"})
+    if re.search(r"al[çc]as? soltas?", registro.get("Descrição", "") or "", re.I) and e:
+        flags.append({"tipo": "metadado_suspeito", "detalhe":
+                      "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"})
     ano = (registro.get("Ano de aquisição do objeto") or "").strip()
     if ano.isdigit() and not (1850 <= int(ano) <= 2026):
         flags.append({"tipo": "metadado_suspeito", "detalhe": f"ano de aquisição improvável: {ano}"})
@@ -263,6 +267,13 @@ def verificar(item):
         p.append(("jargao_de_foto_no_alt", RE_JARGAO_FOTO.search(a).group(0)))
     if len(alt.split()) > 30:
         p.append(("alt_longo", f"{len(alt.split())} palavras"))
+    # a revisao do juiz sobre o v7 achou os tres abaixo passando limpos pelo alt:
+    if RE_AUSENCIA.search(a):
+        p.append(("ausencia_no_alt", RE_AUSENCIA.search(a).group(0)[:30]))
+    if RE_MEDIDA_TXT.search(alt):
+        p.append(("medida_no_alt", RE_MEDIDA_TXT.search(alt).group(0)))
+    if re.search(r"em escala de|escala\s*:", a + chr(10) + (item.get("descricao_objeto") or "").lower()):
+        p.append(("molde_de_escala_no_texto", "a moldura da variável ESCALA vazou"))
     if item.get("enquadramento"):
         alt_detalhe = a.strip().startswith("detalhe")
         if alt_detalhe and item["enquadramento"] != "detalhe":
@@ -291,6 +302,19 @@ def _verificar_nivel2(item, d, dl, a, registro):
             p.append(("foto_no_nivel2", RE_FOTO.search(dl).group(0)))
         if len(d.split()) > 140:
             p.append(("nivel2_longo", f"{len(d.split())} palavras"))
+        # colagem do registro bruto: nomes de campo com dois-pontos dentro do texto
+        # (o 78838 do v7 colou a ficha inteira — e a palavra "Registro" da colagem
+        # ainda comprava a checagem de atribuicao)
+        m_colagem = re.search(r"(matéria-prima|técnica de confecção|categoria|dimensões)\s*:", dl)
+        if m_colagem:
+            p.append(("colagem_do_registro", m_colagem.group(1)))
+        # estado da federacao citado sem estar em nenhum campo do registro — o modelo
+        # preenche por conhecimento de mundo (Kaxinawa -> Acre) quando o campo esta vazio
+        reg_txt = " ".join(str(v) for v in registro.values()).lower()
+        for uf in ("acre", "amazonas", "pará", "maranhão", "mato grosso", "tocantins",
+                   "pernambuco", "rondônia", "roraima", "amapá", "amazônia"):
+            if re.search(rf"(?<![a-zà-ú]){uf}(?![a-zà-ú])", dl) and uf not in reg_txt:
+                p.append(("estado_sem_fonte", uf))
         marcas = RE_MARCA_ATRIB.findall(d)
         if len(marcas) > 1:
             p.append(("atribuicao_repetida", f"{len(marcas)} marcas no mesmo texto"))
@@ -353,9 +377,11 @@ def medir(caminho):
     itens = lote["itens"]
     contagem, por_item = collections.Counter(), []
     for it in itens:
-        # a escala é função só do registro: dá para calculá-la retroativamente nos lotes
-        # que não a receberam pronta. Mede o resultado, não como se chegou nele.
-        if not it.get("escala") and it.get("registro"):
+        # a escala usada na medição é SEMPRE a do código atual (não a que foi injetada
+        # na época): mede-se o texto contra a política de hoje. Caso concreto: a Flauta
+        # 210680 recebeu "41 cm" de uma versão com o filtro de cordel furado; o texto
+        # que repetiu 41 passa a acusar escala_errada, como deve.
+        if it.get("registro"):
             it = dict(it, escala=analisar_registro(it["registro"])[0])
         problemas = verificar(it)
         por_item.append((it["id"], it.get("titulo", ""), problemas))

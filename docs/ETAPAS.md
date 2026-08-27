@@ -200,7 +200,22 @@ vira flag de conferência** (piso implementado ao lado do teto). Defeitos presen
 agora resolvido em código). Vocabulário aprovado registrado: "dispostos paralelamente" (do próprio
 registro da Flauta).
 
-**Pendências da E7:** (1) decisão do Eduardo entre os três caminhos da quarta revisão (reincluir regras no prompt · pós-processamento léxico determinístico · congelar e seguir para E8 com gabarito + revisão humana); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Revisão do juiz sobre o v7 completa (27/08/2026) — o fluxo invertido em operação.** Depois de o
+Eduardo adjudicar "concordo" nos 3 cards-piloto, Claude revisou os 14 restantes com foto em
+resolução máxima + registro completo: **~45 achados numerados** em `avaliacao/revisao_juiz_v7.md`,
+aguardando adjudicação. Padrões sistemáticos: a observação perde artefatos visíveis (2 cards — só
+revisão com imagem pega); o vocabulário do glossário é sistematicamente ignorado pelo redator
+(gregas dispara nos 7 lotes; espinha-de-peixe em 2 cards); a regra 15 super-aplicada suprime
+figuras reais (a onça do estojo Bororo virou "desenhos estilizados"; o "X" que o registro da
+panela nomeia sumiu); molduras de variáveis vazam ("em escala de", "Escala:"); a ficha técnica
+volta pelo nível 2. **Código novo saído da revisão:** filtro de cordel corrigido (a escala da
+Flauta 210680 era 41 cm com cordel; o certo é 12,7), flag de alças soltas, e cinco checagens novas
+na régua (`ausencia_no_alt`, `medida_no_alt`, `molde_de_escala_no_texto`, `colagem_do_registro`,
+`estado_sem_fonte`) — a última corrigiu o próprio juiz, que ia reportar 5 estados alucinados
+quando só 2 trocas Amazonas→Amazônia são reais (o dump do protocolo omitia o campo; caso-método:
+a camada que audita também precisa ser auditável). Régua e gabarito rodados de novo nos 7 lotes.
+
+**Pendências da E7:** (1) Eduardo adjudicar os achados 7.1–20.4 de `avaliacao/revisao_juiz_v7.md` (concordo/discordo/parcial — as concordâncias entram no gabarito e o índice de concordância valida o LLM-as-judge da E10); (2) decisão entre os três caminhos da quarta revisão (reincluir regras no prompt · pós-processamento léxico determinístico · congelar e seguir para E8); (3) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
