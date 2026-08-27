@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · v6 e **v7 rodados** (2,7 → 2,2 problemas/item na régua atual) |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08 · v6/v7 rodados e adjudicados · 🔶 **v8** aguardando Eduardo rodar (critério de saída: zero reincidência) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -231,7 +231,21 @@ v1.4** ganhou o verbete. Régua ganhou `povo_em_minuscula` e `funcao_obvia` ampl
 panela). Auditoria do dataset assumida como função do projeto (flags de dataset: nylon×algodão da
 pulseira, miniatura×102 cm da zarabatana).
 
-**Pendências da E7:** (1) construir o **notebook v8** com as 8 políticas da adjudicação (prompt v11 + resolução mínima em código + info flagada fora do texto + rubrica v1.4 no Drive) — OU congelar e seguir para E8, decisão do Eduardo; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Notebook v8 construído e no Drive (27/08/2026).** As oito políticas da 5ª adjudicação viraram
+sistema: porteiro de resolução (foto < 100 mil px → flag `falta_de_resolucao`, nenhum texto),
+seção EM QUARENTENA no prompt (o código lista o que as flags tiraram da redação), cláusula
+"O CATÁLOGO MANDA NAS PALAVRAS" no contrato, CONTAGENS DO REGISTRO injetadas, escala com número
+literal, funções óbvias vetadas com exemplos, e **validação com um retry** (marca de atribuição,
+teto de 30, ausências, quarentena — diagnóstico devolvido ao modelo uma vez; campo `retry` salvo).
+Observação v3.1 pede todas as cores, inclusive minoritárias. Contradição miniatura×função virou
+heurística de código. Prompt de redação **v12**; rubrica **v1.4** no Drive (`dados/rubrica_v1_4.json`,
+byte-conferida) e no repo. Notebook no Drive em `notebooks/04_pipeline_completo_v8.ipynb`
+(colab.research.google.com/drive/1l96mAdKvMLK1Lvru8bVOKoQ8tzB1h4VD), conferido célula a célula
+contra o repositório (16/16 idênticas). Dry-run com modelo simulado passou de ponta a ponta.
+**Critério de saída registrado (decisão do Eduardo): a etapa só fecha com resultado satisfatório —
+zero reincidência dos defeitos adjudicados no gabarito e régua limpa nas checagens mecânicas.**
+
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v8** no Colab (~45–55 min; link no parágrafo acima); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
