@@ -348,3 +348,58 @@ atinge 7, 12 e 1. São defeitos que existiam desde o primeiro lote e que ningué
 
 O "sem problemas" deixa de ser a métrica útil quando a régua tem vinte checagens — qualquer
 tropeço desqualifica o item inteiro. A comparação passa a ser a **tabela por checagem**.
+
+---
+
+# Lote v7 (27/08/2026) — o prompt assumiu o que o código garantia, e a régua nova é outra
+
+Rodado com o notebook v7 (prompt de redação v10 + garantias em código + as correções dos 8 achados
+da terceira revisão). **Atenção ao ler o placar**: a régua desta rodada tem as checagens novas dos
+8 achados (`atribuicao_repetida`, `funcao_obvia`, `padrao_por_analogia`, ausências endurecidas), que
+punem TODOS os lotes retroativamente — por isso o "itens sem problema" despencou em todas as
+colunas (v6: 11/20 na régua antiga → 1/20 nesta). A comparação honesta é por checagem, e pela
+média: **v5 2,7 → v6 2,5 → v7 2,2 problemas/item** (Gemma 2,0, ainda com o prompt antigo).
+
+## O número mais importante da rodada
+
+**O pós-processamento do fundo agiu em 0/20 alts.** Na v5, "sobre fundo X" estava em 15 de 20; no
+v7 o prompt resolveu sozinho os 20 — o regex que existia de rede de segurança ficou ocioso. É a
+resposta à pergunta que o alt bruto foi criado para responder: o código não está maquiando o texto;
+o texto que a pessoa cega ouve saiu inteiro do modelo.
+
+## O que zerou (e por quê)
+
+| Checagem | v5 | v7 | O que mudou |
+|---|---|---|---|
+| `fundo_no_alt` | 15 | **0** | prompt v10 (pós-processamento não precisou agir) |
+| `escala_errada` | 2 | **0** | escala calculada em código e injetada |
+| `miniatura_nao_declarada` | 1 | **0** | idem — o Pote agora diz "miniatura" |
+| `atribuicao_repetida` | 11 | **0** | marca variada por item (mas ver regressão 1) |
+| `frase_etiqueta`, `especulacao`, `jargao_de_foto` | — | **0** | regras reafirmadas no v10 |
+| `artefato_visto_sem_flag` | — | **0** | varredura de todas as seções (4/4 itens, como validado) |
+
+E as **flags de cor** estrearam funcionando: a Faixa 665 gerou "a foto mostra azul e o registro
+nomeia só amarelo, preto, vermelho" — **as penas azuis do smoke test, redescobertas pelo Qwen**
+(antes só o Gemma as tinha achado). Braçadeiras 1376 (laranja) e 1366 (branco/laranja) idem. O
+abano de 290 cm virou `metadado_suspeito` pela primeira vez (via código). A contradição
+brinquedo×caça do 883523 seguiu não detectada **mesmo como pergunta isolada** — o modelo harmonizou
+de novo ("não há contradição, pois..."); este resíduo fica para a revisão humana.
+
+## Duas regressões, as duas nascidas das correções
+
+1. **A marca de atribuição saiu do texto audível (13/20).** A correção do achado nº 1 (repetição de
+   "segundo o registro do museu") pediu ao modelo a marca variada num campo próprio
+   (`marca_atribuicao`) — e o modelo entendeu que o campo substitui o texto: escolheu formulações
+   variadas ("conforme o catálogo do museu", "de acordo com a ficha do museu"...), preencheu o
+   campo e **escreveu o nível 2 sem marca nenhuma**. Quem ouve perdeu a fronteira de auditoria — a
+   contribuição central do projeto. Correção candidata (v8): o CÓDIGO sorteia a formulação por item
+   e a injeta no prompt como variável ("use exatamente esta marca: ..."), como já se faz com
+   enquadramento e escala — variedade determinística, marca dentro do texto.
+2. **O teto de 30 palavras quebrou em 10/20 alts (31–53).** As exigências novas de cor e material
+   somaram palavras e o limite perdeu a disputa. Correção candidata: reafirmar o teto como
+   prioridade que vence qualquer outra exigência da seção A.
+
+Persistem: `afirmacao_de_ausencia` (9 — "sem pintura", "etiqueta sem caracteres legíveis"; inclui
+1 falso positivo da régua: o 78838 colou o texto de Dimensões do registro, com "(sem cordel)" —
+defeito real, mas de ficha técnica, não de ausência) e `funcao_obvia` (4). Artefato vazou para o
+texto em itens onde a menção vive em PARTES/LEGIBILIDADE, que continuam viajando para a redação.

@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · v6 rodado (3/20 → 11/20) · 🔶 **v7** aguardando Eduardo rodar |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08/2026 · v6 e **v7 rodados** (2,7 → 2,2 problemas/item na régua atual) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -168,7 +168,23 @@ célula com o do repositório (16/16) e a rubrica bate byte a byte (só a quebra
 CRLF local × LF no Drive). O notebook lê a rubrica do Drive e, se não a encontrar, do
 repositório público — a comparação vale para os dois caminhos.
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v7** no Colab (~40–50 min); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Lote v7 rodado (27/08/2026).** A régua atual (com as checagens dos 8 achados da terceira revisão)
+pune todos os lotes retroativamente — a comparação honesta é por checagem e pela média:
+**2,7 (v5) → 2,5 (v6) → 2,2 (v7) problemas/item** (Gemma 2,0, ainda no prompt antigo). O número
+central da rodada: **o pós-processamento do fundo agiu em 0/20 alts** — o prompt v10 resolveu
+sozinho o que era 15/20 na v5; o código ficou de rede de segurança ociosa, e o alt bruto salvo é a
+prova. Zeraram: fundo, escala, miniatura, frase-etiqueta, especulação, jargão de foto, repetição de
+atribuição, artefato sem flag. As **flags de cor estrearam** redescobrindo as penas azuis da Faixa
+(o achado do smoke test, agora pelo Qwen), e o abano de 290 cm virou `metadado_suspeito` pela
+primeira vez. A contradição brinquedo×caça seguiu não detectada mesmo como pergunta isolada — o
+modelo harmoniza; resíduo assumido para a revisão humana. **Duas regressões nascidas das próprias
+correções** (análise em `revisao_editorial_04.md`): a marca de atribuição migrou para o campo JSON
+e sumiu do texto audível em 13/20 (correção candidata: o código sorteia a formulação e a injeta
+como variável, como enquadramento e escala); e o teto de 30 palavras quebrou em 10/20 alts (31–53).
+Persistem afirmações de ausência (9) e função óbvia (4).
+
+**Pendências da E7:** (1) decisão do Eduardo: v8 cirúrgico (2 correções acima, ~40 min de Colab) OU congelar
+o v7 e seguir para a E8 — os resíduos ficam para flags + revisão humana; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas

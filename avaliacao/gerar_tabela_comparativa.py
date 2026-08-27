@@ -37,6 +37,8 @@ LOTES = [
      "observação v3 em seções + contrato de fontes + garantias em código"),
     ("gemma", "Gemma 3 12B · bake-off", "resultados/05_bakeoff_gemma.json",
      "mesmo prompt v8 do v5, redator diferente"),
+    ("v7", "Qwen · v7 (correções medidas no v6)", "resultados/04_pipeline_completo_v7.json",
+     "varredura de artefatos + escala/plausibilidade em código + marca de atribuição variada"),
 ]
 
 CSS = """
@@ -47,7 +49,7 @@ CSS = """
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Google Sans Flex','Segoe UI',system-ui,sans-serif; background:var(--bg);
   color:var(--ink); line-height:1.55; padding:2.2rem 1.25rem 4rem; }
-.wrap { max-width:1600px; margin:0 auto; }
+.wrap { max-width:1900px; margin:0 auto; }
 h1 { font-weight:700; font-size:1.8rem; }
 .resumo { background:var(--indigo-soft); border-radius:16px; padding:1rem 1.3rem;
   margin:1rem 0 1.2rem; font-size:.92rem; }
@@ -66,7 +68,7 @@ h1 { font-weight:700; font-size:1.8rem; }
 h2 { font-size:1.05rem; font-weight:600; display:inline; }
 .tag { font-weight:600; font-size:.64rem; letter-spacing:.05em; text-transform:uppercase;
   background:var(--terra-soft); color:var(--terra-ink); padding:.15rem .5rem; border-radius:999px; }
-.corpo { display:grid; grid-template-columns:minmax(220px,300px) repeat(3,1fr); gap:0; }
+.corpo { display:grid; grid-template-columns:minmax(200px,270px) repeat(4,1fr); gap:0; }
 @media (max-width:1200px) { .corpo { grid-template-columns:1fr 1fr; } }
 @media (max-width:760px) { .corpo { grid-template-columns:1fr; } }
 .esq { padding:.4rem .6rem 1rem; }
@@ -156,12 +158,12 @@ def main():
             it if it.get("escala") else dict(it, escala=CL.analisar_registro(it["registro"])[0])))
 
     sessao = requests.Session()
-    ordem = list(lotes["v6"])
+    ordem = list(lotes["v7"])
     cards = []
     for n, iid in enumerate(ordem, 1):
         det = sessao.get(f"{TAINACAN_BASE}/items/{iid}", timeout=60).json()
         src, cheia = melhor_imagem(det, sessao)
-        ref = lotes["v6"][iid]
+        ref = lotes["v7"][iid]
         reg = ref["registro"]
         escala = CL.analisar_registro(reg)[0]
         colunas = ""
