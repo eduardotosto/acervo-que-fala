@@ -272,7 +272,7 @@ capitalização de frases corrigida em código. Dois achados de conferência: os
 só mostrava a Descrição; corrigida). O v9 fica superado sem rodar; **v10 no Drive**. Régua ganhou
 7 checagens; gabarito, 5 entradas e as 8 políticas da 6ª.
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v10** no Colab (~45–55 min); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v10** no Colab (~45–55 min) — no Drive em notebooks/04_pipeline_completo_v10.ipynb (colab.research.google.com/drive/1p1yhgivka2CBkkDcmGoDKN6vK7HTWZKL), conferido 16/16 células contra o repositório; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
