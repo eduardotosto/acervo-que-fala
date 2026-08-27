@@ -85,10 +85,8 @@ def analisar_registro(registro):
         escala = f"cerca de {numero_pt(valor)} cm" + (f" de {rotulo}" if rotulo else "")
         mediana = MEDIANAS_CATEGORIA.get(cat)
         if mediana and valor < 10 and valor < mediana / 2:
-            escala += " — miniatura (bem menor que o comum na categoria): diga que é miniatura"
-            # 4a revisao editorial: dimensao atipicamente pequena tambem pede conferencia
-            # humana, pelo mesmo motivo do abano de 290 cm — pode ser miniatura genuina
-            # (as 3 dimensoes do Pote 9196 sao coerentes) ou erro de registro
+            # 4a revisao: dimensao atipicamente pequena pede conferencia humana, pelo
+            # mesmo motivo do abano de 290 cm — miniatura genuina ou erro de registro
             flags.append({"tipo": "metadado_suspeito", "detalhe":
                           f"dimensão atipicamente pequena para {cat} ({numero_pt(valor)} cm; "
                           f"mediana da categoria {numero_pt(mediana)} cm) — miniatura genuína "
@@ -101,10 +99,36 @@ def analisar_registro(registro):
     if re.search(r"al[çc]as? soltas?", registro.get("Descrição", "") or "", re.I) and e:
         flags.append({"tipo": "metadado_suspeito", "detalhe":
                       "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"})
+    desc = registro.get("Descrição", "") or ""
+    if re.search(r"(?<![a-zà-ú])miniatura", desc, re.I) and re.search(
+            r"ca[çc]a|pesca|ataque|guerra|defesa", registro.get("Função", "") or "", re.I):
+        flags.append({"tipo": "metadado_suspeito", "detalhe":
+                      "a Descrição diz miniatura/brinquedo e a Função descreve uso real "
+                      "(caça, ataque...) — contradição entre campos do registro; conferir"})
     ano = (registro.get("Ano de aquisição do objeto") or "").strip()
     if ano.isdigit() and not (1850 <= int(ano) <= 2026):
         flags.append({"tipo": "metadado_suspeito", "detalhe": f"ano de aquisição improvável: {ano}"})
+    # 5a adjudicacao: informacao flagada nao entra no texto. Qualquer flag sobre a
+    # dimensao (teto, piso, alcas soltas) poe a medida em quarentena.
+    if any(re.search(r"cm|alças soltas|dimensão", f["detalhe"]) for f in flags):
+        escala = ("EM QUARENTENA — a medida do registro está sob conferência (flag): "
+                  "não escreva medida nenhuma")
     return escala, flags
+
+NUMEROS_PT = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "três": 3, "tres": 3,
+              "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9,
+              "dez": 10, "onze": 11, "doze": 12}
+RE_NUM_SUBST = re.compile(r"(?<![a-zà-ú])(" + "|".join(NUMEROS_PT) + r"|[2-9]|1[0-2])\s+([a-zà-ú]{3,}s)(?![a-zà-ú])", re.I)
+
+
+def contagens(texto):
+    """Pares (substantivo plural, número) escritos num texto: 'seis tubos' -> (tubos, 6)."""
+    pares = {}
+    for m in RE_NUM_SUBST.finditer(texto or ""):
+        n = NUMEROS_PT.get(m.group(1).lower()) or int(m.group(1))
+        pares.setdefault(m.group(2).lower(), n)
+    return pares
+
 # --- FIM BLOCO REGISTRO ---
 
 # --- INICIO BLOCO OBSERVACAO (compartilhado com o Notebook 04, etapa 5) ---
@@ -219,21 +243,6 @@ RE_MARCA_ATRIB = re.compile(
     r"|segundo o cat[áa]logo|o cat[áa]logo (?:informa|registra|descreve)", re.I)
 ABERTURAS_ETIQUETA = ("o objeto é", "trata-se de")
 RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
-
-
-NUMEROS_PT = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "três": 3, "tres": 3,
-              "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9,
-              "dez": 10, "onze": 11, "doze": 12}
-RE_NUM_SUBST = re.compile(r"(?<![a-zà-ú])(" + "|".join(NUMEROS_PT) + r"|[2-9]|1[0-2])\s+([a-zà-ú]{3,}s)(?![a-zà-ú])", re.I)
-
-
-def contagens(texto):
-    """Pares (substantivo plural, número) escritos num texto: 'seis tubos' -> (tubos, 6)."""
-    pares = {}
-    for m in RE_NUM_SUBST.finditer(texto or ""):
-        n = NUMEROS_PT.get(m.group(1).lower()) or int(m.group(1))
-        pares.setdefault(m.group(2).lower(), n)
-    return pares
 
 
 def tem_atribuicao(texto):

@@ -95,13 +95,6 @@
       "origem": "3a #3"
     },
     {
-      "item": 665,
-      "slug": "azul_ausente_do_alt",
-      "tipo": "exige_alt",
-      "padrao": "azul",
-      "origem": "3a #8 — as duas penas azuis (achado fundador); a observacao ve, o alt tem que dizer"
-    },
-    {
       "item": 51023,
       "slug": "sete_tubos",
       "tipo": "proibe",
@@ -316,6 +309,7 @@
       "ALÇAS E CORDAS NUNCA na medida nem no foco — o objeto principal manda; na dúvida, omitir",
       "FUNÇÃO SÓ COM ESPECIFICIDADE CULTURAL: explicar remo, panela ou bolsa é redundância",
       "GAMELIFORME e afins: título mantém, glossário do RAG explica em linguagem comum"
-    ]
+    ],
+    "nota_superseded": "azul_ausente_do_alt (3a #8) saiu em 27/08: a 5a adjudicacao supersede — cor vista que o registro nao nomeia vira flag e NAO entra no texto (quarentena); as cores que entram sao as do catalogo (catalogo manda). O preto da pulseira continua exigido porque o registro o nomeia."
   }
 }
