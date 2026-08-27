@@ -29,6 +29,7 @@ redação v10→v11, nota 2).
 | 04 · v8 | v3.1 | v12 | v1.4 | `04_pipeline_completo_v8.json` (20) | 27/08 | 8 políticas da 5ª adjudicação; retry (5/20) |
 | 04 · v9 | v3.1 | v12 | v1.4 | — nunca rodou | 27/08 | só amplia `validar_rascunho`; superado pelo v10 |
 | 04 · v10 | v3.1 | v13 | v1.4 | `04_pipeline_completo_v10.json` (20) | 27/08 | 6ª adjudicação; validador de 14 exigências; retry 19/20 |
+| 05 · v3 | reusa as do lote v10 (v3.1) | v13 (lida do resultado v10) | v1.4 | `05_bakeoff_gemma_v2.json` — a rodar | 27/08 | bake-off v2: Gemma sob o sistema da 6ª adjudicação |
 
 ¹ O prompt de redação do Notebook 02 nasceu sem rótulo; "v2" é o nome retroativo que o
 Notebook 03 usa ao comparar as duas redações. Não existe redação v1.

@@ -278,8 +278,26 @@ capitalização de frases corrigida em código. Dois achados de conferência: os
 só mostrava a Descrição; corrigida). O v9 fica superado sem rodar; **v10 no Drive**. Régua ganhou
 7 checagens; gabarito, 5 entradas e as 8 políticas da 6ª.
 
-**Pendências da E7:** (1) decisão do Eduardo entre os três caminhos do v10 (congelar e ir para E8 · lapidação pontual · bake-off v2 com Gemma) — análise em revisao_editorial_04.md; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
-gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
+**Bake-off v2 preparado (27/08/2026) — decisão do Eduardo: caminho 3.** Dos três caminhos do
+v10, o escolhido foi refazer o bake-off com o Gemma sob o sistema atual. O julgamento cego do
+bake-off v1 fica **dispensado** — aquele material compara redatores sob o prompt v8, quatro
+revisões atrás; a página e o gabarito lacrado permanecem como registro. O **Notebook 05 v3**
+está no repositório: o Gemma 3 12B redige os mesmos 20 objetos reaproveitando do resultado do
+04 v10 todos os insumos (observações v3.1, escala, quarentena, contagens, marca de atribuição
+sorteada por item e as diretrizes pelos **ids salvos** — única variável: o redator), com o mesmo
+prompt v13 lido de dentro do resultado e o mesmo validador com um retry. Duas decisões de
+construção: o lado da redação foi **extraído byte a byte** do Notebook 04 v10 por script (não
+redigitado), e a régua é **baixada do repositório** (`avaliacao/checar_lote.py`) em tempo de
+execução — a cópia embarcada no 04 ficou defasada quando a régua foi recalibrada depois da
+rodada, e o placar interno recalcula os problemas do Qwen com a mesma régua (régua única).
+`max_seq_length` sobe para 8192 (o prompt v13 + retry não cabem nos 4096 do bake-off v1).
+Dry-run com modelo simulado passou de ponta a ponta: retry forçado em 19/20, porteiro de
+resolução ativo, campos do JSON idênticos aos do v10 — e a média recalculada do Qwen bateu com
+o 1,7 registrado. Resultado esperado: `resultados/05_bakeoff_gemma_v2.json`.
+
+**Pendências da E7:** (1) subir o notebook ao Drive (`notebooks/05_bakeoff_redator_v3.ipynb`) e
+rodar no Colab; (2) análise do lote + página de comparação cega v2 (A/B sorteado por item,
+gabarito lacrado) → **julgamento editorial cego do Eduardo decide o redator**.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
