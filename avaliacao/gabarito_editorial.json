@@ -27,8 +27,8 @@
     {
       "slug": "cor_material_natural",
       "tipo": "proibe",
-      "padrao": "cer[âa]mic[ao] bege|argila bege-|fitas? marrom|cer[âa]mica,? bege",
-      "origem": "1a #4 (fitas marrom claro) + 2a regra 10 + 4a #1 (ceramica bege-clara)"
+      "padrao": "(base|superfície|argila|cerâmic[ao]|madeira|fibra|palha|couro|osso|algodão|linha|fio) (bege|marro[mn]|castanh[ao]|creme|pard[ao])|tonalidades (bege|marro[mn])|cerâmic[ao],? bege|fitas? marrom",
+      "origem": "1a #4 (fitas marrom claro) + 2a regra 10 + 4a #1 (ceramica bege-clara) | 6a adjudicacao: NUNCA nome de cor em material natural, so claro/escuro"
     },
     {
       "slug": "ficha_tecnica",
@@ -41,6 +41,12 @@
       "tipo": "proibe",
       "padrao": "textura natural",
       "origem": "juiz v7 #4, adjudicado 27/08 — frase que nada descreve"
+    },
+    {
+      "slug": "micangas_penas_sobre",
+      "tipo": "proibe",
+      "padrao": "miçangas sobre|penas sobre|penas [a-zà-ú, ]{0,30}sobre base|sobre linha branca|dispostas sobre",
+      "origem": "6a adjudicacao #5/#6 — miçangas confeccionadas com [linha], penas: composta por; nunca sobre"
     }
   ],
   "por_item": [
@@ -297,6 +303,34 @@
       "tipo": "exige",
       "padrao": "pret[ao]",
       "origem": "2a #7 + juiz v7 7.1 — o registro nomeia preta e a foto mostra"
+    },
+    {
+      "item": 63283,
+      "slug": "roseta_nao_visivel_no_alt",
+      "tipo": "proibe_alt",
+      "padrao": "azul|verde",
+      "origem": "6a adjudicacao #4 — a foto e detalhe da trama: a roseta azul/verde vem do catalogo e so entra na descricao"
+    },
+    {
+      "item": 665,
+      "slug": "estrutura_costurada_ausente",
+      "tipo": "exige",
+      "padrao": "costurad",
+      "origem": "6a adjudicacao #2 — o ouvinte precisa saber que as penas sao costuradas no couro (base coberta, nao aparente)"
+    },
+    {
+      "item": 200648,
+      "slug": "dekai_omitido",
+      "tipo": "exige",
+      "padrao": "dekai",
+      "origem": "6a adjudicacao #11 — o tipo de argila do catalogo entra na descricao"
+    },
+    {
+      "item": 200648,
+      "slug": "procedencia_omitida",
+      "tipo": "exige",
+      "padrao": "ucuqui",
+      "origem": "6a adjudicacao #11 — procedencia (Igarape Ucuqui) entra na descricao"
     }
   ],
   "politicas": {
@@ -310,6 +344,16 @@
       "FUNÇÃO SÓ COM ESPECIFICIDADE CULTURAL: explicar remo, panela ou bolsa é redundância",
       "GAMELIFORME e afins: título mantém, glossário do RAG explica em linguagem comum"
     ],
-    "nota_superseded": "azul_ausente_do_alt (3a #8) saiu em 27/08: a 5a adjudicacao supersede — cor vista que o registro nao nomeia vira flag e NAO entra no texto (quarentena); as cores que entram sao as do catalogo (catalogo manda). O preto da pulseira continua exigido porque o registro o nomeia."
+    "nota_superseded": "azul_ausente_do_alt (3a #8) saiu em 27/08: a 5a adjudicacao supersede — cor vista que o registro nao nomeia vira flag e NAO entra no texto (quarentena); as cores que entram sao as do catalogo (catalogo manda). O preto da pulseira continua exigido porque o registro o nomeia.",
+    "6a_adjudicacao_27_08": [
+      "NUNCA nome de cor em material natural (madeira, fibra, argila, algodao, couro): no maximo claro/escuro; procedencia so do catalogo — nao existe base bege",
+      "ALT = so o visivel: fato de catalogo que nao aparece na foto (roseta, decoracao encoberta) vai apenas para a descricao",
+      "Micangas confeccionadas com [linha]; pecas plumarias compostas por penas — nunca [material] sobre [material]",
+      "Povo, ano de aquisicao e origem SEMPRE na descricao quando o registro os tem; texto nao pode terminar na marca de atribuicao (truncado)",
+      "Cor ancorada a parte que a exibe (cabo escuro, bocal claro) — enumerar cores soltas perde a referencia",
+      "Amostras (Etnobotanica): o contenedor (tubo, tampa) so no alt; a descricao e do conteudo, com tipo (dekai) e procedencia",
+      "Nivel 2 nao repete literalmente frases do alt; palavra repetida 3x e defeito (osso 3x)",
+      "Funcao descrita no campo Função do registro PODE entrar (catalogo manda) — funcao_obvia recalibrada; frases sempre iniciando com maiuscula"
+    ]
   }
 }

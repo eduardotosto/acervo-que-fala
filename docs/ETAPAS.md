@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · **v8 rodado: 0,5 problemas/item, gabarito 25→2** · 🔶 v9 (só validador) pronto no Drive |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · v8 rodado e adjudicado (6ª) · 🔶 **v10** aguardando Eduardo rodar |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -261,7 +261,18 @@ do retry; prompt intocado), no Drive em `notebooks/04_pipeline_completo_v9.ipynb
 célula a célula. Análise completa em `avaliacao/revisao_editorial_04.md`; tabela comparativa
 atualizada com colunas v5 × v7 × v8.
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v9** no Colab e/ou revisar os textos do v8 na tabela comparativa — o julgamento de satisfatório é dele; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**6ª adjudicação (27/08/2026) — revisão do Eduardo sobre o v8 vira o notebook v10.** Decisões
+novas: material natural NUNCA tem nome de cor ("não existe base bege" — no máximo clara/escura,
+procedência só do catálogo); alt restrito ao visível (a roseta do catálogo sai do alt); miçangas
+"confeccionadas com linha" e penas "compostas por" (nunca "sobre"); cor presa à parte; povo, ano e
+origem sempre na descrição; contenedor de amostra só no alt (dekai e Igarapé Ucuqui entram);
+`funcao_obvia` recalibrada (função com fonte no campo Função é legítima — catálogo manda);
+capitalização de frases corrigida em código. Dois achados de conferência: os textos truncados do
+1376/200648 (régua nova `nivel2_truncado`) e o #14 que TINHA fonte (campo Função — a tabela é que
+só mostrava a Descrição; corrigida). O v9 fica superado sem rodar; **v10 no Drive**. Régua ganhou
+7 checagens; gabarito, 5 entradas e as 8 políticas da 6ª.
+
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v10** no Colab (~45–55 min); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas

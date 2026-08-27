@@ -243,6 +243,21 @@ RE_MARCA_ATRIB = re.compile(
     r"|segundo o cat[áa]logo|o cat[áa]logo (?:informa|registra|descreve)", re.I)
 ABERTURAS_ETIQUETA = ("o objeto é", "trata-se de")
 RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
+# 6a adjudicacao: nunca dar NOME DE COR a material natural (madeira, fibra, argila,
+# algodao, couro...) — no maximo claro/escuro; procedencia so do catalogo. A excecao
+# e cor de pintura/tingimento ("pintura marrom" descreve a tinta, nao o material).
+RE_COR_MATERIAL = re.compile(
+    r"(?<![a-zà-ú])(?:(?:base|superfície|argila|cerâmic\w+|madeira|fibra\w*|palha|couro|"
+    r"osso|algodão|linha|fio|fios|taquara|cabaça|tucum|buriti|barro|vime|folha)\s+"
+    r"(?:de\s+\w+\s+)?(?:bege|marro[mn]|castanh\w+|creme|pard[ao]s?|amarronzad\w+|"
+    r"acinzentad\w+|terros[ao]s?)"
+    r"|tonalidades?\s+(?:bege|marro[mn]|castanh\w+|creme|pard[ao]s?)"
+    r"|(?:bege|marro[mn])[\w-]*[\s-]*(?:acinzentad|clar|escur)\w*\s+(?:e\s+bege)?)", re.I)
+RE_PINTURA_PERTO = re.compile(r"(pintur|pintad|tingid|tinta)", re.I)
+# frase iniciando em minuscula (a marca de atribuicao colada abre frase sem maiuscula)
+RE_FRASE_MINUSCULA = re.compile(r"(?:^|[.!?]\s+)([a-zà-ú])")
+# contenedor de amostra na descricao (Etnobotanica): o objeto e o conteudo, nao o tubo
+RE_CONTENEDOR = re.compile(r"(?<![a-zà-ú])(tubo de ensaio|tubo|frasco|recipiente|tampa|vidro)", re.I)
 
 
 def tem_atribuicao(texto):
@@ -341,8 +356,15 @@ def _verificar_nivel2(item, d, dl, a, registro):
         marcas = RE_MARCA_ATRIB.findall(d)
         if len(marcas) > 1:
             p.append(("atribuicao_repetida", f"{len(marcas)} marcas no mesmo texto"))
-        if RE_FUNCAO_OBVIA.search(dl):
-            p.append(("funcao_obvia", RE_FUNCAO_OBVIA.search(dl).group(0)[:40]))
+        m_fo = RE_FUNCAO_OBVIA.search(dl)
+        if m_fo:
+            # 6a adjudicacao (bolsa 500322): funcao descrita no campo Função do registro
+            # pode entrar — catalogo manda. So e defeito quando NAO ha fonte.
+            func_reg = (registro.get("Função") or "").lower()
+            chaves_fo = [w for w in re.findall(r"[a-zà-ú]{5,}", m_fo.group(0))
+                         if w not in ("usada", "usado", "para")]
+            if not (func_reg and any(w[:6] in func_reg for w in chaves_fo)):
+                p.append(("funcao_obvia", m_fo.group(0)[:40]))
         # medidas: toda medida escrita tem que estar no registro, e a escala é a maior
         nums_txt = [float(x.replace(",", ".")) for x in RE_MEDIDA_TXT.findall(d)]
         nums_reg = [float(x.replace(",", ".")) for x in
@@ -367,6 +389,21 @@ def _verificar_nivel2(item, d, dl, a, registro):
                     p.append(("escala_errada", f"a maior é {esc:g} cm"))
         if "miniatura" in escala and "miniatura" not in dl:
             p.append(("miniatura_nao_declarada", ""))
+        # 6a adjudicacao: povo, aquisicao e origem SEMPRE entram na descricao quando o
+        # registro os tem; texto que termina na marca de atribuicao esta truncado.
+        povo_n2 = (registro.get("Povo") or "").strip()
+        if povo_n2 and povo_n2.split()[0].lower() not in dl:
+            p.append(("povo_ausente_no_n2", povo_n2))
+        ano_reg = (registro.get("Ano de aquisição do objeto") or "").strip()
+        if ano_reg.isdigit() and ano_reg not in d:
+            p.append(("ano_ausente_no_n2", ano_reg))
+        origem_reg = (registro.get("Estado de origem") or "").strip()
+        if origem_reg and origem_reg.split()[0].lower() not in dl:
+            p.append(("origem_ausente_no_n2", origem_reg))
+        if re.search(r"(museu|registro|catálogo|ficha)[\s,]*$", dl) or not dl.rstrip().endswith("."):
+            p.append(("nivel2_truncado", "termina sem fatos depois da marca ou sem ponto final"))
+        if (registro.get("Categoria") == "Etnobotânica") and RE_CONTENEDOR.search(dl):
+            p.append(("contenedor_no_nivel2", RE_CONTENEDOR.search(dl).group(0)))
 
     reg_desc_letras = set(re.findall(r"[\"'“‘]([A-Za-z])[\"'”’]",
                                      registro.get("Descrição", "") or ""))
@@ -378,6 +415,21 @@ def _verificar_nivel2(item, d, dl, a, registro):
                 continue  # o registro usa a comparacao (figuras em "X") — catalogo manda
             p.append(("padrao_por_analogia", f"{nome}: {m_ana.group(0)[:34]}"))
 
+    for nome, texto_orig in [("alt", item.get("alt_text") or ""),
+                             ("nível 2", item.get("descricao_objeto") or "")]:
+        m_cm = RE_COR_MATERIAL.search(texto_orig)
+        if m_cm and not RE_PINTURA_PERTO.search(texto_orig[max(0, m_cm.start() - 45):m_cm.start()]):
+            p.append(("cor_em_material_natural", f"{nome}: {m_cm.group(0)[:36]}"))
+        m_min = RE_FRASE_MINUSCULA.search(texto_orig)
+        if m_min:
+            p.append(("frase_em_minuscula", f"{nome}: ...{m_min.group(0)[-12:]}"))
+    # nivel 2 nao repete literalmente o alt (6a adjudicacao, caso franjas/cordel)
+    palavras_alt = a.split()
+    for i5 in range(len(palavras_alt) - 4):
+        trecho5 = " ".join(palavras_alt[i5:i5 + 5])
+        if len(trecho5) > 18 and trecho5 in dl:
+            p.append(("repeticao_alt_n2", trecho5[:40]))
+            break
     for nome, texto in [("alt", a), ("nível 2", dl)]:
         if RE_ESPECULACAO.search(texto):
             p.append(("especulacao", f"{nome}: {RE_ESPECULACAO.search(texto).group(0)}"))

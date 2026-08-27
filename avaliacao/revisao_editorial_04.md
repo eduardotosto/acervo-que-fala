@@ -548,3 +548,49 @@ Os resíduos 1–3 têm a mesma causa: o validador do retry não os cobria. O **
 `validar_rascunho`** (prompt e observação intocados): jargão conhecido, povo no alt e função
 óbvia entram na checagem, e o retry cobra a correção. Se o padrão do v8 se repetir (o retry
 resolveu o que cobria), o critério de saída — zero reincidência adjudicada — fica ao alcance.
+
+---
+
+# 6ª adjudicação (27/08/2026) — revisão editorial do Eduardo sobre o v8
+
+Revisão card a card do lote v8, com decisões novas de política. Cada achado foi conferido no dado
+bruto antes de virar regra:
+
+- **Global — frases em minúscula**: a marca de atribuição sorteada em minúscula ("de acordo com a
+  ficha do museu, foi adquirido...") abria frase sem maiúscula. Correção em CÓDIGO (tipografia é
+  determinística): `capitalizar_frases()` no pós-processamento, e a régua ganhou `frase_em_minuscula`.
+- **Global — "não existe base bege" (erro grave)**: material natural (madeira, fibra, argila,
+  algodão, couro) NUNCA recebe nome de cor — no máximo "clara/escura"; procedência (tipo de
+  madeira/fibra) só quando o catálogo der. Isso aposenta de vez a velha muleta "sobre a argila
+  bege". Régua nova `cor_em_material_natural` (exceção: cor de pintura/tingimento).
+- **#1 Pote**: povo fora do nível 2 → política: povo, ano de aquisição e origem SEMPRE entram na
+  descrição quando o registro os tem (régua: `povo/ano/origem_ausente_no_n2`).
+- **#2 Faixa**: a estrutura sumiu — o ouvinte imaginou base de couro aparente, quando o catálogo
+  diz penas COSTURADAS no couro (base coberta). Caso em que o catálogo explica a imagem melhor que
+  o alt: a construção do catálogo estrutura a descrição (gabarito: exige "costurad").
+- **#4 Abano**: o alt citou a roseta azul/verde, que NÃO está visível na foto (detalhe da trama) —
+  elemento só-catálogo nunca entra no alt, apenas na descrição (gabarito: proibe_alt azul|verde).
+- **#5 Tanga**: "miçangas sobre linha" → miçangas são "confeccionadas com [linha]"; e a repetição
+  literal alt↔descrição voltou ("franjas e cordel de amarração" igual nos dois). Régua nova
+  `repeticao_alt_n2` (5 palavras idênticas).
+- **#6 Braçadeira**: penas "compostas por", nunca "sobre"; aquisição/origem faltando — conferido:
+  **o texto estava TRUNCADO** (terminava na marca de atribuição; o 200648 também). Régua nova
+  `nivel2_truncado` + validador exige os fatos depois da marca. E a cor da ETIQUETA (branco) não
+  pode gerar flag de cor — `cores_divergentes` agora exclui frases com artefato.
+- **#8 Zarabatana**: cores enumeradas soltas perdem o vínculo com as partes → política: cor presa
+  à parte que a exibe ("cabo escuro, bocal claro").
+- **#11 Argila**: procedência (Igarapé Ucuqui) e tipo ("dekai") sumiram — catálogo manda, entram;
+  e o contenedor (tubo, tampa) fica SÓ no alt — a descrição é do conteúdo (régua:
+  `contenedor_no_nivel2` para Etnobotânica; gabarito exige dekai/ucuqui).
+- **#12 Flauta de osso**: "osso" 3× — redundância (regra 22 reforçada no prompt).
+- **#14 Abano de talo — checagem de procedência RESOLVIDA**: "pá para virar beiju e atiçar fogo"
+  TEM fonte — é o campo **Função** do registro, textual. A confusão era da TABELA comparativa, que
+  só mostrava o campo Descrição como baseline; agora mostra Descrição + Função + Matéria-prima.
+- **#20 Bolsa — recalibração de `funcao_obvia`**: função descrita no campo Função do registro PODE
+  entrar (catálogo manda) — a checagem só dispara quando a função não tem fonte. Nota: pela mesma
+  lógica, remo/panela/flauta (que têm Função no registro) deixam de ser defeito; se o Eduardo
+  preferir manter o veto para esses casos, a checagem volta a ser incondicional.
+
+**Notebook v10** (prompt v13): todas as políticas acima + capitalização em código + validador
+ampliado (cor-material, povo/ano/origem na descrição, truncamento, repetição do alt, contenedor).
+O v9 fica superado sem rodar — suas mudanças estão contidas no v10.

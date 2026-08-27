@@ -181,6 +181,8 @@ def main():
       <a class="foto" href="{e(cheia)}" target="_blank" rel="noopener" title="Abrir em resolução máxima">
         <img src="{e(src)}" alt="{e(ref['titulo'])}" loading="lazy"></a>
       <div class="base"><b>Baseline — descrição curatorial</b>{e(reg.get('Descrição') or '(o registro não traz descrição)')}</div>
+      <div class="base"><b>Função (registro)</b>{e(reg.get('Função') or '(vazia)')}</div>
+      <div class="base"><b>Matéria-prima (registro)</b>{e(reg.get('Matéria-prima') or '(vazia)')}</div>
       <div class="escala">Escala calculada do registro: {e(escala)}</div>
     </div>{colunas}
   </div>
