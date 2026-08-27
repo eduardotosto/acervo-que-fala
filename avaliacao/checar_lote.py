@@ -246,7 +246,8 @@ RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
 
 
 def tem_atribuicao(texto):
-    return re.search(r"(?<![a-zà-ú])(registro|catálogo|catalogo)", texto or "", re.I) is not None
+    return re.search(r"(?<![a-zà-ú])(registro|catálogo|catalogo|ficha do museu)",
+                     texto or "", re.I) is not None
 
 
 def verificar(item):
@@ -257,6 +258,9 @@ def verificar(item):
     observação) são puladas quando o campo não existe — é o que permite medir os lotes
     antigos sem inventar dado que eles não têm. A escala, por ser função só do registro,
     vale para todos."""
+    if item.get("resolucao_ok") is False:
+        # politica da 5a adjudicacao: sem resolucao nao ha texto — nada a checar
+        return []
     p = []
     alt = item.get("alt_text", "") or ""
     d = item.get("descricao_objeto", "") or ""
@@ -364,9 +368,15 @@ def _verificar_nivel2(item, d, dl, a, registro):
         if "miniatura" in escala and "miniatura" not in dl:
             p.append(("miniatura_nao_declarada", ""))
 
+    reg_desc_letras = set(re.findall(r"[\"'“‘]([A-Za-z])[\"'”’]",
+                                     registro.get("Descrição", "") or ""))
     for nome, texto in [("alt", a), ("nível 2", d)]:
-        if RE_ANALOGIA.search(texto):
-            p.append(("padrao_por_analogia", f"{nome}: {RE_ANALOGIA.search(texto).group(0)[:34]}"))
+        m_ana = RE_ANALOGIA.search(texto)
+        if m_ana:
+            m_letra = re.search(r"de\s*.?([A-Za-z]).?\s*$", m_ana.group(0).strip())
+            if m_letra and m_letra.group(1).upper() in {l.upper() for l in reg_desc_letras}:
+                continue  # o registro usa a comparacao (figuras em "X") — catalogo manda
+            p.append(("padrao_por_analogia", f"{nome}: {m_ana.group(0)[:34]}"))
 
     for nome, texto in [("alt", a), ("nível 2", dl)]:
         if RE_ESPECULACAO.search(texto):
@@ -380,6 +390,8 @@ def _verificar_nivel2(item, d, dl, a, registro):
         p.append(("artefato_visto_sem_flag", artefatos_da_observacao(obs)[0]["detalhe"][:40]))
 
     for f in item.get("flags", []) or []:
+        if f.get("tipo") == "falta_de_resolucao":
+            continue
         det = (f.get("detalhe") or "").lower()
         if (f.get("tipo") == "artefato_estudio" and RE_FUNDO_TXT.search(det)
                 and not RE_ARTEFATO.search(det)):

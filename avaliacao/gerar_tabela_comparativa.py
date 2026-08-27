@@ -33,12 +33,10 @@ import checar_lote as CL
 LOTES = [
     ("v5", "Qwen · sistema antigo", "resultados/04_pipeline_completo_v5.json",
      "prompt v8, 25 regras no mesmo contexto"),
-    ("v6", "Qwen · sistema redesenhado", "resultados/04_pipeline_completo_v6.json",
-     "observação v3 em seções + contrato de fontes + garantias em código"),
-    ("gemma", "Gemma 3 12B · bake-off", "resultados/05_bakeoff_gemma.json",
-     "mesmo prompt v8 do v5, redator diferente"),
-    ("v7", "Qwen · v7 (correções medidas no v6)", "resultados/04_pipeline_completo_v7.json",
-     "varredura de artefatos + escala/plausibilidade em código + marca de atribuição variada"),
+    ("v7", "Qwen · v7", "resultados/04_pipeline_completo_v7.json",
+     "garantias em código + marca variada"),
+    ("v8", "Qwen · v8 (8 políticas da adjudicação)", "resultados/04_pipeline_completo_v8.json",
+     "quarentena + catálogo-manda + contagens injetadas + validação com retry"),
 ]
 
 CSS = """
@@ -68,7 +66,7 @@ h1 { font-weight:700; font-size:1.8rem; }
 h2 { font-size:1.05rem; font-weight:600; display:inline; }
 .tag { font-weight:600; font-size:.64rem; letter-spacing:.05em; text-transform:uppercase;
   background:var(--terra-soft); color:var(--terra-ink); padding:.15rem .5rem; border-radius:999px; }
-.corpo { display:grid; grid-template-columns:minmax(200px,270px) repeat(4,1fr); gap:0; }
+.corpo { display:grid; grid-template-columns:minmax(220px,300px) repeat(3,1fr); gap:0; }
 @media (max-width:1200px) { .corpo { grid-template-columns:1fr 1fr; } }
 @media (max-width:760px) { .corpo { grid-template-columns:1fr; } }
 .esq { padding:.4rem .6rem 1rem; }
@@ -158,12 +156,12 @@ def main():
             it if it.get("escala") else dict(it, escala=CL.analisar_registro(it["registro"])[0])))
 
     sessao = requests.Session()
-    ordem = list(lotes["v7"])
+    ordem = list(lotes["v8"])
     cards = []
     for n, iid in enumerate(ordem, 1):
         det = sessao.get(f"{TAINACAN_BASE}/items/{iid}", timeout=60).json()
         src, cheia = melhor_imagem(det, sessao)
-        ref = lotes["v7"][iid]
+        ref = lotes["v8"][iid]
         reg = ref["registro"]
         escala = CL.analisar_registro(reg)[0]
         colunas = ""

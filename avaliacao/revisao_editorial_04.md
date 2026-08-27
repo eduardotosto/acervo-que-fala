@@ -503,3 +503,48 @@ defeito                                     v1      v2      v4      v5   gemma  
 TOTAL de reincidências                      32      17      15      18      23      20      23
 defeitos distintos presentes             12/29   17/29    8/29    8/29    9/29   14/29   14/29
 ```
+
+---
+
+# Lote v8 (27/08/2026) — as políticas funcionaram; sobrou uma família de defeito
+
+Rodado com as 8 políticas da adjudicação + validação com retry. **Régua mecânica: 3,1 → 0,5
+problemas/item (11/20 sem problema); gabarito de reincidência: 25 → 2 defeitos distintos.**
+Antes do veredito, a revisão dos resíduos encontrou e corrigiu **4 falsos positivos da régua**
+(lição repetida: o avaliador também se avalia): a fórmula "de acordo com a ficha do museu" —
+sorteada pelo nosso próprio rodízio — não era reconhecida como atribuição; "padrões gregos"
+não casava com o padrão exigido "grega"; o "em forma de X" da Panela vem do próprio registro
+(exceção que a política catálogo-manda prevê, agora codificada); e o item sem resolução era
+punido por checagens de texto que a política mandou não gerar.
+
+## O que as políticas entregaram (medido)
+
+- **Zeraram**: fundo, medida/ausência no alt, molde de variável, colagem de registro, escala
+  errada, contagem divergente, atribuição repetida, afirmações de ausência, alt longo,
+  jargão de foto, especulação, artefato nos textos, estado sem fonte, "aquisição em".
+- **Quarentena em ação**: 4 medidas suspeitas fora do texto (9196, 63283, 1376, 1366); o azul
+  da Faixa e o laranja das Braçadeiras em flag e fora do texto; as cores do registro dentro.
+- **Contagem injetada**: a Flauta finalmente diz **seis tubos** — defeito de 4 lotes, resolvido.
+- **"Costuradas"** na Faixa (catálogo-manda) ✓; **espinha-de-peixe** no Abano ✓ (2×); ritual
+  sem fonte da Braçadeira sumiu ✓; o Pião 5146 foi barrado pelo porteiro de resolução e virou
+  flag de dataset ✓.
+- **Retry**: 5 textos precisaram da segunda volta — o número que mede o que o prompt sozinho
+  não segura.
+
+## O que sobrou (9 problemas, uma família dominante)
+
+1. **Jargão do catálogo não traduzido** — a única reincidência real do gabarito: "globular"
+   (9196, 2081), "extrovertida" (9196; 905 só no alt — o nível 2 traduziu "boca que se abre
+   para fora"), "zoomorfos" sem virar "figuras de animais" (4156). O glossário entrega a
+   tradução; o 8B usa às vezes.
+2. **Função óbvia** (5): o modelo escreveu até os exemplos proibidos textualmente no prompt
+   ("remo... deslocar", "panela... cozinhar e servir").
+3. **Povo ausente do alt** (2) e **observação sem linha ENQUADRAMENTO válida** (2, fallback
+   correto nos dois).
+
+## Encaminhamento — v9, mudança de UMA função
+
+Os resíduos 1–3 têm a mesma causa: o validador do retry não os cobria. O **v9 muda só a função
+`validar_rascunho`** (prompt e observação intocados): jargão conhecido, povo no alt e função
+óbvia entram na checagem, e o retry cobra a correção. Se o padrão do v8 se repetir (o retry
+resolveu o que cobria), o critério de saída — zero reincidência adjudicada — fica ao alcance.

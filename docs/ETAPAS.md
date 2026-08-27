@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 (5 smoke + 15 novos) — Notebook 04 | ✅ 24/08 · v6/v7 rodados e adjudicados · 🔶 **v8** aguardando Eduardo rodar (critério de saída: zero reincidência) |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · **v8 rodado: 0,5 problemas/item, gabarito 25→2** · 🔶 v9 (só validador) pronto no Drive |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -245,7 +245,23 @@ contra o repositório (16/16 idênticas). Dry-run com modelo simulado passou de 
 **Critério de saída registrado (decisão do Eduardo): a etapa só fecha com resultado satisfatório —
 zero reincidência dos defeitos adjudicados no gabarito e régua limpa nas checagens mecânicas.**
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v8** no Colab (~45–55 min; link no parágrafo acima); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Lote v8 rodado (27/08/2026) — as políticas funcionaram.** Régua mecânica: **3,1 → 0,5
+problemas/item** (11/20 sem problema); gabarito de reincidência: **25 → 2 defeitos distintos**.
+Antes do veredito, 4 falsos positivos da própria régua foram achados e corrigidos (a fórmula
+"ficha do museu" do nosso rodízio não era reconhecida; "gregos"×"grega"; o "X" que vem do
+registro da Panela — exceção catálogo-manda agora codificada; item sem resolução punido por
+checagens de texto que a política mandou não gerar). Vitrines: Flauta com **seis tubos** (defeito
+de 4 lotes, resolvido pela contagem injetada), "costuradas" na Faixa, espinha-de-peixe no Abano,
+azul/laranja em flag e fora do texto (quarentena), 4 medidas suspeitas fora do texto, Pião barrado
+pelo porteiro de resolução. Retry usado em 5/20. **Resíduo = uma família**: jargão não traduzido
+(globular/extrovertida/zoomorfos, 4 itens), função óbvia (5 — o modelo escreveu até os exemplos
+proibidos do prompt), povo fora do alt (2) — nada disso estava no validador do retry. **Notebook
+v9 pronto** (muda SÓ a função `validar_rascunho`: jargão, povo e função óbvia entram na cobrança
+do retry; prompt intocado), no Drive em `notebooks/04_pipeline_completo_v9.ipynb`, conferido
+célula a célula. Análise completa em `avaliacao/revisao_editorial_04.md`; tabela comparativa
+atualizada com colunas v5 × v7 × v8.
+
+**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v9** no Colab e/ou revisar os textos do v8 na tabela comparativa — o julgamento de satisfatório é dele; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
