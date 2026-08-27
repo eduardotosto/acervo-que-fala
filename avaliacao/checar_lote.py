@@ -423,12 +423,19 @@ def _verificar_nivel2(item, d, dl, a, registro):
         m_min = RE_FRASE_MINUSCULA.search(texto_orig)
         if m_min:
             p.append(("frase_em_minuscula", f"{nome}: ...{m_min.group(0)[-12:]}"))
-    # nivel 2 nao repete literalmente o alt (6a adjudicacao, caso franjas/cordel)
+    # nivel 2 nao repete literalmente o alt (6a adjudicacao, caso franjas/cordel).
+    # Recalibrada no v10: 6 palavras, e trecho que contem o titulo, o povo ou a
+    # contagem do catalogo nao conta — essas palavras SAO obrigatorias nos dois textos.
+    obrigatorias = set((registro.get("Povo") or "").lower().split())
+    obrigatorias |= set((registro.get("Nome do item") or "").lower().split())
+    obrigatorias |= set((item.get("contagem_registro") or "").lower().split())
     palavras_alt = a.split()
-    for i5 in range(len(palavras_alt) - 4):
-        trecho5 = " ".join(palavras_alt[i5:i5 + 5])
-        if len(trecho5) > 18 and trecho5 in dl:
-            p.append(("repeticao_alt_n2", trecho5[:40]))
+    for i6 in range(len(palavras_alt) - 5):
+        grupo = palavras_alt[i6:i6 + 6]
+        trecho6 = " ".join(grupo)
+        if (len(trecho6) > 24 and trecho6 in dl
+                and not (set(w.strip(",.") for w in grupo) & obrigatorias)):
+            p.append(("repeticao_alt_n2", trecho6[:40]))
             break
     for nome, texto in [("alt", a), ("nível 2", dl)]:
         if RE_ESPECULACAO.search(texto):

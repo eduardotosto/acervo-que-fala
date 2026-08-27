@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · v8 rodado e adjudicado (6ª) · 🔶 **v10** aguardando Eduardo rodar |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · **v10 rodado: 1,7 problemas/item (melhor lote)** · decisão: congelar × lapidar × trocar redator |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -272,7 +272,7 @@ capitalização de frases corrigida em código. Dois achados de conferência: os
 só mostrava a Descrição; corrigida). O v9 fica superado sem rodar; **v10 no Drive**. Régua ganhou
 7 checagens; gabarito, 5 entradas e as 8 políticas da 6ª.
 
-**Pendências da E7:** (1) Eduardo rodar o **Notebook 04 v10** no Colab (~45–55 min) — no Drive em notebooks/04_pipeline_completo_v10.ipynb (colab.research.google.com/drive/1p1yhgivka2CBkkDcmGoDKN6vK7HTWZKL), conferido 16/16 células contra o repositório; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Pendências da E7:** (1) decisão do Eduardo entre os três caminhos do v10 (congelar e ir para E8 · lapidação pontual · bake-off v2 com Gemma) — análise em revisao_editorial_04.md; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas

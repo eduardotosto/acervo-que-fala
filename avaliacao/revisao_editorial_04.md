@@ -594,3 +594,50 @@ bruto antes de virar regra:
 **Notebook v10** (prompt v13): todas as políticas acima + capitalização em código + validador
 ampliado (cor-material, povo/ano/origem na descrição, truncamento, repetição do alt, contenedor).
 O v9 fica superado sem rodar — suas mudanças estão contidas no v10.
+
+---
+
+# Lote v10 (27/08/2026) — o melhor lote do projeto, e o retrato honesto do segundo teto
+
+Rodado com a 6ª adjudicação inteira (prompt v13 + capitalização em código + validador de 14
+exigências). **Na régua mais dura de todas: v8 = 4,0 → v10 = 1,7 problemas/item.** Uma
+recalibração de régua no meio: a checagem de repetição alt↔descrição punia o que as próprias
+regras obrigam nos dois textos (título, povo, contagem do catálogo) — agora exige 6 palavras e
+isenta os termos obrigatórios.
+
+## O que a 6ª adjudicação resolveu (medido)
+
+- **Frases em minúscula: 19 → 0** — a capitalização determinística em código fechou a classe.
+- **Cor em material natural: 16 → 4**; origem ausente: 11 → 1; ano ausente: 5 → 1;
+  truncamentos: 6 → 1; jargão, zoomorfo e roseta-no-alt: **zeraram**.
+- Retry usado em **19/20** — o validador de 14 exigências trabalha em quase todo texto.
+
+## O achado de camada: o "relevo" nasceu no olho
+
+A reincidência mais importante ("padrões geométricos em relevo" no Pote, onde o registro diz
+"pintados") **está na observação**, não na redação — o modelo de visão lê pintura de linhas como
+relevo. É divergência de técnica observação×registro, e o encaminhamento natural é o mesmo das
+cores: comparação determinística (registro diz "pintad", observação diz "relevo") → flag +
+quarentena. Ainda não implementado — candidato à próxima rodada.
+
+## O retrato honesto: oscilação sob demanda simultânea
+
+Entre v8 e v10, defeitos antigos trocaram de lugar: jargão/zoomorfo/roseta zeraram, mas
+"costuradas" (que o v8 tinha) se perdeu, o preto da Pulseira sumiu de novo, "tortual" voltou 1×,
+"sobre linha branca" persiste, e apareceu classe nova (o typo "aquisido"; um "eixo metálico" onde
+o registro diz haste de madeira — divergência de material sem flag, reincidência do achado 10.2).
+**Diagnóstico: o retry único com 8–14 demandas simultâneas satura** — o modelo corrige o que o
+diagnóstico lista e derruba outra coisa. É o teto de saturação reaparecendo uma camada acima:
+antes no prompt, agora no laço de correção. Convergência real só onde há garantia determinística;
+no resto, o 8B oscila — e é exatamente o resíduo que o desenho do sistema sempre destinou à
+revisão humana com flags.
+
+## Os três caminhos (decisão do Eduardo)
+
+1. **Congelar o v10 e seguir para E8/E10** — resíduo assumido para flags + revisão humana; o
+   argumento científico está completo (convergência determinística × oscilação estocástica).
+2. **Uma rodada de lapidação**: quarentena de técnica (relevo×pintado), veto à medida "com
+   cordel" no texto, mensagem do validador pedindo "adquirido em [ano]" (o typo "aquisido" nasceu
+   da mensagem atual) — mudanças pequenas, mais uma rodada de Colab.
+3. **Trocar o redator**: bake-off v2 com o Gemma 12B sob o sistema atual — testa se o teto de
+   obediência simultânea é do tamanho do modelo.

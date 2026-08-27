@@ -33,10 +33,10 @@ import checar_lote as CL
 LOTES = [
     ("v5", "Qwen · sistema antigo", "resultados/04_pipeline_completo_v5.json",
      "prompt v8, 25 regras no mesmo contexto"),
-    ("v7", "Qwen · v7", "resultados/04_pipeline_completo_v7.json",
-     "garantias em código + marca variada"),
-    ("v8", "Qwen · v8 (8 políticas da adjudicação)", "resultados/04_pipeline_completo_v8.json",
-     "quarentena + catálogo-manda + contagens injetadas + validação com retry"),
+    ("v8", "Qwen · v8 (8 políticas)", "resultados/04_pipeline_completo_v8.json",
+     "quarentena + catálogo-manda + retry"),
+    ("v10", "Qwen · v10 (6ª adjudicação)", "resultados/04_pipeline_completo_v10.json",
+     "sem cor em material natural + capitalização em código + validador de 14 exigências"),
 ]
 
 CSS = """
@@ -156,12 +156,12 @@ def main():
             it if it.get("escala") else dict(it, escala=CL.analisar_registro(it["registro"])[0])))
 
     sessao = requests.Session()
-    ordem = list(lotes["v8"])
+    ordem = list(lotes["v10"])
     cards = []
     for n, iid in enumerate(ordem, 1):
         det = sessao.get(f"{TAINACAN_BASE}/items/{iid}", timeout=60).json()
         src, cheia = melhor_imagem(det, sessao)
-        ref = lotes["v8"][iid]
+        ref = lotes["v10"][iid]
         reg = ref["registro"]
         escala = CL.analisar_registro(reg)[0]
         colunas = ""
