@@ -83,6 +83,13 @@ def analisar_registro(registro):
         mediana = MEDIANAS_CATEGORIA.get(cat)
         if mediana and valor < 10 and valor < mediana / 2:
             escala += " — miniatura (bem menor que o comum na categoria): diga que é miniatura"
+            # 4a revisao editorial: dimensao atipicamente pequena tambem pede conferencia
+            # humana, pelo mesmo motivo do abano de 290 cm — pode ser miniatura genuina
+            # (as 3 dimensoes do Pote 9196 sao coerentes) ou erro de registro
+            flags.append({"tipo": "metadado_suspeito", "detalhe":
+                          f"dimensão atipicamente pequena para {cat} ({numero_pt(valor)} cm; "
+                          f"mediana da categoria {numero_pt(mediana)} cm) — miniatura genuína "
+                          f"ou erro de registro; conferir"})
         teto = TETOS_CATEGORIA.get(cat)
         if teto and valor > max(teto, PISO_SUSPEITA):
             flags.append({"tipo": "metadado_suspeito", "detalhe":
@@ -207,6 +214,21 @@ ABERTURAS_ETIQUETA = ("o objeto é", "trata-se de")
 RE_MEDIDA_TXT = re.compile(r"(\d+(?:[.,]\d+)?)\s*cm", re.I)
 
 
+NUMEROS_PT = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "três": 3, "tres": 3,
+              "quatro": 4, "cinco": 5, "seis": 6, "sete": 7, "oito": 8, "nove": 9,
+              "dez": 10, "onze": 11, "doze": 12}
+RE_NUM_SUBST = re.compile(r"(?<![a-zà-ú])(" + "|".join(NUMEROS_PT) + r"|[2-9]|1[0-2])\s+([a-zà-ú]{3,}s)(?![a-zà-ú])", re.I)
+
+
+def contagens(texto):
+    """Pares (substantivo plural, número) escritos num texto: 'seis tubos' -> (tubos, 6)."""
+    pares = {}
+    for m in RE_NUM_SUBST.finditer(texto or ""):
+        n = NUMEROS_PT.get(m.group(1).lower()) or int(m.group(1))
+        pares.setdefault(m.group(2).lower(), n)
+    return pares
+
+
 def tem_atribuicao(texto):
     return re.search(r"(?<![a-zà-ú])(registro|catálogo|catalogo)", texto or "", re.I) is not None
 
@@ -281,6 +303,14 @@ def _verificar_nivel2(item, d, dl, a, registro):
         for t in nums_txt:
             if nums_reg and not any(abs(r - t) <= 1.0 for r in nums_reg):
                 p.append(("medida_fora_do_registro", f"{t:g} cm"))
+        # 4a revisao: a contagem do CATALOGO prevalece sempre — o modelo nao e bom nisso
+        reg_desc = registro.get("Descrição", "") or ""
+        cont_reg, cont_txt = contagens(reg_desc), contagens(a + " " + d)
+        for palavra, n_reg in cont_reg.items():
+            n_txt = cont_txt.get(palavra)
+            if n_txt is not None and n_txt != n_reg:
+                p.append(("contagem_diverge_do_registro",
+                          f"{palavra}: texto diz {n_txt}, registro diz {n_reg}"))
         escala = item.get("escala") or ""
         if escala and nums_txt:
             m = re.search(r"(\d+(?:[.,]\d+)?)", escala)

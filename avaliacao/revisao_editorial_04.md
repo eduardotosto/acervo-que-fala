@@ -403,3 +403,103 @@ Persistem: `afirmacao_de_ausencia` (9 — "sem pintura", "etiqueta sem caractere
 1 falso positivo da régua: o 78838 colou o texto de Dimensões do registro, com "(sem cordel)" —
 defeito real, mas de ficha técnica, não de ausência) e `funcao_obvia` (4). Artefato vazou para o
 texto em itens onde a menção vive em PARTES/LEGIBILIDADE, que continuam viajando para a redação.
+
+---
+
+# Quarta revisão editorial (27/08/2026) — lote v7, cards #1–#3 (parcial) e a métrica que faltava
+
+O Eduardo revisou os três primeiros cards do v7 e interrompeu com uma constatação: **defeitos já
+apontados em revisões anteriores estão voltando** — e o veredito otimista da régua ("2,2
+problemas/item, avanço") não os via. O pedido: reunir TODAS as revisões e usá-las como métrica.
+Todos os achados foram conferidos no dado bruto:
+
+- **#1 Pote 9196:** "marrom-escuríssimo" (o superlativo da 2ª revisão, de volta); "decoração em
+  relevo" — **invenção**: o registro diz "pintados"; "cruzes e elementos que lembram raios"
+  (analogia + as cruzes não conferidas desde a 1ª revisão); "cerâmica bege-clara" (cor de material
+  natural, regra 10); **"possui uma única alça lateral" — alucinação** (o pote não tem alça; o v6
+  já a tinha); "borda extrovertida" e "globular" (jargão, regra 3 — o glossário manda "boca que se
+  abre para fora"); e a miniatura de 6 cm deveria pedir conferência como o abano de 290 cm.
+- **#2 Faixa 665:** o registro diz penas **"costuradas em couro de onça"**; o texto escreveu
+  "bordadas" — técnica errada, termo sem fonte. E o alt segue sem o azul (achado nº 8 da 3ª).
+- **#3 Flauta 51023:** "sete tubos" pela quarta rodada seguida — o registro diz **"seis tubos ...
+  dispostos paralelamente"**. Duas decisões novas do Eduardo: **a contagem do catálogo prevalece
+  sempre** (substitui a política da 3ª revisão, que mandava omitir o número) e "paralelamente" — que
+  é palavra do próprio registro — é o termo certo para a disposição.
+
+## O gabarito editorial vira métrica permanente
+
+`avaliacao/gabarito_editorial.json` consolida as quatro revisões em 29 padrões verificáveis
+(5 globais + 24 por item); `avaliacao/checar_gabarito.py` mede qualquer lote contra eles.
+A métrica é **reincidência**: defeito já apontado que volta. Nos sete lotes:
+
+| Lote | v1 | v2 | v4 | v5 | Gemma | v6 | v7 |
+|---|---|---|---|---|---|---|---|
+| Defeitos distintos presentes (de 29) | 12 | 17 | **8** | **8** | 9 | 14 | **14** |
+
+**A leitura muda o veredito do v7.** Na métrica do gabarito, v7 = v6, e ambos estão PIORES que
+v4/v5. O mecanismo é o teto de saturação visto de outro ângulo: o prompt de 25 regras (v4/v5)
+segurava jargão, cor de material natural e analogias **porque as proibia por extenso**; o
+redesenho enxuto (v9/v10) ganhou nos padrões estruturais (fundo, escala, atribuição — o que a
+régua genérica mede) e **devolveu o que tinha saído do prompt**. As duas métricas discordam porque
+medem coisas diferentes — e a métrica editorial é a que decide qualidade de texto público.
+
+Defeitos presentes em TODOS os sete lotes: **"cabo" na zarabatana** (regra 24, nunca cumprida por
+nenhum modelo sob nenhum prompt), **contradição brinquedo×caça sem flag**, **dimensão pequena sem
+flag**. Quase-onipresentes: o azul fora do alt da Faixa (5/7) e os sete tubos (4 lotes seguidos).
+Alucinações novas que o gabarito agora vigia: relevo (v7), alça (v6+v7), bordadas (v7).
+
+## O que já virou código nesta sessão
+
+1. **Dimensão atipicamente pequena → flag** `metadado_suspeito` ("miniatura genuína ou erro de
+   registro; conferir") — mesma lógica do teto de 290 cm, agora com piso.
+2. **Contagem do registro prevalece**: `contagens()` extrai pares número+substantivo da Descrição
+   ("seis tubos") e a régua acusa `contagem_diverge_do_registro` quando o texto conta diferente —
+   dispara na Flauta em v5, v6, Gemma e v7. A injeção no prompt ("CONTAGEM DO REGISTRO: ...")
+   fica para o próximo notebook, se houver.
+3. O gabarito entra no fluxo de fechamento de lote junto com a régua.
+
+**Nota de método:** ao escrever o gabarito, o padrão `\b` em JSON virou backspace e silenciou duas
+linhas da matriz — o MESMO bug do RE_ANALOGIA de ontem, pego porque "cabo ausente em 7/7 lotes"
+era bom demais. Terceira aparição da classe; padrões novos não usam mais barra invertida.
+
+## A matriz completa
+
+```
+GABARITO EDITORIAL — reincidência dos defeitos apontados pelo Eduardo, lote a lote
+(número = itens afetados; '·' = defeito ausente; conferir = fidelidade pendente de olho humano)
+
+defeito                                     v1      v2      v4      v5   gemma      v6      v7
+----------------------------------------------------------------------------------------------
+[global] cor_superlativa                     1       ·       2       2       ·       ·       1
+[global] analogia_lembra                     3       1       ·       ·       1       1       1
+[global] jargao_catalogo                     3       ·       1       ·       1       2       3
+[global] cor_material_natural                1       1       ·       ·       ·       2       3
+[global] ficha_tecnica                      17       ·       7      10      15       5       6
+9196 decoracao_em_relevo                     ·       ·       ·       ·       ·       ·       1
+9196 alca_inexistente                        ·       ·       ·       ·       ·       1       1
+9196 cruzes_nao_conferidas (conferir)        1       ·       ·       ·       ·       ·       1
+9196 dimensao_pequena_sem_flag               1       1       1       1       1       1       1
+665 rebatizado_chapeu                        1       ·       ·       ·       ·       ·       ·
+665 bordado_nao_costurado                    ·       ·       ·       ·       ·       ·       1
+665 coroa_analogia                           ·       ·       ·       ·       ·       1       ·
+665 azul_ausente_do_alt                      ·       1       1       1       ·       1       1
+51023 sete_tubos                             ·       ·       ·       1       1       1       1
+63283 trancado_liso                          1       ·       ·       ·       ·       ·       ·
+63283 angulo_agudo                           ·       1       ·       ·       ·       ·       ·
+84811 coracoes_flores                        ·       1       ·       ·       ·       ·       ·
+84811 letras_G_C                             ·       ·       ·       ·       ·       1       ·
+84811 bordas_de_pulseira                     1       1       1       1       ·       ·       ·
+883523 cabo_de_zarabatana                    1       1       1       1       1       1       1
+883523 contradicao_sem_flag                  1       1       1       1       1       1       1
+5011 tortual                                 ·       1       ·       ·       1       1       ·
+200648 recipiente_antes_do_conteudo          ·       1       ·       ·       ·       ·       ·
+210680 sons_ritmados                         ·       1       ·       ·       ·       ·       ·
+500179 esteira_analogia                      ·       1       ·       ·       1       1       ·
+3411 inteiro_horizontal                      ·       1       ·       ·       ·       ·       ·
+905 pequena_para_uso                         ·       1       ·       ·       ·       ·       ·
+500322 bordas_suaves                         ·       1       ·       ·       ·       ·       ·
+1376 curva_suave_foto                        ·       1       ·       ·       ·       ·       ·
+----------------------------------------------------------------------------------------------
+TOTAL de reincidências                      32      17      15      18      23      20      23
+defeitos distintos presentes             12/29   17/29    8/29    8/29    9/29   14/29   14/29
+```

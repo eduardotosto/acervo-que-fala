@@ -183,8 +183,24 @@ e sumiu do texto audível em 13/20 (correção candidata: o código sorteia a fo
 como variável, como enquadramento e escala); e o teto de 30 palavras quebrou em 10/20 alts (31–53).
 Persistem afirmações de ausência (9) e função óbvia (4).
 
-**Pendências da E7:** (1) decisão do Eduardo: v8 cirúrgico (2 correções acima, ~40 min de Colab) OU congelar
-o v7 e seguir para a E8 — os resíduos ficam para flags + revisão humana; (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
+**Quarta revisão editorial (27/08/2026) — a métrica que faltava.** Eduardo revisou os cards #1–#3
+do v7 e parou: defeitos já apontados estavam voltando (escuríssimo, jargão "globular/extrovertida",
+cor de material natural, analogias, sete tubos pela 4ª rodada) e apareceram alucinações novas
+("decoração em relevo" onde o registro diz "pintados"; "alça lateral" inexistente; "bordadas" onde
+o registro diz "costuradas em couro de onça"). Pedido dele: **consolidar todas as revisões como
+métrica de avaliação** → `avaliacao/gabarito_editorial.json` (29 padrões verificáveis das 4
+revisões) + `avaliacao/checar_gabarito.py` (matriz de reincidência, os 7 lotes). **A leitura
+corrige o veredito do v7**: na métrica de reincidência, v7 = v6 = 14/29 defeitos presentes, PIOR
+que v4/v5 (8/29) — o redesenho ganhou nos padrões estruturais que a régua mede e devolveu o que o
+prompt de 25 regras segurava por extenso (o teto de saturação, medido pelo outro lado). Decisões
+novas do Eduardo codificadas: **a contagem do catálogo prevalece sempre** (régua nova
+`contagem_diverge_do_registro`, dispara na Flauta em 4 lotes) e **dimensão atipicamente pequena
+vira flag de conferência** (piso implementado ao lado do teto). Defeitos presentes em 7/7 lotes:
+"cabo" na zarabatana, contradição brinquedo×caça sem flag, dimensão pequena sem flag (este último
+agora resolvido em código). Vocabulário aprovado registrado: "dispostos paralelamente" (do próprio
+registro da Flauta).
+
+**Pendências da E7:** (1) decisão do Eduardo entre os três caminhos da quarta revisão (reincluir regras no prompt · pós-processamento léxico determinístico · congelar e seguir para E8 com gabarito + revisão humana); (2) **julgamento editorial cego do bake-off** (`resultados/tabela_bakeoff.html`,
 gabarito lacrado em `avaliacao/bakeoff_gabarito.json`) → decide o redator.
 
 ### E8 — Métricas automáticas
