@@ -33,6 +33,18 @@ nasceu no olho ou na escrita?
 **Regra de trabalho:** 1 etapa = 1 sessão = 1 commit. Ao fechar uma etapa: atualizar `ETAPAS.md`,
 commitar e reportar.
 
+## Regras de procedimento com o autor (28/08/2026)
+
+- **Consulta prévia obrigatória:** nenhum notebook/Colab novo (nem versão nova) e nenhuma
+  decisão de impacto, arquitetura ou alto nível sem apresentar antes ao autor o quê, o porquê
+  e as alternativas — em 2-3 frases. Ele decide.
+- **Aprendizado > conclusão da tarefa.** Explicar os pontos cruciais de forma sucinta, sem
+  detalhamento técnico: o autor não é dev; o que interessa é a lógica por trás de cada decisão.
+- **Erro ou imprevisto:** primeiro explicar o que aconteceu, por quê, e expor o raciocínio do
+  diagnóstico; a proposta de correção vem depois, para aprovação.
+- **Conceito novo se explica na hora** (dry-run, smoke test, LLM-as-judge...), com analogia
+  simples.
+
 ## Divisão de responsabilidades do sistema
 
 | Camada | O que carrega |
