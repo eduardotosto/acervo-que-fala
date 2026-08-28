@@ -1,0 +1,1281 @@
+{
+  "notebook": "05_bakeoff_redator_v5",
+  "redator": "unsloth/gemma-3-12b-it-unsloth-bnb-4bit",
+  "ambiente": {
+    "unsloth": "2026.8.22",
+    "transformers": "5.5.0",
+    "torch": "2.11.0+cu128"
+  },
+  "observacoes_de": "04_pipeline_completo_v10",
+  "rubrica_versao": "1.4 (27/08/2026)",
+  "rag": "diretrizes reutilizadas pelos ids salvos no resultado do 04 v10 (mesmos trechos)",
+  "prompt_redacao_v13": "Você escreve descrições de acessibilidade para o acervo digital de um museu. Elas serão OUVIDAS por pessoas cegas, através de leitores de tela — escreva em linguagem cotidiana, com frases que funcionam no ouvido (ordem direta, sem parênteses longos).\n\nINSUMOS — cada um autoriza um tipo de informação:\n\nOBSERVAÇÃO VISUAL DA FOTOGRAFIA (autoriza: aparência — o que é visível):\n{observacao}\n\nENQUADRAMENTO DECIDIDO NA OBSERVAÇÃO: {enquadramento}\n\nESCALA CALCULADA DO REGISTRO: {escala}\n\nCONTAGENS DO REGISTRO (prevalecem SEMPRE sobre a contagem visual): {contagem}\n\nMARCA DE ATRIBUIÇÃO DESTE TEXTO (use esta fórmula, exatamente): {marca}\n\nEM QUARENTENA — informação flagada para revisão humana. NÃO escreva nada sobre:\n{quarentena}\n\nREGISTRO DO MUSEU (autoriza: fatos — sempre com atribuição; o título nomeia o objeto):\n{registro}\n\nDIRETRIZES PARA ESTE TIPO DE OBJETO (autorizam: vocabulário e o que observar nesta categoria):\n{diretrizes}\n\nCONTRATO DE FONTES — prevalece sobre qualquer outra regra:\n1. Cada informação escrita precisa de fonte: visível na observação, escrita no registro (e então leva atribuição) ou vocabulário das diretrizes. Sem fonte, não escreva — omitir é sempre permitido; um texto curto e todo verificável vale mais que um completo com um palpite.\n2. O CATÁLOGO MANDA NAS PALAVRAS: termo do registro que não é técnico se usa como está (cabo, pá, algodão, \"dobradura afunilada\") — não invente sinônimo nem nova forma de dizer o que o catálogo já diz bem; descrição visual do registro em linguagem comum (ex.: figuras em \"X\") entra com as palavras dele. Termo técnico do registro se traduz pelo glossário das diretrizes (\"motivos zoomorfos\" vira \"figuras de animais\"; \"borda extrovertida\" vira \"boca que se abre para fora\"); espécie de animal ou planta SÓ se o registro nomear — nunca pela aparência.\n3. Incerteza se herda: o que estiver na seção LEGIBILIDADE da observação, ou vier com hesitação (\"parece\", \"talvez\", \"possivelmente\"), sai do texto ou vira o termo genérico — nunca vira afirmação.\n4. Divergência não se resolve no texto: quando observação e registro conflitam, não escolha um lado nem harmonize — registre em flags como divergencia_imagem_catalogo e NÃO escreva a informação divergente. Quantidade: use SEMPRE o número de CONTAGENS DO REGISTRO; cores: use as que o REGISTRO nomeia (cor vista que o registro não nomeia já está em quarentena via flag).\n5. Os exemplos deste prompt mostram a FORMA das frases, com lacunas [assim]; preencha sempre com o conteúdo deste objeto, nunca com as palavras do exemplo.\n\nPRODUZA TRÊS SAÍDAS:\n\nA) alt_text — o que a fotografia mostra, para quem não a vê.\n   Uma frase, no máximo 30 palavras — o limite de 30 VENCE qualquer outra exigência desta seção: se faltar espaço, corte adjetivo e detalhe secundário, nunca o objeto e o povo.\n   Começa pelo objeto (nomeado pelo TÍTULO do registro) e pelo povo, com o nome do povo em maiúscula inicial.\n   Contém: o material; as cores VISÍVEIS na observação que o registro confirma, onde a cor informa — elemento ou cor que só existe no catálogo e NÃO aparece na foto (decoração encoberta, roseta em foto de detalhe) nunca entra no alt, só na descrição; a forma dos padrões, sempre pela geometria OU pelo termo que a diretriz/glossário nomear (espinha-de-peixe, gregas) — quando a diretriz nomeia o padrão que você vê, USE esse termo; NUNCA descreva padrão por semelhança com letra, figura ou objeto (\"em forma de G\", \"como uma flor\", \"lembra uma coroa\" são erros) — exceto quando o próprio registro usar a comparação (figuras em \"X\").\n   MATERIAL NATURAL NÃO TEM NOME DE COR: madeira, fibra, argila, algodão, couro e afins são no máximo \"clara\" ou \"escura\" — nunca bege, marrom ou castanho; a procedência (tipo de madeira, de fibra) entra quando o catálogo a dá. Cores nomeadas só em pintura, tingimento, penas e miçangas. Construção: miçangas são \"confeccionadas com [linha]\" e peças plumárias são \"compostas por penas...\" — nunca \"[material] sobre [material]\". Quando a peça tem pintura sobre a base, primeiro a pintura e suas cores, depois a base sem cor (\"pintura em vermelho e preto sobre a cerâmica\"). Cada cor fica PRESA à parte que a exibe (\"cabo escuro, bocal claro\") — enumerar cores soltas perde a referência.\n   Se o ENQUADRAMENTO diz \"detalhe\", comece com \"Detalhe de [objeto]\"; se diz \"inteiro\", não mencione enquadramento nem orientação.\n   Aves de penas: só as que o registro nomear, com as cores QUE O REGISTRO dá a elas: \"penas [cores do registro] de [ave]\".\n   Não aparecem aqui: fundo ou estúdio, artefato de inventário, medida, alça/cordel/corda (salvo se for a característica principal do objeto), frases de ausência (\"sem X\", \"não há X\") e palavras de seção da observação (\"partes contáveis\", \"legível\").\n\nB) descricao_objeto — o objeto em si, para quem quer conhecê-lo além da foto. Dois parágrafos, no máximo 120 palavras somadas.\n   1º: a PRIMEIRA PALAVRA é o nome do objeto — sem \"O objeto é…\", \"Trata-se de…\", \"é um objeto\". A função entra nessa primeira frase SÓ quando diz algo que o nome não diz (caça, ritual, preparo) — bolsa que guarda, panela que cozinha, remo que rema e pulseira no pulso NÃO se explicam. Depois, a aparência: formas, materiais e padrões, cada informação uma vez.\n   2º: os fatos do catálogo, AGRUPADOS, em frases naturais: a marca de atribuição aparece UMA vez, ao entrar neles, com a fórmula exata de MARCA DE ATRIBUIÇÃO — o texto PRECISA conter essa fórmula, e a frase que a contém começa com letra MAIÚSCULA. O povo, o ano de aquisição e o estado de origem SEMPRE entram quando o registro os tem, e o texto nunca termina na marca — os fatos vêm depois dela. A escala é EXATAMENTE a de ESCALA CALCULADA DO REGISTRO, em frase natural — não recalcule, não escolha outra medida, não cite medida de parte nem de alça; se lá diz para não escrever medida, NÃO escreva.\n   Este texto descreve o objeto, não a fotografia: posição, fundo, enquadramento, \"visível/parcialmente visível\" não existem aqui; relações de ponto de vista viram relações da peça (\"decrescentes\", \"em degraus\"). Em amostras (argila, resina), o CONTENEDOR (tubo, tampa, frasco) só existe no alt — a descrição é do conteúdo, com o tipo e a procedência que o catálogo der. Não repita frases do alt nem a mesma palavra várias vezes.\n   O texto diz o que existe: nada de \"sem [coisa]\", \"não há [coisa]\"; o que o registro não traz não vira frase.\n\nC) flags — o que precisa de revisão humana. Artefatos, metadados improváveis e cores divergentes já foram registrados pelo código; concentre-se no que só quem leu os dois lados percebe:\n   - divergencia_imagem_catalogo: conflito entre observação e registro (quantidade, material, formato) — ou objeto visto diferente do que o título nomeia (use o título no texto e registre aqui).\n   Lista vazia [] se não houver nada.\n\nResponda APENAS com JSON: {{\"alt_text\": \"...\", \"descricao_objeto\": \"...\", \"flags\": [{{\"tipo\": \"...\", \"detalhe\": \"...\"}}]}}",
+  "itens": [
+    {
+      "id": 9196,
+      "titulo": "Pote",
+      "registro": {
+        "Nome do item": "Pote",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "4,3 cm de diâmetro (borda); 5,5 cm de diâmetro (bojo); 6,0 cm de altura",
+        "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1977",
+        "Descrição": "Pote de borda extrovertida e base plana apresentando superfície decorada com motivos geometrizantes pintados em vermelho e preto"
+      },
+      "observacao": "OBJETO: Vaso de cerâmica com formato globular, gargalo arredondado e base ligeiramente proeminente, decorado com padrões geométricos em relevo.\n\nMATERIAIS E CORES: cerâmica; cor bege claro; cor marrom-avermelhada; cor marrom-escura.\n\nPADRÕES E TEXTURAS: padrões geométricos estilizados em relevo, composto por linhas retas, curvas e cruzes; textura aparentemente lisa na superfície.\n\nPARTES E QUANTIDADES: uma boca circular; um único gargalo; uma base circular.\n\nPOSIÇÃO: objeto posicionado de forma que a boca esteja voltada para cima e ligeiramente para o lado direito; interior do vaso parcialmente visível.\n\nLEGIBILIDADE: não há inscrições legíveis.\n\nFONDO E ESTÚDIO: fundo branco puro; iluminação de estúdio uniforme.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 128.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 73.81 MiB is free. Including non-PyTorch memory, this process has 14.49 GiB memory in use. Of the allocated memory 14.21 GiB is allocated by PyTorch, and 136.38 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [],
+      "escala": "EM QUARENTENA — a medida do registro está sob conferência (flag): não escreva medida nenhuma",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna no registro. As informações são coerentes entre si e não apresentam declarações incompatíveis sobre o mesmo objeto."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "dimensão atipicamente pequena para Cerâmica (6 cm; mediana da categoria 14 cm) — miniatura genuína ou erro de registro; conferir"
+        }
+      ],
+      "flags_registro": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "dimensão atipicamente pequena para Cerâmica (6 cm; mediana da categoria 14 cm) — miniatura genuína ou erro de registro; conferir"
+        }
+      ],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "ceramica-02",
+        "glossario-11",
+        "glossario-04"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Karajá"
+        ]
+      ]
+    },
+    {
+      "id": 665,
+      "titulo": "Faixa frontal emplumada",
+      "registro": {
+        "Nome do item": "Faixa frontal emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Animal > Couro de onça | Animal > Pena de arara | Animal > Pena de jaburu | Animal > Pena de jacu",
+        "Técnica de confecção": "",
+        "Dimensões": "60,0cm de comprimento; 13,0cm de altura",
+        "Função": "Adorno para cabeça",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Faixa frontal emplumada confeccionado com penas nas cores preto(Jaburu), amarelo(Jacú-amarelo) e vermelha e amarelo(Arara) dispostas verticalmente com corte horizontal das penas costuradas em couro de onça"
+      },
+      "observacao": "OBJETO: Um objeto circular com penas coloridas dispostas em torno de uma base, com três penas longas projetando-se para cima e para os lados.\n\nMATERIAIS E CORES: \n- Fibra (penas) em amarelo, azul, marrom, vermelho, preto e branco.\n- Fibra (base) em preto e vermelho.\n- Fibra (penas) em tons de marrom e cinza, com manchas escuras.\n\nPADRÕES E TEXTURAS: \n- Textura das penas com variações de cor e tonalidade.\n- Pena central com padrão de listras horizontais escuras e claras.\n- Base com textura lisa e bordas definidas.\n\nPARTES E QUANTIDADES: \n- 3 penas longas proeminentes (duas laterais, uma central).\n- Múltiplas penas curtas em volta da base, formando uma borda.\n- 3 penas curtas no topo, entre as penas longas.\n\nPOSIÇÃO: O objeto está de pé, centralizado na imagem, com a base apoiada no chão e as penas apontando para cima e para os lados. O interior da base não é visível.\n\nLEGIBILIDADE: Nada é legível no objeto.\n\nFONDO E ESTÚDIO: Fundo branco liso, com uma cartela de cores padrão (Munsell) no canto esquerdo da imagem.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: Cartela de cores.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [
+        "cartela de cores: Cartela de cores"
+      ],
+      "resolucao": "394×378",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 144.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 73.81 MiB is free. Including non-PyTorch memory, this process has 14.49 GiB memory in use. Of the allocated memory 14.23 GiB is allocated by PyTorch, and 107.68 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [
+        "Cartela de cores"
+      ],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra azul, branco e o registro nomeia só amarelo, preto, vermelho"
+        }
+      ],
+      "escala": "cerca de 60 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem coerentemente o objeto como um adorno emplumado, com funções e materiais compatíveis entre si."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra azul, branco e o registro nomeia só amarelo, preto, vermelho"
+        }
+      ],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "plumaria-02",
+        "plumaria-03",
+        "glossario-02",
+        "glossario-05"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Kalapalo"
+        ],
+        [
+          "artefato_visto_sem_flag",
+          "cartela de cores: Cartela de cores"
+        ]
+      ]
+    },
+    {
+      "id": 51023,
+      "titulo": "Flauta de pã",
+      "registro": {
+        "Nome do item": "Flauta de pã",
+        "Povo": "Tukano",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "Vegetal > Taquara",
+        "Técnica de confecção": "",
+        "Dimensões": "29,5; 21,5; 16,8; 14,0; 12,0 e 9,5 cm de comprimento (para os tubos) e 6,5 cm de largura - medidas aproximadas por tratar-se de objeto irregular",
+        "Função": "Instrumenntos musical e sonoro",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1957",
+        "Descrição": "Flauta de pã confeccionado com seis tubos de taquara (Guadua angustifolia Kunth.), dispostos paralelamente uns aos outros e presos por meio de fios de fibra de buriti (Mauritia vinifera Mart.)"
+      },
+      "observacao": "OBJETO: Um conjunto de tubos de madeira unidos por cordas de fibra, dispostos em forma de abertura de ângulo agudo, com os tubos mais curtos no topo e o mais longo na base.\n\nMATERIAIS E CORES: Madeira clara (tons de bege a marrom claro), fibra (cor marrom claro), cordas de fibra (cor marrom).\n\nPADRÕES E TEXTURAS: Nenhum padrão ou textura repetida; superfícies lisas, com marcas de cordas em volta dos tubos.\n\nPARTES E QUANTIDADES: Sete tubos de madeira, dispostos em ordem decrescente de comprimento, com o mais curto no topo e o mais longo na base; todos os tubos têm extremidades cortadas retas.\n\nPOSIÇÃO: O objeto está em pé, inclinado ligeiramente para a direita, com a base apoiada no chão. A parte superior dos tubos está voltada para o topo da imagem, a base para a parte inferior. A face frontal dos tubos é visível.\n\nLEGIBILIDADE: A inscrição \"8283\" está visível na parte inferior do tubo mais longo, em caracteres pretos.\n\nFONDO E ESTÚDIO: Fundo preto liso. A iluminação é de estúdio, com sombra suave projetada para baixo e para a direita. O objeto está posicionado de forma a destacar sua forma contra o fundo.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: Nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [
+        "inscrição: A inscrição \"8283\" está visível na parte inferior do tubo mais longo, em caracteres pretos"
+      ],
+      "resolucao": "427×640",
+      "resolucao_ok": true,
+      "contagem_registro": "6 tubos",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 132.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.25 GiB is allocated by PyTorch, and 133.90 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 29,5 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem consistentemente a flauta como instrumento musical feito de taquara, com função sonora, sem conflitos entre as informações."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-08"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Tukano"
+        ],
+        [
+          "artefato_visto_sem_flag",
+          "inscrição: A inscrição \"8283\" está visív"
+        ]
+      ]
+    },
+    {
+      "id": 63283,
+      "titulo": "Abano trançado",
+      "registro": {
+        "Nome do item": "Abano trançado",
+        "Povo": "Fulni-ô",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Fibra de vegetal não identificado",
+        "Técnica de confecção": "Trançado sarjado",
+        "Dimensões": "290,0 cm de comprimento (maior); 19,5 cm de largura (menor)",
+        "Função": "Objeto destinado a atiçar o fogo e para abanar-se",
+        "Estado de origem": "Pernambuco",
+        "Ano de aquisição do objeto": "1949",
+        "Descrição": "Abano trançado de conformação retangular confeccionado com fibra não identificada, segundo a técnica do trançado sarjado. Apresenta empunhadura formada com o pecíolo da planta revestido com trançado sarjado que também reveste as bordas do objeto. Exibe na parte central decoração formada com fitas de fibra tingidas de azul e verde, formando uma roseta, através do revestimento de parte do trançado"
+      },
+      "observacao": "OBJETO: uma superfície plana com padrão de entrelaçamento em ângulo, formada por tiras retangulares dispostas em diagonal alternada.\n\nMATERIAIS E CORES: madeira clara, com variações de tom entre bege e marrom claro; algumas tiras apresentam veios mais escuros.\n\nPADRÕES E TEXTURAS: padrão de entrelaçamento em V invertido, com tiras diagonais intercaladas, formando um motivo de xadrez inclinado.\n\nPARTES E QUANTIDADES: não há partes distinguíveis como alças, furos ou componentes separados; apenas o padrão contínuo de entrelaçamento.\n\nPOSIÇÃO: plano horizontal, vista de cima, mostrando a superfície frontal do objeto.\n\nLEGIBILIDADE: não há inscrições, símbolos ou elementos legíveis.\n\nFONDO E ESTÚDIO: fundo neutro, sem artefatos visíveis.\n\nENQUADRAMENTO: detalhe.\n\nARTEFATOS: nenhum",
+      "enquadramento": "detalhe",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 132.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.25 GiB is allocated by PyTorch, and 128.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [],
+      "escala": "EM QUARENTENA — a medida do registro está sob conferência (flag): não escreva medida nenhuma",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna no registro. As informações são coerentes entre si: o objeto é um abano trançado, com função de abanar-se e atiçar fogo, e sua descrição detalha sua construção e decoração sem conflitos."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "290 cm de comprimento está acima do teto de plausibilidade da categoria Trançados (181 cm, calculado do acervo)"
+        }
+      ],
+      "flags_registro": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "290 cm de comprimento está acima do teto de plausibilidade da categoria Trançados (181 cm, calculado do acervo)"
+        }
+      ],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-02",
+        "glossario-03"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Fulni-ô"
+        ],
+        [
+          "enquadramento_incoerente",
+          "observação diz detalhe, alt não marca"
+        ]
+      ]
+    },
+    {
+      "id": 78838,
+      "titulo": "Tanga de miçangas",
+      "registro": {
+        "Nome do item": "Tanga de miçangas",
+        "Povo": "Tiriyó",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "Entretecido",
+        "Dimensões": "50,0 cm de comprimento (medida maior, sem cordel); 75,0 cm de comprimento (com cordel de amarração); 44,0 cm de largura",
+        "Função": "Adornos de materiais ecléticos utilizados como vestuário e arranjos de decoro",
+        "Estado de origem": "Pará",
+        "Ano de aquisição do objeto": "2009",
+        "Descrição": "Tanga de miçanga de conformação retangular confeccionado com linha industrializada branca e contas de miçangas nas cores: branca e preta. A superfície é ornamentada por: figuras estilizadas, motivo grego e piramidal, tecida segundo a técnica do entretorcido. Apresenta borda superior com cordel para amarrar o objeto ao corpo feito com barbante de algodão. Acabamento inferior com franjas de linha industrializada, tendo nas duas extremidades pingentes constituídos por miçangas branca e preta intercaladas. Possui acabamento da borda inferior com franjas de linha industrializada na cor branca"
+      },
+      "observacao": "OBJETO: Uma peça retangular com bordas desfiadas, apresentando um padrão geométrico em preto sobre fundo claro, com elementos que lembram cruzes e quadrados interligados.\n\nMATERIAIS E CORES: Fibra clara (branco ou off-white), fibra escura (preto).\n\nPADRÕES E TEXTURAS: Padrão geométrico composto por cruzes e quadrados interligados, com linhas retas e contornos definidos. Textura aparentemente lisa, com bordas desfiadas.\n\nPARTES E QUANTIDADES: Nenhuma parte distinta ou contável é visível.\n\nPOSIÇÃO: O objeto está deitado, inclinado para a direita, ocupando a maior parte do enquadramento, com a borda superior mais próxima da câmera. O verso não é visível.\n\nLEGIBILIDADE: Nada é ilegível ou incerto; todos os elementos são claramente visíveis.\n\nFONDO E ESTÚDIO: Fundo branco liso, sem marcações ou texturas. Não há artefatos de estúdio visíveis.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "2 extremidades",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 140.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 113.81 MiB is free. Including non-PyTorch memory, this process has 14.45 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 105.54 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [],
+      "escala": "cerca de 50 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem de forma coerente um objeto decorativo e funcional como vestuário, sem conflitos entre descrição e função."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "glossario-02",
+        "glossario-03"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Tiriyó"
+        ]
+      ]
+    },
+    {
+      "id": 1376,
+      "titulo": "Braçadeira emplumada",
+      "registro": {
+        "Nome do item": "Braçadeira emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Vegetal > Algodão | Animal > Pena de arara",
+        "Técnica de confecção": "Passamanaria",
+        "Dimensões": "76,0cm de comprimento;11,0cm de largura",
+        "Função": "Adorno para braço",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Braçadeira emplumada composta de fio de algodão com penas nas cores amarelo,verde e vermelha(Arara) confeccionado pela técnica de emplumação em passamanaria com alças soltas"
+      },
+      "observacao": "OBJETO: Um objeto decorativo feito de penas coloridas, com uma corda de fibra natural presa a um pequeno rótulo branco.\n\nMATERIAIS E CORES: Penas em tons de vermelho, laranja, amarelo e verde-oliva; corda de fibra natural de cor marrom; rótulo branco com texto preto.\n\nPADRÕES E TEXTURAS: Textura das penas em forma de cachos desordenados, sem padrões repetitivos; superfície da corda com textura de tecido trançado.\n\nPARTES E QUANTIDADES: Uma única peça de penas; uma única corda; um único rótulo com texto.\n\nPOSIÇÃO: O objeto está deitado, com a corda esticada em curva para o lado direito da imagem; o verso da peça não é visível, apenas o lado frontal das penas.\n\nLEGIBILIDADE: O texto no rótulo é parcialmente ilegível, mas parece conter caracteres em japonês ou chinês.\n\nFONDO E ESTÚDIO: Fundo preto uniforme; iluminação de estúdio com sombra suave.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: Rótulo branco com texto.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [
+        "etiqueta: Rótulo branco com texto"
+      ],
+      "resolucao": "427×640",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 138.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 133.81 MiB is free. Including non-PyTorch memory, this process has 14.43 GiB memory in use. Of the allocated memory 14.17 GiB is allocated by PyTorch, and 113.71 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [
+        "Rótulo branco com texto"
+      ],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra laranja e o registro nomeia só amarelo, verde, vermelho"
+        }
+      ],
+      "escala": "EM QUARENTENA — a medida do registro está sob conferência (flag): não escreva medida nenhuma",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem consistentemente um objeto: uma braçadeira emplumada, com função de adorno para braço, feita com materiais e técnica descritos, sem conflitos entre as informações."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"
+        },
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra laranja e o registro nomeia só amarelo, verde, vermelho"
+        }
+      ],
+      "flags_registro": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"
+        }
+      ],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "plumaria-02",
+        "plumaria-03",
+        "glossario-02",
+        "glossario-09"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Kalapalo"
+        ],
+        [
+          "artefato_visto_sem_flag",
+          "etiqueta: Rótulo branco com texto"
+        ]
+      ]
+    },
+    {
+      "id": 84811,
+      "titulo": "Pulseira de miçangas",
+      "registro": {
+        "Nome do item": "Pulseira de miçangas",
+        "Povo": "Kaxinawá",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "",
+        "Dimensões": "18,8 cm de comprimento; 7,0 cm de largura",
+        "Função": "Adorno para os membros que cinge o pulso",
+        "Estado de origem": "Acre",
+        "Ano de aquisição do objeto": "2011",
+        "Descrição": "Pulseira de miçangas confeccionado com fios de nylon e contas de miçangas nas cores: verde, branca, vermelha, preta e azul, formando uma faixa, cuja composição das contas formam padrões característico do grupo nas cores: verde, vermelho e branco. Possui as laterais com contas azuis e dois fechos com botões para prender o objeto ao pulso"
+      },
+      "observacao": "OBJETO: Peça quadrada, feita de contas, com padrão geométrico repetido em verde, branco e vermelho.\n\nMATERIAIS E CORES: contas de plástico ou vidro, cor verde, branco, vermelho, preto (parcialmente encoberto).\n\nPADRÕES E TEXTURAS: padrão geométrico com elementos em forma de “G” e “C” interligados, preenchidos com contas brancas e vermelhas, com contornos em verde e preto; textura uniforme e lisa, com contas compactamente dispostas.\n\nPARTES E QUANTIDADES: não há partes distinguíveis nem contáveis (não há alças, furos, tubos, penas, etc.).\n\nPOSIÇÃO: objeto deitado sobre o fundo, em ângulo, com a face frontal visível, não encostando nas margens.\n\nLEGIBILIDADE: tudo é legível.\n\nFONDO E ESTÚDIO: fundo branco liso, sem artefatos visíveis.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "2 fechos",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 73.81 MiB is free. Including non-PyTorch memory, this process has 14.49 GiB memory in use. Of the allocated memory 14.21 GiB is allocated by PyTorch, and 128.12 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [],
+      "escala": "cerca de 18,8 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois as informações sobre o objeto são coerentes entre si: a descrição detalha a composição e função como adorno para o pulso, e o campo Função confirma essa função sem conflito."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "glossario-04",
+        "glossario-02"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Kaxinawá"
+        ]
+      ]
+    },
+    {
+      "id": 883523,
+      "titulo": "Brinquedo zarabatana",
+      "registro": {
+        "Nome do item": "Brinquedo zarabatana",
+        "Povo": "Baniwa",
+        "Categoria": "Armas",
+        "Matéria-prima": "Vegetal > Breu | Vegetal > Jupati | Vegetal > Madeira marupá",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "102 cm de comprimento; 6 cm de diâmetro (bocal); 2 cm de diâmetro (cabo)",
+        "Função": "Objeto utilizado para caça",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2020",
+        "Descrição": "Brinquedor zarabatana em miniatura, apresentando o cabo na cor preta natural confeccionada em madeira de jupati (\"mawi\" baniwa / \"yupati\" nhengatu) e bocal confeccionado em madeira de marupá (Simarouba amara. / \"koitina\" baniwa) na cor natural branca, colada ao cabo com breu. O cabo é confeccionado segundo a técnica do entalhe, usando instrumentos de arumã, para retirada do miolo da madeira de jupati."
+      },
+      "observacao": "OBJETO: Um bastão longo e cilíndrico, com uma extremidade revestida em material claro e a outra terminando em um acabamento liso e escuro.\n\nMATERIAIS E CORES: \n- Cor preta (pintura ou revestimento sobre material não identificado) \n- Cor branca ou bege claro (material aparentemente de madeira ou fibra, na extremidade)\n\nPADRÕES E TEXTURAS: \n- Superfície lisa e uniforme no corpo do bastão, com acabamento ligeiramente fosco\n- Extremidade oposta apresenta um acabamento côncavo, com textura mais rugosa e irregular\n\nPARTES E QUANTIDADES: \n- Uma peça única, sem divisões ou partes contáveis\n\nPOSIÇÃO: Deitado horizontalmente, ocupando a parte central da imagem, com a extremidade mais clara voltada para a direita. Nenhuma parte interna é visível.\n\nLEGIBILIDADE: Não há inscrições, marcas ou detalhes legíveis.\n\nFONDO E ESTÚDIO: Fundo de estúdio uniforme, em tom cinza-escuro, com iluminação de estúdio que cria sombra suave. Nenhum artefato de identificação (etiqueta, numeração, cartela) é visível.\n\nENQUADRAMENTO: Inteiro\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×463",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 132.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.25 GiB is allocated by PyTorch, and 128.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 102 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois o objeto é descrito como 'brinquedo em miniatura' e sua função é 'objeto utilizado para caça', o que pode ser compatível culturalmente, sem conflito lógico."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição diz miniatura/brinquedo e a Função descreve uso real (caça, ataque...) — contradição entre campos do registro; conferir"
+        }
+      ],
+      "flags_registro": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição diz miniatura/brinquedo e a Função descreve uso real (caça, ataque...) — contradição entre campos do registro; conferir"
+        }
+      ],
+      "diretrizes_usadas": [
+        "arma-01",
+        "glossario-09",
+        "glossario-07"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Baniwa"
+        ]
+      ]
+    },
+    {
+      "id": 2081,
+      "titulo": "Pote",
+      "registro": {
+        "Nome do item": "Pote",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "6,8 cm de diâmetro de borda; 10,3 cm de diâmetro de bojo; 7,3 cm de altura",
+        "Função": "Objeto utilizado para o preparo e serviço de alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1950",
+        "Descrição": "Pote de cor clara, base plana e borda extrovertida. Apresenta decoração externa no bojo com motivos geometrizantes (arabesco) pintados na cor preto"
+      },
+      "observacao": "OBJETO: Vaso cerâmico de forma globular, com base arredondada e abertura circular na parte superior, exibindo padrões geométricos esquemáticos em relevo.\n\nMATERIAIS E CORES: cerâmica de tonalidade bege claro, com detalhes em cor marrom-escura, que parece ser um revestimento ou pigmento aplicado sobre a superfície.\n\nPADRÕES E TEXTURAS: padrões geométricos abstratos formados por linhas retas e curvas que se interligam, criando figuras semelhantes a “L” e “U” invertidos, com contornos definidos e superfície lisa.\n\nPARTES E QUANTIDADES: não há alças, furos, tampas ou componentes adicionais visíveis. A boca do vaso está parcialmente visível no topo da imagem.\n\nPOSIÇÃO: o objeto está posicionado de forma a mostrar sua lateral, com a boca virada para cima e ligeiramente inclinada para o lado esquerdo da imagem. O interior da boca não é visível.\n\nLEGIBILIDADE: não há inscrições, símbolos ou textos legíveis. A superfície do objeto é lisa e os detalhes são visíveis, mas não há texto ou grafia.\n\nFONDO E ESTÚDIO: fundo branco puro, sem marcações ou elementos de estúdio visíveis. A iluminação é uniforme, sugerindo uso de luz de estúdio.\n\nENQUADRAMENTO: detalhe — a fotografia mostra apenas a parte superior e lateral do vaso, com o topo cortado pela borda superior da imagem e a base cortada pela borda inferior.\n\nARTEFATOS: nenhum",
+      "enquadramento": "detalhe",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 538.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 513.81 MiB is free. Including non-PyTorch memory, this process has 14.06 GiB memory in use. Of the allocated memory 13.76 GiB is allocated by PyTorch, and 156.28 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [],
+      "escala": "cerca de 10,3 cm de diâmetro",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna no registro. As informações são coerentes entre si e não apresentam conflitos sobre o mesmo objeto."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "ceramica-02",
+        "glossario-05",
+        "glossario-04"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Karajá"
+        ],
+        [
+          "enquadramento_incoerente",
+          "observação diz detalhe, alt não marca"
+        ]
+      ]
+    },
+    {
+      "id": 5011,
+      "titulo": "Fuso",
+      "registro": {
+        "Nome do item": "Fuso",
+        "Povo": "Xavante",
+        "Categoria": "Cordões e Tecidos",
+        "Matéria-prima": "Mineral > Argila | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Entalhe | Modelado",
+        "Dimensões": "44,0 cm de comprimento; 6,2 cm de diâmetro ( tortual )",
+        "Função": "Utensílio para fiar o algodão",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1988",
+        "Descrição": "Fuso constituído de uma haste de madeira \"buritiana\" com castão chanfrado e tortual de cerâmica com fixação de fio de algodão. Apresenta algodão bruto enrolado à vareta"
+      },
+      "observacao": "OBJETO: Um corpo cilíndrico de fibra em volume, com uma extremidade circular de madeira e um eixo metálico central.\n\nMATERIAIS E CORES: Fibra de cor bege claro com manchas amareladas; madeira de tom marrom-avermelhado; eixo metálico de cor escura.\n\nPADRÕES E TEXTURAS: Textura irregular e felpuda da fibra; superfície lisa e com veios da madeira; acabamento liso do eixo metálico.\n\nPARTES E QUANTIDADES: Uma única peça de fibra; uma única peça de madeira circular; um único eixo metálico.\n\nPOSIÇÃO: Deitado horizontalmente, com a extremidade de madeira voltada para a direita; o interior do eixo não é visível.\n\nLEGIBILIDADE: Nada é legível.\n\nFONDO E ESTÚDIO: Fundo branco liso, sem marcações ou texturas.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 122.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.25 GiB is allocated by PyTorch, and 128.41 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [],
+      "escala": "cerca de 44 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem de forma consistente um fuso de madeira e cerâmica usado para fiar algodão, sem conflitos entre descrição e função."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "cordoes-01",
+        "glossario-08",
+        "glossario-09"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Xavante"
+        ]
+      ]
+    },
+    {
+      "id": 200648,
+      "titulo": "Argila",
+      "registro": {
+        "Nome do item": "Argila",
+        "Povo": "Baniwa",
+        "Categoria": "Etnobotânica",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "14,7 cm de altura; 3,0 cm de diâmetro (tubo de ensaio)",
+        "Função": "Utilizada como um dos componente no processo para confecção de objetos de cerâmica",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2014",
+        "Descrição": "Amostra de argila \"dekai\", matéria-prima utilizada na manufatura de artefatos indígenas, usada para o processo de confecção da cerâmica, dentro de um tubo de ensaio da localização geográfica Igarapé Ucuqui"
+      },
+      "observacao": "OBJETO: Um tubo de vidro contendo fragmentos de material orgânico, tampado com tampa de metal.\n\nMATERIAIS E CORES: \n- Vidro transparente, com reflexos e manchas escuras internas.\n- Metal dourado (possivelmente latão ou bronze) na tampa.\n- Fragmentos internos: tons de marrom, bege, cinza e preto, com texturas que sugerem material orgânico desidratado (como fibra ou tecido).\n- Pequena etiqueta branca parcialmente visível, com texto ilegível.\n\nPADRÕES E TEXTURAS:\n- Textura irregular dos fragmentos internos, sem padrão repetido.\n- Tampão metálico com ranhuras circulares em relevo.\n- Superfície do vidro com manchas e desgastes.\n\nPARTES E QUANTIDADES:\n- 1 tubo de vidro.\n- 1 tampa metálica.\n- 1 etiqueta adesiva branca (parcialmente visível, texto ilegível).\n\nPOSIÇÃO:\n- O objeto está deitado diagonalmente, em ângulo de aproximadamente 45 graus, com a boca do tubo apontando para a direita.\n- O interior do tubo é parcialmente visível, mostrando fragmentos compactados.\n\nLEGIBILIDADE:\n- Inscrição gravada na tampa: “14.11.154” — legível.\n- Texto na etiqueta branca: ilegível.\n\nFONDO E ESTÚDIO:\n- Fundo: tecido cinza-escuro com textura de malha, uniforme e sem artefatos visíveis.\n- Iluminação: difusa, sem sombras fortes, sugerindo estúdio controlado.\n\nENQUADRAMENTO:\n- Detalhe — a fotografia mostra apenas a parte superior do tubo e a tampa, com o objeto encostando nas margens superior e direita da imagem.\n\nARTEFATOS:\n- Nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": false,
+      "artefatos_obs": [
+        "etiqueta: - Texto na etiqueta branca: ilegível",
+        "inscrição: - Inscrição gravada na tampa: “14"
+      ],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 132.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 53.81 MiB is free. Including non-PyTorch memory, this process has 14.51 GiB memory in use. Of the allocated memory 14.24 GiB is allocated by PyTorch, and 119.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [
+        "- Nenhum"
+      ],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [],
+      "escala": "cerca de 14,7 cm de altura",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos são coerentes entre si. A argila é descrita como matéria-prima para cerâmica, sua função é compatível com a descrição, e as dimensões e localização são consistentes com o contexto etnobotânico."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "etnobotanica-01",
+        "glossario-06",
+        "glossario-05"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "obs_sem_enquadramento",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Baniwa"
+        ],
+        [
+          "artefato_visto_sem_flag",
+          "etiqueta: - Texto na etiqueta branca: il"
+        ]
+      ]
+    },
+    {
+      "id": 210680,
+      "titulo": "Flauta reta de osso",
+      "registro": {
+        "Nome do item": "Flauta reta de osso",
+        "Povo": "Hixkaryána",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "12,7 cm de comprimento (osso); 41,0 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+        "Função": "Instrumento musical e sonoro",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2018",
+        "Descrição": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de arara de cor vermelhas, amarradas ao fio de fibra, junto a extremidade proximal do osso"
+      },
+      "observacao": "OBJETO: Um objeto longo e fino, com formato de bastão, adornado com penas vermelhas e uma corda de fibra natural, repousando horizontalmente sobre uma superfície escura.\n\nMATERIAIS E CORES: madeira clara, penas vermelhas, fibra natural (corda), cor marrom claro (penas com bordas mais escuras), cor bege (madeira).\n\nPADRÕES E TEXTURAS: textura lisa na madeira, penas com veios e contornos irregulares, corda com fios desiguais e desgaste irregular.\n\nPARTES E QUANTIDADES: três furos circulares alinhados na madeira, uma coleção de penas vermelhas (cerca de 6-8 penas visíveis), uma corda de fibra natural com extremidade desfiada, uma pequena porção de material escuro (possivelmente resina ou pedaço de casca) na ponta direita da madeira.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, com a ponta direita ligeiramente mais elevada. O lado frontal da madeira está voltado para o observador. O interior da madeira não é visível.\n\nLEGIBILIDADE: Nada é legível no objeto.\n\nFONDO E ESTÚDIO: fundo de tecido cinza-escuro, textura uniforme, sem marcas de suporte ou marcações. A iluminação é difusa, sem sombras fortes.\n\nENQUADRAMENTO: inteiro\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "3 orifícios",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.23 GiB is allocated by PyTorch, and 153.64 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [],
+      "escala": "cerca de 12,7 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem consistentemente o objeto como uma flauta de osso com função musical, sem conflitos entre as informações."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-06"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Hixkaryána"
+        ]
+      ]
+    },
+    {
+      "id": 5146,
+      "titulo": "Pião noz de tucum",
+      "registro": {
+        "Nome do item": "Pião noz de tucum",
+        "Povo": "Canela",
+        "Categoria": "Objetos rituais, mágicos e lúdicos",
+        "Matéria-prima": "Vegetal > Cabaça | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "",
+        "Dimensões": "13,5 cm de comprimento",
+        "Função": "Objeto destinado a atividade lúdica",
+        "Estado de origem": "Maranhão",
+        "Ano de aquisição do objeto": "1950",
+        "Descrição": "Pião noz de tucum constituído de um recipiente de cabaça contendo uma haste de madeira roliça atravessada"
+      },
+      "observacao": "",
+      "enquadramento": "",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "96×64",
+      "resolucao_ok": false,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "",
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 13,5 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois o objeto é descrito como lúdico e sua função é compatível com a descrição: é um pião, usado para brincar. Não há conflito entre os campos."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "falta_de_resolucao",
+          "detalhe": "imagem de 96×64 px — sem resolução para descrever; item devolvido ao dataset"
+        }
+      ],
+      "flags_registro": [],
+      "diretrizes_usadas": [],
+      "json_valido": true,
+      "problemas": []
+    },
+    {
+      "id": 500179,
+      "titulo": "Abano de talo de tucum",
+      "registro": {
+        "Nome do item": "Abano de talo de tucum",
+        "Povo": "Baniwa",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Fio de tucum | Vegetal > Palmeira de tucum",
+        "Técnica de confecção": "Trançado",
+        "Dimensões": "41,5 cm de comprimento; 37,0 cm de largura",
+        "Função": "Usado como uma pá para virar beiju e para atiçar o fogo.",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Abano trançado semelhante a uma pequena esteira, provido\nde uma parte mais resistente em um dos seus cantos para empalmar."
+      },
+      "observacao": "OBJETO: Um objeto de vime ou fibra natural, com forma arredondada e simétrica, disposto em formato de coração, com base em X embaixo e bordas curvas que se fecham em pontas.\n\nMATERIAIS E CORES: Fibra natural de cor bege claro, com variações de tons mais claros e mais escuros; fios de amarrar de cor cinza clara ou branco.\n\nPADRÕES E TEXTURAS: Tecido em padrão de entrelaçamento em cruz, com áreas de tecido em diagonal no centro, formando um X; bordas com fios aparentes e amarrados.\n\nPARTES E QUANTIDADES: Duas partes simétricas que se unem no centro, formando um X; base com dois nós de amarrar visíveis; bordas curvas com extremidades apontadas; fios de amarrar em quantidade de pelo menos quatro, visíveis nas bases.\n\nPOSIÇÃO: Deitado sobre uma superfície plana, visto de cima, com a parte inferior (base) visível, mostrando o X central e as extremidades das partes simétricas.\n\nLEGIBILIDADE: Nada é ilegível; todos os elementos são visíveis e identificáveis.\n\nFONDO E ESTÚDIO: Fundo de cor azul-marinho sólido, sem textura aparente; não há artefatos de estúdio visíveis, como etiquetas, numeração ou cartelas.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 134.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 33.81 MiB is free. Including non-PyTorch memory, this process has 14.53 GiB memory in use. Of the allocated memory 14.26 GiB is allocated by PyTorch, and 123.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [],
+      "escala": "cerca de 41,5 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois as descrições são coerentes: o abano é trançado, usado para tarefas domésticas (virar beiju e atiçar fogo), e sua descrição física (semelhante a uma esteira com parte resistente) se alinha com sua função."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-08",
+        "glossario-02"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Baniwa"
+        ]
+      ]
+    },
+    {
+      "id": 3411,
+      "titulo": "Remo espatular",
+      "registro": {
+        "Nome do item": "Remo espatular",
+        "Povo": "Karajá",
+        "Categoria": "Utensílios e implementos de materiais ecléticos",
+        "Matéria-prima": "Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "124,2 cm de comprimento; 19,3 cm de largura (pá)",
+        "Função": "Objeto utilizado para deslocar o transporte em vias aquáticas",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1952",
+        "Descrição": "Remo espatular confeccionado em um só bloco de madeira apresentando punho em forma de muleta, cabo roliço e pá em forma de espatulada. Exibe superfície da pá decorada com motivos geometrizantes pintados na cor vermelha e preta"
+      },
+      "observacao": "OBJETO: Uma peça longa, de formato alongado e simétrico, com uma extremidade mais larga e arredondada e outra mais fina e pontiaguda, com uma superfície decorada em sua parte central.\n\nMATERIAIS E CORES: Madeira de tonalidade escura, com uma área central pintada em vermelho-alaranjado, sobreposta a uma textura de pontos escuros. As bordas e a haste são de madeira natural, com tons de marrom e cinza-escuro. As cores presentes são: vermelho-alaranjado, marrom, cinza-escuro, e preto (nos pontos).\n\nPADRÕES E TEXTURAS: Na superfície vermelha, há um padrão geométrico composto por linhas retas e curvas que formam figuras interligadas, com uma textura de pontos escuros distribuídos uniformemente sobre o fundo vermelho.\n\nPARTES E QUANTIDADES: Uma única peça com uma haste longa e uma lâmina larga, com uma extremidade pontiaguda e outra arredondada. Não há furos, alças, ou partes destacadas visíveis.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, com a extremidade mais larga à esquerda e a mais fina à direita, em perspectiva de cima para baixo. O interior da peça não é visível.\n\nLEGIBILIDADE: Não há inscrições, textos ou marcas legíveis na superfície do objeto.\n\nFONDO E ESTÚDIO: Fundo liso e uniforme de cor cinza-acinzentado, sem textura aparente. Não há etiquetas, numeração, cartelas ou suportes visíveis.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: Nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×395",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 542.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 533.81 MiB is free. Including non-PyTorch memory, this process has 14.04 GiB memory in use. Of the allocated memory 13.76 GiB is allocated by PyTorch, and 131.50 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [],
+      "escala": "cerca de 124,2 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois as descrições são coerentes: o objeto é um remo espatular, usado para deslocar transporte aquático, e sua descrição detalha sua forma e decoração sem conflito com a função declarada."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "utensilio-01",
+        "glossario-02",
+        "glossario-11"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Karajá"
+        ]
+      ]
+    },
+    {
+      "id": 1366,
+      "titulo": "Braçadeira emplumada",
+      "registro": {
+        "Nome do item": "Braçadeira emplumada",
+        "Povo": "Kalapalo",
+        "Categoria": "Adornos Plumários",
+        "Matéria-prima": "Animal > Pena de arara",
+        "Técnica de confecção": "Emplumação em passamanaria",
+        "Dimensões": "76,0cm de comprimento;9,0cm de largura",
+        "Função": "Adorno para braço",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1987",
+        "Descrição": "Braçadeira emplumada composta de fio de algodão com penas nas cores amarelo,vermelha de arara confeccionado pela técnica de emplumação em passamanaria com alças soltas"
+      },
+      "observacao": "OBJETO: Um objeto circular, composto por penas coloridas e um cordão de fibra natural, disposto sobre fundo preto.\n\nMATERIAIS E CORES: Penas em tons de vermelho, amarelo e laranja; fibra natural marrom; pequena peça de material branco (possivelmente tecido ou papel).\n\nPADRÕES E TEXTURAS: Nenhum padrão ou textura repetida visível; as penas apresentam textura frouxa e volumosa, o cordão tem textura de tecido trançado ou torcido.\n\nPARTES E QUANTIDADES: Três grupos principais de penas (um em vermelho, dois em amarelo/laranja), um cordão de fibra natural com nós e curvas, uma pequena peça branca presa às penas.\n\nPOSIÇÃO: O objeto está deitado sobre o fundo, em posição horizontal, com o cordão enrolado parcialmente. A face superior é visível, com as penas e o cordão dispostos de forma a mostrar a estrutura do objeto.\n\nLEGIBILIDADE: Nada é legível, como inscrições ou marcas, e não há elementos visíveis que permitam identificar a função ou o contexto de uso.\n\nFONDO E ESTÚDIO: Fundo preto liso. Não há etiquetas, numerações, cartelas de cores, régua ou suporte visível.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 140.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 113.81 MiB is free. Including non-PyTorch memory, this process has 14.45 GiB memory in use. Of the allocated memory 14.21 GiB is allocated by PyTorch, and 96.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra branco, laranja e o registro nomeia só amarelo, vermelho"
+        }
+      ],
+      "escala": "EM QUARENTENA — a medida do registro está sob conferência (flag): não escreva medida nenhuma",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos são consistentes entre si e descrevem o objeto de forma coerente."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"
+        },
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra branco, laranja e o registro nomeia só amarelo, vermelho"
+        }
+      ],
+      "flags_registro": [
+        {
+          "tipo": "metadado_suspeito",
+          "detalhe": "a Descrição menciona alças soltas — o comprimento pode incluí-las; conferir"
+        }
+      ],
+      "diretrizes_usadas": [
+        "plumaria-01",
+        "plumaria-02",
+        "plumaria-03",
+        "glossario-02",
+        "glossario-01"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Kalapalo"
+        ]
+      ]
+    },
+    {
+      "id": 4156,
+      "titulo": "Estojo peniano",
+      "registro": {
+        "Nome do item": "Estojo peniano",
+        "Povo": "Bororo",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Vegetal > Palmeira de babaçu",
+        "Técnica de confecção": "Dobradura",
+        "Dimensões": "19,5 cm de comprimento; 4,2 cm de largura; 2,4 cm de espessura",
+        "Função": "Objeto utilizado como protetor de genitália masculina de uso cerimonial",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "1959",
+        "Descrição": "Estojo peniano feito do folíolo do broto da palmeira de babaçu, que consiste em uma dobradura afunilada, com orifício na ponta. Apresenta prolongamento da folha onde apresenta decoração com motivos zoomorfos em cera"
+      },
+      "observacao": "OBJETO: Um objeto longo, fino e retangular, com uma extremidade dobrada e a outra pontiaguda, apresentando desenhos em preto sobre superfície de cor marrom claro.\n\nMATERIAIS E CORES: madeira clara, preto.\n\nPADRÕES E TEXTURAS: desenhos em preto, com contornos de figuras animais estilizadas; textura da madeira visível em alguns trechos.\n\nPARTES E QUANTIDADES: uma peça única, com uma extremidade dobrada e outra pontiaguda; não há partes contáveis como furos, alças ou penas.\n\nPOSIÇÃO: deitado diagonalmente, com a extremidade dobrada no lado esquerdo da imagem e a ponta no lado direito inferior; o verso não é visível.\n\nLEGIBILIDADE: os desenhos são visíveis, mas não há texto legível.\n\nFONDO E ESTÚDIO: fundo branco uniforme; não há etiquetas, numeração ou cartelas de cores visíveis.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×429",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 128.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 93.81 MiB is free. Including non-PyTorch memory, this process has 14.47 GiB memory in use. Of the allocated memory 14.19 GiB is allocated by PyTorch, and 128.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [],
+      "escala": "cerca de 19,5 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem coerentemente o estojo como objeto cerimonial de proteção, feito de material vegetal, com técnica de dobradura e decoração zoomorfa, sem conflitos entre descrições."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "glossario-08",
+        "glossario-05"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Bororo"
+        ]
+      ]
+    },
+    {
+      "id": 205095,
+      "titulo": "Arco plano-côncavo",
+      "registro": {
+        "Nome do item": "Arco plano-côncavo",
+        "Povo": "Waimiri-Atroari",
+        "Categoria": "Armas",
+        "Matéria-prima": "",
+        "Técnica de confecção": "Entalhe",
+        "Dimensões": "237,2 cm de comprimento, 3 cm de largura - Medidas aproximadas por se tratar de objeto irregular",
+        "Função": "Objeto utilizado para arremesso de flechas, caça, pesca, ataque e defesa",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1972",
+        "Descrição": "Arco plano-côncavo confeccionado com madeira não identificada, apresentando corda tecida segundo a técnica da torção em S com fibra não identificada"
+      },
+      "observacao": "OBJETO: Um objeto cilíndrico com uma ponta aparente, envolto por uma corda trançada em espiral, sobre um fundo texturizado.\n\nMATERIAIS E CORES: Madeira escura, fibra de cor marrom claro, fibra de cor marrom mais clara, fibra de cor marrom escuro, fibra de cor marrom avermelhado.\n\nPADRÕES E TEXTURAS: Trama de trança em espiral, textura irregular da fibra, superfície lisa da madeira, textura de tecido no fundo.\n\nPARTES E QUANTIDADES: Uma ponta aparente, uma fibra que sobra, uma fibra que desce verticalmente, uma fibra que se curva para baixo.\n\nPOSIÇÃO: O objeto está de pé, vertical, com a ponta aparente no topo, a base não visível, o interior não visível, o verso não visível.\n\nLEGIBILIDADE: Não há inscrições, marcas, textos ou símbolos legíveis.\n\nFONDO E ESTÚDIO: Fundo cinza com textura de tecido, sem artefatos de estúdio visíveis.\n\nENQUADRAMENTO: Detalhe.\n\nARTEFATOS: Nenhum.",
+      "enquadramento": "detalhe",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "683×1024",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 494.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 493.81 MiB is free. Including non-PyTorch memory, this process has 14.08 GiB memory in use. Of the allocated memory 13.80 GiB is allocated by PyTorch, and 128.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 237,2 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois as informações sobre o objeto são coerentes: é um arco plano-côncavo, usado para arremesso de flechas (função), feito com madeira e corda, o que é compatível com sua categoria (armas) e função (caça, pesca, ataque e defesa)."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "arma-01",
+        "glossario-01",
+        "glossario-02"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Waimiri-Atroari"
+        ],
+        [
+          "enquadramento_incoerente",
+          "observação diz detalhe, alt não marca"
+        ]
+      ]
+    },
+    {
+      "id": 905,
+      "titulo": "Panela gameliforme",
+      "registro": {
+        "Nome do item": "Panela gameliforme",
+        "Povo": "Karajá",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "Mineral > Argila",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "17,3 cm de diâmetro de borda; 8,4 cm de altura",
+        "Função": "Objeto utilizado para cozinhar e servir alimentos",
+        "Estado de origem": "Tocantins",
+        "Ano de aquisição do objeto": "1955",
+        "Descrição": "Panela gameliforme de borda extrovertida e base plana. Apresenta externamente o bojo decorado com motivos geometrizantes, figuras em \"X\", pintados na cor vermelha"
+      },
+      "observacao": "OBJETO: Um recipiente cerâmico de formato circular, com base ligeiramente proeminente e borda arredondada, apresentando decoração em linhas cruzadas.\n\nMATERIAIS E CORES: cerâmica de cor bege claro, com detalhes em tinta vermelha aplicada sobre a superfície externa e ao longo da borda. A cor vermelha aparece em traços finos e em áreas mais densas, como um quadrado central. A cerâmica exibe textura ligeiramente áspera e sinais de uso ou desgaste, como pequenas lascas na borda.\n\nPADRÕES E TEXTURAS: padrão de linhas diagonais que se cruzam formando um quadrado central, com linhas que se estendem até a borda. As linhas são contínuas, de espessura uniforme, e não apresentam desenhos adicionais.\n\nPARTES E QUANTIDADES: borda completa visível, interior parcialmente visível, base circular completa. Não há alças, furos, tampas ou outras partes adicionais visíveis.\n\nPOSIÇÃO: O objeto está posicionado de forma equilibrada, em vista de três quartos, com o interior parcialmente visível e a base apoiada no suporte. A borda está voltada para o espectador.\n\nLEGIBILIDADE: Não há inscrições, marcas ou textos legíveis na superfície do objeto.\n\nFONDO E ESTÚDIO: fundo azul-escuro, uniforme, sem textura aparente. Não há etiquetas, numerações, cartelas de cores, régua ou suporte visível.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×678",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 138.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 113.81 MiB is free. Including non-PyTorch memory, this process has 14.45 GiB memory in use. Of the allocated memory 14.18 GiB is allocated by PyTorch, and 120.17 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [],
+      "escala": "cerca de 17,3 cm de diâmetro",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna no registro. As informações são coerentes entre si e não apresentam afirmações incompatíveis sobre o mesmo objeto."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "ceramica-02",
+        "glossario-11",
+        "glossario-04"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Karajá"
+        ]
+      ]
+    },
+    {
+      "id": 500322,
+      "titulo": "Bolsa tecida",
+      "registro": {
+        "Nome do item": "Bolsa tecida",
+        "Povo": "Baniwa",
+        "Categoria": "Cordões e Tecidos",
+        "Matéria-prima": "Vegetal > Fio de tucum | Vegetal > Semente de açaí",
+        "Técnica de confecção": "",
+        "Dimensões": "24,0 cm de largura; 23,5 cm de altura; 83,0 cm altura com a alça esticada",
+        "Função": "Usada como acessório para guardar e transportar objetos.",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Bolsa tecida com alça usado para portar pequenos objetos feito segundo a técnica de trabalho em malha."
+      },
+      "observacao": "OBJETO: Um objeto retangular, aparentemente uma bolsa, com alça longa, feito de fibra trançada em padrão de malha aberta.\n\nMATERIAIS E CORES: Fibra de cor bege claro, com variações de tom mais claro e mais escuro na trama; pequeno botão de cor escura, quase preta, no centro superior da frente.\n\nPADRÕES E TEXTURAS: Textura de malha aberta, formada por fios entrelaçados em padrão de trama retangular. A alça apresenta um acabamento de costura aparente ao longo de seu comprimento.\n\nPARTES E QUANTIDADES: Uma alça única, contínua, com formato ondulado; um único botão, centralizado na parte superior frontal.\n\nPOSIÇÃO: O objeto está deitado sobre um fundo, com a face frontal voltada para a câmera, alça estendida para o lado esquerdo da imagem, parcialmente dobrada. O interior não é visível.\n\nLEGIBILIDADE: Nada é legível no objeto, nem textos, nem marcas.\n\nFONDO E ESTÚDIO: Fundo de cor azul-escura, uniforme, sem textura aparente. A iluminação é difusa, sem sombras fortes. Não há artefatos de estúdio visíveis, como etiquetas ou régua.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "resposta_bruta": "",
+      "resposta_bruta_retry": "",
+      "erro": "OutOfMemoryError('CUDA out of memory. Tried to allocate 498.00 MiB. GPU 0 has a total capacity of 14.56 GiB of which 473.81 MiB is free. Including non-PyTorch memory, this process has 14.10 GiB memory in use. Of the allocated memory 13.81 GiB is allocated by PyTorch, and 139.89 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)')",
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [],
+      "escala": "cerca de 24 cm de largura",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos são coerentes entre si e não apresentam afirmações incompatíveis sobre o mesmo objeto."
+      },
+      "alt_bruto": "",
+      "alt_text": "",
+      "descricao_objeto": "",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "cordoes-01",
+        "glossario-02",
+        "glossario-03"
+      ],
+      "json_valido": false,
+      "problemas": [
+        [
+          "json_invalido",
+          ""
+        ],
+        [
+          "povo_ausente_no_alt",
+          "Baniwa"
+        ]
+      ]
+    }
+  ]
+}

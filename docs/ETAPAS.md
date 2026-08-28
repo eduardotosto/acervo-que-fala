@@ -17,7 +17,7 @@
 | E4 | Notebook 01 no Colab: Qwen3-VL-8B (4-bit) + 1 item ponta a ponta | ✅ 24/08/2026 (v3) |
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
-| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ 24/08 · **v10 rodado: 1,7 problemas/item (melhor lote)** · decisão: congelar × lapidar × trocar redator |
+| E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ encerrada 28/08 · v10 = lote final (1,7 problemas/item) · **redator: Qwen 8B** (bake-off v2 encerrado pela regra de parada: o 12B não coube na T4) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
 | E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
@@ -337,10 +337,25 @@ primeiro uso da GPU. Dry-run com modelo simulado passou. No Drive:
 (colab.research.google.com/drive/1w0amoSOGsJuGzbmeUsu4MUGK-nMUuvfb), conferido por tamanho
 exato e marcos do base64.
 
-**Pendências da E7:** (1) rodar o Notebook 05 v5 no Colab (→ `resultados/05_bakeoff_gemma_v4.json`);
-(2) se funcionar: análise + página de comparação cega v2 → **julgamento editorial cego do
-Eduardo decide o redator**; se falhar por memória: regra de parada — bake-off encerrado,
-Qwen v10 titular, seguir para E8.
+**Terceira rodada e regra de parada (28/08/2026) — bake-off v2 ENCERRADO, E7 fechada.** O
+Notebook 05 v5 rodou e falhou identicamente: OOM nos 19 itens reais, com o **mesmo perfil de
+memória** da rodada anterior (14,21 GiB alocados; a redução da reserva de contexto de 8192
+para 5632 não mudou nada no consumo — fato medido pelos erros gravados). Leitura técnica: o
+consumo não vem da reserva configurável, e sim do processamento do prompt longo pelo próprio
+12B (hipótese: o custo de leitura de ~3,5k tokens de entrada com o vocabulário de 262k do
+Gemma). **Regra de parada pré-combinada aplicada: sem nova tentativa.** Conclusão registrada:
+*sob a restrição de infraestrutura gratuita do projeto (T4), o desafiante de 12B executa o
+sistema v8 (prompt curto — bake-off v1, 26/08) mas NÃO executa o sistema atual (prompt v13,
+~2× maior); a comparação justa entre redatores sob o sistema da 6ª adjudicação é inviável na
+T4.* **Redator final: Qwen3-VL-8B, lote v10.** A pergunta científica ("o teto de obediência é
+do tamanho do modelo?") fica aberta, documentada como limitação honesta. Resultado da rodada
+em `resultados/05_bakeoff_gemma_v4.json`; os três resultados de falha ficam no repositório
+como registro do incidente e da regra de parada.
+
+**E7 encerrada:** sistema congelado — observação v3.1, redação v13, rubrica v1.4, garantias em
+código, validador com retry; resíduo do v10 (oscilação sob demanda simultânea) assumido para
+flags + revisão humana. Próxima etapa: **E8** (métricas automáticas nos 40 casos), a iniciar
+com consulta prévia ao autor.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
