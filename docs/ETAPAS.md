@@ -315,10 +315,22 @@ no resultado. Dry-run com modelo simulado passou de ponta a ponta. No Drive:
 (colab.research.google.com/drive/1Z_yhDS65BuRPiXPRMEiv0J5we3Y8bU0P), conferido por tamanho
 exato e marcos do base64 (o caminho de upload foi validado byte a byte na véspera).
 
-**Pendências da E7:** (1) rodar o bake-off v2 de novo no Colab (Notebook 05 v4, GPU T4,
-Executar tudo → salva `resultados/05_bakeoff_gemma_v3.json`; se o teste de fumaça quebrar,
-colar o traceback no chat); (2) análise do lote + página de comparação cega v2 (A/B sorteado
-por item, gabarito lacrado) → **julgamento editorial cego do Eduardo decide o redator**.
+**Segunda rodada do bake-off v2 (28/08/2026) — a observabilidade pagou: causa diagnosticada.**
+O Notebook 05 v4 rodou, o teste de fumaça passou (geração pequena cabe) e os 19 itens reais
+falharam de novo — mas desta vez **cada item gravou o erro**: `CUDA out of memory`, com 14,21
+GiB realmente alocados dos 14,56 GiB da T4 e falta de apenas 128–494 MiB por item (reservado-
+não-usado ínfimo → capacidade esgotada, não fragmentação). Explicação: entre o bake-off v1
+(26/08, funcionou) e o v2, o sistema cresceu — prompt v13 + insumos ≈ 2× o tamanho do v8, e o
+`max_seq_length` subiu de 4096 para 8192 (reserva de memória proporcional). **O Gemma 12B com
+o sistema atual não cabe na T4 gratuita por margem mínima.** A rodada perdida de ontem
+(v3, sem diagnóstico) tinha quase certamente a mesma causa. Ambiente da rodada, agora gravado
+no resultado: unsloth 2026.8.22 · transformers 5.5.0 · torch 2.11.0. Resultado em
+`resultados/05_bakeoff_gemma_v3.json`.
+
+**Pendências da E7:** decisão do Eduardo entre (1) ajustes de memória no mesmo motor
+(margem pequena a recuperar; mais uma rodada), (2) trocar o motor de execução por um mais
+econômico, (3) encerrar o bake-off com a conclusão honesta — o desafiante de 12B não cabe na
+restrição de infraestrutura do projeto sob o sistema atual — e seguir para E8 com o Qwen v10.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
