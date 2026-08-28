@@ -299,10 +299,26 @@ o 1,7 registrado. Resultado esperado: `resultados/05_bakeoff_gemma_v2.json`.
 (colab.research.google.com/drive/1Hd-W2JkSde9tzCVFNiqIcX0qD4cNgYyD), conferido depois do upload
 por download e comparação: **byte a byte idêntico ao do repositório (12/12 células)**.
 
-**Pendências da E7:** (1) rodar o bake-off v2 no Colab (GPU T4, Executar tudo → salva
-`resultados/05_bakeoff_gemma_v2.json`); (2) análise do lote + página de comparação cega v2
-(A/B sorteado por item, gabarito lacrado) → **julgamento editorial cego do Eduardo decide o
-redator**.
+**Rodada perdida do bake-off v2 (28/08/2026) — e a lição de observabilidade.** A primeira
+rodada do Notebook 05 v3 terminou "com sucesso" mas **19/20 itens saíram sem texto**: toda
+extração de JSON falhou (`json_valido: false`, retry 0), e o `except` do notebook engolia a
+exceção sem gravar nem o erro nem a resposta do modelo — o resultado
+(`resultados/05_bakeoff_gemma_v2.json`, mantido como registro do incidente) não permite
+diagnóstico. Pesquisa feita (pedido do autor): issues conhecidas do Unsloth com Gemma-3 no
+caminho `apply_chat_template`/`token_type_ids`, e o Colab instala sempre o Unsloth mais novo —
+o ambiente que rodou o bake-off v1 em 26/08 não é o mesmo de 28/08, e nenhuma rodada registrava
+versões. **Notebook 05 v4** construído: resposta bruta + erro gravados por item, **teste de
+fumaça** (geração mínima sem try/except — quebra alto antes do lote), `entradas` filtradas para
+`input_ids`/`attention_mask`, `max_tokens` 1024, e versões de unsloth/transformers/torch salvas
+no resultado. Dry-run com modelo simulado passou de ponta a ponta. No Drive:
+`notebooks/05_bakeoff_redator_v4.ipynb`
+(colab.research.google.com/drive/1Z_yhDS65BuRPiXPRMEiv0J5we3Y8bU0P), conferido por tamanho
+exato e marcos do base64 (o caminho de upload foi validado byte a byte na véspera).
+
+**Pendências da E7:** (1) rodar o bake-off v2 de novo no Colab (Notebook 05 v4, GPU T4,
+Executar tudo → salva `resultados/05_bakeoff_gemma_v3.json`; se o teste de fumaça quebrar,
+colar o traceback no chat); (2) análise do lote + página de comparação cega v2 (A/B sorteado
+por item, gabarito lacrado) → **julgamento editorial cego do Eduardo decide o redator**.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
