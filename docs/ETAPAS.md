@@ -327,10 +327,20 @@ o sistema atual não cabe na T4 gratuita por margem mínima.** A rodada perdida 
 no resultado: unsloth 2026.8.22 · transformers 5.5.0 · torch 2.11.0. Resultado em
 `resultados/05_bakeoff_gemma_v3.json`.
 
-**Pendências da E7:** decisão do Eduardo entre (1) ajustes de memória no mesmo motor
-(margem pequena a recuperar; mais uma rodada), (2) trocar o motor de execução por um mais
-econômico, (3) encerrar o bake-off com a conclusão honesta — o desafiante de 12B não cabe na
-restrição de infraestrutura do projeto sob o sistema atual — e seguir para E8 com o Qwen v10.
+**Decisão do Eduardo (28/08/2026): caminho 1, com regra de parada.** Ajustes de memória no
+mesmo motor; **se esta rodada falhar por memória, o bake-off v2 encerra** e o Qwen v10 segue
+titular. **Notebook 05 v5** construído com os três ajustes: `max_seq_length` 8192 → **5632**
+(tamanho justo, MEDIDO sobre o pior caso real — retry do item 1366, ~4,9k tokens);
+`gc.collect` + `empty_cache` entre itens; alocador `expandable_segments` definido antes do
+primeiro uso da GPU. Dry-run com modelo simulado passou. No Drive:
+`notebooks/05_bakeoff_redator_v5.ipynb`
+(colab.research.google.com/drive/1w0amoSOGsJuGzbmeUsu4MUGK-nMUuvfb), conferido por tamanho
+exato e marcos do base64.
+
+**Pendências da E7:** (1) rodar o Notebook 05 v5 no Colab (→ `resultados/05_bakeoff_gemma_v4.json`);
+(2) se funcionar: análise + página de comparação cega v2 → **julgamento editorial cego do
+Eduardo decide o redator**; se falhar por memória: regra de parada — bake-off encerrado,
+Qwen v10 titular, seguir para E8.
 
 ### E8 — Métricas automáticas
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.

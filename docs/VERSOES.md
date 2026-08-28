@@ -31,6 +31,7 @@ redação v10→v11, nota 2).
 | 04 · v10 | v3.1 | v13 | v1.4 | `04_pipeline_completo_v10.json` (20) | 27/08 | 6ª adjudicação; validador de 14 exigências; retry 19/20 |
 | 05 · v3 | reusa as do lote v10 (v3.1) | v13 (lida do resultado v10) | v1.4 | `05_bakeoff_gemma_v2.json` (20; **sem textos**) | 28/08 | bake-off v2, rodada perdida: 19/20 sem JSON, erro não gravado |
 | 05 · v4 | reusa as do lote v10 (v3.1) | v13 (lida do resultado v10) | v1.4 | `05_bakeoff_gemma_v3.json` (20; **sem textos**) | 28/08 | bake-off v2, 2ª rodada: OOM na T4 em 19/19 — causa gravada (o 12B não cabe sob o sistema atual) |
+| 05 · v5 | reusa as do lote v10 (v3.1) | v13 (lida do resultado v10) | v1.4 | `05_bakeoff_gemma_v4.json` — a rodar | 28/08 | bake-off v2, 3ª rodada: ajustes de memória (contexto 5632 medido, limpeza entre itens, alocador expansível); regra de parada |
 
 ¹ O prompt de redação do Notebook 02 nasceu sem rótulo; "v2" é o nome retroativo que o
 Notebook 03 usa ao comparar as duas redações. Não existe redação v1.
