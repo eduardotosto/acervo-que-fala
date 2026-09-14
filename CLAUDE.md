@@ -40,10 +40,10 @@ commitar e reportar.
   e as alternativas — em 2-3 frases. Ele decide.
 - **Aprendizado > conclusão da tarefa.** Explicar os pontos cruciais de forma sucinta, sem
   detalhamento técnico: o autor não é dev; o que interessa é a lógica por trás de cada decisão.
-- **Erro ou imprevisto:** primeiro explicar o que aconteceu, por quê, e expor o raciocínio do
-  diagnóstico; a proposta de correção vem depois, para aprovação.
-- **Conceito novo se explica na hora** (dry-run, smoke test, LLM-as-judge...), com analogia
-  simples.
+- **Erro ou imprevisto:** explicar o que aconteceu e o raciocínio do diagnóstico; aqui a
+  correção só entra depois de aprovada.
+- **Conceito novo se explica na hora** (dry-run, smoke test, LLM-as-judge...), pelo nome real
+  e em linguagem simples. Analogia não substitui o termo.
 
 ## Divisão de responsabilidades do sistema
 
@@ -61,12 +61,11 @@ não entrega trechos "gerais").
 
 ## Convenções de escrita
 
-- **Português** no texto, **jargão técnico em inglês** sem tradução (smoke test, prompt, baseline,
-  bake-off, flag, RAG, fine-tuning).
+As regras gerais (jargão técnico em inglês, sem julgamentos em nome do autor) estão no
+`~/.claude/CLAUDE.md`. Específicas deste projeto:
+
 - **Não usar o rótulo "designer"** para se referir ao autor em nenhum material do projeto.
 - **Não citar fine-tuning** em nenhum material — nem como extensão futura (fora do escopo).
-- **Nada de julgamentos que o autor não fez**: relatar fato e consequência, nunca "foi a decisão
-  certa", "ficou excelente". O julgamento é dele.
 - As descrições são **ouvidas** por pessoas cegas via leitor de tela — nunca "lidas".
 
 ## Execução: sempre no Colab
@@ -93,14 +92,6 @@ estável — o git é o versionamento.
 - Classe oficial do Qwen: `Qwen3VLForConditionalGeneration`.
 - Imagens: `ImageOps.exif_transpose(...).convert("RGB")` sempre.
 - **Pesquisar antes de corrigir** erro de Colab — pedido explícito do autor.
-
-## Windows / PowerShell
-
-- Evitar aspas duplas em mensagens de `git commit` (quebram o parsing do here-string).
-- `gh` está em `C:\Program Files\GitHub CLI\gh.exe`, autenticado, mas **fora do PATH** — chamar
-  pelo caminho completo. `git push` normal funciona.
-- Pasta dentro do Dropbox: um `update_ref failed` ocasional é lock do Dropbox, não erro real —
-  conferir com `git fetch` antes de reagir.
 
 ## Achados que definem o projeto (não redescobrir)
 
