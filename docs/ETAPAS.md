@@ -18,11 +18,11 @@
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
 | E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ encerrada 28/08 · v10 = lote final (1,7 problemas/item) · **redator: Qwen 8B** (bake-off v2 encerrado pela regra de parada: o 12B não coube na T4) |
-| E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ |
-| E9 | Lote completo no Colab (notebook com markdown explicativo) | ⬜ |
-| E10 | Painel humano: material A/B + condução (trabalho de Eduardo; Claude prepara) | ⬜ |
+| E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ (depende do resultado da E9) |
+| E9 | Lote completo no Colab (notebook com markdown explicativo) | 🔶 Notebook 06 pronto em 29/09/2026 · aguardando a rodada no Colab |
+| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | ⬜ |
 | E11 | Site Gradio + deploy no HF Spaces + interface de revisão | ⬜ |
-| E12 | Holdout (roda 1x) + README da banca + texto descritivo + ensaio da demo | ⬜ |
+| E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
 
 Mapeamento com o plano de 10 semanas: E1–E3 = Fases 0–1 · E4–E7 = Fase 2 · E8–E10 = Fase 3 · E11 = Fase 4 · E12 = Fase 5.
@@ -361,9 +361,48 @@ com consulta prévia ao autor.
 `avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
 **Verificação:** uma tabela de métricas impressa em um comando.
 
-### E9 — Lote no Colab
-Notebook `notebooks/01_lote_descricoes.ipynb` (com células markdown explicativas, padrão combinado) para gerar descrições dos 40 casos + amostra ampliada com GPU. Eduardo roda ("Executar tudo"), baixa resultados, Claude analisa.
-**Verificação:** resultados idênticos em formato aos do pipeline local.
+### E9 — Lote no Colab 🔶
+**Decisões do Eduardo (29/09/2026), na retomada do projeto:**
+- a entrega é **só o README** — não haverá apresentação à banca (sai o ensaio da demo da E12);
+- a **E10 fecha sem A/B humano**: LLM-as-judge + teste com NVDA; o A/B com avaliadores entra no
+  README como limitação declarada e trabalho futuro;
+- o **holdout roda na mesma sessão** dos 40 casos, salvo em arquivo separado — o sistema está
+  congelado desde 28/08, então nada do que os 40 mostrarem pode voltar para o sistema.
+
+**Ordem:** a E9 vem antes da E8. A métrica precisa do texto gerado, e toda inferência roda no
+Colab; o `rodar.py` mede os arquivos que o notebook salva.
+
+**Notebook 06 construído (29/09/2026)** — `notebooks/06_lote_avaliacao.ipynb`. Roda o sistema
+congelado (observação v3.1, redação v13, rubrica v1.4) nos 40 casos + 10 de holdout. Os blocos que
+definem o sistema foram copiados do Notebook 04 v10 por script, e os três prompts conferidos
+contra os gravados em `resultados/04_pipeline_completo_v10.json` (idênticos). O que é novo fica
+em volta do sistema:
+- **checkpoint** no Drive a cada resposta do modelo: se a sessão cair, "Executar tudo" retoma de
+  onde parou; item que falhou não é refeito na retomada (não ganha tentativa que os outros não
+  tiveram); três falhas seguidas param o notebook e saem do checkpoint;
+- **erro e resposta bruta gravados por item**, versões do ambiente e **tempo por item** no
+  resultado (os lotes anteriores não registravam duração);
+- API do museu com até 3 tentativas por pedido; se falhar, o notebook para em vez de pular o caso;
+- a régua é baixada do repositório em tempo de execução (`avaliacao/checar_lote.py`).
+
+**Dry-run com modelo simulado** (API do museu e régua reais) passou em três cenários: queda da
+sessão no meio da redação, retomada pelo checkpoint sem refazer nenhuma observação, e ambiente
+quebrado (para na terceira falha seguida, checkpoint limpo). Os arquivos de saída são lidos pelo
+`checar_lote.py` local sem adaptação.
+
+**Achados do dry-run, antes de qualquer GPU:**
+- o caso **680 (Panela gameliforme, Suruí) tem foto de 154×106 px** — o porteiro de resolução o
+  barra: flag `falta_de_resolucao`, nenhum texto. Dos 40 casos, 39 geram descrição;
+- o título do holdout **199679 é "Flauta reta sem aeroduto"** — o nome do objeto contém a
+  construção que o validador e a régua tratam como frase de ausência ("sem X"). Regra do sistema
+  e título do catálogo colidem; o sistema não muda (holdout), o caso fica para a análise;
+- cinco dos 40 casos (9196, 665, 51023, 63283, 78838) são os objetos do smoke test e estiveram
+  no lote de desenvolvimento: marcados como `visto_no_desenvolvimento`, métricas com e sem eles.
+
+**Onde abrir:** direto do repositório público —
+colab.research.google.com/github/eduardotosto/acervo-que-fala/blob/main/notebooks/06_lote_avaliacao.ipynb.
+Saídas no Drive: `resultados/06_lote_casos.json` e `resultados/06_lote_holdout.json`.
+**Verificação:** os dois arquivos no Drive, com 40 e 10 itens.
 
 ### E10 — Avaliação cega e por critérios (redesenhada 25/08/2026)
 **Mudança de metodologia (decisão do Eduardo):** o projeto NÃO terá acesso a usuários cegos nem a curadores do museu. A avaliação foi redesenhada para refletir a realidade, com a limitação registrada honestamente no README (e a validação com usuários reais documentada como trabalho futuro). Três frentes:
@@ -371,6 +410,9 @@ Notebook `notebooks/01_lote_descricoes.ipynb` (com células markdown explicativa
 2. **LLM-juiz** com a rubrica de 25 regras + os critérios de cada caso — avaliação automatizada e rastreável dos 40 casos (metodologia LLM-as-judge, tema do próprio curso; juiz ≠ redator para reduzir viés).
 3. **Teste de leitor de tela pelo próprio Eduardo**: NVDA (gratuito, Windows) lendo os alt-texts em contexto de página — a experiência auditiva real, na primeira pessoa que o projeto consegue alcançar.
 A pergunta-guia do projeto ajusta junto: "as descrições geradas superam a descrição curatorial usada como alt-text, **segundo critérios objetivos de acessibilidade e avaliação cega**?" (atualizar proposta/README na E12; **avisar a Manoela da mudança**).
+**Atualização (29/09/2026):** a orientadora ainda não opinou sobre o projeto, e o Eduardo decidiu
+seguir até a entrega finalizada. A frente 1 (A/B cego com avaliadores leigos) **sai do escopo**
+por decisão dele — ficam as frentes 2 e 3, e o A/B entra no README como limitação declarada.
 **Verificação:** resultados por caso registrados em `avaliacao/painel/`.
 
 ### E11 — Site
@@ -378,7 +420,7 @@ A pergunta-guia do projeto ajusta junto: "as descrições geradas superam a desc
 **Verificação:** URL pública funcionando.
 
 ### E12 — Fechamento
-Rodar holdout (primeira e única vez). Preencher `docs/modelo-readme-banca.md` → `README.md` final (Resumo, Introdução, Modelagem, Resultados, Conclusões — remover comentários HTML). Texto descritivo. Ensaio da demo: problema em 30s, 2 casos, 1 falha explicada.
+Rodar holdout (primeira e única vez — na sessão da E9, arquivo separado). Preencher `docs/modelo-readme-banca.md` → `README.md` final (Resumo, Introdução, Modelagem, Resultados, Conclusões — remover comentários HTML). Texto descritivo. ~~Ensaio da demo~~ — não haverá apresentação à banca (29/09/2026); a entrega é o README.
 **Verificação:** checklist §8.8 do curso completo.
 
 ### EP — GitHub remoto (paralela) ✅
