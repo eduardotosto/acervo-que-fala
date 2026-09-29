@@ -732,6 +732,10 @@
           "infiel": 5,
           "fiel": 6
         },
+        "adjudicacao": {
+          "concordo": 48
+        },
+        "graves_confirmados": 31,
         "ab_pares": 39,
         "ab_descreve_melhor": {
           "baseline": 12,
@@ -1385,6 +1389,10 @@
           "infiel": 5,
           "fiel": 4
         },
+        "adjudicacao": {
+          "concordo": 45
+        },
+        "graves_confirmados": 28,
         "ab_pares": 34,
         "ab_descreve_melhor": {
           "baseline": 12,
@@ -1663,6 +1671,10 @@
           "fiel_com_ressalva": 8,
           "fiel": 2
         },
+        "adjudicacao": {
+          "concordo": 9
+        },
+        "graves_confirmados": 6,
         "ab_pares": 10,
         "ab_descreve_melhor": {
           "baseline": 6,

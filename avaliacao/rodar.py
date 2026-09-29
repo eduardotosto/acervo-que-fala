@@ -190,8 +190,10 @@ def medir_recorte(itens, casos_por_id, gabarito):
 
 
 def medir_juiz(itens, juiz):
-    """O que o juiz disse sobre os itens deste recorte (E10)."""
+    """O que o juiz disse sobre os itens deste recorte (E10), e o que o autor decidiu
+    sobre os itens levados à adjudicação."""
     ids = {it["id"] for it in itens}
+    adjudicados = [d for d in juiz.get("adjudicacao", []) if d["id"] in ids]
     casos = [j for j in juiz["criterios"] if j["id"] in ids]
     achados = [a for j in casos for a in j["achados"]]
     pares = [p for p in juiz["ab"] if p["id"] in ids]
@@ -210,6 +212,9 @@ def medir_juiz(itens, juiz):
         "casos_com_achado_grave": sum(1 for j in casos
                                       if any(a["gravidade"] == "alta" for a in j["achados"])),
         "fidelidade_visual": conta(j["fidelidade_visual"] for j in casos),
+        "adjudicacao": conta(d["decisao"] or "sem decisão" for d in adjudicados),
+        "graves_confirmados": sum(1 for d in adjudicados
+                                  if d["tipo"] == "achado_grave" and d["decisao"] == "concordo"),
         "ab_pares": len(pares),
         "ab_descreve_melhor": conta(p["descreve_melhor"] for p in pares),
         "ab_publicaria": conta(p["publicaria"] for p in pares),
@@ -246,6 +251,14 @@ def imprimir_juiz(recortes):
                ("registro (o catálogo erra)", "registro"), ("código (flag, escala)", "codigo"))
     bloco("achados por camada onde o erro nasceu", "achados_por_camada", camadas)
     bloco("idem, só os de gravidade alta", "achados_graves_por_camada", camadas[:2])
+    if any(j(n)["adjudicacao"] for n in nomes):
+        bloco("adjudicação do autor sobre os itens do relatório", "adjudicacao",
+              (("concordo", "concordo"), ("discordo", "discordo"), ("parcial", "parcial")))
+        linha("  achados de gravidade alta confirmados",
+              [f"{j(n)['graves_confirmados']}/{j(n)['achados_por_gravidade'].get('alta', 0)}"
+               for n in nomes])
+    else:
+        print("   (leitura do juiz ainda não adjudicada pelo autor)")
     bloco("fidelidade visual", "fidelidade_visual",
           (("fiel", "fiel"), ("fiel com ressalva", "fiel_com_ressalva"), ("infiel", "infiel"),
            ("conferir", "conferir")))
@@ -367,6 +380,10 @@ def metricas(args, casos, holdout):
         for chave, caminho in zip(("criterios", "ab"), caminhos_juiz):
             with open(caminho, encoding="utf-8") as f:
                 juiz[chave] = json.load(f)
+        caminho_adj = os.path.join(PAINEL_DIR, "adjudicacao.json")
+        if os.path.exists(caminho_adj):
+            with open(caminho_adj, encoding="utf-8") as f:
+                juiz["adjudicacao"] = json.load(f)["itens"]
         por_recorte = {"casos": itens,
                        "não vistos": [it for it in itens if not it.get("visto_no_desenvolvimento")]}
         if "holdout" in recortes:

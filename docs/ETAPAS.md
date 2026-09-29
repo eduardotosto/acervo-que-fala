@@ -20,7 +20,7 @@
 | E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ encerrada 28/08 · v10 = lote final (1,7 problemas/item) · **redator: Qwen 8B** (bake-off v2 encerrado pela regra de parada: o 12B não coube na T4) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ✅ 29/09/2026 · 1,6 problemas/item nos casos, 1,7 no holdout (lote de desenvolvimento: 1,7) |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ✅ 29/09/2026 · 50/50 objetos, nenhuma falha de geração, 93 min |
-| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 juiz rodado em 29/09/2026 (50 casos, 49 pares) · pendentes do Eduardo: adjudicação e teste com NVDA |
+| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 juiz rodado e adjudicado em 29/09/2026 (57 de 57 itens: concordo) · pendente: teste com NVDA |
 | E11 | Site Gradio + deploy no HF Spaces (enxuto, sem interface de revisão — decisão de 29/09) | 🔶 código pronto em `site/`; falta o deploy |
 | E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
@@ -496,8 +496,15 @@ fechado) antes de entrar no repositório. O bloco 6 do `rodar.py` imprime o resu
 - O 680 ficou sem texto, e o juiz sustenta a decisão diante da foto de 154×106 px.
 
 **Material de adjudicação:** `avaliacao/painel/relatorio_juiz.md` — 57 itens numerados (37 achados
-de gravidade alta + 20 vereditos `conferir`) e os 18 pares em que a baseline venceu. **Até a
-adjudicação, os números acima são a leitura do juiz**, com a margem da calibração de 27/08.
+de gravidade alta + 20 vereditos `conferir`) e os 18 pares em que a baseline venceu;
+`adjudicacao.html` mostra cada item com a foto ao lado.
+
+**Adjudicação (29/09/2026): o Eduardo concordou com os 57 itens.** Os 37 achados de gravidade
+alta estão confirmados pelo autor (31 nos casos, 6 no holdout). Nos 20 itens `conferir`, a
+concordância confirma o que o juiz viu; o veredito do critério continua `conferir`, porque o juiz
+não o decidiu. A decisão foi declarada no chat depois de percorrer a página, e o arquivo
+`adjudicacao.json` registra essa origem — não é a exportação item a item.
+Na calibração de 27/08 a concordância tinha sido de ~95%; nesta rodada, 100%.
 
 **Teste com NVDA:** `avaliacao/painel/teste_nvda_gerado.html` e `teste_nvda_baseline.html` — os 49
 objetos na mesma ordem, o alt de cada imagem trocado entre uma página e outra.

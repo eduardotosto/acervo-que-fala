@@ -52,6 +52,12 @@ def main():
                         f"{dossies[i]['conjunto']})")
 
     itens = itens_para_adjudicar(criterios)
+    caminho_adj = os.path.join(PAINEL_DIR, "adjudicacao.json")
+    adj = ler("adjudicacao.json") if os.path.exists(caminho_adj) else None
+    decisoes = {d["numero"]: d for d in adj["itens"]} if adj else {}
+    def decisao(numero):
+        d = decisoes.get(numero, {})
+        return (d.get("decisao") or "") + (f" — {d['nota']}" if d.get("nota") else "")
     graves = [(it["id"], it) for it in itens if it["tipo"] == "achado_grave"]
     conferir = [(it["id"], it) for it in itens if it["tipo"] == "conferir"]
     perdidos = [p for p in ab if p["descreve_melhor"] == "baseline"]
@@ -61,9 +67,14 @@ def main():
          "Gerado por `avaliacao/gerar_relatorio_juiz.py` a partir de `juiz_criterios.json` e "
          "`juiz_ab.json`. Protocolo em [protocolo_juiz.md](protocolo_juiz.md).", "",
          "**Como usar:** cada item numerado pede uma decisão — *concordo*, *discordo* ou "
-         "*parcial*. Achado adjudicado vira dado do projeto; discordância calibra o juiz. "
-         "Enquanto não houver adjudicação, os números abaixo são a leitura do juiz, com a margem "
-         "medida em 27/08 (concordância de ~95%, recall de ~89%).", "",
+         "*parcial*. Achado adjudicado vira dado do projeto; discordância calibra o juiz.", "",
+         (f"**Adjudicado por {adj['adjudicado_por']} em {adj['data']}:** "
+          + ", ".join(f"{n} {d}" for d, n in collections.Counter(
+              x["decisao"] or "sem decisão" for x in adj["itens"]).most_common())
+          + f", de {len(adj['itens'])} itens. Origem do registro: {adj.get('origem', 'página de adjudicação')}"
+          if adj else
+          "**Ainda não adjudicado.** Os números abaixo são a leitura do juiz, com a margem medida "
+          "em 27/08 (concordância de ~95%, recall de ~89%)."), "",
          "## O julgamento em números", "",
          "| | Total |", "|---|---|",
          f"| Casos julgados | {len(criterios)} |",
@@ -87,14 +98,14 @@ def main():
             L += [f"**{a['numero']}.** {limpo(a['descricao'])}",
                   f"   - Onde: {TEXTO.get(a['texto'], a['texto'])} · camada: {CAMADA[a['camada']]}",
                   f"   - Evidência: {limpo(a['evidencia'])}",
-                  "   - Adjudicação:", ""]
+                  f"   - Adjudicação: {decisao(a['numero'])}", ""]
 
     L += ["## 2. Vereditos que pedem olho humano", "",
           "O juiz não decidiu: depende de tonalidade, leitura de padrão ou nitidez da foto.", ""]
     for i, c in conferir:
         L += [f"**{c['numero']}.** {rotulo(i)} — critério: *{limpo(c['criterio'])}*",
               f"   - O que o juiz viu: {limpo(c['evidencia'])}",
-              "   - Adjudicação:", ""]
+              f"   - Adjudicação: {decisao(c['numero'])}", ""]
 
     L += ["## 3. A/B cego: pares em que a descrição curatorial descreve melhor", "",
           "No motivo, A e B são os lados do sorteio; a coluna ao lado diz qual era o texto gerado.", "",

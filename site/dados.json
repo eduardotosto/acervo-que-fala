@@ -5,7 +5,7 @@
   "executado_em_utc": "2026-09-29 19:55",
   "minutos_de_geracao": 93.4
  },
- "adjudicado": false,
+ "adjudicado": true,
  "recortes": {
   "casos": {
    "n": 40,
@@ -238,6 +238,10 @@
      "infiel": 5,
      "fiel": 6
     },
+    "adjudicacao": {
+     "concordo": 48
+    },
+    "graves_confirmados": 31,
     "ab_pares": 39,
     "ab_descreve_melhor": {
      "baseline": 12,
@@ -475,6 +479,10 @@
      "infiel": 5,
      "fiel": 4
     },
+    "adjudicacao": {
+     "concordo": 45
+    },
+    "graves_confirmados": 28,
     "ab_pares": 34,
     "ab_descreve_melhor": {
      "baseline": 12,
@@ -624,6 +632,10 @@
      "fiel_com_ressalva": 8,
      "fiel": 2
     },
+    "adjudicacao": {
+     "concordo": 9
+    },
+    "graves_confirmados": 6,
     "ab_pares": 10,
     "ab_descreve_melhor": {
      "baseline": 6,
@@ -698,7 +710,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'base arredondada'; alt: 'base arredondada'; registro, Descrição: 'base plana'. Na foto o pote está inclinado e a base não é visível.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -707,7 +719,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'Apresenta corpo arredondado, gargalo estreito, boca que se abre para fora e base arredondada' ... 'com base plana e borda extrovertida'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -716,7 +728,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'o padrão decorativo é identidade visual do povo'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -867,7 +879,7 @@
       "camada": "observacao",
       "onde": "observacao",
       "evidencia": "Observação: 'um disco circular', 'madeira de tom marrom avermelhado'; registro: Tigela, Matéria-prima 'Mineral > Argila'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -876,7 +888,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Alt: 'padrão geométrico em gregas'; observação: 'padrão central em forma de cruz com elementos triangulares e curvas', 'curvas em espiral'; foto mostra volutas entrelaçadas.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -885,7 +897,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'decoração externa em padrão de gregas'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -973,7 +985,7 @@
       "camada": "observacao",
       "onde": "descricao_objeto",
       "evidencia": "Observação: 'com formato de rosto', 'destacam os contornos faciais'; descrição: 'detalhes em relevo que destacam os contornos faciais'. A foto mostra tigela oval com volutas, sem rosto.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -982,7 +994,7 @@
       "camada": "observacao",
       "onde": "observacao",
       "evidencia": "Observação: 'Madeira escura'; registro: 'Mineral > Argila'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -991,7 +1003,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Descrição: 'Tigela de cerâmica, em forma de gamela, baixa e larga'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -1079,7 +1091,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'Nenhum padrão repetido ou geométrico', 'manchas irregulares'; alt: 'interior com manchas irregulares'; descrição: 'com manchas irregulares no interior'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -1088,7 +1100,7 @@
       "camada": "observacao",
       "onde": "observacao",
       "evidencia": "Observação: 'Madeira clara'; registro: 'Mineral > Argila'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -1097,7 +1109,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'Tigela em forma de gamela, baixa e larga'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -1649,7 +1661,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'extremidade mais escura na direção inferior direita' / 'pequena área mais escura na extremidade direita'. Foto: disco escuro na ponta inferior esquerda.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -1737,7 +1749,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'fios de fibra natural de cor marrom claro'. Registro: 'Fio de algodão industrializado'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -1746,7 +1758,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Descrição: '... sobre fios de fibra natural marrom claro. Confeccionada com técnica de entretecido, com cordel branco para amarração.'",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -1826,7 +1838,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Foto: nariz entalhado, sem tinta. Observação: 'detalhes em marrom-avermelhado nas pálpebras e lábios'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -1835,7 +1847,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Registro: 'olhos pintados, nariz e boca salientes'. Descrição: 'A peça exibe olhos, nariz e boca salientes'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -1922,7 +1934,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Função: 'Objeto utilizado em atividades lúdicas'. Descrição: 'objeto lúdico usado em atividades rituais'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -2009,7 +2021,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Foto: corpo alongado de ~67 cm. Descrição: 'com forma globular'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -2018,7 +2030,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'terminando em nós ou fios desfeitos em ambas as extremidades'. Foto: extremidade direita aberta, com aro trançado.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -2437,7 +2449,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'entrelaçamento contínuo, com curvas suaves... Não há padrões geométricos'. Foto: cordel de algodão enrolado, penas amarradas em franja.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -2446,7 +2458,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "Registro, Observação sobre o item: os Waurá vieram ao Museu do Índio em abril e as peças foram compradas pelo Museu após as comemorações. Mato Grosso é o Estado de origem.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -2728,7 +2740,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'Madeira de tom marrom avermelhado'; registro, Matéria-prima: 'Vegetal > Cabaça'; o próprio título diz cabaça.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -2737,7 +2749,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'Linhas retas e cruzes escuras'; registro: 'motivos geometrizantes pirogravados'; foto: linhas, cruzes e pontos, sem meandro.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -2820,7 +2832,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'rede de linhas diagonais e verticais ... padrão irregular'; foto: malha poligonal com nós.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -2912,7 +2924,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'Linhas escuras desenhadas em forma de riscos ou traços irregulares'; registro: 'motivos geometrizantes pirogravados'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -3000,7 +3012,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'Um recipiente de cerâmica'; Matéria-prima: 'Vegetal > Cabaça'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -3009,7 +3021,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'padrão de nós e laços ... linhas diagonais e verticais'; foto: cordões cruzados e anel com nós.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -3486,7 +3498,7 @@
       "camada": "observacao",
       "onde": "descricao_objeto",
       "evidencia": "Observação: 'formado por nós entrelaçados'; descrição: 'formada por nós entrelaçados' ... 'técnica de contratorcido e enlace sem enodação'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -3579,7 +3591,7 @@
       "camada": "redacao",
       "onde": "alt_text",
       "evidencia": "Alt e descrição: 'com padrão de gregas'. Observação: 'fios entrelaçados em padrões irregulares'. Foto: malha aberta com faixas lisas de cor.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      },
      {
@@ -3588,7 +3600,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'... três faixas. De acordo com a ficha do museu'",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4157,7 +4169,7 @@
       "camada": "observacao",
       "onde": "observacao",
       "evidencia": "'metal escuro com aspecto oxidado'; registro: Mineral > Argila; a foto mostra fornilho de barro escuro.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4237,7 +4249,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'duas aberturas circulares para os olhos e uma abertura retangular para a boca'; foto: olhos ovais entalhados na superfície e boca em degraus salientes; registro: 'testa, nariz e boca salientes'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4463,7 +4475,7 @@
       "camada": "observacao",
       "onde": "observacao",
       "evidencia": "'Um artefato de madeira'; registro: 'fêmur de mamífero'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4543,7 +4555,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'padrão de cruzeta (ou xadrez) formado por fios entrelaçados em ângulos retos'; foto: malha vazada hexagonal; descrição: 'trançado hexagonal' e, na frase seguinte, 'padrão de cruzeta'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4622,7 +4634,7 @@
       "camada": "redacao",
       "onde": "descricao_objeto",
       "evidencia": "'sendo parte de um conjunto de cerâmica acordelada'; registro: Número de peças '1'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
@@ -4771,7 +4783,7 @@
       "camada": "observacao",
       "onde": "alt_text",
       "evidencia": "Observação: 'laço ou nó complexo' e 'Não há furos, alças'; alt: 'fechado em dois nós'; descrição: 'acabamento em nós'; registro: 'duas alças'.",
-      "adjudicacao": null,
+      "adjudicacao": "concordo",
       "nota": ""
      }
     ],
