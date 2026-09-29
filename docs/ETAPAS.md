@@ -22,7 +22,7 @@
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ✅ 29/09/2026 · 50/50 objetos, nenhuma falha de geração, 93 min |
 | E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 juiz rodado e adjudicado em 29/09/2026 (57 de 57 itens: concordo) · pendente: teste com NVDA |
 | E11 | Site Gradio + deploy no HF Spaces (enxuto, sem interface de revisão — decisão de 29/09) | 🔶 código pronto em `site/`; falta o deploy |
-| E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
+| E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | 🔶 holdout rodado e README escrito em 29/09/2026 · falta a leitura do Eduardo e o link do site |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
 
 Mapeamento com o plano de 10 semanas: E1–E3 = Fases 0–1 · E4–E7 = Fase 2 · E8–E10 = Fase 3 · E11 = Fase 4 · E12 = Fase 5.
@@ -466,6 +466,7 @@ fechado) antes de entrar no repositório. O bloco 6 do `rodar.py` imprime o resu
 |---|---|---|---|
 | critérios atendidos (entre atende e não atende) | 58% | 53% | 56% |
 | casos com achado de gravidade alta | 16/40 | 15/35 | 6/10 |
+| ... que chegou ao texto público (alt ou descrição) | 16/39 | 15/34 | 4/10 |
 | fidelidade visual: fiel / com ressalva / infiel | 6 / 28 / 5 | 4 / 25 / 5 | 2 / 8 / 0 |
 | A/B cego, descreve melhor: gerado × baseline | 27 × 12 | 22 × 12 | 4 × 6 |
 | A/B cego, publicaria: gerado × baseline × nenhum | 26 × 11 × 2 | 21 × 11 × 2 | 7 × 3 × 0 |
@@ -479,7 +480,9 @@ fechado) antes de entrar no repositório. O bloco 6 do `rodar.py` imprime o resu
 - **"Nenhum elemento inventado" é o critério mais perdido**: nos 40 casos, 13 atendem, 18 não
   atendem, 8 pedem conferência.
 - **Onde o erro nasce.** Dos 37 achados de gravidade alta, 17 nasceram na observação (o modelo
-  viu errado) e 20 na redação. No holdout a proporção é 5 × 1: material trocado (cabaça lida como
+  viu errado) e 20 na redação. Cinco dos 17 ficaram só na observação interna e não chegaram ao
+  texto; por isso "achado grave" e "informação falsa no texto" não são o mesmo número (no
+  holdout, 6 casos × 4 textos). No holdout a proporção é 5 × 1: material trocado (cabaça lida como
   cerâmica ou madeira, osso como madeira), alça lida como nó.
 - **Achado novo: alucinação induzida pela recuperação.** Em 12 dos 49 textos aparece "gregas" ou
   "espinha-de-peixe" sem que o termo esteja na observação ou no registro — ele só existe na
@@ -537,6 +540,33 @@ não foi contornada. A execução se verifica no próprio Hugging Face, no deplo
 
 ### E12 — Fechamento
 Rodar holdout (primeira e única vez — na sessão da E9, arquivo separado). Preencher `docs/modelo-readme-banca.md` → `README.md` final (Resumo, Introdução, Modelagem, Resultados, Conclusões — remover comentários HTML). Texto descritivo. ~~Ensaio da demo~~ — não haverá apresentação à banca (29/09/2026); a entrega é o README.
+
+**README escrito (29/09/2026)**, depois da adjudicação, como o Eduardo decidiu. Orientação dele
+para o texto: explicar de forma simples, sem complexidade, o caminho do projeto e a PoC — o
+modelo de tom é a mensagem à orientadora de 17/09. Segue a estrutura do modelo da banca (Resumo,
+Introdução, Modelagem, Resultados, Conclusões), mais uma nota de método (projeto construído em par
+com LLMs; o juiz é o Claude) e uma seção de reprodução. O README faz o papel do texto descritivo;
+o histórico detalhado continua aqui. Todos os números foram conferidos contra
+`resultados/06_metricas.json`, e os links relativos, contra o repositório.
+
+**Correção feita ao escrever o README.** "Caso com achado de gravidade alta" vinha sendo lido
+como "texto com informação falsa" — inclusive no resumo que o Claude deu ao Eduardo e na primeira
+versão do site. Não é o mesmo número: 5 dos 37 achados graves estão só na observação interna. O
+`rodar.py` passou a imprimir as duas medidas, e README, site e esta página usam a que corresponde
+ao que afirmam (texto público: 16 de 39 nos casos, 4 de 10 no holdout).
+A abertura do Notebook 06 dizia "dez rodadas de geração"; foram dez versões e oito rodadas. Texto
+corrigido no repositório — o código do notebook não mudou.
+
+**Checklist §8.8 do curso:**
+- [x] README conta problema, abordagem, execução, números e limites
+- [x] `avaliacao/rodar.py` executa e imprime as métricas do conjunto fixo
+- [x] Nenhum segredo no repositório
+- [x] Texto com decisões e alternativas descartadas (README + este arquivo)
+- [x] Resposta para "o que este sistema ainda não prova?" (README, Limites)
+- [ ] Demonstração com roteiro — não se aplica: não haverá apresentação à banca
+
+**Pendente:** leitura do README pelo Eduardo; link do site no README depois do deploy; teste com
+NVDA (ou a declaração de que não foi feito, que é como o README está hoje).
 **Verificação:** checklist §8.8 do curso completo.
 
 ### EP — GitHub remoto (paralela) ✅

@@ -211,6 +211,12 @@ def medir_juiz(itens, juiz):
         "achados_graves_por_camada": conta(a["camada"] for a in achados if a["gravidade"] == "alta"),
         "casos_com_achado_grave": sum(1 for j in casos
                                       if any(a["gravidade"] == "alta" for a in j["achados"])),
+        # o que interessa a quem ouve: erro grave que chegou ao alt-text ou à descrição
+        "casos_com_grave_no_texto": sum(1 for j in casos if any(
+            a["gravidade"] == "alta" and a["texto"] in ("alt_text", "descricao_objeto")
+            for a in j["achados"])),
+        "graves_so_na_observacao": sum(1 for a in achados
+                                       if a["gravidade"] == "alta" and a["texto"] == "observacao"),
         "fidelidade_visual": conta(j["fidelidade_visual"] for j in casos),
         "adjudicacao": conta(d["decisao"] or "sem decisão" for d in adjudicados),
         "graves_confirmados": sum(1 for d in adjudicados
@@ -247,6 +253,9 @@ def imprimir_juiz(recortes):
            ("baixa (estilo)", "baixa")))
     linha("  casos com achado de gravidade alta",
           [f"{j(n)['casos_com_achado_grave']}/{j(n)['casos_julgados']}" for n in nomes])
+    linha("  ... que chegou ao texto público",
+          [f"{j(n)['casos_com_grave_no_texto']}/{recortes[n]['com_texto']}" for n in nomes])
+    linha("  achados graves só na observação", [j(n)["graves_so_na_observacao"] for n in nomes])
     camadas = (("observação (viu errado)", "observacao"), ("redação (escreveu errado)", "redacao"),
                ("registro (o catálogo erra)", "registro"), ("código (flag, escala)", "codigo"))
     bloco("achados por camada onde o erro nasceu", "achados_por_camada", camadas)

@@ -232,6 +232,8 @@
      "redacao": 19
     },
     "casos_com_achado_grave": 16,
+    "casos_com_grave_no_texto": 16,
+    "graves_so_na_observacao": 3,
     "fidelidade_visual": {
      "fiel_com_ressalva": 28,
      "conferir": 1,
@@ -473,6 +475,8 @@
      "redacao": 17
     },
     "casos_com_achado_grave": 15,
+    "casos_com_grave_no_texto": 15,
+    "graves_so_na_observacao": 3,
     "fidelidade_visual": {
      "conferir": 1,
      "fiel_com_ressalva": 25,
@@ -628,6 +632,8 @@
      "redacao": 1
     },
     "casos_com_achado_grave": 6,
+    "casos_com_grave_no_texto": 4,
+    "graves_so_na_observacao": 2,
     "fidelidade_visual": {
      "fiel_com_ressalva": 8,
      "fiel": 2

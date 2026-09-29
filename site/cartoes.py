@@ -262,7 +262,8 @@ Ela não foi escrita para ser texto alternativo; é comparada como tal porque é
 
 <h3>Juiz: um modelo de linguagem confere cada texto contra a foto e o registro</h3>
 {tabela(cab, [["Critérios do caso atendidos"] + juiz(lambda j: taxa(j["vereditos"])),
-              ["Objetos com informação falsa ou inventada"] + juiz(lambda j: f"{j['casos_com_achado_grave']} de {j['casos_julgados']}"),
+              ["Textos com informação falsa ou inventada"] + [
+                  f"{r[n]['juiz']['casos_com_grave_no_texto']} de {r[n]['com_texto']}" for n in nomes],
               ["Erros graves nascidos na observação"] + juiz(lambda j: j["achados_graves_por_camada"].get("observacao", 0)),
               ["Erros graves nascidos na redação"] + juiz(lambda j: j["achados_graves_por_camada"].get("redacao", 0)),
               ["Fiel à foto / com ressalva / infiel"] + juiz(lambda j: " / ".join(
