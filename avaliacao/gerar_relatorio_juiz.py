@@ -29,14 +29,31 @@ def limpo(texto):
     return re.sub(r"\s+", " ", texto or "").replace("|", "/").strip()
 
 
+def itens_para_adjudicar(criterios):
+    """Os itens que pedem decisão humana, na ordem e com a numeração do relatório:
+    primeiro os achados de gravidade alta, caso a caso; depois os vereditos `conferir`.
+    A página de adjudicação usa a mesma função — os números são os mesmos nos dois."""
+    itens = []
+    for j in criterios:
+        for a in j["achados"]:
+            if a["gravidade"] == "alta":
+                itens.append({"tipo": "achado_grave", "id": j["id"], **a})
+    for j in criterios:
+        for c in j["criterios"]:
+            if c["veredito"] == "conferir":
+                itens.append({"tipo": "conferir", "id": j["id"], **c})
+    return [dict(it, numero=n) for n, it in enumerate(itens, 1)]
+
+
 def main():
     dossies = {d["id"]: d for d in ler("dossies.json")}
     criterios, ab = ler("juiz_criterios.json"), ler("juiz_ab.json")
     rotulo = lambda i: (f"{dossies[i]['titulo']} {dossies[i]['povo']} ({i}, "
                         f"{dossies[i]['conjunto']})")
 
-    graves = [(j["id"], a) for j in criterios for a in j["achados"] if a["gravidade"] == "alta"]
-    conferir = [(j["id"], c) for j in criterios for c in j["criterios"] if c["veredito"] == "conferir"]
+    itens = itens_para_adjudicar(criterios)
+    graves = [(it["id"], it) for it in itens if it["tipo"] == "achado_grave"]
+    conferir = [(it["id"], it) for it in itens if it["tipo"] == "conferir"]
     perdidos = [p for p in ab if p["descreve_melhor"] == "baseline"]
     todos = [a for j in criterios for a in j["achados"]]
 
@@ -61,15 +78,13 @@ def main():
                  a["camada"] for _, a in graves).most_common()) + ".", "",
          "## 1. Achados de gravidade alta", "",
          "Informação falsa ou inventada, segundo o juiz. A camada diz onde o erro nasceu.", ""]
-    n = 0
     for caso in criterios:
         do_caso = [a for i, a in graves if i == caso["id"]]
         if not do_caso:
             continue
         L += [f"### {rotulo(caso['id'])}", ""]
         for a in do_caso:
-            n += 1
-            L += [f"**{n}.** {limpo(a['descricao'])}",
+            L += [f"**{a['numero']}.** {limpo(a['descricao'])}",
                   f"   - Onde: {TEXTO.get(a['texto'], a['texto'])} · camada: {CAMADA[a['camada']]}",
                   f"   - Evidência: {limpo(a['evidencia'])}",
                   "   - Adjudicação:", ""]
@@ -77,8 +92,7 @@ def main():
     L += ["## 2. Vereditos que pedem olho humano", "",
           "O juiz não decidiu: depende de tonalidade, leitura de padrão ou nitidez da foto.", ""]
     for i, c in conferir:
-        n += 1
-        L += [f"**{n}.** {rotulo(i)} — critério: *{limpo(c['criterio'])}*",
+        L += [f"**{c['numero']}.** {rotulo(i)} — critério: *{limpo(c['criterio'])}*",
               f"   - O que o juiz viu: {limpo(c['evidencia'])}",
               "   - Adjudicação:", ""]
 
@@ -93,7 +107,7 @@ def main():
     with open(os.path.join(PAINEL_DIR, "relatorio_juiz.md"), "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(L))
     print(f"relatorio_juiz.md: {len(graves)} achados graves, {len(conferir)} conferir, "
-          f"{len(perdidos)} pares perdidos — {n} itens para adjudicar")
+          f"{len(perdidos)} pares perdidos — {len(itens)} itens para adjudicar")
 
 
 if __name__ == "__main__":
