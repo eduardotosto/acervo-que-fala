@@ -21,7 +21,7 @@
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ✅ 29/09/2026 · 1,6 problemas/item nos casos, 1,7 no holdout (lote de desenvolvimento: 1,7) |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ✅ 29/09/2026 · 50/50 objetos, nenhuma falha de geração, 93 min |
 | E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 juiz rodado em 29/09/2026 (50 casos, 49 pares) · pendentes do Eduardo: adjudicação e teste com NVDA |
-| E11 | Site Gradio + deploy no HF Spaces + interface de revisão | ⬜ |
+| E11 | Site Gradio + deploy no HF Spaces (enxuto, sem interface de revisão — decisão de 29/09) | 🔶 código pronto em `site/`; falta o deploy |
 | E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
 
@@ -505,9 +505,28 @@ objetos na mesma ordem, o alt de cada imagem trocado entre uma página e outra.
 **Verificação:** resultados por caso registrados em `avaliacao/painel/`. ✓ (juiz) · pendente
 (adjudicação e NVDA).
 
-### E11 — Site
-`site/app.py` (Gradio): navegação pelos objetos, dois níveis, comparativo com baseline, flags — servindo o lote pré-computado. Interface de revisão (aprovar/editar). Deploy no HF Spaces gratuito.
-**Verificação:** URL pública funcionando.
+### E11 — Site 🔶
+**Decisão do Eduardo (29/09/2026): site enxuto.** Como a entrega é o README, o site deixou de ser
+palco de demonstração: mostra os 50 objetos e a avaliação de cada um, sem interface de revisão
+(aprovar/editar), que exigiria guardar dados.
+
+**Construído (29/09/2026), em `site/`:**
+- `montar_dados.py` junta, por objeto, o resultado do lote, o caso de avaliação, a leitura do juiz
+  e a adjudicação quando existir → `dados.json` (50 objetos). O site não roda modelo nenhum.
+- `cartoes.py` é a renderização, em código puro: cartão do objeto (foto, descrição curatorial, os
+  dois níveis gerados, flags, o que a avaliação apontou), a aba de resultados e a de como funciona.
+  **A foto entra na página com o alt-text gerado no atributo `alt`** — o site pratica o que o
+  projeto propõe.
+- `app.py` é a casca Gradio (6.29.0): dois controles ligados às funções do `cartoes.py`.
+- Aviso fixo no topo: textos gerados por modelo, sem revisão humana, com erros; projeto acadêmico
+  independente, não é produto do museu.
+
+**Verificado:** os 50 cartões renderizam, cada um com uma imagem e `alt` preenchido e igual ao
+texto gerado; marcação balanceada; código compila; nomes das variáveis de tema conferidos no
+código-fonte do Gradio. **Não verificado:** a casca Gradio em execução — o Windows desta máquina
+bloqueou uma biblioteca do ambiente de teste (política de Controle de Aplicativo), e a proteção
+não foi contornada. A execução se verifica no próprio Hugging Face, no deploy.
+**Verificação:** URL pública funcionando. (pendente)
 
 ### E12 — Fechamento
 Rodar holdout (primeira e única vez — na sessão da E9, arquivo separado). Preencher `docs/modelo-readme-banca.md` → `README.md` final (Resumo, Introdução, Modelagem, Resultados, Conclusões — remover comentários HTML). Texto descritivo. ~~Ensaio da demo~~ — não haverá apresentação à banca (29/09/2026); a entrega é o README.
