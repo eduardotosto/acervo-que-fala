@@ -633,6 +633,127 @@
           2316,
           1436
         ]
+      },
+      "juiz": {
+        "casos_julgados": 40,
+        "vereditos": {
+          "atende": 94,
+          "nao_atende": 69,
+          "nao_se_aplica": 6,
+          "conferir": 17
+        },
+        "por_criterio": {
+          "alt-text descreve a fotografia (enquadramento incluído)": {
+            "atende": 20,
+            "nao_se_aplica": 1,
+            "nao_atende": 17,
+            "conferir": 2
+          },
+          "descrição do objeto ancorada: todo fato não-visível tem fonte no registro": {
+            "nao_atende": 13,
+            "nao_se_aplica": 1,
+            "atende": 26
+          },
+          "nenhum elemento inventado": {
+            "nao_atende": 18,
+            "nao_se_aplica": 1,
+            "atende": 13,
+            "conferir": 8
+          },
+          "alt-text em linguagem simples, sem jargão de catalogação": {
+            "atende": 2
+          },
+          "termos técnicos só na descrição do objeto, explicados ou atribuídos ao museu": {
+            "nao_atende": 1,
+            "atende": 1
+          },
+          "artefatos de estúdio/inventário (etiqueta, numeração, cartela, borda, suporte) excluídos da descrição": {
+            "nao_se_aplica": 1,
+            "atende": 9,
+            "nao_atende": 4,
+            "conferir": 1
+          },
+          "elemento visível ausente do catálogo é descrito": {
+            "nao_atende": 3,
+            "atende": 6,
+            "conferir": 2
+          },
+          "divergência sinalizada em flag para revisão, não omitida": {
+            "nao_atende": 6,
+            "conferir": 2,
+            "atende": 3
+          },
+          "alt-text conciso (≤30 palavras), objeto primeiro": {
+            "atende": 1,
+            "nao_atende": 1
+          },
+          "informação do registro reorganizada com hierarquia na descrição do objeto": {
+            "atende": 2
+          },
+          "descrição não inventa detalhes ilegíveis pela distância do enquadramento": {
+            "conferir": 2,
+            "atende": 1
+          },
+          "incerteza declarada quando o enquadramento limita a leitura": {
+            "nao_atende": 1,
+            "nao_se_aplica": 2
+          },
+          "alt-text avisa que a foto é detalhe/parcial": {
+            "nao_atende": 1,
+            "atende": 6
+          },
+          "descrição do objeto completa vem do registro, com atribuição": {
+            "nao_atende": 4,
+            "atende": 3
+          },
+          "valor improvável do registro sinalizado em flag, não repetido como fato": {
+            "atende": 1
+          }
+        },
+        "achados_por_gravidade": {
+          "alta": 31,
+          "media": 188,
+          "baixa": 67
+        },
+        "achados_por_camada": {
+          "observacao": 45,
+          "redacao": 202,
+          "codigo": 20,
+          "registro": 19
+        },
+        "achados_graves_por_camada": {
+          "observacao": 12,
+          "redacao": 19
+        },
+        "casos_com_achado_grave": 16,
+        "fidelidade_visual": {
+          "fiel_com_ressalva": 28,
+          "conferir": 1,
+          "infiel": 5,
+          "fiel": 6
+        },
+        "ab_pares": 39,
+        "ab_descreve_melhor": {
+          "baseline": 12,
+          "gerado": 27
+        },
+        "ab_publicaria": {
+          "baseline": 11,
+          "nenhum": 2,
+          "gerado": 26
+        },
+        "ab_notas": {
+          "gerado": {
+            "fidelidade": 3.85,
+            "clareza_ao_ouvido": 4.08,
+            "concisao": 4.1
+          },
+          "baseline": {
+            "fidelidade": 3.49,
+            "clareza_ao_ouvido": 2.85,
+            "concisao": 3.31
+          }
+        }
       }
     },
     "não vistos": {
@@ -1176,6 +1297,116 @@
           2316,
           1436
         ]
+      },
+      "juiz": {
+        "casos_julgados": 35,
+        "vereditos": {
+          "nao_se_aplica": 6,
+          "nao_atende": 64,
+          "atende": 72,
+          "conferir": 17
+        },
+        "por_criterio": {
+          "alt-text descreve a fotografia (enquadramento incluído)": {
+            "nao_se_aplica": 1,
+            "nao_atende": 16,
+            "conferir": 2,
+            "atende": 16
+          },
+          "descrição do objeto ancorada: todo fato não-visível tem fonte no registro": {
+            "nao_se_aplica": 1,
+            "atende": 22,
+            "nao_atende": 12
+          },
+          "nenhum elemento inventado": {
+            "nao_se_aplica": 1,
+            "nao_atende": 17,
+            "atende": 9,
+            "conferir": 8
+          },
+          "artefatos de estúdio/inventário (etiqueta, numeração, cartela, borda, suporte) excluídos da descrição": {
+            "nao_se_aplica": 1,
+            "atende": 8,
+            "nao_atende": 4,
+            "conferir": 1
+          },
+          "elemento visível ausente do catálogo é descrito": {
+            "nao_atende": 3,
+            "atende": 5,
+            "conferir": 2
+          },
+          "divergência sinalizada em flag para revisão, não omitida": {
+            "nao_atende": 6,
+            "conferir": 2,
+            "atende": 2
+          },
+          "descrição não inventa detalhes ilegíveis pela distância do enquadramento": {
+            "conferir": 2,
+            "atende": 1
+          },
+          "incerteza declarada quando o enquadramento limita a leitura": {
+            "nao_atende": 1,
+            "nao_se_aplica": 2
+          },
+          "alt-text avisa que a foto é detalhe/parcial": {
+            "nao_atende": 1,
+            "atende": 5
+          },
+          "descrição do objeto completa vem do registro, com atribuição": {
+            "nao_atende": 3,
+            "atende": 3
+          },
+          "alt-text conciso (≤30 palavras), objeto primeiro": {
+            "nao_atende": 1
+          },
+          "informação do registro reorganizada com hierarquia na descrição do objeto": {
+            "atende": 1
+          }
+        },
+        "achados_por_gravidade": {
+          "baixa": 58,
+          "alta": 28,
+          "media": 169
+        },
+        "achados_por_camada": {
+          "codigo": 18,
+          "observacao": 43,
+          "redacao": 177,
+          "registro": 17
+        },
+        "achados_graves_por_camada": {
+          "observacao": 11,
+          "redacao": 17
+        },
+        "casos_com_achado_grave": 15,
+        "fidelidade_visual": {
+          "conferir": 1,
+          "fiel_com_ressalva": 25,
+          "infiel": 5,
+          "fiel": 4
+        },
+        "ab_pares": 34,
+        "ab_descreve_melhor": {
+          "baseline": 12,
+          "gerado": 22
+        },
+        "ab_publicaria": {
+          "baseline": 11,
+          "nenhum": 2,
+          "gerado": 21
+        },
+        "ab_notas": {
+          "gerado": {
+            "fidelidade": 3.76,
+            "clareza_ao_ouvido": 4.03,
+            "concisao": 4.09
+          },
+          "baseline": {
+            "fidelidade": 3.59,
+            "clareza_ao_ouvido": 2.91,
+            "concisao": 3.47
+          }
+        }
       }
     },
     "holdout": {
@@ -1389,6 +1620,70 @@
         ],
         "textura_natural_vazia": [],
         "micangas_penas_sobre": []
+      },
+      "juiz": {
+        "casos_julgados": 10,
+        "vereditos": {
+          "atende": 15,
+          "nao_atende": 12,
+          "conferir": 3
+        },
+        "por_criterio": {
+          "alt-text descreve a fotografia (enquadramento incluído)": {
+            "atende": 6,
+            "nao_atende": 4
+          },
+          "descrição do objeto ancorada: todo fato não-visível tem fonte no registro": {
+            "nao_atende": 4,
+            "atende": 6
+          },
+          "nenhum elemento inventado": {
+            "conferir": 3,
+            "nao_atende": 4,
+            "atende": 3
+          }
+        },
+        "achados_por_gravidade": {
+          "media": 52,
+          "baixa": 14,
+          "alta": 6
+        },
+        "achados_por_camada": {
+          "redacao": 54,
+          "observacao": 10,
+          "registro": 4,
+          "codigo": 4
+        },
+        "achados_graves_por_camada": {
+          "observacao": 5,
+          "redacao": 1
+        },
+        "casos_com_achado_grave": 6,
+        "fidelidade_visual": {
+          "fiel_com_ressalva": 8,
+          "fiel": 2
+        },
+        "ab_pares": 10,
+        "ab_descreve_melhor": {
+          "baseline": 6,
+          "gerado": 4
+        },
+        "ab_publicaria": {
+          "baseline": 3,
+          "gerado": 7
+        },
+        "ab_notas": {
+          "gerado": {
+            "fidelidade": 3.7,
+            "clareza_ao_ouvido": 4,
+            "concisao": 4.2
+          },
+          "baseline": {
+            "fidelidade": 4,
+            "clareza_ao_ouvido": 2.4,
+            "concisao": 2.6
+          }
+        }
       }
     }
   }

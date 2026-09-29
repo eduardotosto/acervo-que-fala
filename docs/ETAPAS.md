@@ -20,7 +20,7 @@
 | E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ encerrada 28/08 · v10 = lote final (1,7 problemas/item) · **redator: Qwen 8B** (bake-off v2 encerrado pela regra de parada: o 12B não coube na T4) |
 | E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ✅ 29/09/2026 · 1,6 problemas/item nos casos, 1,7 no holdout (lote de desenvolvimento: 1,7) |
 | E9 | Lote completo no Colab (notebook com markdown explicativo) | ✅ 29/09/2026 · 50/50 objetos, nenhuma falha de geração, 93 min |
-| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 protocolo e painel prontos; julgamento em curso |
+| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 juiz rodado em 29/09/2026 (50 casos, 49 pares) · pendentes do Eduardo: adjudicação e teste com NVDA |
 | E11 | Site Gradio + deploy no HF Spaces + interface de revisão | ⬜ |
 | E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
@@ -454,7 +454,51 @@ A pergunta-guia do projeto ajusta junto: "as descrições geradas superam a desc
 **Atualização (29/09/2026):** a orientadora ainda não opinou sobre o projeto, e o Eduardo decidiu
 seguir até a entrega finalizada. A frente 1 (A/B cego com avaliadores leigos) **sai do escopo**
 por decisão dele — ficam as frentes 2 e 3, e o A/B entra no README como limitação declarada.
-**Verificação:** resultados por caso registrados em `avaliacao/painel/`.
+
+**Juiz rodado (29/09/2026).** Claude (Opus), protocolo em `avaliacao/painel/protocolo_juiz.md`.
+Sete sessões independentes: cinco para os critérios (10 casos cada) e duas para o A/B cego, que
+receberam só foto e dois textos, sob código opaco, sem o gabarito do sorteio. Cerca de 870 mil
+tokens no total. As saídas foram conferidas por código contra o material entregue
+(`consolidar_juiz.py`: todo caso julgado, todo critério com veredito e evidência, vocabulário
+fechado) antes de entrar no repositório. O bloco 6 do `rodar.py` imprime o resultado.
+
+| | casos (40) | não vistos (35) | holdout (10) |
+|---|---|---|---|
+| critérios atendidos (entre atende e não atende) | 58% | 53% | 56% |
+| casos com achado de gravidade alta | 16/40 | 15/35 | 6/10 |
+| fidelidade visual: fiel / com ressalva / infiel | 6 / 28 / 5 | 4 / 25 / 5 | 2 / 8 / 0 |
+| A/B cego, descreve melhor: gerado × baseline | 27 × 12 | 22 × 12 | 4 × 6 |
+| A/B cego, publicaria: gerado × baseline × nenhum | 26 × 11 × 2 | 21 × 11 × 2 | 7 × 3 × 0 |
+| nota de fidelidade (gerado / baseline) | 3,85 / 3,49 | 3,76 / 3,59 | 3,7 / 4,0 |
+| nota de clareza ao ouvido (gerado / baseline) | 4,08 / 2,85 | 4,03 / 2,91 | 4,0 / 2,4 |
+| nota de concisão (gerado / baseline) | 4,1 / 3,31 | 4,09 / 3,47 | 4,2 / 2,6 |
+
+- **O texto gerado ganha no ouvido e não ganha no olho.** Clareza e concisão ficam mais de um
+  ponto acima da baseline nos três recortes. Em fidelidade a diferença é pequena nos casos e se
+  inverte no holdout (3,7 × 4,0), onde a baseline descreve melhor em 6 dos 10 pares.
+- **"Nenhum elemento inventado" é o critério mais perdido**: nos 40 casos, 13 atendem, 18 não
+  atendem, 8 pedem conferência.
+- **Onde o erro nasce.** Dos 37 achados de gravidade alta, 17 nasceram na observação (o modelo
+  viu errado) e 20 na redação. No holdout a proporção é 5 × 1: material trocado (cabaça lida como
+  cerâmica ou madeira, osso como madeira), alça lida como nó.
+- **Achado novo: alucinação induzida pela recuperação.** Em 12 dos 49 textos aparece "gregas" ou
+  "espinha-de-peixe" sem que o termo esteja na observação ou no registro — ele só existe na
+  diretriz do glossário que o RAG entregou (o trecho do trançado sarjado foi entregue a 25 dos 49
+  itens). Em 7 desses 12 o juiz apontou padrão inventado, gravidade alta: a foto não mostra o
+  padrão. É o papagaio de exemplo por outra porta. No lote de desenvolvimento o defeito não
+  aparecia porque os objetos de lá tinham de fato esses padrões.
+- Os três achados previstos no dry-run se confirmaram: o 680 ficou sem texto (o juiz concorda com
+  a decisão); o título "Flauta reta sem aeroduto" passou pelo sistema sem derrubar o texto.
+
+**Material de adjudicação:** `avaliacao/painel/relatorio_juiz.md` — 57 itens numerados (37 achados
+de gravidade alta + 20 vereditos `conferir`) e os 18 pares em que a baseline venceu. **Até a
+adjudicação, os números acima são a leitura do juiz**, com a margem da calibração de 27/08.
+
+**Teste com NVDA:** `avaliacao/painel/teste_nvda_gerado.html` e `teste_nvda_baseline.html` — os 49
+objetos na mesma ordem, o alt de cada imagem trocado entre uma página e outra.
+
+**Verificação:** resultados por caso registrados em `avaliacao/painel/`. ✓ (juiz) · pendente
+(adjudicação e NVDA).
 
 ### E11 — Site
 `site/app.py` (Gradio): navegação pelos objetos, dois níveis, comparativo com baseline, flags — servindo o lote pré-computado. Interface de revisão (aprovar/editar). Deploy no HF Spaces gratuito.

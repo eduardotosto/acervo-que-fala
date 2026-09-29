@@ -1,0 +1,250 @@
+{
+  "seed": 42,
+  "pares": {
+    "P01": {
+      "id": 1316,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P02": {
+      "id": 1321,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P03": {
+      "id": 2316,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P04": {
+      "id": 77963,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P05": {
+      "id": 1045,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P06": {
+      "id": 508608,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P07": {
+      "id": 1331,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P08": {
+      "id": 4211,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P09": {
+      "id": 500067,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P10": {
+      "id": 665,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P11": {
+      "id": 777254,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P12": {
+      "id": 1436,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P13": {
+      "id": 2601,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P14": {
+      "id": 1996,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P15": {
+      "id": 204975,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P16": {
+      "id": 206999,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P17": {
+      "id": 4246,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P18": {
+      "id": 5366,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P19": {
+      "id": 199679,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P20": {
+      "id": 9196,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P21": {
+      "id": 90371,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P22": {
+      "id": 2236,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P23": {
+      "id": 4896,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P24": {
+      "id": 499969,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P25": {
+      "id": 775243,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P26": {
+      "id": 5041,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P27": {
+      "id": 3176,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P28": {
+      "id": 1521,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P29": {
+      "id": 5371,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P30": {
+      "id": 84836,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P31": {
+      "id": 630,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P32": {
+      "id": 205123,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P33": {
+      "id": 210599,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P34": {
+      "id": 4056,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P35": {
+      "id": 4391,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P36": {
+      "id": 1050,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P37": {
+      "id": 1826,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P38": {
+      "id": 63283,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P39": {
+      "id": 205036,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P40": {
+      "id": 2151,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P41": {
+      "id": 51023,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P42": {
+      "id": 78838,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P43": {
+      "id": 4116,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P44": {
+      "id": 2826,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P45": {
+      "id": 4606,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P46": {
+      "id": 2221,
+      "B": "baseline",
+      "A": "gerado"
+    },
+    "P47": {
+      "id": 1260,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P48": {
+      "id": 4286,
+      "A": "baseline",
+      "B": "gerado"
+    },
+    "P49": {
+      "id": 2746,
+      "B": "baseline",
+      "A": "gerado"
+    }
+  }
+}

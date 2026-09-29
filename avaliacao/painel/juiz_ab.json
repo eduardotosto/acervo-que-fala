@@ -1,0 +1,933 @@
+[
+  {
+    "codigo": "P01",
+    "id": 1316,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 4,
+      "concisao": 3
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra uma cabaça envolta por cordões torcidos soltos e tampa de sabugo; B erra ao dizer cerâmica e padrão espinha-de-peixe."
+  },
+  {
+    "codigo": "P02",
+    "id": 1321,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 3
+    },
+    "notas_baseline": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A rede de cordões na cabaça forma malhas hexagonais, não espinha-de-peixe como diz A; B cita alça, revestimento e tampa de sabugo, todos visíveis."
+  },
+  {
+    "codigo": "P03",
+    "id": 2316,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "nenhum",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra penas vermelhas, amarelas, pretas (e algumas azuis) presas a um cordel de algodão com longas pontas soltas; B inventa base em espinha-de-peixe e A é longo e técnico demais para o ouvido."
+  },
+  {
+    "codigo": "P04",
+    "id": 77963,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A pulseira de miçangas em zigue-zague preto, laranja, verde, branco e azul com cordões de amarração aparece bem em A; B é uma frase longa sem pausa e com termos técnicos."
+  },
+  {
+    "codigo": "P05",
+    "id": 1045,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A foto mostra moringa de corpo esférico, alça em arco, dois gargalos e traços brancos vegetais, dito de forma direta em A; B usa jargão como fitomorfos e bordas diretas."
+  },
+  {
+    "codigo": "P06",
+    "id": 508608,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "O cesto tem trançado aberto hexagonal de fibra clara e uniforme; B fala em padrão de cruzeta e fibras claras e escuras, que a foto não confirma."
+  },
+  {
+    "codigo": "P07",
+    "id": 1331,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 3
+    },
+    "notas_baseline": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra cabaça com cordões, alça e tampa de sabugo, como diz A; B descreve cruzetas pouco evidentes e gasta palavras com etiqueta de museu."
+  },
+  {
+    "codigo": "P08",
+    "id": 4211,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "O bastão cilíndrico de madeira clara com pequenas manchas escuras, posto na diagonal, é descrito visualmente em B; A só diz o material."
+  },
+  {
+    "codigo": "P09",
+    "id": 500067,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "concisao",
+    "motivo": "A foto mostra tubo trançado em espinha-de-peixe com uma argola em cada ponta; B diz isso de forma curta, enquanto A explica o uso, que não se vê."
+  },
+  {
+    "codigo": "P10",
+    "id": 665,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 5,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A foto mostra faixa de penas amarelas, vermelhas e pretas com longas penas vermelhas e azuis em leque; ambos afirmam couro de onça que não se vê, mas A é claro e B é confuso e sem pontuação."
+  },
+  {
+    "codigo": "P11",
+    "id": 777254,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A bolsa de malha aberta com duas alças em laço no alto e cordão solto embaixo aparece em B; A só traz termos técnicos de fabricação."
+  },
+  {
+    "codigo": "P12",
+    "id": 1436,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A foto mostra penas vermelhas sobre base trançada marrom e um maço de fios verdes; B diz isso com ordem direta, A com jargão de passamanaria."
+  },
+  {
+    "codigo": "P13",
+    "id": 2601,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A máscara de madeira clara, alongada, com olhos, sobrancelhas e boca pintados de preto e marrom-avermelhado é dita de forma simples em B; A cita madeira de balsa, que a foto não mostra."
+  },
+  {
+    "codigo": "P14",
+    "id": 1996,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "nenhum",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A tigela rachada tem espirais marrom-avermelhadas sobre fundo amarelado; A inventa azul-claro e amarelo-ocidental, B fala em motivos geométricos, base plana e decoração externa que não se veem."
+  },
+  {
+    "codigo": "P15",
+    "id": 204975,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto é um detalhe da ponta do arco, madeira avermelhada com corda torcida e um nó grosso, como diz A; B descreve o arco inteiro em termos técnicos."
+  },
+  {
+    "codigo": "P16",
+    "id": 206999,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 5,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra garrafa de vidro com tampa vermelha e etiqueta escrita à mão, líquido cremoso; B não menciona a garrafa e afirma a origem nas sementes, que não se vê."
+  },
+  {
+    "codigo": "P17",
+    "id": 4246,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "O bastão de madeira clara tem a ponta escura do lado esquerdo, não do direito como afirma A; B é genérico mas não erra."
+  },
+  {
+    "codigo": "P18",
+    "id": 5366,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra cabaça redonda com abertura na borda e traços riscados em volta dela, como diz A; B fala em gregas, que não aparecem, e se ocupa da etiqueta."
+  },
+  {
+    "codigo": "P19",
+    "id": 199679,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A flauta de taquara com quatro furos, duas penas pintadas e franjas vermelhas é detalhada em B, mas com jargão e frase longa; A resume o essencial e se ouve de uma vez."
+  },
+  {
+    "codigo": "P20",
+    "id": 9196,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 5,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "O pote de corpo arredondado com padrão geométrico vermelho e preto sobre fundo claro aparece nos dois; A é mais direto, e nenhum dos dois pode afirmar a base, que não se vê."
+  },
+  {
+    "codigo": "P21",
+    "id": 90371,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "O colar de franjas coloridas tem pingente triangular com figura de animal; A diz isso com mais detalhe, mas B se ouve de uma vez e serve melhor como alt-text."
+  },
+  {
+    "codigo": "P22",
+    "id": 2236,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 5,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "A foto mostra penas amarelo-alaranjadas presas a um aro de cordéis; A diz isso com clareza, B com termos técnicos."
+  },
+  {
+    "codigo": "P23",
+    "id": 4896,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A peça de malha com três faixas verde-escuras é bem descrita em A; B cita padrão de gregas, que não existe na foto."
+  },
+  {
+    "codigo": "P24",
+    "id": 499969,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "O tubo trançado em espinha-de-peixe termina em argolas, não em nós como diz B; A acerta mas explica um uso que não se vê e fica longo demais para ouvir."
+  },
+  {
+    "codigo": "P25",
+    "id": 775243,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "O tecido claro dividido em nove quadrados com contornos verdes e rosa, figuras em vermelho e azul e franjas em volta aparece em B; A chama o tecido de marrom."
+  },
+  {
+    "codigo": "P26",
+    "id": 5041,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto é um close do disco escuro de madeira, riscado, com a haste e um fio de fibra enrolado; B descreve isso, A cita decoração entalhada na extremidade que não aparece e usa jargão (castão, tortual)."
+  },
+  {
+    "codigo": "P27",
+    "id": 3176,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Close do trançado em espinha-de-peixe com o cabo amarrado por cordel; A diz isso em palavras simples, B fala em conformação irregular e ourela, termos opacos ao ouvido."
+  },
+  {
+    "codigo": "P28",
+    "id": 1521,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Penas amarelo-alaranjadas presas a um cordel de fibra torcido em volta; A é legível, B tem erros de redação e parênteses que o leitor de tela lê mal."
+  },
+  {
+    "codigo": "P29",
+    "id": 5371,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra uma cabaça ovoide marrom com linhas e pontos pirogravados; A diz que é de madeira e fala em gregas, o que a foto desmente."
+  },
+  {
+    "codigo": "P30",
+    "id": 84836,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "concisao",
+    "motivo": "Faixa de miçangas azuis e laranja com contornos pretos formando espirais; B diz isso direto, A é longo e afirma nylon, que não se vê."
+  },
+  {
+    "codigo": "P31",
+    "id": 630,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 3
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Dois potes de cerâmica ligados por um tubo sobre uma base única, um de boca larga e outro com pequeno orifício; B descreve essa estrutura, A só cores e linhas."
+  },
+  {
+    "codigo": "P32",
+    "id": 205123,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 1,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Close de uma haste cilíndrica de madeira escura com corda marrom torcida ao longo e laçada na ponta; A diz madeira tecida em torção Z, o que não faz sentido na foto."
+  },
+  {
+    "codigo": "P33",
+    "id": 210599,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "concisao",
+    "motivo": "Flauta de osso claro com três furos e tufos de penas amarelas presos por cordel; B diz o essencial, A repete termos técnicos e alonga."
+  },
+  {
+    "codigo": "P34",
+    "id": 4056,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 5,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Peteca de palha de milho clara com base arredondada e tiras soltas no alto; B acrescenta forma e cor visíveis, A é mínimo demais."
+  },
+  {
+    "codigo": "P35",
+    "id": 4391,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Cachimbo com fornilho de cerâmica escura com incisões geométricas e tubo de madeira clara; A usa palavras comuns, B usa fornilho e aspirador."
+  },
+  {
+    "codigo": "P36",
+    "id": 1050,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Bilha escura de corpo lobulado, gargalo curto e alça de cordel; B cita forma, alça e gargalo, A é vago e de redação truncada."
+  },
+  {
+    "codigo": "P37",
+    "id": 1826,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 3,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto mostra uma peça escura avermelhada com linhas brancas em curvas e espirais; B afirma forma fitomorfa, lábio ondulado e pintura interna que não se veem."
+  },
+  {
+    "codigo": "P38",
+    "id": 63283,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 1,
+      "clareza_ao_ouvido": 3,
+      "concisao": 1
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "A foto é só um close do trançado em espinha-de-peixe de tons claros; A descreve cabo, bordas e roseta azul e verde que não aparecem."
+  },
+  {
+    "codigo": "P39",
+    "id": 205036,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 3,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Close de haste de madeira escura com corda clara enrolada em espiral e fios soltos; B descreve exatamente isso, A cita só técnica de torção."
+  },
+  {
+    "codigo": "P40",
+    "id": 2151,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Pote claro com gregas contornadas em preto e preenchidas em ocre no gargalo; A omite o corpo claro e diz marrom-avermelhado."
+  },
+  {
+    "codigo": "P41",
+    "id": 51023,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Seis tubos de taquara em ordem decrescente amarrados com fibra; B diz isso claramente, A intercala nomes científicos difíceis de ouvir."
+  },
+  {
+    "codigo": "P42",
+    "id": 78838,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 1
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "concisao",
+    "motivo": "Close de tecido de miçangas brancas e pretas com gregas e figuras e franja; A resume bem, B é muito longo e cita cordel e pingentes que não aparecem."
+  },
+  {
+    "codigo": "P43",
+    "id": 4116,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 5
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "concisao",
+    "motivo": "Placa de miçangas laranja com figura amarela, azul e vermelha e franjas; A diz o essencial em uma frase, B é mais longo e com pontuação quebrada."
+  },
+  {
+    "codigo": "P44",
+    "id": 2826,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 3,
+      "concisao": 3
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Peça alongada de palha trançada em espinha com franjas laterais e cauda desfiada, com forma de peixe; B identifica o peixe, nadadeiras e rabo, A não diz o que a figura representa."
+  },
+  {
+    "codigo": "P45",
+    "id": 4606,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Estojo de folha dobrada em dois cones com abertura no meio; A cita o orifício central visível, B fala em padrão espiralado menos claro."
+  },
+  {
+    "codigo": "P46",
+    "id": 2221,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 2,
+      "concisao": 3
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Tufos de penas amarelas em meia-lua presos a um cordel de fibra torcido; A é claro, B tem concordância errada e frase longa."
+  },
+  {
+    "codigo": "P47",
+    "id": 1260,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 2,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 3,
+      "concisao": 3
+    },
+    "descreve_melhor": "baseline",
+    "publicaria": "baseline",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Peça escura avermelhada com linhas brancas em curvas e cruz central; B diz gregas em tons claros, o que a foto desmente, A cita motivos por corda plausíveis."
+  },
+  {
+    "codigo": "P48",
+    "id": 4286,
+    "lado_do_gerado": "B",
+    "notas_gerado": {
+      "fidelidade": 5,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 4,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "fidelidade",
+    "motivo": "Pequeno bastão cilíndrico claro de taquara com uma ponta escura; B descreve cor e ponta escura visíveis."
+  },
+  {
+    "codigo": "P49",
+    "id": 2746,
+    "lado_do_gerado": "A",
+    "notas_gerado": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 4,
+      "concisao": 4
+    },
+    "notas_baseline": {
+      "fidelidade": 3,
+      "clareza_ao_ouvido": 2,
+      "concisao": 2
+    },
+    "descreve_melhor": "gerado",
+    "publicaria": "gerado",
+    "criterio_decisivo": "clareza_ao_ouvido",
+    "motivo": "Face de madeira clara entalhada presa a um capuz de entrecasca bege; A é curta e clara, B é longo, cita cores fortes que a foto não mostra e tem aspas soltas."
+  }
+]

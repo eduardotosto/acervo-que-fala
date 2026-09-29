@@ -11,8 +11,9 @@ Arquivos:
     resultados/06_lote_casos.json    — saída do Notebook 06 para os 40 casos
     resultados/06_lote_holdout.json  — saída do Notebook 06 para o holdout
 
-O que se mede aqui é o que código consegue medir sem olhar a fotografia. Fidelidade
-visual (o texto descreve o que a foto mostra?) é trabalho do juiz, na E10.
+Os blocos 1 a 5 são o que código consegue medir sem olhar a fotografia. Fidelidade
+visual (o texto descreve o que a foto mostra?) é trabalho do juiz: o bloco 6 aparece
+quando avaliacao/painel/ tem o julgamento consolidado (E10).
 """
 import argparse
 import collections
@@ -29,6 +30,8 @@ import checar_gabarito
 import checar_lote
 
 AVAL_DIR = os.path.dirname(os.path.abspath(__file__))
+PAINEL_DIR = os.path.join(AVAL_DIR, "painel")
+NOTAS_AB = ("fidelidade", "clareza_ao_ouvido", "concisao")
 RESULTADOS_DIR = os.path.join(os.path.dirname(AVAL_DIR), "resultados")
 
 CATEGORIAS_BORDA = {
@@ -186,6 +189,79 @@ def medir_recorte(itens, casos_por_id, gabarito):
     }
 
 
+def medir_juiz(itens, juiz):
+    """O que o juiz disse sobre os itens deste recorte (E10)."""
+    ids = {it["id"] for it in itens}
+    casos = [j for j in juiz["criterios"] if j["id"] in ids]
+    achados = [a for j in casos for a in j["achados"]]
+    pares = [p for p in juiz["ab"] if p["id"] in ids]
+    por_criterio = {}
+    for j in casos:
+        for c in j["criterios"]:
+            por_criterio.setdefault(c["criterio"].strip(), collections.Counter())[c["veredito"]] += 1
+    conta = lambda valores: dict(collections.Counter(valores))
+    return {
+        "casos_julgados": len(casos),
+        "vereditos": conta(c["veredito"] for j in casos for c in j["criterios"]),
+        "por_criterio": {k: dict(v) for k, v in por_criterio.items()},
+        "achados_por_gravidade": conta(a["gravidade"] for a in achados),
+        "achados_por_camada": conta(a["camada"] for a in achados),
+        "achados_graves_por_camada": conta(a["camada"] for a in achados if a["gravidade"] == "alta"),
+        "casos_com_achado_grave": sum(1 for j in casos
+                                      if any(a["gravidade"] == "alta" for a in j["achados"])),
+        "fidelidade_visual": conta(j["fidelidade_visual"] for j in casos),
+        "ab_pares": len(pares),
+        "ab_descreve_melhor": conta(p["descreve_melhor"] for p in pares),
+        "ab_publicaria": conta(p["publicaria"] for p in pares),
+        "ab_notas": {lado: {n: round(statistics.mean(p[f"notas_{lado}"][n] for p in pares), 2)
+                            for n in NOTAS_AB} if pares else {}
+                     for lado in ("gerado", "baseline")},
+    }
+
+
+def imprimir_juiz(recortes):
+    nomes = list(recortes)
+    j = lambda n: recortes[n]["juiz"]
+
+    def bloco(titulo, campo, pares):
+        print(f"   {titulo}")
+        for rotulo, chave in pares:
+            linha(f"  {rotulo}", [j(n)[campo].get(chave, 0) for n in nomes])
+
+    print()
+    print("6. JUIZ (E10) — Claude (Opus); protocolo em avaliacao/painel/protocolo_juiz.md")
+    linha("casos julgados", [j(n)["casos_julgados"] for n in nomes])
+    bloco("critérios dos casos", "vereditos",
+          (("atende", "atende"), ("não atende", "nao_atende"),
+           ("conferir (olho humano)", "conferir"), ("não se aplica", "nao_se_aplica")))
+    taxa = lambda v: (f"{100 * v.get('atende', 0) / (v.get('atende', 0) + v.get('nao_atende', 0)):.0f}%"
+                      if v.get("atende", 0) + v.get("nao_atende", 0) else "—")
+    linha("  atende, entre atende e não atende", [taxa(j(n)["vereditos"]) for n in nomes])
+    bloco("achados contra a régua editorial, por gravidade", "achados_por_gravidade",
+          (("alta (informação falsa ou inventada)", "alta"), ("média (regra quebrada)", "media"),
+           ("baixa (estilo)", "baixa")))
+    linha("  casos com achado de gravidade alta",
+          [f"{j(n)['casos_com_achado_grave']}/{j(n)['casos_julgados']}" for n in nomes])
+    camadas = (("observação (viu errado)", "observacao"), ("redação (escreveu errado)", "redacao"),
+               ("registro (o catálogo erra)", "registro"), ("código (flag, escala)", "codigo"))
+    bloco("achados por camada onde o erro nasceu", "achados_por_camada", camadas)
+    bloco("idem, só os de gravidade alta", "achados_graves_por_camada", camadas[:2])
+    bloco("fidelidade visual", "fidelidade_visual",
+          (("fiel", "fiel"), ("fiel com ressalva", "fiel_com_ressalva"), ("infiel", "infiel"),
+           ("conferir", "conferir")))
+    print("   A/B cego (alt-text gerado × descrição curatorial)")
+    linha("  pares julgados", [j(n)["ab_pares"] for n in nomes])
+    for titulo, campo, terceiro in (("descreve melhor", "ab_descreve_melhor", "empate"),
+                                    ("publicaria", "ab_publicaria", "nenhum")):
+        for lado in ("gerado", "baseline", terceiro):
+            linha(f"  {titulo}: {lado}", [j(n)[campo].get(lado, 0) for n in nomes])
+    for nota in NOTAS_AB:
+        linha(f"  nota {nota.replace('_', ' ')}, de 1 a 5",
+              [f"{j(n)['ab_notas']['gerado'].get(nota, '—')} | "
+               f"{j(n)['ab_notas']['baseline'].get(nota, '—')}" for n in nomes])
+    print("   (notas: gerado | baseline)")
+
+
 # ---------------------------------------------------------------- impressão
 def linha(rotulo, valores, larg=18):
     print(f"   {rotulo:38}" + "".join(f"{str(v):>{larg}}" for v in valores))
@@ -284,7 +360,23 @@ def metricas(args, casos, holdout):
         lotes.append(lote_holdout)
         recortes["holdout"] = medir_recorte(lote_holdout["itens"], casos_por_id, gabarito)
 
+    caminhos_juiz = [os.path.join(PAINEL_DIR, n) for n in ("juiz_criterios.json", "juiz_ab.json")]
+    tem_juiz = all(os.path.exists(c) for c in caminhos_juiz)
+    if tem_juiz:
+        juiz = {}
+        for chave, caminho in zip(("criterios", "ab"), caminhos_juiz):
+            with open(caminho, encoding="utf-8") as f:
+                juiz[chave] = json.load(f)
+        por_recorte = {"casos": itens,
+                       "não vistos": [it for it in itens if not it.get("visto_no_desenvolvimento")]}
+        if "holdout" in recortes:
+            por_recorte["holdout"] = lote_holdout["itens"]
+        for nome, itens_do_recorte in por_recorte.items():
+            recortes[nome]["juiz"] = medir_juiz(itens_do_recorte, juiz)
+
     imprimir(lotes, recortes, args.itens)
+    if tem_juiz:
+        imprimir_juiz(recortes)
     with open(args.saida, "w", encoding="utf-8") as f:
         json.dump({"sistema": {k: lote_casos.get(k) for k in
                                ("notebook", "modelo", "rubrica_versao", "executado_em_utc",
