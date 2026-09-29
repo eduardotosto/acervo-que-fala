@@ -487,8 +487,13 @@ fechado) antes de entrar no repositório. O bloco 6 do `rodar.py` imprime o resu
   itens). Em 7 desses 12 o juiz apontou padrão inventado, gravidade alta: a foto não mostra o
   padrão. É o papagaio de exemplo por outra porta. No lote de desenvolvimento o defeito não
   aparecia porque os objetos de lá tinham de fato esses padrões.
-- Os três achados previstos no dry-run se confirmaram: o 680 ficou sem texto (o juiz concorda com
-  a decisão); o título "Flauta reta sem aeroduto" passou pelo sistema sem derrubar o texto.
+- **A colisão prevista no dry-run aconteceu, e ficou gravada** (holdout 199679). O primeiro
+  rascunho nomeou o objeto pelo título, "Flauta reta sem aeroduto"; o validador leu "sem aeroduto"
+  como frase de ausência e mandou remover; o retry cortou o nome para "Flauta reta"; o juiz
+  apontou objeto não nomeado pelo título do registro. Uma regra do validador forçou a quebra de
+  outra. Só dá para contar essa história porque a resposta bruta de cada tentativa passou a ser
+  salva.
+- O 680 ficou sem texto, e o juiz sustenta a decisão diante da foto de 154×106 px.
 
 **Material de adjudicação:** `avaliacao/painel/relatorio_juiz.md` — 57 itens numerados (37 achados
 de gravidade alta + 20 vereditos `conferir`) e os 18 pares em que a baseline venceu. **Até a
