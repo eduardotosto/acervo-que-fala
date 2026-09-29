@@ -1,0 +1,1395 @@
+{
+  "sistema": {
+    "notebook": "06_lote_avaliacao",
+    "modelo": "Qwen/Qwen3-VL-8B-Instruct",
+    "rubrica_versao": "1.4 (27/08/2026)",
+    "executado_em_utc": "2026-09-29 19:55",
+    "versoes_ambiente": {
+      "transformers": "5.17.0",
+      "torch": "2.11.0+cu128",
+      "pillow": "11.3.0"
+    }
+  },
+  "recortes": {
+    "casos": {
+      "n": 40,
+      "com_texto": 39,
+      "sem_resolucao": 1,
+      "falha_de_geracao": 0,
+      "retry": 38,
+      "regua_sem_problema": 8,
+      "regua_problemas_por_item": 1.6,
+      "regua_por_checagem": {
+        "povo_ausente_no_n2": 18,
+        "repeticao_alt_n2": 14,
+        "aquisicao_em": 5,
+        "afirmacao_de_ausencia": 4,
+        "flag_de_ausencia": 4,
+        "ano_ausente_no_n2": 3,
+        "origem_ausente_no_n2": 3,
+        "nivel2_truncado": 3,
+        "artefato_no_alt": 3,
+        "frase_etiqueta": 2,
+        "obs_sem_enquadramento": 2,
+        "artefato_no_nivel2": 1,
+        "cor_em_material_natural": 1,
+        "alt_longo": 1
+      },
+      "regua_por_item": [
+        [
+          9196,
+          "Pote",
+          [
+            [
+              "frase_etiqueta",
+              "a função é"
+            ]
+          ]
+        ],
+        [
+          680,
+          "Panela gameliforme",
+          []
+        ],
+        [
+          1260,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ]
+          ]
+        ],
+        [
+          1826,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ],
+            [
+              "repeticao_alt_n2",
+              "em tons de marrom e branco"
+            ]
+          ]
+        ],
+        [
+          1996,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ]
+          ]
+        ],
+        [
+          1045,
+          "Moringa",
+          []
+        ],
+        [
+          2151,
+          "Pote",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Karajá"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com corpo arredondado, gargalo estreito "
+            ]
+          ]
+        ],
+        [
+          78838,
+          "Tanga de miçangas",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "afirmacao_de_ausencia",
+              "sem cordel"
+            ]
+          ]
+        ],
+        [
+          4286,
+          "Brinco cavilha",
+          []
+        ],
+        [
+          4116,
+          "Colar de miçangas",
+          []
+        ],
+        [
+          4211,
+          "Brinco cavilha",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Xavante"
+            ]
+          ]
+        ],
+        [
+          4246,
+          "Brinco cavilha",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Xavante"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com veias naturais e uma mancha"
+            ]
+          ]
+        ],
+        [
+          77963,
+          "Pulseira de miçangas",
+          [
+            [
+              "repeticao_alt_n2",
+              "com contas em verde-limão, laranja, pret"
+            ]
+          ]
+        ],
+        [
+          2601,
+          "Máscara antropomorfa Tikuna",
+          [
+            [
+              "ano_ausente_no_n2",
+              "1986"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Amazonas"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com pintura em preto e marrom-avermelhad"
+            ]
+          ]
+        ],
+        [
+          4056,
+          "Peteca",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Menkrangnotí"
+            ]
+          ]
+        ],
+        [
+          2826,
+          "Escultura zoomorfa ritual Timbira",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Krahô"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com padrão de trança em zig-zag"
+            ]
+          ]
+        ],
+        [
+          4606,
+          "Estojo para guardar umbigo",
+          [
+            [
+              "repeticao_alt_n2",
+              "afuniladas e padrão espiralado em camada"
+            ]
+          ]
+        ],
+        [
+          665,
+          "Faixa frontal emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "com penas em vermelho, amarelo e"
+            ]
+          ]
+        ],
+        [
+          2221,
+          "Braçadeira emplumada",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Kamayurá"
+            ],
+            [
+              "repeticao_alt_n2",
+              "de meia-lua sobre base de fibra"
+            ]
+          ]
+        ],
+        [
+          2236,
+          "Braçadeira emplumada",
+          []
+        ],
+        [
+          2316,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "sobre base de fibra entrelaçada em"
+            ]
+          ]
+        ],
+        [
+          1521,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "penas de arara em tons amarelo"
+            ]
+          ]
+        ],
+        [
+          1436,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "com penas vermelhas de arara sobre"
+            ]
+          ]
+        ],
+        [
+          5371,
+          "Recipiente de cabaça",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ],
+        [
+          1321,
+          "Recipiente de cabaça",
+          [
+            [
+              "obs_sem_enquadramento",
+              ""
+            ],
+            [
+              "afirmacao_de_ausencia",
+              "sem alça"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          5366,
+          "Recipiente de cabaça",
+          [
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "artefato_no_nivel2",
+              "etiqueta"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          1316,
+          "Recipiente de cabaça",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Guarani Nhandeva"
+            ],
+            [
+              "cor_em_material_natural",
+              "alt: cerâmica marrom"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ],
+        [
+          1331,
+          "Recipiente de cabaça",
+          [
+            [
+              "obs_sem_enquadramento",
+              ""
+            ],
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "afirmacao_de_ausencia",
+              "sem alça"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          63283,
+          "Abano trançado",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Fulni-ô"
+            ],
+            [
+              "ano_ausente_no_n2",
+              "1949"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Pernambuco"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ],
+            [
+              "repeticao_alt_n2",
+              "em tons claros a médios, com"
+            ]
+          ]
+        ],
+        [
+          3176,
+          "Abano trançado",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Tembé"
+            ]
+          ]
+        ],
+        [
+          500067,
+          "Tipiti iará",
+          [
+            [
+              "frase_etiqueta",
+              "a função é"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Baniwa"
+            ]
+          ]
+        ],
+        [
+          5041,
+          "Fuso",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Urubu"
+            ]
+          ]
+        ],
+        [
+          777254,
+          "Bolsa tecida",
+          [
+            [
+              "afirmacao_de_ausencia",
+              "sem enodação"
+            ]
+          ]
+        ],
+        [
+          4896,
+          "Alforge",
+          [
+            [
+              "ano_ausente_no_n2",
+              "1968"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Mato Grosso do Sul"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ],
+            [
+              "repeticao_alt_n2",
+              "em tons de verde-oliva e marrom,"
+            ]
+          ]
+        ],
+        [
+          775243,
+          "Tecido bordado",
+          [
+            [
+              "alt_longo",
+              "32 palavras"
+            ]
+          ]
+        ],
+        [
+          51023,
+          "Flauta de pã",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ],
+        [
+          205123,
+          "Arco retangular",
+          []
+        ],
+        [
+          204975,
+          "Arco plano-côncavo",
+          []
+        ],
+        [
+          205036,
+          "Arco plano-côncavo",
+          []
+        ],
+        [
+          206999,
+          "Óleo vegetal de coco de babaçu",
+          [
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "alt_criterios": {
+        "gerado": {
+          "até 30 palavras": 38,
+          "começa pelo objeto": 38,
+          "cita o povo": 39,
+          "sem jargão de catálogo": 39,
+          "sem medida": 39
+        },
+        "baseline": {
+          "até 30 palavras": 29,
+          "começa pelo objeto": 39,
+          "sem medida": 39,
+          "sem jargão de catálogo": 35
+        }
+      },
+      "alt_todos_os_criterios": {
+        "gerado": 37,
+        "baseline": 0
+      },
+      "alt_mediana_palavras": {
+        "gerado": 23,
+        "baseline": 23
+      },
+      "flags_por_tipo": {
+        "metadado_suspeito": 4,
+        "falta_de_resolucao": 1,
+        "divergencia_imagem_catalogo": 9,
+        "artefato_estudio": 16
+      },
+      "sinais": {
+        "artefato_estudio": {
+          "anotados": 14,
+          "sinalizados": 9,
+          "nao_sinalizados": [
+            2236,
+            2316,
+            1321,
+            5041,
+            4896
+          ],
+          "sem_anotacao": [
+            51023
+          ]
+        },
+        "divergencia_imagem_catalogo": {
+          "anotados": 11,
+          "sinalizados": 4,
+          "nao_sinalizados": [
+            1260,
+            1826,
+            1996,
+            4116,
+            2601,
+            4056,
+            777254
+          ],
+          "sem_anotacao": [
+            2151,
+            2221,
+            1521,
+            1436,
+            4896
+          ]
+        },
+        "metadado_suspeito": {
+          "anotados": 1,
+          "sinalizados": 1,
+          "nao_sinalizados": [],
+          "sem_anotacao": [
+            9196,
+            1521,
+            1436
+          ]
+        },
+        "foto_parcial": {
+          "anotados": 7,
+          "sinalizados": 6,
+          "nao_sinalizados": [
+            4116
+          ],
+          "sem_anotacao": [
+            78838
+          ]
+        }
+      },
+      "reincidencia_global": {
+        "cor_superlativa": [],
+        "analogia_lembra": [],
+        "jargao_catalogo": [
+          9196,
+          2826
+        ],
+        "cor_material_natural": [
+          1316
+        ],
+        "ficha_tecnica": [
+          1045,
+          2151,
+          4606
+        ],
+        "textura_natural_vazia": [
+          4056
+        ],
+        "micangas_penas_sobre": [
+          78838,
+          2316,
+          1436
+        ]
+      }
+    },
+    "não vistos": {
+      "n": 35,
+      "com_texto": 34,
+      "sem_resolucao": 1,
+      "falha_de_geracao": 0,
+      "retry": 33,
+      "regua_sem_problema": 8,
+      "regua_problemas_por_item": 1.51,
+      "regua_por_checagem": {
+        "povo_ausente_no_n2": 17,
+        "repeticao_alt_n2": 12,
+        "aquisicao_em": 3,
+        "flag_de_ausencia": 3,
+        "afirmacao_de_ausencia": 3,
+        "artefato_no_alt": 3,
+        "ano_ausente_no_n2": 2,
+        "origem_ausente_no_n2": 2,
+        "nivel2_truncado": 2,
+        "obs_sem_enquadramento": 2,
+        "artefato_no_nivel2": 1,
+        "cor_em_material_natural": 1,
+        "frase_etiqueta": 1,
+        "alt_longo": 1
+      },
+      "regua_por_item": [
+        [
+          680,
+          "Panela gameliforme",
+          []
+        ],
+        [
+          1260,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ]
+          ]
+        ],
+        [
+          1826,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ],
+            [
+              "repeticao_alt_n2",
+              "em tons de marrom e branco"
+            ]
+          ]
+        ],
+        [
+          1996,
+          "Tigela",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Kadiweu"
+            ]
+          ]
+        ],
+        [
+          1045,
+          "Moringa",
+          []
+        ],
+        [
+          2151,
+          "Pote",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Karajá"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com corpo arredondado, gargalo estreito "
+            ]
+          ]
+        ],
+        [
+          4286,
+          "Brinco cavilha",
+          []
+        ],
+        [
+          4116,
+          "Colar de miçangas",
+          []
+        ],
+        [
+          4211,
+          "Brinco cavilha",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Xavante"
+            ]
+          ]
+        ],
+        [
+          4246,
+          "Brinco cavilha",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Xavante"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com veias naturais e uma mancha"
+            ]
+          ]
+        ],
+        [
+          77963,
+          "Pulseira de miçangas",
+          [
+            [
+              "repeticao_alt_n2",
+              "com contas em verde-limão, laranja, pret"
+            ]
+          ]
+        ],
+        [
+          2601,
+          "Máscara antropomorfa Tikuna",
+          [
+            [
+              "ano_ausente_no_n2",
+              "1986"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Amazonas"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com pintura em preto e marrom-avermelhad"
+            ]
+          ]
+        ],
+        [
+          4056,
+          "Peteca",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Menkrangnotí"
+            ]
+          ]
+        ],
+        [
+          2826,
+          "Escultura zoomorfa ritual Timbira",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Krahô"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com padrão de trança em zig-zag"
+            ]
+          ]
+        ],
+        [
+          4606,
+          "Estojo para guardar umbigo",
+          [
+            [
+              "repeticao_alt_n2",
+              "afuniladas e padrão espiralado em camada"
+            ]
+          ]
+        ],
+        [
+          2221,
+          "Braçadeira emplumada",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Kamayurá"
+            ],
+            [
+              "repeticao_alt_n2",
+              "de meia-lua sobre base de fibra"
+            ]
+          ]
+        ],
+        [
+          2236,
+          "Braçadeira emplumada",
+          []
+        ],
+        [
+          2316,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "sobre base de fibra entrelaçada em"
+            ]
+          ]
+        ],
+        [
+          1521,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "penas de arara em tons amarelo"
+            ]
+          ]
+        ],
+        [
+          1436,
+          "Braçadeira emplumada",
+          [
+            [
+              "repeticao_alt_n2",
+              "com penas vermelhas de arara sobre"
+            ]
+          ]
+        ],
+        [
+          5371,
+          "Recipiente de cabaça",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ],
+        [
+          1321,
+          "Recipiente de cabaça",
+          [
+            [
+              "obs_sem_enquadramento",
+              ""
+            ],
+            [
+              "afirmacao_de_ausencia",
+              "sem alça"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          5366,
+          "Recipiente de cabaça",
+          [
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "artefato_no_nivel2",
+              "etiqueta"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          1316,
+          "Recipiente de cabaça",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Guarani Nhandeva"
+            ],
+            [
+              "cor_em_material_natural",
+              "alt: cerâmica marrom"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ],
+        [
+          1331,
+          "Recipiente de cabaça",
+          [
+            [
+              "obs_sem_enquadramento",
+              ""
+            ],
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "afirmacao_de_ausencia",
+              "sem alça"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Guarani-Kaiowá"
+            ]
+          ]
+        ],
+        [
+          3176,
+          "Abano trançado",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Tembé"
+            ]
+          ]
+        ],
+        [
+          500067,
+          "Tipiti iará",
+          [
+            [
+              "frase_etiqueta",
+              "a função é"
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Baniwa"
+            ]
+          ]
+        ],
+        [
+          5041,
+          "Fuso",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Urubu"
+            ]
+          ]
+        ],
+        [
+          777254,
+          "Bolsa tecida",
+          [
+            [
+              "afirmacao_de_ausencia",
+              "sem enodação"
+            ]
+          ]
+        ],
+        [
+          4896,
+          "Alforge",
+          [
+            [
+              "ano_ausente_no_n2",
+              "1968"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Mato Grosso do Sul"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ],
+            [
+              "repeticao_alt_n2",
+              "em tons de verde-oliva e marrom,"
+            ]
+          ]
+        ],
+        [
+          775243,
+          "Tecido bordado",
+          [
+            [
+              "alt_longo",
+              "32 palavras"
+            ]
+          ]
+        ],
+        [
+          205123,
+          "Arco retangular",
+          []
+        ],
+        [
+          204975,
+          "Arco plano-côncavo",
+          []
+        ],
+        [
+          205036,
+          "Arco plano-côncavo",
+          []
+        ],
+        [
+          206999,
+          "Óleo vegetal de coco de babaçu",
+          [
+            [
+              "artefato_no_alt",
+              "etiqueta"
+            ],
+            [
+              "flag_de_ausencia",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "alt_criterios": {
+        "gerado": {
+          "até 30 palavras": 33,
+          "começa pelo objeto": 33,
+          "cita o povo": 34,
+          "sem jargão de catálogo": 34,
+          "sem medida": 34
+        },
+        "baseline": {
+          "até 30 palavras": 26,
+          "começa pelo objeto": 34,
+          "sem jargão de catálogo": 31,
+          "sem medida": 34
+        }
+      },
+      "alt_todos_os_criterios": {
+        "gerado": 32,
+        "baseline": 0
+      },
+      "alt_mediana_palavras": {
+        "gerado": 22.0,
+        "baseline": 22.0
+      },
+      "flags_por_tipo": {
+        "falta_de_resolucao": 1,
+        "divergencia_imagem_catalogo": 8,
+        "artefato_estudio": 14,
+        "metadado_suspeito": 2
+      },
+      "sinais": {
+        "artefato_estudio": {
+          "anotados": 13,
+          "sinalizados": 8,
+          "nao_sinalizados": [
+            2236,
+            2316,
+            1321,
+            5041,
+            4896
+          ],
+          "sem_anotacao": []
+        },
+        "divergencia_imagem_catalogo": {
+          "anotados": 10,
+          "sinalizados": 3,
+          "nao_sinalizados": [
+            1260,
+            1826,
+            1996,
+            4116,
+            2601,
+            4056,
+            777254
+          ],
+          "sem_anotacao": [
+            2151,
+            2221,
+            1521,
+            1436,
+            4896
+          ]
+        },
+        "metadado_suspeito": {
+          "anotados": 0,
+          "sinalizados": 0,
+          "nao_sinalizados": [],
+          "sem_anotacao": [
+            1521,
+            1436
+          ]
+        },
+        "foto_parcial": {
+          "anotados": 6,
+          "sinalizados": 5,
+          "nao_sinalizados": [
+            4116
+          ],
+          "sem_anotacao": []
+        }
+      },
+      "reincidencia_global": {
+        "cor_superlativa": [],
+        "analogia_lembra": [],
+        "jargao_catalogo": [
+          2826
+        ],
+        "cor_material_natural": [
+          1316
+        ],
+        "ficha_tecnica": [
+          1045,
+          2151,
+          4606
+        ],
+        "textura_natural_vazia": [
+          4056
+        ],
+        "micangas_penas_sobre": [
+          2316,
+          1436
+        ]
+      }
+    },
+    "holdout": {
+      "n": 10,
+      "com_texto": 10,
+      "sem_resolucao": 0,
+      "falha_de_geracao": 0,
+      "retry": 9,
+      "regua_sem_problema": 1,
+      "regua_problemas_por_item": 1.7,
+      "regua_por_checagem": {
+        "povo_ausente_no_n2": 6,
+        "repeticao_alt_n2": 5,
+        "aquisicao_em": 2,
+        "cor_em_material_natural": 1,
+        "ano_ausente_no_n2": 1,
+        "origem_ausente_no_n2": 1,
+        "nivel2_truncado": 1
+      },
+      "regua_por_item": [
+        [
+          4391,
+          "Cachimbo de cerâmica",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Canela"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com corpo em argila e haste"
+            ]
+          ]
+        ],
+        [
+          2746,
+          "Máscara antropomorfa Tikuna",
+          [
+            [
+              "repeticao_alt_n2",
+              "com aberturas para olhos e boca,"
+            ]
+          ]
+        ],
+        [
+          84836,
+          "Pulseira de miçangas",
+          [
+            [
+              "repeticao_alt_n2",
+              "com contas em azul royal, laranja"
+            ]
+          ]
+        ],
+        [
+          90371,
+          "Colar de miçangas",
+          []
+        ],
+        [
+          210599,
+          "Flauta reta de osso",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "povo_ausente_no_n2",
+              "Hixkaryána"
+            ],
+            [
+              "repeticao_alt_n2",
+              "penas amarelas e brancas presas por"
+            ]
+          ]
+        ],
+        [
+          508608,
+          "Cesto-cargueiro",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Baniwa"
+            ]
+          ]
+        ],
+        [
+          630,
+          "Bilhas comunicantes",
+          [
+            [
+              "aquisicao_em",
+              ""
+            ],
+            [
+              "cor_em_material_natural",
+              "alt: tonalidade bege"
+            ]
+          ]
+        ],
+        [
+          1050,
+          "Bilha",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Marubo"
+            ],
+            [
+              "repeticao_alt_n2",
+              "com corpo irregular, material escurament"
+            ]
+          ]
+        ],
+        [
+          499969,
+          "Tipiti dente de cutia",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Baniwa"
+            ],
+            [
+              "ano_ausente_no_n2",
+              "2019"
+            ],
+            [
+              "origem_ausente_no_n2",
+              "Amazonas"
+            ],
+            [
+              "nivel2_truncado",
+              "termina sem fatos depois da marca ou sem ponto final"
+            ]
+          ]
+        ],
+        [
+          199679,
+          "Flauta reta sem aeroduto",
+          [
+            [
+              "povo_ausente_no_n2",
+              "Salumã"
+            ]
+          ]
+        ]
+      ],
+      "alt_criterios": {
+        "gerado": {
+          "até 30 palavras": 10,
+          "começa pelo objeto": 10,
+          "cita o povo": 10,
+          "sem jargão de catálogo": 10,
+          "sem medida": 10
+        },
+        "baseline": {
+          "até 30 palavras": 3,
+          "começa pelo objeto": 10,
+          "sem jargão de catálogo": 9,
+          "sem medida": 10
+        }
+      },
+      "alt_todos_os_criterios": {
+        "gerado": 10,
+        "baseline": 0
+      },
+      "alt_mediana_palavras": {
+        "gerado": 21.5,
+        "baseline": 38.5
+      },
+      "flags_por_tipo": {
+        "divergencia_imagem_catalogo": 2
+      },
+      "sinais": {
+        "artefato_estudio": {
+          "anotados": 0,
+          "sinalizados": 0,
+          "nao_sinalizados": [],
+          "sem_anotacao": []
+        },
+        "divergencia_imagem_catalogo": {
+          "anotados": 0,
+          "sinalizados": 0,
+          "nao_sinalizados": [],
+          "sem_anotacao": [
+            90371,
+            210599
+          ]
+        },
+        "metadado_suspeito": {
+          "anotados": 0,
+          "sinalizados": 0,
+          "nao_sinalizados": [],
+          "sem_anotacao": []
+        },
+        "foto_parcial": {
+          "anotados": 0,
+          "sinalizados": 0,
+          "nao_sinalizados": [],
+          "sem_anotacao": []
+        }
+      },
+      "reincidencia_global": {
+        "cor_superlativa": [],
+        "analogia_lembra": [],
+        "jargao_catalogo": [],
+        "cor_material_natural": [],
+        "ficha_tecnica": [
+          630
+        ],
+        "textura_natural_vazia": [],
+        "micangas_penas_sobre": []
+      }
+    }
+  }
+}

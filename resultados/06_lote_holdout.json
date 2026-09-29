@@ -1,0 +1,671 @@
+{
+  "notebook": "06_lote_avaliacao",
+  "conjunto": "holdout",
+  "executado_em_utc": "2026-09-29 19:55",
+  "modelo": "Qwen/Qwen3-VL-8B-Instruct",
+  "embedding": "Qwen/Qwen3-Embedding-0.6B (CPU)",
+  "rubrica_versao": "1.4 (27/08/2026)",
+  "rag": "híbrido: diretriz da categoria pelo registro + glossário por similaridade (k=2)",
+  "versoes_ambiente": {
+    "transformers": "5.17.0",
+    "torch": "2.11.0+cu128",
+    "pillow": "11.3.0"
+  },
+  "minutos_de_geracao": 18.4,
+  "prompt_observacao_v3": "Você está diante da fotografia de um objeto do acervo de um museu — objetos etnográficos de povos indígenas do Brasil, fotografados em estúdio. Este contexto serve para você reconhecer materiais e situações de estúdio; NÃO use para adivinhar o que o objeto é ou significa. Descreva somente o que está visível NESTA fotografia.\n\nPreencha as seções abaixo, nesta ordem:\n\nOBJETO: o que se vê, em uma frase — forma geral, sem nomear função nem significado.\nMATERIAIS E CORES: os materiais aparentes e suas cores, do maior para o menor — liste TODAS as cores presentes, inclusive as minoritárias e as parcialmente encobertas. Material que não dá para identificar recebe o termo genérico (\"fibra\", \"madeira clara\") — nunca chute espécie ou origem.\nPADRÕES E TEXTURAS: desenhos, tramas e acabamentos visíveis, descritos pela forma (linhas, xadrez, diagonais) — somente se existirem.\nPARTES E QUANTIDADES: partes distinguíveis e contáveis (tubos, furos, alças, penas destacadas).\nPOSIÇÃO: como o objeto está na foto (de pé, deitado, inclinado) e partes internas visíveis (boca, interior, verso).\nLEGIBILIDADE: o que estiver ilegível ou incerto — declare a incerteza em vez de estimar.\nFUNDO E ESTÚDIO: o fundo e qualquer artefato de estúdio (etiqueta, numeração, cartela de cores, régua, suporte).\nENQUADRAMENTO: inteiro OU detalhe — \"detalhe\" SÓ se a foto mostra claramente apenas parte do objeto; objeto que encosta ou sangra nas margens conta como inteiro.\nARTEFATOS: os artefatos de estúdio vistos, separados por vírgula, ou \"nenhum\".\n\nRegra geral: o que não está visível não existe para esta descrição. Responda em português.",
+  "prompt_redacao_v13": "Você escreve descrições de acessibilidade para o acervo digital de um museu. Elas serão OUVIDAS por pessoas cegas, através de leitores de tela — escreva em linguagem cotidiana, com frases que funcionam no ouvido (ordem direta, sem parênteses longos).\n\nINSUMOS — cada um autoriza um tipo de informação:\n\nOBSERVAÇÃO VISUAL DA FOTOGRAFIA (autoriza: aparência — o que é visível):\n{observacao}\n\nENQUADRAMENTO DECIDIDO NA OBSERVAÇÃO: {enquadramento}\n\nESCALA CALCULADA DO REGISTRO: {escala}\n\nCONTAGENS DO REGISTRO (prevalecem SEMPRE sobre a contagem visual): {contagem}\n\nMARCA DE ATRIBUIÇÃO DESTE TEXTO (use esta fórmula, exatamente): {marca}\n\nEM QUARENTENA — informação flagada para revisão humana. NÃO escreva nada sobre:\n{quarentena}\n\nREGISTRO DO MUSEU (autoriza: fatos — sempre com atribuição; o título nomeia o objeto):\n{registro}\n\nDIRETRIZES PARA ESTE TIPO DE OBJETO (autorizam: vocabulário e o que observar nesta categoria):\n{diretrizes}\n\nCONTRATO DE FONTES — prevalece sobre qualquer outra regra:\n1. Cada informação escrita precisa de fonte: visível na observação, escrita no registro (e então leva atribuição) ou vocabulário das diretrizes. Sem fonte, não escreva — omitir é sempre permitido; um texto curto e todo verificável vale mais que um completo com um palpite.\n2. O CATÁLOGO MANDA NAS PALAVRAS: termo do registro que não é técnico se usa como está (cabo, pá, algodão, \"dobradura afunilada\") — não invente sinônimo nem nova forma de dizer o que o catálogo já diz bem; descrição visual do registro em linguagem comum (ex.: figuras em \"X\") entra com as palavras dele. Termo técnico do registro se traduz pelo glossário das diretrizes (\"motivos zoomorfos\" vira \"figuras de animais\"; \"borda extrovertida\" vira \"boca que se abre para fora\"); espécie de animal ou planta SÓ se o registro nomear — nunca pela aparência.\n3. Incerteza se herda: o que estiver na seção LEGIBILIDADE da observação, ou vier com hesitação (\"parece\", \"talvez\", \"possivelmente\"), sai do texto ou vira o termo genérico — nunca vira afirmação.\n4. Divergência não se resolve no texto: quando observação e registro conflitam, não escolha um lado nem harmonize — registre em flags como divergencia_imagem_catalogo e NÃO escreva a informação divergente. Quantidade: use SEMPRE o número de CONTAGENS DO REGISTRO; cores: use as que o REGISTRO nomeia (cor vista que o registro não nomeia já está em quarentena via flag).\n5. Os exemplos deste prompt mostram a FORMA das frases, com lacunas [assim]; preencha sempre com o conteúdo deste objeto, nunca com as palavras do exemplo.\n\nPRODUZA TRÊS SAÍDAS:\n\nA) alt_text — o que a fotografia mostra, para quem não a vê.\n   Uma frase, no máximo 30 palavras — o limite de 30 VENCE qualquer outra exigência desta seção: se faltar espaço, corte adjetivo e detalhe secundário, nunca o objeto e o povo.\n   Começa pelo objeto (nomeado pelo TÍTULO do registro) e pelo povo, com o nome do povo em maiúscula inicial.\n   Contém: o material; as cores VISÍVEIS na observação que o registro confirma, onde a cor informa — elemento ou cor que só existe no catálogo e NÃO aparece na foto (decoração encoberta, roseta em foto de detalhe) nunca entra no alt, só na descrição; a forma dos padrões, sempre pela geometria OU pelo termo que a diretriz/glossário nomear (espinha-de-peixe, gregas) — quando a diretriz nomeia o padrão que você vê, USE esse termo; NUNCA descreva padrão por semelhança com letra, figura ou objeto (\"em forma de G\", \"como uma flor\", \"lembra uma coroa\" são erros) — exceto quando o próprio registro usar a comparação (figuras em \"X\").\n   MATERIAL NATURAL NÃO TEM NOME DE COR: madeira, fibra, argila, algodão, couro e afins são no máximo \"clara\" ou \"escura\" — nunca bege, marrom ou castanho; a procedência (tipo de madeira, de fibra) entra quando o catálogo a dá. Cores nomeadas só em pintura, tingimento, penas e miçangas. Construção: miçangas são \"confeccionadas com [linha]\" e peças plumárias são \"compostas por penas...\" — nunca \"[material] sobre [material]\". Quando a peça tem pintura sobre a base, primeiro a pintura e suas cores, depois a base sem cor (\"pintura em vermelho e preto sobre a cerâmica\"). Cada cor fica PRESA à parte que a exibe (\"cabo escuro, bocal claro\") — enumerar cores soltas perde a referência.\n   Se o ENQUADRAMENTO diz \"detalhe\", comece com \"Detalhe de [objeto]\"; se diz \"inteiro\", não mencione enquadramento nem orientação.\n   Aves de penas: só as que o registro nomear, com as cores QUE O REGISTRO dá a elas: \"penas [cores do registro] de [ave]\".\n   Não aparecem aqui: fundo ou estúdio, artefato de inventário, medida, alça/cordel/corda (salvo se for a característica principal do objeto), frases de ausência (\"sem X\", \"não há X\") e palavras de seção da observação (\"partes contáveis\", \"legível\").\n\nB) descricao_objeto — o objeto em si, para quem quer conhecê-lo além da foto. Dois parágrafos, no máximo 120 palavras somadas.\n   1º: a PRIMEIRA PALAVRA é o nome do objeto — sem \"O objeto é…\", \"Trata-se de…\", \"é um objeto\". A função entra nessa primeira frase SÓ quando diz algo que o nome não diz (caça, ritual, preparo) — bolsa que guarda, panela que cozinha, remo que rema e pulseira no pulso NÃO se explicam. Depois, a aparência: formas, materiais e padrões, cada informação uma vez.\n   2º: os fatos do catálogo, AGRUPADOS, em frases naturais: a marca de atribuição aparece UMA vez, ao entrar neles, com a fórmula exata de MARCA DE ATRIBUIÇÃO — o texto PRECISA conter essa fórmula, e a frase que a contém começa com letra MAIÚSCULA. O povo, o ano de aquisição e o estado de origem SEMPRE entram quando o registro os tem, e o texto nunca termina na marca — os fatos vêm depois dela. A escala é EXATAMENTE a de ESCALA CALCULADA DO REGISTRO, em frase natural — não recalcule, não escolha outra medida, não cite medida de parte nem de alça; se lá diz para não escrever medida, NÃO escreva.\n   Este texto descreve o objeto, não a fotografia: posição, fundo, enquadramento, \"visível/parcialmente visível\" não existem aqui; relações de ponto de vista viram relações da peça (\"decrescentes\", \"em degraus\"). Em amostras (argila, resina), o CONTENEDOR (tubo, tampa, frasco) só existe no alt — a descrição é do conteúdo, com o tipo e a procedência que o catálogo der. Não repita frases do alt nem a mesma palavra várias vezes.\n   O texto diz o que existe: nada de \"sem [coisa]\", \"não há [coisa]\"; o que o registro não traz não vira frase.\n\nC) flags — o que precisa de revisão humana. Artefatos, metadados improváveis e cores divergentes já foram registrados pelo código; concentre-se no que só quem leu os dois lados percebe:\n   - divergencia_imagem_catalogo: conflito entre observação e registro (quantidade, material, formato) — ou objeto visto diferente do que o título nomeia (use o título no texto e registre aqui).\n   Lista vazia [] se não houver nada.\n\nResponda APENAS com JSON: {{\"alt_text\": \"...\", \"descricao_objeto\": \"...\", \"flags\": [{{\"tipo\": \"...\", \"detalhe\": \"...\"}}]}}",
+  "prompt_contradicao": "Leia os campos do registro de catálogo de um museu abaixo e responda se existe CONTRADIÇÃO INTERNA: dois campos que afirmam coisas incompatíveis sobre o MESMO objeto.\n\nExemplo de contradição: o campo Descrição diz \"brinquedo em miniatura\" e o campo Função diz \"utilizado para caça\" — o mesmo objeto não é as duas coisas.\nNão é contradição: campo vazio, informação que falta, detalhe que só um campo traz, ou estilo de escrita.\n\nREGISTRO:\n{registro}\n\nResponda APENAS com JSON: {{\"contradicao\": true ou false, \"campos\": [\"campo A\", \"campo B\"], \"detalhe\": \"uma frase explicando\"}}",
+  "tetos_categoria": {
+    "Adornos Plumários": 156,
+    "Adornos de Materiais Ecléticos, Indumentária e Toucador": 106,
+    "Armas": 491,
+    "Cerâmica": 56,
+    "Cordões e Tecidos": 103,
+    "Etnobotânica": 33,
+    "Instrumentos musicais e de sinalização": 76,
+    "Objetos rituais, mágicos e lúdicos": 144,
+    "Trançados": 181,
+    "Utensílios e implementos de materiais ecléticos": 75
+  },
+  "itens": [
+    {
+      "id": 4391,
+      "titulo": "Cachimbo de cerâmica",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Cachimbo de cerâmica",
+        "Povo": "Canela",
+        "Categoria": "Objetos rituais, mágicos e lúdicos",
+        "Matéria-prima": "Mineral > Argila | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Modelado",
+        "Dimensões": "19,0 cm de comprimento; 3,6 cm de altura; 2,3 cm de diâmetro",
+        "Função": "Aparelho para estimulantes e narcóticos",
+        "Estado de origem": "Maranhão",
+        "Ano de aquisição do objeto": "1950",
+        "Descrição": "Cachimbo cerâmica constituído de um fornilho modelado em barro e aspirador de madeira não identificada. Exibe a superfície do fornilho decorada com motivos incisos formando padrões geometrizantes"
+      },
+      "observacao": "OBJETO: Um objeto longo e cilíndrico com uma extremidade aberta em forma de boca, conectado a um corpo mais robusto com detalhes em relevo.\n\nMATERIAIS E CORES: Madeira clara com tons de marrom e castanho; metal escuro com aspecto oxidado; fibra ou material sintético de cor marrom claro, visível em uma junta.\n\nPADRÕES E TEXTURAS: Textura irregular e desgastada na parte metálica; linhas de junção visíveis na madeira; relevo em forma de pequenas projeções circulares no corpo metálico.\n\nPARTES E QUANTIDADES: Uma parte metálica com detalhes em relevo; uma haste de madeira; uma junta de fixação entre metal e madeira; uma extremidade aberta (boca) com bordas desgastadas.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, ligeiramente inclinado para a direita, com a boca voltada para a esquerda. O interior da boca é visível.\n\nLEGIBILIDADE: Não há inscrições legíveis. Nada está ilegível.\n\nFONDO E ESTÚDIO: Fundo branco uniforme. Nenhum artefato de estúdio visível.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×426",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [],
+      "escala": "cerca de 19 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem consistentemente um cachimbo cerâmico de uso ritualístico e mágico, com função de estimulante e narcótico, sem conflito entre as informações."
+      },
+      "alt_bruto": "Cachimbo de cerâmica do povo Canela, com corpo em argila e haste de madeira, exibe padrões geométricos incisos e boca que se abre para fora.",
+      "alt_text": "Cachimbo de cerâmica do povo Canela, com corpo em argila e haste de madeira, exibe padrões geométricos incisos e boca que se abre para fora.",
+      "descricao_objeto": "Cachimbo de cerâmica, aparelho para estimulantes e narcóticos, com corpo em argila e haste de madeira não identificada, exibe padrões geométricos incisos e boca que se abre para fora. Segundo o registro do museu, foi aquisicionado em 1950 no Maranhão, mede 19,0 cm de comprimento, e sua função ritual é documentada no catálogo.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ritual-01",
+        "glossario-07",
+        "glossario-06"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "povo_ausente_no_n2",
+          "Canela"
+        ],
+        [
+          "repeticao_alt_n2",
+          "com corpo em argila e haste"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Cachimbo de cerâmica do povo Canela, com corpo em argila e haste de madeira, exibe padrões geométricos incisos e borda extrovertida.\",\n  \"descricao_objeto\": \"Cachimbo de cerâmica, aparelho para estimulantes e narcóticos, com corpo em argila e haste de madeira não identificada, exibe padrões geométricos incisos e borda extrovertida. segundo o registro do museu, foi aquisicionado em 1950 no Maranhão, mede 19,0 cm de comprimento, e sua função ritual é documentada no catálogo.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Cachimbo de cerâmica do povo Canela, com corpo em argila e haste de madeira, exibe padrões geométricos incisos e boca que se abre para fora.\",\n  \"descricao_objeto\": \"Cachimbo de cerâmica, aparelho para estimulantes e narcóticos, com corpo em argila e haste de madeira não identificada, exibe padrões geométricos incisos e boca que se abre para fora. segundo o registro do museu, foi aquisicionado em 1950 no Maranhão, mede 19,0 cm de comprimento, e sua função ritual é documentada no catálogo.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 40.3,
+      "segundos_contradicao": 7.1,
+      "segundos_redacao": 50.9
+    },
+    {
+      "id": 2746,
+      "titulo": "Máscara antropomorfa Tikuna",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Máscara antropomorfa Tikuna",
+        "Povo": "Tikuna",
+        "Categoria": "Objetos rituais, mágicos e lúdicos",
+        "Matéria-prima": "Vegetal > Entrecasca de árvore não identificada | Vegetal > Madeira não identificada",
+        "Técnica de confecção": "Entalhe | Pintura",
+        "Dimensões": "22,0 cm de comprimento(cabeça de madeira); 59,0 cm de comprimento(cabeça e veste); 25,5 cm de largura(cabeça e veste)",
+        "Função": "Objeto utilizado nas festas de iniciação feminina para afastar os espíritos malígnos que elas representam",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1994",
+        "Descrição": "Máscara antropomorfa tukúna constituída por capuz confeccionado com entrecasca de árvore, decorado com motivos geometrizantes nas cores azul, amarelo e marrom. Apresenta na parte central do capuz, \"cara sobrenatural, talhada em madeira não identificada exibindo superfície decorada, também com motivos geometrizantes, pintados na cor amarelo e preto. Exibe testa, nariz e boca salientes"
+      },
+      "observacao": "OBJETO: Uma peça de madeira com forma de rosto, parcialmente envolta por um material fibroso e desgastado, apresentando uma estrutura central com aberturas para olhos e boca.\n\nMATERIAIS E CORES: Madeira clara, fibra (textura irregular, amarelada e desgastada), manchas escuras (possivelmente resíduos de pigmento ou ferrugem), tons de marrom e cinza.\n\nPADRÕES E TEXTURAS: Nenhum padrão repetido ou geométrico. Textura irregular da fibra e superfície lisa da madeira. Linhas de corte e ranhuras em torno da boca.\n\nPARTES E QUANTIDADES: Uma peça central de madeira com duas aberturas circulares para os olhos e uma abertura retangular para a boca. Uma única peça de fibra envolta ao redor da base e superior da peça de madeira.\n\nPOSIÇÃO: O objeto está de pé, centralizado na imagem, com a face frontal voltada para o observador. O interior da peça (aberturas) é visível.\n\nLEGIBILIDADE: Nada é legível, incluindo inscrições ou marcas.\n\nFONDO E ESTÚDIO: Fundo liso de cor cinza-azulado, sem marcações ou artefatos visíveis. Iluminação de estúdio uniforme.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [],
+      "escala": "cerca de 59 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem de forma consistente uma máscara ritual com função específica, materiais e dimensões compatíveis entre si."
+      },
+      "alt_bruto": "Máscara antropomorfa Tikuna, com corpo em madeira clara e fibra amarelada envolta, com aberturas para olhos e boca, em tons de marrom e cinza.",
+      "alt_text": "Máscara antropomorfa Tikuna, com corpo em madeira clara e fibra amarelada envolta, com aberturas para olhos e boca, em tons de marrom e cinza.",
+      "descricao_objeto": "Máscara antropomorfa Tikuna, usada em festas de iniciação feminina para afastar espíritos malígnos. Apresenta forma de rosto com aberturas para olhos e boca, feita em madeira e coberta por fibra amarelada e desgastada. O registro do museu informa que ela foi adquirida em 1994 no Amazonas, com dimensões de 59,0 cm de comprimento total.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ritual-01",
+        "glossario-06",
+        "glossario-09"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "repeticao_alt_n2",
+          "com aberturas para olhos e boca,"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Máscara antropomorfa Tikuna, com corpo em madeira clara e fibra amarelada envolta, com aberturas para olhos e boca, em tons de marrom e cinza.\",\n  \"descricao_objeto\": \"Máscara antropomorfa Tikuna, usada em festas de iniciação feminina para afastar espíritos malígnos. Apresenta forma de rosto com aberturas para olhos e boca, feita em madeira e coberta por fibra amarelada e desgastada. o registro do museu informa que ela foi adquirida em 1994 no Amazonas, com dimensões de 59,0 cm de comprimento total.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Máscara antropomorfa Tikuna, com corpo em madeira clara e fibra amarelada envolta, com aberturas para olhos e boca, em tons de marrom e cinza.\",\n  \"descricao_objeto\": \"Máscara antropomorfa Tikuna, usada em festas de iniciação feminina para afastar espíritos malígnos. Apresenta forma de rosto com aberturas para olhos e boca, feita em madeira e coberta por fibra amarelada e desgastada. o registro do museu informa que ela foi adquirida em 1994 no Amazonas, com dimensões de 59,0 cm de comprimento total.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 59.5,
+      "segundos_contradicao": 7.1,
+      "segundos_redacao": 56.0
+    },
+    {
+      "id": 84836,
+      "titulo": "Pulseira de miçangas",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Pulseira de miçangas",
+        "Povo": "Kaxinawá",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "",
+        "Dimensões": "10,0 cm de comprimento; 7,2 cm de largura",
+        "Função": "Adorno para os membros que cinge o pulso",
+        "Estado de origem": "Acre",
+        "Ano de aquisição do objeto": "2011",
+        "Descrição": "Pulseira de miçangas fechada,confeccionado com fios de nylon e contas de miçangas formando uma faixa que cinge o pulso, cuja composição das contas formam padrões característico do grupo nas cores: azul e laranja, com contorno na cor preta"
+      },
+      "observacao": "OBJETO: Um objeto retangular, feito de contas, com padrões geométricos em tons de azul e laranja, sobre fundo branco.\n\nMATERIAIS E CORES: Contas de plástico ou vidro, em azul royal, laranja vibrante e preto. As contas são pequenas, esféricas e uniformemente distribuídas.\n\nPADRÕES E TEXTURAS: Padrão geométrico repetido composto por formas de “G” estilizadas, interligadas por linhas retas e curvas. A textura é granulada e uniforme devido à disposição das contas.\n\nPARTES E QUANTIDADES: Não são visíveis partes distintas, como alças, bordas ou furos. O objeto é uma peça única, sem elementos destacáveis ou contáveis além das contas que o compõem.\n\nPOSIÇÃO: O objeto está deitado, ligeiramente inclinado para a direita, em perspectiva de cima para baixo. A face frontal está visível, sem partes internas ou verso expostos.\n\nLEGIBILIDADE: Tudo é legível. Não há elementos ilegíveis ou incertos.\n\nFONDO E ESTÚDIO: Fundo branco liso, sem textura ou marcação. Não há etiquetas, numerações, cartelas de cores, régua ou suporte visível.\n\nENQUADRAMENTO: Inteiro. O objeto está completamente dentro dos limites da imagem, sem sangrar nas margens.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 10 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos são coerentes entre si e descrevem o objeto de forma consistente: é uma pulseira de miçangas, com função de adorno para o pulso, feita de materiais sintéticos, e a descrição confirma os detalhes mencionados nos campos de matéria-prima e função."
+      },
+      "alt_bruto": "Pulseira de miçangas do povo Kaxinawá, com contas em azul royal, laranja vibrante e preto, dispostas em padrões geométricos estilizados com linhas retas e curvas interligadas.",
+      "alt_text": "Pulseira de miçangas do povo Kaxinawá, com contas em azul royal, laranja vibrante e preto, dispostas em padrões geométricos estilizados com linhas retas e curvas interligadas.",
+      "descricao_objeto": "Pulseira de miçangas, adorno para o pulso, com contas em azul royal, laranja vibrante e preto, organizadas em padrões geométricos estilizados. Conforme o catálogo do museu, o objeto é do povo Kaxinawá, originário do Acre, adquirido em 2011. Mede cerca de 10 cm de comprimento.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "glossario-04",
+        "glossario-02"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "repeticao_alt_n2",
+          "com contas em azul royal, laranja"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Pulseira de miçangas do povo Kaxinawá, confeccionada com fios de nylon e contas em azul royal, laranja vibrante e preto, formando padrões geométricos estilizados com linhas retas e curvas interligadas.\",\n  \"descricao_objeto\": \"Pulseira de miçangas, adorno para o pulso, confeccionada com fios de nylon e contas em azul royal, laranja vibrante e preto, organizadas em padrões geométricos estilizados. Conforme o catálogo do museu, o objeto é do povo Kaxinawá, originário do Acre, adquirido em 2011. Mede cerca de 10 cm de comprimento.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Pulseira de miçangas do povo Kaxinawá, com contas em azul royal, laranja vibrante e preto, dispostas em padrões geométricos estilizados com linhas retas e curvas interligadas.\",\n  \"descricao_objeto\": \"Pulseira de miçangas, adorno para o pulso, com contas em azul royal, laranja vibrante e preto, organizadas em padrões geométricos estilizados. Conforme o catálogo do museu, o objeto é do povo Kaxinawá, originário do Acre, adquirido em 2011. Mede cerca de 10 cm de comprimento.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 45.2,
+      "segundos_contradicao": 10.3,
+      "segundos_redacao": 56.2
+    },
+    {
+      "id": 90371,
+      "titulo": "Colar de miçangas",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Colar de miçangas",
+        "Povo": "Tiriyó",
+        "Categoria": "Adornos de Materiais Ecléticos, Indumentária e Toucador",
+        "Matéria-prima": "Sintético > Fio de algodão industrializado | Sintético > Miçanga",
+        "Técnica de confecção": "",
+        "Dimensões": "20,0 cm de largura; 21,0 cm de comprimento",
+        "Função": "Adornos de materiais ecléticos do tronco",
+        "Estado de origem": "Pará",
+        "Ano de aquisição do objeto": "2008",
+        "Descrição": "Colar de miçangas, confeccionado com contas de miçangas \"samura\" multicoloridas (transparente,azul,laranja,preto e marrom) e linha industrializada na cor branca. Consiste de colar com franjas em toda sua extensão. Exibe, ao centro,pingente triangular com a representação de figura zoomorfa"
+      },
+      "observacao": "OBJETO: Um colar de contas em formato de arco, com elementos decorativos em formato de fios pendurados e uma peça central com desenho.\n\nMATERIAIS E CORES: Contas de vidro ou plástico em branco, preto, azul claro, azul mais escuro, laranja, amarelo e verde. Algumas contas são transparentes ou translúcidas. Há também contas de cor marrom-escura, possivelmente madeira ou cerâmica, e contas de cor verde-oliva.\n\nPADRÕES E TEXTURAS: Disposição em fios de contas em padrão repetitivo, com variações em largura e densidade. A peça central apresenta um padrão mais denso e complexo, com contas dispostas em forma de quadrados e linhas retas. A textura é lisa e uniforme nas contas.\n\nPARTES E QUANTIDADES: O colar possui uma forma arqueada, com duas extremidades que se unem em um nó ou fecho. Há cerca de 20 a 30 fios de contas pendurados em cada lado do colar. A peça central contém um padrão de contas, com cerca de 100 a 150 contas visíveis.\n\nPOSIÇÃO: O objeto está deitado sobre um fundo branco, com a parte frontal voltada para a câmera. A parte interna do colar não é visível.\n\nLEGIBILIDADE: Não há texto legível.\n\nFONDO E ESTÚDIO: Fundo branco liso. Não há artefatos de estúdio visíveis.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "640×427",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": false,
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra amarelo, verde e o registro nomeia só azul, branco, laranja, preto"
+        }
+      ],
+      "escala": "cerca de 21 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem coerentemente o colar como um adorno de miçangas com função estética e decorativa, sem conflitos entre descrições ou funções."
+      },
+      "alt_bruto": "Colar de miçangas do povo Tiriyó, com contas multicoloridas em padrão de franjas, com pingente triangular estilizado no centro.",
+      "alt_text": "Colar de miçangas do povo Tiriyó, com contas multicoloridas em padrão de franjas, com pingente triangular estilizado no centro.",
+      "descricao_objeto": "Colar de miçangas, confeccionado com contas em tons de branco, preto, azul, laranja, verde e marrom, dispostas em fios com padrão de franjas. O centro exibe um pingente triangular com figura estilizada. De acordo com a ficha do museu, o objeto é do povo Tiriyó, originário do Pará, adquirido em 2008. Mede 21,0 cm de comprimento.",
+      "flags": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra amarelo, verde e o registro nomeia só azul, branco, laranja, preto"
+        }
+      ],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "miçanga-01",
+        "glossario-02",
+        "glossario-03"
+      ],
+      "json_valido": true,
+      "problemas": [],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Colar de miçangas do povo Tiriyó, com contas multicoloridas em padrão de franjas, com pingente triangular estilizado no centro.\",\n  \"descricao_objeto\": \"Colar de miçangas, confeccionado com contas em tons de branco, preto, azul, laranja, verde e marrom, dispostas em fios com padrão de franjas. O centro exibe um pingente triangular com figura estilizada. de acordo com a ficha do museu, o objeto é do povo Tiriyó, originário do Pará, adquirido em 2008. Mede 21,0 cm de comprimento.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "",
+      "segundos_observacao": 48.9,
+      "segundos_contradicao": 7.3,
+      "segundos_redacao": 26.1
+    },
+    {
+      "id": 210599,
+      "titulo": "Flauta reta de osso",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Flauta reta de osso",
+        "Povo": "Hixkaryána",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "11,8 cm de comprimento (osso); 41,3 cm de comprimento (osso + cordel) - medidas aproximadas por se tratar de objeto irregular",
+        "Função": "Instrumento musical e sonoro",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2018",
+        "Descrição": "Flauta reta de osso confeccionado com fêmur de mamífero não identificado apresentando três orifícios em sua extensão e pendurada a fio de fibra natural não identificada. Possui decoração formada por tufos de penas de tucano amarelas, amarradas ao fio de fibra, junto a extremidade proximal do osso"
+      },
+      "observacao": "OBJETO: Um artefato de madeira com três furos alinhados, adornado com penas amarelas e brancas e amarrado com corda de fibra natural.\n\nMATERIAIS E CORES: Madeira clara, penas amarelas e brancas, corda de fibra natural (marrom claro).\n\nPADRÕES E TEXTURAS: Nenhum padrão ou textura repetida visível; as penas apresentam textura frouxa e irregular.\n\nPARTES E QUANTIDADES: Uma haste de madeira com três furos circulares alinhados; um grupo de penas amarradas à haste; uma corda de fibra natural que se estende para fora da haste, formando um laço no final.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, com a extremidade da haste virada para a direita, e o lado com as penas voltado para a esquerda. O interior da haste não é visível.\n\nLEGIBILIDADE: Nada é legível.\n\nFONDO E ESTÚDIO: Fundo de tecido cinza-escuro, com textura visível. Nenhum artefato de estúdio como etiqueta ou régua é visível.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "3 orifícios",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra branco e o registro nomeia só amarelo"
+        }
+      ],
+      "escala": "cerca de 11,8 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem consistentemente uma flauta de osso com função musical, sem conflitos entre as informações."
+      },
+      "alt_bruto": "Flauta reta de osso do povo Hixkaryána, com três orifícios alinhados, adornada com penas amarelas e brancas presas por corda de fibra natural.",
+      "alt_text": "Flauta reta de osso do povo Hixkaryána, com três orifícios alinhados, adornada com penas amarelas e brancas presas por corda de fibra natural.",
+      "descricao_objeto": "Flauta reta de osso, instrumento musical e sonoro, com três orifícios em linha reta e decoração de penas amarelas e brancas presas por corda de fibra natural. O objeto apresenta forma reta, com a extremidade das penas voltada para a esquerda e o furo mais distante voltado para a direita. O catálogo do museu registra que foi aquisição em 2018, originário do Amazonas, com dimensão de 11,8 cm de comprimento (osso) e 41,3 cm (osso + cordel), confeccionado com fêmur de mamífero não identificado e cordel de fibra natural não identificada.",
+      "flags": [
+        {
+          "tipo": "divergencia_imagem_catalogo",
+          "detalhe": "a foto mostra branco e o registro nomeia só amarelo"
+        }
+      ],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-06"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "aquisicao_em",
+          ""
+        ],
+        [
+          "povo_ausente_no_n2",
+          "Hixkaryána"
+        ],
+        [
+          "repeticao_alt_n2",
+          "penas amarelas e brancas presas por"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Flauta reta de osso do povo Hixkaryána, com três orifícios alinhados, adornada com penas amarelas e brancas amarradas por corda de fibra natural.\",\n  \"descricao_objeto\": \"Flauta reta de osso, instrumento musical e sonoro, com três orifícios em linha reta e decoração de penas amarelas e brancas presas por corda de fibra natural. O objeto apresenta forma reta, com a extremidade das penas voltada para a esquerda e o furo mais distante voltado para a direita. o catálogo do museu registra que foi aquisição em 2018, originário do Amazonas, com dimensão de 11,8 cm de comprimento (osso) e 41,3 cm (osso + cordel), confeccionado com fêmur de mamífero não identificado e cordel de fibra natural não identificada.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Flauta reta de osso do povo Hixkaryána, com três orifícios alinhados, adornada com penas amarelas e brancas presas por corda de fibra natural.\",\n  \"descricao_objeto\": \"Flauta reta de osso, instrumento musical e sonoro, com três orifícios em linha reta e decoração de penas amarelas e brancas presas por corda de fibra natural. O objeto apresenta forma reta, com a extremidade das penas voltada para a esquerda e o furo mais distante voltado para a direita. o catálogo do museu registra que foi aquisição em 2018, originário do Amazonas, com dimensão de 11,8 cm de comprimento (osso) e 41,3 cm (osso + cordel), confeccionado com fêmur de mamífero não identificado e cordel de fibra natural não identificada.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 56.7,
+      "segundos_contradicao": 6.7,
+      "segundos_redacao": 71.3
+    },
+    {
+      "id": 508608,
+      "titulo": "Cesto-cargueiro",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Cesto-cargueiro",
+        "Povo": "Baniwa",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Cipó-imbé",
+        "Técnica de confecção": "Trançado hexagonal",
+        "Dimensões": "38cm de diâmetro lado maior; 28cm de diâmetro lado menor; 25cm de altura",
+        "Função": "Usado no transporte de cargas",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Cesto-cargueiro paneiriforme confeccionado em cipó ambé segundo a técnica do trançado hexagonal"
+      },
+      "observacao": "OBJETO: Um recipiente de formato cônico, com borda arredondada e parede inclinada, feito de material entrelaçado em padrão de cruzeta.\n\nMATERIAIS E CORES: Fibra de cor marrom claro, com variações de tonalidade entre bege e marrom mais escuro; algumas fibras mais claras, quase brancas, aparecem em alguns cruzamentos; sombra e reflexo de luz sobre a superfície dão tonalidade azulada em alguns pontos.\n\nPADRÕES E TEXTURAS: Padrão de cruzeta (ou xadrez) formado por fios entrelaçados em ângulos retos, com interseções visíveis; textura irregular devido à variação de espessura das fibras e à forma do entrelaçado.\n\nPARTES E QUANTIDADES: Não há alças, tampas, furos ou elementos destacados visíveis; o objeto é uma peça única sem partes separadas.\n\nPOSIÇÃO: O objeto está em pé, centralizado na imagem, com a boca voltada para o observador e o interior parcialmente visível; a base não está totalmente visível, mas o objeto está apoiado sobre uma superfície plana.\n\nLEGIBILIDADE: Não há inscrições, marcas ou elementos legíveis.\n\nFONDO E ESTÚDIO: Fundo de cor azul-escura, uniforme, sem textura visível; superfície onde o objeto repousa é da mesma tonalidade azul-escura, sugerindo uma tela ou pano estendido; iluminação frontal e lateral cria sombras suaves, indicando uso de luz controlada em estúdio.\n\nENQUADRAMENTO: Inteiro — o objeto ocupa a maior parte do quadro, com bordas visíveis nas margens superior e inferior.\n\nARTEFATOS: Nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "segundo o registro do museu",
+      "flags_cor": [],
+      "escala": "cerca de 38 cm de diâmetro",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos são consistentes entre si e descrevem o objeto de forma coerente."
+      },
+      "alt_bruto": "Cesto-cargueiro de cipó-imbé, trançado em padrão de cruzeta, com fibras claras e escuras, feito pelo povo Baniwa.",
+      "alt_text": "Cesto-cargueiro de cipó-imbé, trançado em padrão de cruzeta, com fibras claras e escuras, feito pelo povo Baniwa.",
+      "descricao_objeto": "Cesto-cargueiro, usado no transporte de cargas, confeccionado em cipó-imbé com trançado hexagonal. A superfície exibe padrão de cruzeta com fibras em tons variados entre claro e escuro, com relevo irregular. Segundo o registro do museu, o objeto foi aquisido em 2019 no estado do Amazonas, com 38cm de diâmetro no lado maior e 25cm de altura.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-01",
+        "glossario-02"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "povo_ausente_no_n2",
+          "Baniwa"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Cesto-cargueiro de cipó-imbé, trançado em padrão de cruzeta, com fibras em tons de marrom claro e bege, com relevo irregular na superfície, feito pelo povo Baniwa.\",\n  \"descricao_objeto\": \"Cesto-cargueiro, usado no transporte de cargas, confeccionado em cipó-imbé com trançado hexagonal. A superfície exibe padrão de cruzeta com fibras de tonalidade variada entre bege e marrom, com relevo irregular. segundo o registro do museu, o objeto foi aquisido em 2019 no estado do Amazonas, com 38cm de diâmetro no lado maior e 25cm de altura.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Cesto-cargueiro de cipó-imbé, trançado em padrão de cruzeta, com fibras claras e escuras, feito pelo povo Baniwa.\",\n  \"descricao_objeto\": \"Cesto-cargueiro, usado no transporte de cargas, confeccionado em cipó-imbé com trançado hexagonal. A superfície exibe padrão de cruzeta com fibras em tons variados entre claro e escuro, com relevo irregular. segundo o registro do museu, o objeto foi aquisido em 2019 no estado do Amazonas, com 38cm de diâmetro no lado maior e 25cm de altura.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 68.8,
+      "segundos_contradicao": 5.2,
+      "segundos_redacao": 54.9
+    },
+    {
+      "id": 630,
+      "titulo": "Bilhas comunicantes",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Bilhas comunicantes",
+        "Povo": "Palikur",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "16,5 cm de diâmetro de bojo; 21,0 cm de altura; 42,0 cm de comprimento; 19,0 cm de largura",
+        "Função": "Objeto utilizado como cerâmica utilitária e/ou cerimonial para armazenagem e serviço",
+        "Estado de origem": "Amapá",
+        "Ano de aquisição do objeto": "1957",
+        "Descrição": "Bilhas comunicantes composta por dois recipientes diferentes. O primeiro de borda reta e contorno simples e o segundo exibe um pequeno orifício na parte superior. Apresenta base oval única para ambos os recipientes, superfície resinada e decorada com motivos geometrizantes"
+      },
+      "observacao": "OBJETO: Um recipiente cerâmico de formato bifurcado, com duas cavidades principais conectadas por um tubo central, apoiado sobre uma base plana.\n\nMATERIAIS E CORES: cerâmica com tonalidade predominantemente marrom-claro e bege, com manchas e áreas mais escuras em tons de marrom e cinza; algumas partes mostram resíduos de pigmento em tons de marrom avermelhado e amarelo-claro.\n\nPADRÕES E TEXTURAS: superfícies com marcas de desgaste e riscos superficiais; padrões de traços lineares e curvas escuras, possivelmente pintados ou incisos, em ambas as cavidades.\n\nPARTES E QUANTIDADES: duas cavidades principais (uma maior e uma menor), um tubo central conectando-as, uma base plana que sustenta o objeto, e uma abertura irregular na cavidade maior.\n\nPOSIÇÃO: objeto em posição horizontal, deitado sobre uma base, com a cavidade maior voltada para o lado esquerdo da imagem; a cavidade menor está à direita; o interior da cavidade maior é parcialmente visível, com borda irregular e desgaste.\n\nLEGIBILIDADE: não há inscrições ou marcas legíveis; os desenhos são indistintos e não identificáveis como símbolos ou letras.\n\nFONDO E ESTÚDIO: fundo branco puro, sem marcações ou elementos de estúdio visíveis.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "591×399",
+      "resolucao_ok": true,
+      "contagem_registro": "2 recipientes",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "o registro do museu informa que",
+      "flags_cor": [],
+      "escala": "cerca de 42 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois os campos descrevem o objeto de forma coerente: a função como cerâmica utilitária/cerimonial e a descrição física dos recipientes são compatíveis entre si."
+      },
+      "alt_bruto": "Bilhas comunicantes de cerâmica do povo Palikur, com corpo em tonalidade bege e marrom, exibindo padrões lineares e curvas escuras.",
+      "alt_text": "Bilhas comunicantes de cerâmica do povo Palikur, com corpo em tonalidade bege e marrom, exibindo padrões lineares e curvas escuras.",
+      "descricao_objeto": "Bilhas comunicantes, objeto cerimonial e utilitário dos Palikur, com corpo em cerâmica e padrões geométricos em tons de marrom e cinza. Apresenta duas cavidades conectadas por tubo central, com base plana e borda irregular na cavidade maior. O registro do museu informa que foi aquisição em 1957 no Amapá, com dimensões de 42 cm de comprimento, 21 cm de altura e 19 cm de largura, sendo parte de um conjunto de cerâmica acordelada com função de armazenagem e serviço.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "ceramica-02",
+        "glossario-11",
+        "glossario-07"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "aquisicao_em",
+          ""
+        ],
+        [
+          "cor_em_material_natural",
+          "alt: tonalidade bege"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Bilhas comunicantes de cerâmica do povo Palikur, com tonalidade marrom-claro e bege, exibindo padrões lineares e curvas escuras, com duas cavidades conectadas por tubo central.\",\n  \"descricao_objeto\": \"Bilhas comunicantes, objeto cerimonial e utilitário dos Palikur, com corpo em cerâmica e padrões geométricos em tons de marrom e cinza. Apresenta duas cavidades conectadas por tubo central, com base plana e borda irregular na cavidade maior. o registro do museu informa que foi aquisição em 1957 no Amapá, com dimensões de 42 cm de comprimento, 21 cm de altura e 19 cm de largura, sendo parte de um conjunto de cerâmica acordelada com função de armazenagem e serviço.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Bilhas comunicantes de cerâmica do povo Palikur, com corpo em tonalidade bege e marrom, exibindo padrões lineares e curvas escuras.\",\n  \"descricao_objeto\": \"Bilhas comunicantes, objeto cerimonial e utilitário dos Palikur, com corpo em cerâmica e padrões geométricos em tons de marrom e cinza. Apresenta duas cavidades conectadas por tubo central, com base plana e borda irregular na cavidade maior. o registro do museu informa que foi aquisição em 1957 no Amapá, com dimensões de 42 cm de comprimento, 21 cm de altura e 19 cm de largura, sendo parte de um conjunto de cerâmica acordelada com função de armazenagem e serviço.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 45.1,
+      "segundos_contradicao": 7.8,
+      "segundos_redacao": 64.7
+    },
+    {
+      "id": 1050,
+      "titulo": "Bilha",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Bilha",
+        "Povo": "Marubo",
+        "Categoria": "Cerâmica",
+        "Matéria-prima": "",
+        "Técnica de confecção": "Acordelado",
+        "Dimensões": "13,0 cm de altura; 10,5 cm de largura; 10,5 cm de comprimento",
+        "Função": "Objeto utilizado para reservar e/ou servir líquidos (aioásca)",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "1975",
+        "Descrição": "Bilha frutiforme com alça de tucum, ambos enegrecidos, de base plana. Apresenta gargalo com bico"
+      },
+      "observacao": "OBJETO: Vaso de forma globular e irregular, com um único orifício na parte superior, suspenso por uma corda que se conecta a um nó na parte superior do objeto.\n\nMATERIAIS E CORES: material com tonalidade marrom-escura, com variações de tons mais escuros e mais claros; superfície com aspecto fosco e irregular, com manchas de cor mais clara; cor marrom-escuro predominante, com áreas de marrom-acinzentado e marrom-terroso; superfície com textura irregular, sem brilho.\n\nPADRÕES E TEXTURAS: ausente.\n\nPARTES E QUANTIDADES: 1 orifício na parte superior; 1 corda de fibra natural, com um nó no topo; 1 corpo principal com forma irregular.\n\nPOSIÇÃO: o objeto está suspenso verticalmente, com a boca virada para cima, de frente para o observador; o interior do orifício não é visível.\n\nLEGIBILIDADE: nada é legível.\n\nFONDO E ESTÚDIO: fundo branco liso e uniforme, sem marcas de estúdio visíveis.\n\nENQUADRAMENTO: inteiro.\n\nARTEFATOS: nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "427×640",
+      "resolucao_ok": true,
+      "contagem_registro": "nenhuma no registro",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "conforme o catálogo do museu",
+      "flags_cor": [],
+      "escala": "cerca de 13 cm de altura",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna no registro. As informações são coerentes entre si: a descrição detalha a forma e características físicas da bilha, e a função é compatível com sua forma (gargalo com bico), sem conflito."
+      },
+      "alt_bruto": "Bilha de cerâmica do povo Marubo, com corpo irregular, material escuramente tonificado, superfície fosca e textura irregular.",
+      "alt_text": "Bilha de cerâmica do povo Marubo, com corpo irregular, material escuramente tonificado, superfície fosca e textura irregular.",
+      "descricao_objeto": "Bilha, objeto cerâmico utilizado para reservar e servir líquidos, com corpo irregular, material escuramente tonificado, superfície fosca e textura irregular. Conforme o catálogo do museu, é de origem do estado do Amazonas, adquirido em 1975, com dimensão de 13,0 cm de altura. A peça apresenta gargalo com bico e alça de tucum, ambos enegrecidos, e base plana.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "ceramica-01",
+        "ceramica-02",
+        "glossario-11",
+        "glossario-08"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "povo_ausente_no_n2",
+          "Marubo"
+        ],
+        [
+          "repeticao_alt_n2",
+          "com corpo irregular, material escurament"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Bilha de cerâmica do povo Marubo, com corpo irregular e tonalidade marrom-escura, com superfície fosca e textura irregular, sem padrões visíveis.\",\n  \"descricao_objeto\": \"Bilha, objeto cerâmico utilizado para reservar e servir líquidos, com corpo irregular, tonalidade marrom-escura e superfície fosca. Conforme o catálogo do museu, é de origem do estado do Amazonas, adquirido em 1975, com dimensão de 13,0 cm de altura. A peça apresenta gargalo com bico e alça de tucum, ambos enegrecidos, e base plana.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Bilha de cerâmica do povo Marubo, com corpo irregular, material escuramente tonificado, superfície fosca e textura irregular.\",\n  \"descricao_objeto\": \"Bilha, objeto cerâmico utilizado para reservar e servir líquidos, com corpo irregular, material escuramente tonificado, superfície fosca e textura irregular. Conforme o catálogo do museu, é de origem do estado do Amazonas, adquirido em 1975, com dimensão de 13,0 cm de altura. A peça apresenta gargalo com bico e alça de tucum, ambos enegrecidos, e base plana.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 37.9,
+      "segundos_contradicao": 7.4,
+      "segundos_redacao": 52.0
+    },
+    {
+      "id": 499969,
+      "titulo": "Tipiti dente de cutia",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Tipiti dente de cutia",
+        "Povo": "Baniwa",
+        "Categoria": "Trançados",
+        "Matéria-prima": "Vegetal > Arumã",
+        "Técnica de confecção": "Trançado",
+        "Dimensões": "149,0 cm de comprimento; 8,0 cm de diâmetro",
+        "Função": "Usado para extrair o ácido hidrociânico da mandioca brava para que a mesma possa ser utilizada para fazer farinha ou beiju.",
+        "Estado de origem": "Amazonas",
+        "Ano de aquisição do objeto": "2019",
+        "Descrição": "Tipiti trançado de arumã em formato cilíndrico com possibilidade de extensão com abertura na parte superior e duas alças: a de cima para prender a um ponto fixo e a de baixo para introduzir a alavanca e fazê-lo distender-se."
+      },
+      "observacao": "OBJETO: Um objeto longo, cilíndrico, com extremidades em forma de anéis entrelaçados, apresentando uma textura de tecido trançado ao longo de seu corpo.\n\nMATERIAIS E CORES: Fibra de cor marrom claro, com variações em tons mais escuros e mais claros, sugerindo textura natural. Pequenas manchas de cor escura e marrom mais escuro, possivelmente resíduos de pigmento ou desgaste. Não há outras cores visíveis.\n\nPADRÕES E TEXTURAS: Textura de tecido trançado em padrão de “V” invertido, repetido ao longo do corpo. As extremidades apresentam acabamento em laço ou nó complexo, com fios entrelaçados em padrão irregular.\n\nPARTES E QUANTIDADES: Duas extremidades, cada uma em forma de anel ou laço entrelaçado. Não há furos, alças ou outros componentes visíveis além das extremidades.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, com a orientação paralela às margens da imagem. As partes internas dos anéis são visíveis, mostrando o interior da trança.\n\nLEGIBILIDADE: Não há inscrições, marcas ou textos legíveis.\n\nFONDO E ESTÚDIO: Fundo preto uniforme. Não há artefatos de estúdio como etiquetas, numerações ou suportes visíveis.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: nenhum",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×268",
+      "resolucao_ok": true,
+      "contagem_registro": "2 alças",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "de acordo com a ficha do museu",
+      "flags_cor": [],
+      "escala": "cerca de 149 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois as informações sobre o objeto são coerentes: o tipiti é descrito como trançado, feito de arumã, com função específica de extrair ácido hidrociânico da mandioca brava, e sua descrição física (cilíndrico, com abertura e alças) se alinha com essa função."
+      },
+      "alt_bruto": "Tipiti dente de cutia, trançado de fibra vegetal marrom claro, com padrão de espinha-de-peixe, fechado em dois nós entrelaçados nas extremidades, do povo Baniwa.",
+      "alt_text": "Tipiti dente de cutia, trançado de fibra vegetal marrom claro, com padrão de espinha-de-peixe, fechado em dois nós entrelaçados nas extremidades, do povo Baniwa.",
+      "descricao_objeto": "Tipiti dente de cutia, usado para extrair o ácido hidrociânico da mandioca brava. Feito de fibra de arumã, com padrão de espinha-de-peixe e acabamento em nós nas extremidades. De acordo com a ficha do museu",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "trancado-01",
+        "glossario-02",
+        "glossario-03"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "povo_ausente_no_n2",
+          "Baniwa"
+        ],
+        [
+          "ano_ausente_no_n2",
+          "2019"
+        ],
+        [
+          "origem_ausente_no_n2",
+          "Amazonas"
+        ],
+        [
+          "nivel2_truncado",
+          "termina sem fatos depois da marca ou sem ponto final"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Tipiti dente de cutia, trançado de fibra vegetal marrom claro, com padrão de espinha-de-peixe, fechado em dois nós entrelaçados nas extremidades, do povo Baniwa.\",\n  \"descricao_objeto\": \"Tipiti dente de cutia, usado para extrair o ácido hidrociânico da mandioca brava. Feito de fibra de arumã, com padrão de espinha-de-peixe e acabamento em nós nas extremidades. de acordo com a ficha do museu\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Tipiti dente de cutia, trançado de fibra vegetal marrom claro, com padrão de espinha-de-peixe, fechado em dois nós entrelaçados nas extremidades, do povo Baniwa.\",\n  \"descricao_objeto\": \"Tipiti dente de cutia, usado para extrair o ácido hidrociânico da mandioca brava. Feito de fibra de arumã, com padrão de espinha-de-peixe e acabamento em nós nas extremidades. de acordo com a ficha do museu\",\n  \"flags\": []\n}",
+      "segundos_observacao": 44.3,
+      "segundos_contradicao": 10.7,
+      "segundos_redacao": 46.1
+    },
+    {
+      "id": 199679,
+      "titulo": "Flauta reta sem aeroduto",
+      "conjunto": "holdout",
+      "visto_no_desenvolvimento": false,
+      "registro": {
+        "Nome do item": "Flauta reta sem aeroduto",
+        "Povo": "Salumã",
+        "Categoria": "Instrumentos musicais e de sinalização",
+        "Matéria-prima": "",
+        "Técnica de confecção": "",
+        "Dimensões": "73,0 cm de comprimento; 8,0 cm de diâmetro",
+        "Função": "",
+        "Estado de origem": "Mato Grosso",
+        "Ano de aquisição do objeto": "2013",
+        "Descrição": "Flauta reta sem aeroduto confeccionado com tubo de taquara exibindo extremidade proximal em secção reta, corrigida com cera preta e quatro orifícios para variação do som. Apresenta adornada com franjas de linha industrializada na cor vermelha e duas penas de gavião, fixadas junto à extremidade superior"
+      },
+      "observacao": "OBJETO: Um tubo cilíndrico de madeira, com furos alinhados, adornado com penas e um laço vermelho.\n\nMATERIAIS E CORES: Madeira clara, penas de tonalidade escura com manchas claras, fios de tecido vermelho.\n\nPADRÕES E TEXTURAS: Nenhum padrão ou textura repetida visível; superfície lisa do tubo, penas com textura natural.\n\nPARTES E QUANTIDADES: Um tubo com quatro furos alinhados, duas penas presas por um laço vermelho.\n\nPOSIÇÃO: O objeto está deitado horizontalmente, com o tubo paralelo ao topo da imagem. O interior do tubo não é visível. A extremidade direita do tubo está parcialmente fora do enquadramento.\n\nLEGIBILIDADE: Nada legível.\n\nFONDO E ESTÚDIO: Fundo cinza-azulado, sem marcações, numeração ou cartelas de cores visíveis. Iluminação de estúdio uniforme.\n\nENQUADRAMENTO: Inteiro.\n\nARTEFATOS: Nenhum.",
+      "enquadramento": "inteiro",
+      "enquadramento_ok": true,
+      "artefatos_obs": [],
+      "resolucao": "1024×683",
+      "resolucao_ok": true,
+      "contagem_registro": "4 orifícios; 2 penas",
+      "retry": true,
+      "artefatos_secao": [],
+      "marca_atribuicao": "o catálogo do museu registra que",
+      "flags_cor": [],
+      "escala": "cerca de 73 cm de comprimento",
+      "contradicao": {
+        "contradicao": false,
+        "campos": [],
+        "detalhe": "Não há contradição interna, pois todos os campos descrevem consistentemente uma flauta musical com características específicas, sem conflitos entre descrições ou funções."
+      },
+      "alt_bruto": "Flauta reta de taquara, com penas escuras e detalhes em vermelho, do povo Salumã.",
+      "alt_text": "Flauta reta de taquara, com penas escuras e detalhes em vermelho, do povo Salumã.",
+      "descricao_objeto": "Flauta reta, feita de taquara, com penas escuras e detalhes em vermelho. O objeto possui quatro orifícios alinhados e está adornado com franjas vermelhas e duas penas de gavião. O catálogo do museu registra que foi aquisido em 2013, originário do estado de Mato Grosso, com 73,0 cm de comprimento e 8,0 cm de diâmetro.",
+      "flags": [],
+      "flags_registro": [],
+      "diretrizes_usadas": [
+        "instrumento-01",
+        "glossario-09",
+        "glossario-02"
+      ],
+      "json_valido": true,
+      "problemas": [
+        [
+          "povo_ausente_no_n2",
+          "Salumã"
+        ]
+      ],
+      "erro": "",
+      "erro_observacao": "",
+      "resposta_bruta": "{\n  \"alt_text\": \"Flauta reta sem aeroduto de taquara, com penas escuras e detalhes em vermelho, do povo Salumã.\",\n  \"descricao_objeto\": \"Flauta reta sem aeroduto, feita de taquara, com penas escuras e detalhes em vermelho. O objeto possui quatro orifícios alinhados e está adornado com franjas vermelhas e duas penas de gavião. o catálogo do museu registra que foi aquisido em 2013, originário do estado de Mato Grosso, com 73,0 cm de comprimento e 8,0 cm de diâmetro.\",\n  \"flags\": []\n}",
+      "resposta_bruta_retry": "{\n  \"alt_text\": \"Flauta reta de taquara, com penas escuras e detalhes em vermelho, do povo Salumã.\",\n  \"descricao_objeto\": \"Flauta reta, feita de taquara, com penas escuras e detalhes em vermelho. O objeto possui quatro orifícios alinhados e está adornado com franjas vermelhas e duas penas de gavião. o catálogo do museu registra que foi aquisido em 2013, originário do estado de Mato Grosso, com 73,0 cm de comprimento e 8,0 cm de diâmetro.\",\n  \"flags\": []\n}",
+      "segundos_observacao": 54.0,
+      "segundos_contradicao": 6.6,
+      "segundos_redacao": 50.5
+    }
+  ]
+}

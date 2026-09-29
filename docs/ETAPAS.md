@@ -18,9 +18,9 @@
 | E5 | Pipeline nível 1 (alt-text) nos 5 objetos do smoke test — Notebook 02 | ✅ 24/08/2026 |
 | E6 | RAG: rubrica indexada + recuperação por tipo de objeto — Notebook 03 | ✅ 24/08/2026 |
 | E7 | Nível 2 + flags + saída estruturada; lote de 20 — Notebook 04 | ✅ encerrada 28/08 · v10 = lote final (1,7 problemas/item) · **redator: Qwen 8B** (bake-off v2 encerrado pela regra de parada: o 12B não coube na T4) |
-| E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ⬜ (depende do resultado da E9) |
-| E9 | Lote completo no Colab (notebook com markdown explicativo) | 🔶 Notebook 06 pronto em 29/09/2026 · aguardando a rodada no Colab |
-| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | ⬜ |
+| E8 | `rodar.py` completo: métricas automáticas nos 40 casos | ✅ 29/09/2026 · 1,6 problemas/item nos casos, 1,7 no holdout (lote de desenvolvimento: 1,7) |
+| E9 | Lote completo no Colab (notebook com markdown explicativo) | ✅ 29/09/2026 · 50/50 objetos, nenhuma falha de geração, 93 min |
+| E10 | Avaliação por critérios: LLM-as-judge + teste com NVDA (sem A/B humano — decisão de 29/09) | 🔶 protocolo e painel prontos; julgamento em curso |
 | E11 | Site Gradio + deploy no HF Spaces + interface de revisão | ⬜ |
 | E12 | Holdout (roda 1x, na sessão da E9) + README da banca + texto descritivo | ⬜ |
 | EP | *(paralela, qualquer momento)* GitHub remoto: instalar `gh`, criar repo, push | ⬜ |
@@ -357,9 +357,41 @@ código, validador com retry; resíduo do v10 (oscilação sob demanda simultân
 flags + revisão humana. Próxima etapa: **E8** (métricas automáticas nos 40 casos), a iniciar
 com consulta prévia ao autor.
 
-### E8 — Métricas automáticas
-`avaliacao/rodar.py` completo: schema válido, ancoragem, comprimento do alt, checklist por categoria. Primeira rodada oficial nos 40 casos → `avaliacao/resultados/`.
-**Verificação:** uma tabela de métricas impressa em um comando.
+### E8 — Métricas automáticas ✅
+`python avaliacao/rodar.py` valida o conjunto fixo e imprime cinco blocos: cobertura, régua
+mecânica (`checar_lote.py`), alt-text gerado × baseline em 5 critérios objetivos do nível 1, flags
+× anotação humana da E3 e os padrões globais do gabarito editorial. Três recortes: casos (40),
+não vistos (35 — sem os objetos do smoke test) e holdout (10). Saída gravada em
+`resultados/06_metricas.json` (a pasta `avaliacao/resultados/` do plano não foi criada: resultado
+tem um lugar só).
+
+**Rodada oficial (29/09/2026), sobre o lote da E9:**
+
+| | desenvolvimento (v10, 20) | casos (40) | não vistos (35) | holdout (10) |
+|---|---|---|---|---|
+| problemas por item, régua mecânica | 1,7 | 1,6 | 1,51 | 1,7 |
+| itens sem problema | 3/20 | 8/40 | 8/35 | 1/10 |
+| alt atende aos 5 critérios (gerado / baseline) | — | 37/39 · 0/39 | 32/34 · 0/34 | 10/10 · 0/10 |
+| idem, sem o critério "cita o povo" | — | 37/39 · 26/39 | — | 10/10 · 3/10 |
+
+- **A régua mede o mesmo nível dentro e fora do desenvolvimento**: 1,7 no lote em que o sistema
+  foi ajustado, 1,5 a 1,7 nos objetos que ele nunca tinha visto.
+- **A baseline zera nos 5 critérios por um motivo só**: a descrição curatorial não cita o povo em
+  nenhum dos 49 casos — o povo mora em outro campo do catálogo. Por isso a linha sem esse critério
+  está na tabela: é a comparação que não depende dele.
+- **Defeito dominante: povo ausente da descrição em 24 de 49 textos**, embora o validador cobre
+  e o retry tenha agido em 47 de 49. Conferido texto a texto: nenhum caso é diferença de grafia.
+  O retry é único e o rascunho corrigido não volta ao validador.
+- Repetição de trecho do alt na descrição: 19 de 49.
+- **O que a régua não vê**: particípio inventado de "adquirir" ("aquisido", "aquisida",
+  "aquisitado", "aquisicionado") em 12 de 49 textos — mesma taxa do lote de desenvolvimento
+  (5 de 19). A régua só mede "aquisição em". Defeito conhecido desde o v10, fora do alcance da
+  medição automática até aqui; entra no relatório do juiz.
+- **Flags × anotação humana da E3** (casos observados): artefato de estúdio 9/14; divergência
+  foto×catálogo 4/11; foto parcial 6/7; metadado suspeito 1/1. `enquadramento_distante` não tem
+  mecanismo no sistema.
+
+**Verificação:** uma tabela de métricas impressa em um comando. ✓
 
 ### E9 — Lote no Colab 🔶
 **Decisões do Eduardo (29/09/2026), na retomada do projeto:**
@@ -402,7 +434,16 @@ quebrado (para na terceira falha seguida, checkpoint limpo). Os arquivos de saí
 **Onde abrir:** direto do repositório público —
 colab.research.google.com/github/eduardotosto/acervo-que-fala/blob/main/notebooks/06_lote_avaliacao.ipynb.
 Saídas no Drive: `resultados/06_lote_casos.json` e `resultados/06_lote_holdout.json`.
-**Verificação:** os dois arquivos no Drive, com 40 e 10 itens.
+**Lote rodado (29/09/2026).** 50 de 50 objetos processados, nenhuma falha de geração, nenhuma
+queda de sessão. 49 geraram texto; o 680 foi barrado pelo porteiro de resolução, como previsto.
+Tempo de geração medido: 75,0 min nos 40 casos e 18,4 min no holdout — por item, cerca de 50 s de
+observação, 8 s da pergunta de contradição e 55 s de redação. O retry agiu em 47 dos 49 textos.
+Ambiente: transformers 5.17.0 · torch 2.11.0+cu128 · pillow 11.3.0. Os dois arquivos foram
+trazidos do Drive e conferidos byte a byte (226.000 e 63.199 bytes):
+`resultados/06_lote_casos.json` e `resultados/06_lote_holdout.json`.
+
+**O holdout está gasto.** Rodou uma vez, em 29/09/2026. O sistema não muda depois desta rodada.
+**Verificação:** os dois arquivos no Drive, com 40 e 10 itens. ✓
 
 ### E10 — Avaliação cega e por critérios (redesenhada 25/08/2026)
 **Mudança de metodologia (decisão do Eduardo):** o projeto NÃO terá acesso a usuários cegos nem a curadores do museu. A avaliação foi redesenhada para refletir a realidade, com a limitação registrada honestamente no README (e a validação com usuários reais documentada como trabalho futuro). Três frentes:

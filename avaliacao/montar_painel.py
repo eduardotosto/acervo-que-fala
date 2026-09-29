@@ -84,7 +84,8 @@ def main():
     ap.add_argument("--gabarito", required=True,
                     help="onde gravar o gabarito do A/B — fora do alcance de quem julga")
     ap.add_argument("--lotes-dir", required=True, help="pasta de trabalho com os lotes do juiz")
-    ap.add_argument("--por-lote", type=int, default=10)
+    ap.add_argument("--por-lote", type=int, default=10, help="dossiês por lote de critérios")
+    ap.add_argument("--por-lote-ab", type=int, default=25, help="pares por lote do A/B")
     args = ap.parse_args()
 
     pool = {it["id"]: it for it in ler_json(os.path.join(DADOS_DIR, "itens.json"))}
@@ -143,8 +144,9 @@ def main():
     gravar(os.path.join(args.saida, "dossies.json"), dossies)
     gravar(os.path.join(args.saida, "ab_cego.json"), cego)
     gravar(args.gabarito, {"seed": SEED, "pares": gabarito})
-    for nome, material in (("criterios", dossies), ("ab", cego)):
-        for n, lote in enumerate(em_lotes(material, args.por_lote), 1):
+    for nome, material, tamanho in (("criterios", dossies, args.por_lote),
+                                    ("ab", cego, args.por_lote_ab)):
+        for n, lote in enumerate(em_lotes(material, tamanho), 1):
             gravar(os.path.join(args.lotes_dir, f"{nome}_{n:02d}.json"), lote)
 
     lados = [g["A"] for g in gabarito.values()]
@@ -154,7 +156,8 @@ def main():
     print(f"sem par no A/B (não geraram texto): "
           f"{[d['id'] for d in dossies if d['situacao'] != 'descrição gerada']}")
     print(f"lotes do juiz em {args.lotes_dir}: "
-          f"{len(em_lotes(dossies, args.por_lote))} de critérios, {len(em_lotes(cego, args.por_lote))} de A/B")
+          f"{len(em_lotes(dossies, args.por_lote))} de critérios, "
+          f"{len(em_lotes(cego, args.por_lote_ab))} de A/B")
 
 
 if __name__ == "__main__":
